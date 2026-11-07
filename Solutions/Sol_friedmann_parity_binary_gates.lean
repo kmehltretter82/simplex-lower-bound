@@ -11,14 +11,19 @@ def HitsK (glob : Bool) (n b s : ℕ) (w : V_bin n) (i : Fin n) : Prop :=
   ∀ u, (G_bin n).priority .c ≤ (G_bin n).priority u →
     (u ∈ predPath glob n b s w ↔ u ∈ predPath glob n b s (.k i))
 
+def PortalCR (glob : Bool) (n b s : ℕ) (w : V_bin n) : Prop :=
+  if b < 2 ^ n - 1 ∧ (s = S_close0 n b + 2 ∨ s = S_close0 n b + 3) then
+    HitsPortal glob n b s w .r
+  else
+    HitsPortal glob n b s w .c
+
 def GKOrderProp (glob : Bool) (n b s : ℕ) (i : Fin n) : Prop :=
   chooseTauEdge1 n b s (.g i) = true →
-    ∀ w_p w_k p, (p = .c ∨ p = .r) →
-      HitsPortal glob n b s w_p p →
+    ∀ w_p w_k,
+      PortalCR glob n b s w_p →
       HitsK glob n b s w_k i →
       if (b.testBit i.val = true ∨ 3 * (n + 2 * i.val + 1) + 2 ≤ s) ∧
-          ¬(b < 2 ^ n - 1 ∧ i.val < lowestZero0 b n ∧
-            ((p = .r ∧ S_close0 n b + 1 ≤ s) ∨ (p = .c ∧ S_close0 n b + 3 ≤ s))) then
+          ¬(b < 2 ^ n - 1 ∧ i.val < lowestZero0 b n ∧ (s = S_close0 n b + 2 ∨ s = S_close0 n b + 3)) then
         ValueLT (G_bin n) (predVal glob n b s w_p) (predVal glob n b s w_k)
       else
         ValueLT (G_bin n) (predVal glob n b s w_k) (predVal glob n b s w_p)
@@ -50,7 +55,7 @@ lemma prio_d2_odd (n : ℕ) (i : Fin n) : (G_bin n).priority (.d2 i) % 2 = 1 := 
 lemma prio_d3_odd (n : ℕ) (i : Fin n) : (G_bin n).priority (.d3 i) % 2 = 1 := by
   have := shift_bin_even n; dsimp [G_bin, priority_bin]; omega
 
-lemma prio_g_even (n : ℕ) (i : Fin n) : (G_bin n).priority (.g i) % 2 = 0 := by
+private lemma prio_g_even (n : ℕ) (i : Fin n) : (G_bin n).priority (.g i) % 2 = 0 := by
   have := shift_bin_even n; dsimp [G_bin, priority_bin]; omega
 
 lemma prio_l2_lt_d1 (n : ℕ) (m : Fin (3 * n - 1)) (i : Fin n) :
@@ -181,7 +186,7 @@ lemma hitsK_d2 (glob : Bool) (n b s : ℕ) (hvalid : ValidState n b s) (i : Fin 
 
 /-! ### Part 2: Bit-Arithmetic Helpers and Exact `bestEdge1` Formulas -/
 
-lemma testBit_two_pow_sub_one : ∀ (n i : ℕ), i < n → (2 ^ n - 1).testBit i = true
+private lemma testBit_two_pow_sub_one : ∀ (n i : ℕ), i < n → (2 ^ n - 1).testBit i = true
   | 0, _, hi => by omega
   | n + 1, 0, _ => by
     rw [testBit_zero_eq, decide_eq_true_eq]
@@ -568,13 +573,7 @@ lemma hitsWithTop_of_step_gt' (glob : Bool) (n b s : ℕ) (hvalid : ValidState n
   have h1 := hstep.1
   exact hitsWithTop_of_step_gt glob n b s hvalid w p topV hw (by omega) hprio hstep
 
-def PortalCR (glob : Bool) (n b s : ℕ) (w : V_bin n) : Prop :=
-  if b < 2 ^ n - 1 ∧ (s = S_close0 n b + 2 ∨ s = S_close0 n b + 3) then
-    HitsPortal glob n b s w .r
-  else
-    HitsPortal glob n b s w .c
-
-lemma gkOrder_of_portalCR (glob : Bool) (n b s : ℕ) (hvalid : ValidState n b s) (i : Fin n)
+lemma gkOrder_of_portalCR (glob : Bool) (n b s : ℕ) (_hvalid : ValidState n b s) (i : Fin n)
     (h_gk : GKOrderProp glob n b s i)
     (htau : chooseTauEdge1 n b s (.g i) = true)
     {w_p w_k : V_bin n}
@@ -584,46 +583,8 @@ lemma gkOrder_of_portalCR (glob : Bool) (n b s : ℕ) (hvalid : ValidState n b s
         ¬(b < 2 ^ n - 1 ∧ i.val < lowestZero0 b n ∧ (s = S_close0 n b + 2 ∨ s = S_close0 n b + 3)) then
       ValueLT (G_bin n) (predVal glob n b s w_p) (predVal glob n b s w_k)
     else
-      ValueLT (G_bin n) (predVal glob n b s w_k) (predVal glob n b s w_p) := by
-  rcases hvalid with ⟨_, _, hs_lt⟩
-  unfold PortalCR at hp
-  by_cases hclose : b < 2 ^ n - 1 ∧ (s = S_close0 n b + 2 ∨ s = S_close0 n b + 3)
-  · rw [if_pos hclose] at hp
-    have h := h_gk htau w_p w_k .r (Or.inr rfl) hp hk
-    have hs1 : S_close0 n b + 1 ≤ s := by omega
-    by_cases hc : (b.testBit i.val = true ∨ 3 * (n + 2 * i.val + 1) + 2 ≤ s) ∧
-        ¬(b < 2 ^ n - 1 ∧ i.val < lowestZero0 b n ∧ (s = S_close0 n b + 2 ∨ s = S_close0 n b + 3))
-    · rw [if_pos hc]
-      rw [if_pos] at h
-      · exact h
-      · refine ⟨hc.1, ?_⟩
-        rintro ⟨hb_lt, hil, _⟩
-        exact hc.2 ⟨hb_lt, hil, hclose.2⟩
-    · rw [if_neg hc]
-      rw [if_neg] at h
-      · exact h
-      · rintro ⟨h1, hnot⟩
-        exact hc ⟨h1, fun ⟨hb_lt, hil, _⟩ => hnot ⟨hb_lt, hil, Or.inl ⟨rfl, hs1⟩⟩⟩
-  · rw [if_neg hclose] at hp
-    have h := h_gk htau w_p w_k .c (Or.inl rfl) hp hk
-    have hnot_s3 : ¬(b < 2 ^ n - 1 ∧ S_close0 n b + 3 ≤ s) := by
-      rintro ⟨hb_lt, hs3⟩
-      have hmax := maxStep0_of_lt hb_lt
-      exact hclose ⟨hb_lt, Or.inr (by omega)⟩
-    by_cases hc : (b.testBit i.val = true ∨ 3 * (n + 2 * i.val + 1) + 2 ≤ s) ∧
-        ¬(b < 2 ^ n - 1 ∧ i.val < lowestZero0 b n ∧ (s = S_close0 n b + 2 ∨ s = S_close0 n b + 3))
-    · rw [if_pos hc]
-      rw [if_pos] at h
-      · exact h
-      · refine ⟨hc.1, ?_⟩
-        rintro ⟨hb_lt, _, ⟨hcr, _⟩ | ⟨_, hs3⟩⟩
-        · cases hcr
-        · exact hnot_s3 ⟨hb_lt, hs3⟩
-    · rw [if_neg hc]
-      rw [if_neg] at h
-      · exact h
-      · rintro ⟨h1, _⟩
-        exact hc ⟨h1, fun ⟨hb_lt, _, h23⟩ => hclose ⟨hb_lt, h23⟩⟩
+      ValueLT (G_bin n) (predVal glob n b s w_k) (predVal glob n b s w_p) :=
+  h_gk htau w_p w_k hp hk
 
 lemma portalCR_lp1 (glob : Bool) (n b s : ℕ) (hvalid : ValidState n b s) (i : Fin n) :
     PortalCR glob n b s (.lp1 (tap_bin n i)) := by

@@ -1,6 +1,7 @@
 import Definitions.Def_friedmann_payoff
 import Solutions.Sol_friedmann_parity_transport
 import Solutions.Sol_friedmann_parity_improvement
+import Solutions.Sol_friedmann_parity_binary
 
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
@@ -508,6 +509,14 @@ theorem exponential_payoff_of_sink_family
     rcases hExp global n hn with ⟨N, G, ι, sink, hedge, hSink, hHard⟩
     have hind := hardInstance_induced_of_isSinkGame hSink global (2 ^ n) hHard
     exact ⟨N, G, ι, hSink.1, hedge, hind.1, hind.2⟩
+
+theorem exponential_payoff : FriedmannDiscounted.Exponential ∧
+    FriedmannDiscounted.ExponentialMeanViaReduction := by
+  apply exponential_payoff_of_sink_family
+  rcases exponential_sink_family with ⟨C, hC, hExp⟩
+  refine ⟨C, hC, fun global n hn => ?_⟩
+  rcases hExp global n hn with ⟨N, G, ι, sink, _hbin, hedge, _hprio, hSink, hHard⟩
+  exact ⟨N, G, ι, sink, hedge, hSink, hHard⟩
 
 end SinkPayoffReduction
 

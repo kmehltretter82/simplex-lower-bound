@@ -1,4 +1,4 @@
-import Theorems.Thm_friedmann_parity_binary
+import Definitions.Def_friedmann_parity
 import Mathlib.Data.Fintype.Basic
 import Mathlib.Data.Fintype.Sum
 import Mathlib.Data.Fintype.Prod

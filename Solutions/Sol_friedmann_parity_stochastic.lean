@@ -1,5 +1,6 @@
 import Solutions.Sol_friedmann_parity_discounted_bellman
 import Solutions.Sol_friedmann_parity_stochastic_semantics
+import Solutions.Sol_friedmann_parity_payoff
 import Mathlib.Algebra.Order.BigOperators.Group.Finset
 import Mathlib.Tactic.FieldSimp
 import Mathlib.Tactic.Linarith
@@ -1078,5 +1079,8 @@ theorem exponential_stochastic_of_discounted
     intro T run' hrun'
     exact hbound T (fun t => proj hN (run' t))
       (completeRun_proj hN G hG global ι T run' hrun')
+
+theorem exponential_stochastic : FriedmannStochastic.Exponential :=
+  exponential_stochastic_of_discounted exponential_payoff.1
 
 end FriedmannParity

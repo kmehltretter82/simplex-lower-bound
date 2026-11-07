@@ -86,14 +86,3 @@ theorem discounted_bellman {V : Type} [Fintype V] [DecidableEq V]
     rw [← hmul, mulVec_mulVec, Matrix.nonsing_inv_mul A hunit, one_mulVec]
 
 end FriedmannDiscounted
-
-open FriedmannDiscounted
-
-theorem solution {V : Type} [Fintype V] [DecidableEq V]
-    (G : Game V) (hG : WellFormed G) (σ τ : V → V) :
-    (∀ v, playValue G σ τ v = G.reward v + G.discount *
-      playValue G σ τ (if G.arena.owner v = false then σ v else τ v)) ∧
-    ∀ x : V → ℚ,
-      (∀ v, x v = G.reward v + G.discount *
-        x (if G.arena.owner v = false then σ v else τ v)) → x = playValue G σ τ :=
-  discounted_bellman G hG σ τ
