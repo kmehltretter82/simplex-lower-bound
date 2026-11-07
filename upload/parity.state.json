@@ -1,0 +1,69 @@
+{
+  "items": {
+    "def:friedmann_parity": {
+      "id": "afe1eac2-d457-4325-9df6-ccbee4f48ac1",
+      "hash": "0bc78453f6373c5c33f3957637aba23fcf39ac4ad09d9e3d54218bab3712fcaa"
+    },
+    "def:friedmann_payoff": {
+      "id": "f37f4aef-4c68-43be-a747-124186445fac",
+      "hash": "e88f588c9da68f71425025763ee249bda7bdf3d51d26ea81989ad9fc9c353deb"
+    },
+    "counterstrategy": {
+      "id": "a551805c-073a-4e23-ab24-d480c74fada6",
+      "hash": "df1df1b1859bc5b71ca0833cc54c3bdcd9ffaf254269de2aa52832c2f53be776"
+    },
+    "improvement": {
+      "id": "9de5cab8-8741-461e-bc45-df5303ceb27a",
+      "hash": "2597ee8622904b0004cdc1959eb60746c41b82004486952453b772fc3184678b"
+    },
+    "winning": {
+      "id": "80f5092a-c9be-49fb-be14-584d4f642f5b",
+      "hash": "5033e497d8f99f285e057e91efce4b746635d5b68ea9487bfb9a59228f0890d4"
+    },
+    "local": {
+      "id": "d7fde18c-df9e-4493-8a7a-bca366313832",
+      "hash": "1d96592ee63830cbfbac05ebcab3b8f8fe14d618a96ab7c7c6a5cb1b3a95e092"
+    },
+    "bellman": {
+      "id": "1ffa798a-00d4-4d75-aee1-a23935f71230",
+      "hash": "a1d507a32207d2a08224ea904dfd634b7d7c50e4575ca117b5d75a0f51a1597e"
+    },
+    "absorption": {
+      "id": "09ef356a-302f-4c02-b243-4c0c51160a7d",
+      "hash": "7d6ba6aa558aa1d6e1b02e5460c12661dbff94a6ddf1f55eeb57812a7641afd2"
+    },
+    "payoff": {
+      "id": "42a58882-2328-476b-b8ba-daf296b1a085",
+      "hash": "3bb1abae81a2fe587a0fa397a50242fb3adaf7d98d03fc65194e032279f379c3"
+    },
+    "stochastic": {
+      "id": "36c8a890-f718-4d30-82e5-52ff7d34ffe5",
+      "hash": "9e34f9f1023f13729242058f2b815353ab89da95bc845810ab4510b23b0ff27e"
+    },
+    "binary": {
+      "id": "310b3ccb-237d-4a5e-a263-333ef3d968f9",
+      "hash": "15f122315458844a1a0c01bef07e828293deda5beb268072c89d93583548ebd6"
+    },
+    "transport": {
+      "id": "7416660b-3dc8-46e7-bd92-04209b16e209",
+      "hash": "0ae4c343a72f93ac0da3c260001e6e63a4534994a914cadafbd5dd68d95887d8"
+    },
+    "goal": {
+      "id": "3674606a-e519-4c04-b886-4a4e3b46cc1a",
+      "hash": "60e931d11f3a8b03d86c980eff5dd771219f7529ee63542db98bd2a8b7e99fd4"
+    }
+  },
+  "milestones": {
+    "counterstrategy": "ed23f25e7ecf96c6f911056d843cb7be45954a1c59c42cd21be639fbac2d2a6c",
+    "improvement": "e98f868211dd10663d376cad5a9594ed792d5acfccdfc95a28293f870cb5c3fd",
+    "winning": "9779ec9fd010ddad55d9fee9cc3d99af13e21fcd831e95ed900c9bcf1f93cfc6",
+    "local": "bf6adc751a6755236888d148a72e1f15aba3611c48bb4c42804f2cfb4bffd031",
+    "bellman": "98d431f450d3b9a4edd0ab6963c338e4268b4dd812fe080a681d73197b05b36a",
+    "absorption": "163a33be178f36161ccc0f86803e3b8113bc80a013b7943e93360dcd5b7b89b7",
+    "payoff": "d46c8649d3edd52e9cb87faedfd24d5a09ff1187af10e19e43297b590ca94c5b",
+    "stochastic": "7476ab53bf6700b67599903cd3ee23f14b0e501f1ba4a1ce38e93f53126edbf0",
+    "binary": "e4c751c590ca1209c69eca37d72c25fd853da03c2fd79b8d2577d7510b81fbcb",
+    "transport": "84d4d1868e018b335a5d09bc36ecb4f2148bb6f767fda7c8635fc4dbee073411"
+  },
+  "proposal_id": "8279d529-169a-4665-9f70-6298f21fd346"
+}
