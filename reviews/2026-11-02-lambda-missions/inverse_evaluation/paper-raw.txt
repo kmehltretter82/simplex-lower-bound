@@ -1,0 +1,1166 @@
+Proceedings
+Sixth Annual IEEE Symposium on
+LOGIC IN COMPUTERSCIENCE
+July 15-18,1991 Amsterdam, The Netherlands
+Sponsored by
+IEEE Technical Committee on
+Mathematical Foundations of Computing
+CWI, Amsterdam
+Vrije Universiteit, Amsterdam
+In cooperation with
+Association for Computing Machinery
+Association for Symbolic Logic
+European Association for Theoretical Computer Science
+1951-1991
+IEEE Computer Society Press
+Los Alamitos, California
+Washington # Brussels · TokyoTable of Contents
+Foreword vii
+Preface ix
+Additional Reviewers xi
+Conference Organization xiii
+Session 1
+Chair: G. Longo
+A Foundational Delineation of Computational Feasibility 2
+D. Leivant
+Toward a Semantics for the QUEST Language 12
+F. Alessi and F. Barbanera
+Term Declaration Logic and Generalised Composita 22
+P. Aczel
+Session 2
+Chair: S.Abramsky
+Logic Programming in a Fragment of Intuitionistic Linear Logic 32
+JS.Hodas and D.Miller
+Games Semantics for Linear Logic 43
+Y. Lafont and T. Streicher
+Linearizing Intuitionistic Implication 51
+P. Lincoln, A. Scedrov, and N. Shankar
+Some Results on the Interpretation of λ-calculus in
+OperatorAlgebras 63
+P. Malacaria and L. Regnier
+Session 3
+Chair: V. Breazu-Tannen
+Unification and Anti-Unification inthe Calculus of Constructions .74
+F. Pfenning
+Partial Objects inthe Calculus of Constructions 86
+P. Audebaud
+An Evaluation Semantics for Classical Proofs 96
+CJt. Murthy
+Session 4
+Chair: B. Steffen
+A Theory of Testing for Real-Time 110
+R. Cleaveland andA.E. Zwarico
+Complexity Bounds of Hoare-style ProofSystems 120
+H. Hungar
+Semantics of Pointers, Referencing and Dereferencing
+With Intensional Logic 127
+H.-K. Hung and J J. Zucker
+xvSession 5
+Chair: P.-L. Curien
+Sequentially and Strong Stability 138
+A. Bucciarelli and T. Ehrhard
+Parallel PCF has a UniqueExtensional Model 146
+A. Stoughton
+The Fixed Point Property inSynthetic Domain Theory 152
+P. Taylor
+Session 6
+Chair: R. Constable
+On Computational Open-Endedness inMartin-Löfs Type Theory 162
+DJ. Howe
+Predicative Type Universes and Primitive Recursion 173
+NJP. Mendler
+Session 7
+Chair: S. Ronchi Delia Rocca
+Freydf
+s Hierarchy of Combinator Monoids 186
+R. Statman
+Equational Programming inλ-calculus 191
+E. Tronci
+An Inverse of the EvaluationFunctional for Typed λ-calculus 203
+U. Berger andH. Schwichtenberg
+Session 8
+Chair: S.Abiteboul
+A Completeness Theorem for Kleene Algebras and the
+Algebra of Regular Events 214
+D. Kozen
+On First Order Database Query Languages 226
+A. Avron and J. Hirshfeld
+Specifying and Proving Serializability in Temporal Logic 232
+D. Peled,S. Katz,andA. Pnueli
+Session 9
+Chair: J.Bergstra
+CCS withPriority Choice 246
+/. Camilleri and G.Winskel
+Rabin Measures and Their Applications to
+Fairness and Automata Theory 256
+N. Klarlund and D. Kozen
+Specification and Refinement of Probabilistic Processes . 266
+B. Jonsson and KG. Larsen
+xviSession 10
+Chair: E.Shapiro
+On the 0-1 Law for the Classof Existential Second Order
+Minimal Gödel Sentences withEquality
+L. Pacholski and W. Szwast
+On the Deduction Rule and the Number of ProofLines . . . . ,
+ML. Bonet and SJl. Buss
+Session 11
+Chair: K. Apt
+Logic Programs as Types for Logic Programs
+T. Frühwirth, Ε, Shapiro, MY. Vardi, and E. Yardeni
+A First-Order Theory of Types and
+Polymorphism inLogic Programming
+M.KiferandJ. Wu
+Prop revisited: Propositional Formula as Abstract Domain
+for Groundness Analysis
+A. Cortesi, G. Fili, and W. Winsborough
+Constructive Negation for Constraint Logic Programming . . .
+ΡJ. Stuckey
+Session 12
+Chair: M. Sato
+Higher-Order Critical Pairs
+T. Nipkow
+A Computation Model for Executable Higher-Order
+Algebraic Specification Languages
+J.-P. Jouannaud and M. Okada
+Defaults andRevision inStructured Theories
+Μ.Ryan
+Session 13
+Chair: U.Goltz
+Actions Speak Louder than Words: Proving Bisimilarity for
+Context-FreeProcesses
+H. Hütteland C. Stirling
+On the Relationship Between Process Algebra and
+Input/Output Automata ,
+F.W. Vaandrager
+A Compositional ProofSystem for DynamicProcess Creation
+F. de Boer
+A Partial Approach to Model Checking
+P. Godefroid and P. Wolper
+Author Index
+xviiAn Inverse of the Evaluation Functional
+for Typed λ-calculus
+U. Berger
+Mathematisches Institut
+der LMU München
+8000 München 2
+Η. Schwichtenberg
+Mathematisches Institut
+der LMU München
+8000 München 2
+Abstract
+In any model of typed λ-calculus conianing some basic
+arithmetic, a functional p - * (procedure—* expression)
+will be defined which inverts the evaluation functio­
+nal for typed X-terms, Combined with the evaluation
+functional, p-e yields an efficient normalization algo­
+rithm. The method is extended to X-calculi with con­
+stants and is used to normalize (the X-representations
+of) natural deduction proofs of (higher order) arithme­
+tic. A consequence of theoretical interest is a strong
+completeness theorem for βη-reduction, generalizing
+results of Friedman [1] and Statman [31: If two X-
+terms have the same value in some model containing
+representations of the primitive recursive functions
+(of level 1) then they are provably equal in the βη-
+calculus.
+0 Introduction
+Normalization is a fundamental but expensive process
+in proof theory and proof implementation. In view of
+the Curry-Howard correspondence it is natural to try
+to use evaluation of typed Α-terms, which corresponds
+to normalizationof proofs and is available in functio­
+nal programminglanguages, to get rid of the burden
+of implementing a normalization procedure 'by hand'.
+However in trying so, one is faced with two problems:
+1. Terms containing free variables are not accepted by
+the compiler. 2. If the term is of functional type, the
+normalized procedure is not shown but only a message
+that the result is some procedural object.
+Although both problems seem to be implementation
+dependent, they may be formulated purely mathema­
+tically, using denotational semantics. The denotatio-
+nal value of a term of functional type is a functional
+(or procedure) which is an abstract object and the­
+refore cannot be shown on the screen. But to solve
+the second problem we do not need the procedure it­
+self but a term in normal form evaluating to it. So,
+it is our our task to define a functional p—e inverting
+the evaluation functional and returning normal forms
+only. The first problem asks for an environment bin­
+ding every free variable χ of the term to be normalized
+to some functional which we will call mse(x) (make self
+evaluating) for reasons (perhaps) becoming appearent
+when looking at the definition below.
+Let us briefly discuss a first guess how p—« and mse
+might be defined: Because p-^e should return terms,
+it is clear that a model Μ in which p—*e exists must
+contain (representations of) λ-terms. Therefore let,
+for simplicity, M° be the set of all typed λ-terms
+and Mp
+~*° = (Μσ
+)Μ
+'. Define p-ne,-, € M*"*0
+and
+msep G Μsimultaneously by
+p-*eö (r) = mse0 (r) - r
+ρ-Ηβ^σ (α) = Xzfi
+.p-*ea(a(msep(zp
+)))
+msep_x,(r)(&) = mse<T(r(p-^ep(6)))
+In the definition of p — ( a ) the bound variable zp
+must be 'fresh', i.e. whenever a is the value of a term r
+then zp
+must not occur free in r, where the evaluation
+of r takes place in an environment binding every free
+variable χ to mse(x). Under this assumption it is not
+hard to show that p-ne does the job.
+But how can we find a fresh z?
+Being faced with this problem for the first time, we
+were working with the LISP dialect SCHEME which
+is a functional language but provides also some pro­
+cedural facilities. Therefore at the computer it was
+no problem to produce such a z. We simply used the
+SCHEME procedure gensym creating a new symbol
+every time it is called (such a procedure may be easily
+defined in any procedural language).
+It is the aim of this work to solve the inversion pro­
+blem purely functionally, i.e. inside the theory of ty­
+ped λ-calculus, avoiding procedural elements. This
+will allow us to prove some interesting syntactical and
+semantical properties of typed λ-calculus. The most
+remarkable one is the following strong completeness
+theorem:
+If two closed typed λ-terms have the same
+value in some model allowing the represen­
+tation of primitive recursive functions, then
+they are already provably equal in the βη-
+calculus.
+This generalizes Friedmans 'extended completeness
+theorem' [1]. Friedman requires the models to consist
+CH3025-4/91/0000/0203$01.00 © 1991 IEEE
+203of the full (set theoretical) function space at all func­
+tional types whereas in our theorem only for types of
+level 1 conditions on the model are imposed.
+To achieve our aim we will introduce in the Sections 2
+and 3 a renaming and coding machinery for λ-terms
+in a large class of models. These models will be called
+admissible. The point is that single terms are replaced
+by families of α-equivalent terms for which the the
+'fresh z' is very easy to compute. In Section 4 we
+define the inversion functional for admissible models
+and prove the completeness theorem. In Section 5
+we construct a specific model where this functional
+yields a normalization algorithm which is as efficient
+as the one based on gensym. In Section 6 we extend
+the results of Section 4 to λ-calculi with constants.
+Finally in Section 7 we discuss, as an example of such
+an extended λ-calculus, the —• V-fragment of (higher
+order) logic and arithmetic and show how to normalize
+proofs with our method.
+1 Models of typed A-calculus
+Types are built up from ground types by — I t will
+suffice to consider only one ground type o. λ-terms
+are constructed from typed variables xp
+by applica­
+tion (tp
+-°rp
+)p
+and abstraction (Xxp
+.sa
+)p
+^a
+. A ^ is
+the set of terms (of type p). We will frequently omit
+types and parentneses if they can be recovered from
+the context. Iterated applications are associated to
+the left and application binds more than abstraction.
+For example Xx.rst stands for Ax.((rs)t).
+As for the notion of a model we follow Friedman [1]
+with some change in notation. A pre-structure Μ con­
+sists of a set Mp
+, mappings Apy. Μρ
+-*σ
+χ Mp
+—• Μσ
+and equivalence relations = p on Mp
+which are congru­
+ences for the APta} i.e.
+a < ra',6 =p b' =>> APtCab =σ APi9a'V
+Furthermore we require extensionality
+V6 G Mp
+APi<fab =σ APi<7a'b α =ρ^σ a'
+Hence all the = σ are completely determined by = 0
+because
+α =0^σ a' V6 G Mp
+Ap^ab =, A^a'b
+If 6,6' G Mp
+then 6 = 6' will always mean 6 =p b1
+.
+Furthermore we will write ab for APyüab and will again
+associate to the left.
+To define models we need environments which are
+type respecting mappings from the variables to M .
+Let ENV be the set of environments. For every en-
+vironment η} variable xp
+and α G Mp
+the environ­
+ment η[χρ
+a] is defined by η[χρ
+a](xp
+) = a and
+η[χρ
+Η* a](y) = η(ρ) if y φ xp
+.
+A X-model is a pre-structure Μ together with map­
+pings I · 1'·: Ap
+χ ENV Mp
+s.t. (omitting types)
+1 * 1 » ? = = l*Mr
+fo> |λ*.$|τ?α = \8\η[χ ι- α].
+We write Μ \=η r = s if in Μ the equation \τ\η = | S | T 7
+holds. Μ \= r = s:<& ¥η:Μ \= r = s. Common
+λ-models are the full set-theoretic models Τβ where
+T% = Β is any set and T j p * = T £ T
+* [1], domain-
+theoretic models D where D° is a domain and Dp
+~*a
+is the set of continuous functions from Dp
+to D° or
+the Kleene-Kreisel functionals. A nice constructive
+λ-model is the structure HEO of hereditarily effective
+operations where HEOp
+consist of natural numbers
+and APi<Ten = {e}n [4].
+2 Normal forms and α-equality
+/3-reduction, based on ^-conversion (Xx.r)s \-+ r\s/x],
+and /?-normalforms are defined as usual. We will pre­
+fer long ß-normalforms which have the form
+\ζ{ι
+...λχζ*Υι σ
+^ ° 8 γ s
+k
+with s\,..., sk in long /?-normalform (σχ —• ... — •
+ak —• ο is associated to the right) [3, §0]. Obviously
+each term in /?-normalform may fee transformed into
+long /?-normalform by suitable 77-expansions. The­
+refore each term r may be transformed into a uni­
+que long /?-normalform r* by /^-conversions and 77-
+expansions.
+It is common (and was done above) to identify α-equal
+terms i.e. terms interconvertible by bound renaming.
+However, for the algorithms we will define, concrete
+λ-terms with specific bound variables are needed. For
+every finite 0-1 sequence J b let akr be the result of
+replacing each bound variable ya
+in r with binding
+position /G {0,1}* by (* denotes concatenation).
+We can make this precise t>y defining inductively
+akx = x
+akrs = (a**0 r)(a**is)
+«k(Xyp
+-r) = Xxlak.o(r[xp
+k/yP
+))
+Lemma 1.
+(a) r =a s => akr = aks.
+(b) If r contains no free variables of the form xk+i
+then otkr = α r.
+Proof: Induction on the length of r. •
+By this lemma, for every term r G Ap
+, the term family
+EMBr: {0,1}* — A>, defined by
+EMBrifc := ak(r)
+may be viewed as a representation of r (by (b)) which
+abstracts from α-equality (by (a)), (b) also tells us
+how toA recover Aan α-variant of r from EMBr: Take
+EMBrJk where J b is such that there is no index in the
+finite set {/ G {0, free in r} extending k. This
+set can be computed easily because a variable in r
+is free in r iff it is not changed in EMBrfc when k
+204changes. Therefore we only need to determine all /
+s.t. x\ appears in EMBre and EMBrO at the same
+position (e is the empty sequence, 0 stands for the
+sequence containing only 0). In fact ib only depends
+on EMBr and is well defined not only for EMBr but
+for any term family F: {0,1}* — • A. Therefore we
+may define EXTRACT(F) := EMBFJfe. Let us sum­
+marize some properties of EMB:A — • A^0 , 1
+^* and
+EXTRACT: A^0
+'1
+** —• A.
+Lemma 2.
+(a) r = e a =• EMB(r) = EMB(«).
+(b) EXTRACT(EMBr) = e r.
+(c) EMB(EMBrib)ib = EMBrfc.
+Proof: (a) : is Lemma 1(a) and u
+<=" follows from
+(b) of this lemma, (b) follows from Lemma 1(b) and
+the definition of EXTRACT, (c) is proved by induc­
+tion on r. •
+3 Admissible λ-models and pr-models
+Now we tackle the problem of inverting the evalua­
+tion functional | · |. Because the final solution will
+be rather technical, it might be helpful to sketch the
+algorithms in a particular model where things are
+simple. Suppose Μ is a λ-model s.t. M° contains
+syntactical material such as indices (0-1 sequences)
+and λ-terms and assume that all usual syntactic ope­
+rations exist in Μ. In particular EMB G M°~*° and
+EXTRACT G M(°^-° (We assume that Μρ
+~*σ
+con­
+sists of set theoretic functions). The inversion functio­
+nal will be based on functional Φρ G Mp
+~*(0
+~*0
+) and
+» , G Λί<β
+->β
+>-*> defined by
+Φ0 Γ = EMBr
+Φβ / = EXTRACT/
+Φ^σαί = λχ£.Φρ (α(Ψρ (ΕΜΒχ£)))(* * 0)
+Ψρ ^/α = (ί-ΑΡΡ/(Φ,β))
+where f-APP is application for term families i.e.
+f-APP(EMBr)(EMBs) = EMB(rs) should hold. The
+crucial property of Φ is
+• If r is a closed term in long /?-normalform then
+Φ|Γ| = EMBr.
+Now we define p-*ep: Mp
+—• Ap
+by
+ρ-Ηβ,(α) = EXTRACT(4»,a).
+This works because ifα G Mp is λ-definable then there
+is a term r in long /?-normalform s.t. |r| = α and
+consequently
+|p-*ep(a)| = IEXTRACT( EM Βr) | = |r| = a,
+i.e. ρ-πβρ(α) is a term with value a. Furthermore, for
+closed r G Ap
+,
+norm(r) := p-*,(|r|)
+is the long /?-normalform of r, because |r| = |r*| and
+therefore
+norm(r)
+= EXTRACT^,|r*|)
+= EXTRACT(EMBr*)
+=« r*
+which means that norm(r) is (as an α-variant of r*)
+the long /?-normalform ot r as well. A third conse­
+quence is a completeness result for /?77-reduction: Let
+r, 8 G A p
+be closed with |r| = Then norm(r) =
+p-iep(|r|) = p-«p(|s|) = norm(s) and therefore r and
+s are provablyequal in the /?t7-calculus.
+To prove the stated propertyof Φ for closed terms, one
+has to show a more general statement involving also
+Φ and open terms. For any substitution θ define η$ G
+ENV by η9{νρ
+) - Φ,(ΕΜΒ(00*)). Now it is an easy
+but very instructiveexercise to show (by induction on
+r distinguishing the cases ρ = ο and ρ φ ο) that the
+equation
+Φ{\ΑηΒ) = EMB(r0)
+holds for every term r in long /?-normalform. A detai­
+led proofof this equation in a more general framework
+will be carried out in Lemma 5 in the next section.
+Now we will precisely describe the requirements on a
+λ-model making these constructions possible. In fact
+we will describe a more general situation which will
+strengthen our completeness result and allows for the
+definition of an efficient normalization procedure.
+Call a λ-model admissible if there are types f (type
+of term families) and L (type of indices), coding fun­
+ctions f.]°:A — Αί°, Γ·|':{0,1}* — Ml
+and objects
+append G M*"*'"**, mvarp G M 4
+" 4 0
+, app G M°^°^°,
+abstp G M^°^° (for every type p), emb G M°~*f
+,
+fun G Mf
+~^4
+"*°) and extract G M^°^° s.t. the fol­
+lowing holds (omitting types)
+(append) appendfir] [7] = \k * f|
+(mvar) mvarp|"Jfc] = \x
+(app) appfrlfel = fr«|
+(abst) abetpr*lM = Γλ
+**·Γ
+1
+([.]) [r] = |Y| => EMBr = EMBs
+(emb) EMBr = EMBs => embfr] = emb|Y|
+(fun) fun(emb|"r])fjbl = [EMBrfc]
+(extract) VJb: afibl = Γ Ε Μ Β Γ Μ
+=> extract(a) = [EXTRACT(EMBr)]
+205All infinite λ-models mentioned in Section 1 are easily
+seen to be admissible by letting ι = ο and f = ο —• ο.
+Because the definition given above is not very com­
+prehensible, we will define a more natural, smaller but
+still very large class of λ-models, showing that admis­
+sibility is in fact a very weak requirement.
+Call a λ-model Μ a pr-model if all binary primitive
+recursive functions are represented in it. This shall
+mean that there is an injection ν:ω —» M° and for
+every binary primitive recursive function Α: ω2
+— • u;
+an object Λ € M°"*°"*0
+s.t. Λ(ι/η)(ι/τη) = u(hnm) for
+all n, m € u;. In fact in a pr-model all primitive recur­
+sive functions are represented because every primitive
+recursive function is explicitely definable from binary
+ones. However we will only need that in pr-models
+all unary and binary primitive recursive functions are
+represented.
+Lemma 3. Every pr-model is admissible.
+Proof: Let r i , Γ2,... resp. Jbi, £ 2 , . . . be effective re-
+pitition free numberings of A resp. {0,1}*. 'Effective'
+shall mean that there are primitive recursive functions
+APPEND, MVARp, APP, ABST, EXEMB and
+ALPHA s.t.
+*APPEND(n,m) = kn*km,
+r
+MVAR,(n) = XP
+kn
+r
+APP(n,m) = r
+nr
+m
+^ABSTp(n,m) = ^x
+kn
+r
+m
+ΓΕΧΕΜΒ(η) = EXTRACT(EMBrn )
+r
+ALPHA(n,m) = EMBrn fcm
+In the previous section we
+defined EXTIUCTfEMBr) = EMBrJb where k can
+be computed from EM Βre and EMBrO. Hence we
+may assume furthermore that there exists a primitive
+recursive function INDEXT s.t. if EMBre = r n and
+EMBrO = r m then
+EXTRACT(EMBr) = E M B r J b I N D E X T ( n i m )
+Now we turn Μ into an admissible model by letting
+t = 0, f = o, [rn ]° = i/n, \kny = i/n, append =
+APPEND, mvarp = MVAR,, app = APP, abstp =
+ABSTp, emb = EXEMB, fun = ALPHA and define
+extract € M^°^° by
+extract(a) = a(INDEXT(afcl)(a[OD)
+extract exists in Μ because it is explicitely defined
+from elements of Μ and Μ is a λ-model. We have
+to verify the laws for admissibility, (append), (mvar),
+app), (abet), ([·]) and (emb) clearly hold,
+fun):
+fun(embrr„l)rfcml
+= ALPHA(EXEMBz/n)(i/m)
+= i/(ALPHA(EXEMBn)m)
+= |"r
+ALPHA(EXEMBn)ml
+= TEMBrEXEMBntml
+= [EMB(EXTRACT(EMBrn )) Jkm"l
+= rEMBrn Jbm ]
+by Lemma 2 (a) and (b).
+(extract): Let EMBre = r n and EMBrO = r m and
+assume a\k] = [EMBrJb] for all J b G {0,1}*. Then in
+f
+articular a(Y| = [EMBre] = [ r n ] = i/n and likewise
+a0] = um. Hence
+extract (a)
+= a(INDEXT(a[e])(a[o]))
+= a(INDEXT(i/n)(i/m))
+= a(i/(INDEXTnm))
+= ö[fclNDEXT(n,m)]
+= [EMB rtiNDEXT(n ,m)]
+= [EXTRACT(EMBr)]
+using the assumption again. •
+To improve the readability of the calculations in the
+next section we introduce some auxiliaryobjects. Let
+Μ be an admissible model and define f-extract 6
+Mf
+^°, f-app G M f
+- * f
+- * f
+and fam € M^°^{
+by
+f-extract / = extract (fun/)
+f-app/<7 = emb(app(f-extract/)(f-extract<7))
+fam(a) = emb(extract(a))
+Lemma 4. In every admissible X-model Μ the follo­
+wing equations hold:
+(a) f-extract(emb[r]) = [EXTRACT(EMBr)]
+(b) emb(f-extract(emb[r])) = emb[r]
+(c) f-app(emb[r])(emb[s]) = emb[rs]
+(d) VJb : a[Jb] = [EMBrJb] => fam(a) = emb[r]
+Proof:
+(a) : f-extract(emb[r]) = extract(fun(emb[r])). By
+(fun), fun(emb[r])| Jb] = [EMBrJb] for all Jb and hence,
+by (extract),
+extract(fun(emb[r])) = [EXTRACT(EMBr)]
+(b): EMB(EXTRACT(EMBr)) = EMBr, by Lemma
+2. Hence, by (emb), emb[EXTRACTfEMBrVl =
+emb[r]. Therefore, by (a), emb(f-extract(emb[r|)) =
+206emb[r|.
+(c) : By (a), (app) and (emb), we have
+f-app(emb fr] )(emb f s])
+= emb(app(f-extract(emb fr] ))(f-extract (emb |Y|)))
+= emb[(EXTRACT(EMBr))(EXTRACT(EMBs))l
+= emb \rs]
+(d) : If a\k] = [EMBrfc] for all k then, by (extract),
+extract(a) = [EXTRACT(EMBr)]. Hence
+fam(a) = emb(extract(a)) — embfr]
+by (emb). •
+4 Inversion, normalization and com­
+pleteness
+Let Μ be an admissible λ-model. By recursion on ρ
+we define terms Φρ G A ^ f
+and Φρ G Af
+~*p
+:
+Φ ο = emb,
+Φσ = f-extract,
+Φρ^σ = λα^σ
+.fam(λp^abstp(fun(Φ<τ(αV'b]))(pO)))
+where t/>[p] stands for ¥p (emb(mvarp p)) and pO is short
+for appendpfO].
+Φρ^„ = λ/.λα>.*σ (Γ-Α ρρ/(Φρ α)).
+Here of course emb,..., f-app denote constants, i.e.
+variables with the valuations emb,..., f-app G Μ re­
+spectively. As with emb,..., f-app the values \ΦΡ\ G
+Mp
+~*f
+resp. |ΦΡ| G M*"** are denoted by Φρ resp.
+Φρ again. Furthermore for f,g G M f
+we will write
+fg for f-app/(j and /1/2...Λ1 will be associated to
+the left. Clearly for ρ = />i —•...—•/>„ — • ο and
+αϊ G Mpl
+,...,an G M p
+*
+Φρ/αχ .. .a„ = f-extract(/^P l ai)^,w an ))
+For any substitution θ define η$ G ENV by η$(νρ
+) =
+«(emb|Vl).
+Lemma 5 (Main Lemma). For every X-term r G
+Ap
+in long β-normalform and every substitution θ
+Φ,(|Γ|ι„) = βιηΙ>(ΓΓ01)
+Moreover if ρ = ο then \τ\ηφ = \rff].
+Proof: Induction on r. Recall that fg stands for
+f-app/0.
+1. ρ = ο, r = χΡι-+—>Ρ*-°8{1
+. .
+\xsi ...8η\η$
+= *(embria?l)|ei|»?...|«n|»7
+= Γ-βχ^Ι((βπιΒΓχί1)(Φ|βι|ν).. .(Φ|«ηΜ)
+= f-extract((emb[xÖ])(embf5iöl)... (emb|"s„0l))
+= f-extract(emb \(xs\ ... sn)0])
+= [EXTR ACT( EM Βr 0)1
+But EXTRACT(EMBr0) = α r0, by Lemma 2(c)
+and since substitution is determined only up to in­
+equivalence, we may write EXTRACT(EMBrfl) = τθ.
+2. ρ σ, r = λχρ
+.*σ
+(w.l.o.g. 0χρ
+= xp
+and xp
+not
+free in Oyfor any y φ xp
+free in βσ
+):
+Φρ-»σ (|λ2.*|ΐ)*) = fam(a), where α G Μ*"1 , 0
+is s.t.
+(using the same abbreviations as in the definition of
+ap = abst,p(fun^<,(|s|ty[£ Φ\ρ]]))(ρΟ))
+for all ρ G Af*. We have to show fam(a) =
+embf(A2.e)0]. By virtue of lemma 4 (d) it will suffice
+to show a\k] = |ΈΜΒ((λχ.*)0)*1 for all J f c G {0,1}*:
+a\k]
+= &8ίρμ](ΐηη(Φσ(\*\ηθ[χ -> if>[\k}))))( Γ*1 * PD)
+= βΙ^^ΛΚΛιιιίΦ^ίμΐιι^^]))^ * 0])
+= abstp[Jbl(fun(embrs(Ö[a: ^ χ£])1)|** * Ol)
+= 3b8tp\k]\EMB(s(e[x^xk]))(k*0)]
+= Γλχ£.ΕΜΒ($0[χ*/χ])(* * 0)1
+= ΓΕΜΒ(λχ.(50))*1
+Because Xx.(sO) = (λχ.$)0 we are done. •
+For every 6 G fA"| let 6"" G A be any term s.t. |~6~] = 6.
+By (emb), we then have [ r ] ~ = a r for every r G A.
+Now define partial functions p-*ep: Mp
+—• Ap
+by
+p—«p(a) ~ (f-extrad^p (a))~
+Call a G A/p
+λ-definable if there is a closed term r G
+A' s.t. |r| = a.
+Theorem 1. Let Μ be an admissible X-model.
+1. Inversion: If α £ Mp
+is X-definable then
+p—«p(o) is a closed term of type ρ s.t. |p-«p(a)| =
+a.
+2. Normalization and substitution: For every
+term r G Ap
+and every substitution θ
+p-*v(lr
+lw) =<* r
+*°
+3. Completeness: If Μ (= r = s then r and s are
+provably equal in the βη-calculus.
+Proof: 1.: Let α = |r| with r G A p
+closed and in long
+/?-normalform. By Lemma 5 and Lemma 4(a)
+f-extract^pa)
+= f-extract(ΦρIr I)
+= f-extract(emb [r|)
+= fEXTRACT(EMBr)!
+Hence p-nep(a) = fEXTRACT(EMBr)l~ = e r.
+2072.:
+f-extract^p |r|7j0)
+= f-extract(<&p |r*\η$)
+= f-extract(embrr*i])
+= fEXTRACT(EMB(r*0))]
+Hence p-ep(|r|r/,) = fEXTRACT(EMBr*0)] =« r'0.
+3.: If Μ \= r = s then |r|iftd = |*|ffci and therefore, by
+2., Γ * = α 5 * . •
+Let us reformulate this theorem in terms of the more
+natural pr-models (see Section 3). Recall that with
+every pr-model Μ we associated an injection ι/:ω —•
+M° and that |Vj = ι/n whenever r = r„ in the (fixed)
+effective, repetition free numberingΓχ, Γ2,... of A. We
+call [r] the canonical code of r in Af.
+Inversion and normalization theorem
+In a pr-model Μ there exists for every ρ an object
+invp G Mp
+~*° s.t., for every λ-definable a G M p
+, invp a
+is the canonical code of a closed term r G Ap
+in long
+ß-normalform s.t. |r|= a. Hence, for every term s
+of type />, invp|s| is the canonical code of the long
+ß-normalform of s.
+Proof: By Lemma 3, Af is admissible. Hence,
+by the previous theorem, we may define invp
+by invp a = f-extract(4^pa). We could define
+even simpler inv^a = Φρα because in pr-models
+f-extract(embjV]) = embfr] and therefore, for clo­
+sed r G Ap
+, t-extract^p |r|) = f-extract(embfr]) =
+embfr] = ΦΡ |Γ|. •
+Completeness Theorem
+If r and s are X-terms of type ρ s.t. there exists a pr-
+model Μ in which Μ f= r = s holds, then r and s are
+provably equal in the βη-calculus.
+Proof: By Lemma 5 and Theorem 1.3. •
+Note that the conditions on a λ-model for being a
+pr-model refer only to the types ο and ο —• ο —• ο.
+For higher types nothing is required. Thus this com-
+pletenss result is considerably stronger than that ob­
+tained by Friedman [1, Theorem 3] because there the
+models are required to be full type structures T# over
+an infinite set B. Statman proves another comple­
+teness theorem [3, Theorem 2]: For every closed λ-
+term r there is a finite set E, such that for all clo­
+sed s, TE \= r = s r —βη s. Let us briefly in­
+dicate how this may be generalized by our method:
+Call a λ-model admissible below a natural number n,
+if it has the same properties as an admissible model
+but everything is restricted to indices of length < η
+and terms of length < n built up from η variables.
+If any syntactical operation exeeds this finite set of
+indices and terms, then an error element should be
+retourned. Clearly this determines an increasing se­
+quence of finite sets of terms A n having A as their
+union s.t. for every model Μ admissible below π and
+every closed r in long normal form, Ρ-«Μ(ΙΗ) = R
+if r G A n and ρ-*Λ/(Μ) = e r r o r
+otherwise. Now
+let Μ be admissible below η and let r be closed s.t.
+r* € A n . Then for every closed s s.t. Μ \= r = s we
+have p-«A/(k|) = r* φ error and hence s* G A n and
+r* = s*. Because clearly for every η there is a finite set
+Ε s.t. TE is admissible below η we have generalized
+Statmans theorem.
+The completeness theorem may be formulated equiva­
+lent^ as follows: In every pr-modelΜ and every type
+Ρ = Pi pn ο
+Vr, s G Ap
+(r φβη s =• 3η G ENV, α : \τ\ηα φ |e|qa)
+holds where η and α: = αχ,..., an G Mpl
+χ ... χ Mpn
+may depend on r and s. But in fact η and α may
+be chosen independently from r and 8 because we can
+take η = Tfaj and α,· = ¥p .(emb(zQ Q)). Therefore
+the stronger formula
+3η G ENVBSVr, s G A'(r φβη s => \ν\ηα φ |φα)
+is true in every pr-model.
+5 An efficient normalization algorithm
+So far we were studying the theoretical consequences
+of our inversion method. Now we will discuss the
+question if our results also are of practical interest.
+In particular we will examine the normalization pro­
+cedure defined in the previous section. This proce­
+dure is based on Φ and Ψ and hence on EMB and
+EXTRACT which are rather expensive operations.
+Now if we work in the naive model described in Section
+3, emb = EMB and extract = f-extract = EXTRACT
+and hence we have not gained very much on the com­
+putational side. In pr-models the algorithms are even
+worse. Therefore, if we want an efficient normaliza­
+tion procedure, we must look for a more sophisticated
+model where emb and extract are as simple as possi­
+ble. At this point the generality of admissible models
+pays out: We can find an admissible λ-model where
+emb = extract = identity. Before we define such a
+model, let us look how Φ and Φ may then be compu­
+ted.
+Assume Μ to be an admissible λ-model s.t. f = o,
+M° = Λ*0
+·1
+**, Μρ
+-σ
+= (Mp
+)M
+\ Αρ>σ = function
+application, \r\° = EMBr and emb = f-extract =
+identity. Then Φ0 = Φσ = identity and by Lemma
+5 for r = Xx.s G Αρ
+"~*σ
+in long /?-normalform, any
+substitution θ and any J b G {0, l } *
+Φρ-,Οφ*)*
+= emb(\re])k
+= ΕΜΒ(Χχ.8(θ[χ Η- * ] ) ) *
+= λ*£.ΕΜΒ(*(0[χ ι- Xk]))(k * 0)
+= Xxl.*p(\8\q$[s„gk])(k*Q)
+= Χχ>.Φρ(\8\ηθ[χ H+ *p(emb\xk])])(k * 0)
+= λ*£.Φρ (|*|^(»ρ(ΕΜΒ**)))(**0)
+208i.e, for all a G Μρ
+~*σ
+of the form α = |r|^
+Φ ^ α * = λ*2.Φ,(β(»,(ΕΜΒ**)))(* * 0).
+Furthermore for t € Αρ
+~*σ
+and r G Ap
+, defining
+f-APP/0* = / ( * * O ) * ( * * l ) ,
+«^^(EMB0|r|i»
+= »,(f-app(EMB<)|r|i»)
+= Φ, (f-app(emb \t] )(emb|>0~|))
+= *,(embf*(r0)"|)
+= «,(EMB(i(ri)))
+= »,(f-APP(EMBi)(EMB(ri)))
+= Φ^-ΑΡΡ(ΕΜΒ*)(Φρ |φ*))
+i.e. for / G EMB(A'~**) and t of the form 6 = |r|q*
+we have
+V * * / * = »(Γ-ΑΡΡ/(Φ,*)).
+These very easy recursion equations for Φ and Φ sug­
+gest to define Φ Ρ G Mp
+^° and Φρ G Mp
+"*° by
+Φβ / = Ψβ / = /
+Φρ^σ α* = λχ£.Φρ (α(Ψρ (ΕΜΒχ*)))(** 0)
+* ^ , / 6 = *,(f-APP/(5,6))
+for α///EM°,aG Μρ
+^σ
+and 6 G Μρ
+.
+Now it can be shown that for r G Ap
+in long β-
+normalform again the equation Φρ (|Γ|^) = EMB(r0)
+holds, where ηΛχρ
+) = Φρ (ΕΜΒχρ
+), with a proof much
+simpler than the proof for Φ in Lemma 5.
+Thus for r G Ap
+containing no variables x* free we get
+an efficient normalization algorithm by defining
+norm(r) = *P{\r\qxd)e.
+The hard part in the computation of norm(r) is to
+compute |r|r/id which is done by the compiler of a func­
+tional programming language. Therefore, this norma­
+lization procedure will be as efficient as the compiler
+is.
+Note that the definitions of Φ and Φ are external, i.e.
+Φ and Φ are not defined as the values in Μ of certain
+Α-terms. The definition takes place in a different λ-
+model Μ over ground types ο and__t with M° = A,
+M* = {0,1}* and MP
+^° = (Μ°)Ή
+' (Hence Mp
+=
+It remains to define an admissible λ-model Μ with
+the properties postulated at the beginning of this sec­
+tion: M° = Α<°·1
+>·> Μρ
+^σ
+= {MP
+)M
+\ APt<T = fun­
+ction application, ι = f = o, M ° = EMBr, [Jfc] =
+EMBx£. For the definition ot the remaining func­
+tions we use the auxiliary function ~':M° —• {0,1}*
+defined by F' = J k if Fe = x°k) otherwise Fl
+-
+anything. Now define appendFG = \Fl
+* G']',
+mvarp F = EMB(x^), app = f-APP, abstp FG =
+EMB(Ax^.EXTRACT(G)), embF = F, funFG =
+EMB(FG'), extractaJfc = a[Jfe"|Jfc.
+Let's verify the laws
+for admissibility: (append), (mvar), (app), (abst), ([.])
+and (emb) clearly hold.
+(fun): fun(embfrl)fifel = EMB (emb( EMBr) pfc]*) =
+tEMBrJbl.
+(extract): If fail = [EMBrJfcl then extracted =
+a\k]k = [EMB Hb] Jfc = EMB(EMBrJfc)Jfc = EMBrJfc
+by Lemma 2 (c). Because by assumption this
+is true for all Jfc, we get extracta = EMBr =
+EMB(EXTRACT(EMBr)) = [EXTRACT(EMBr)].
+β Integrating constants
+In this section we will extend our method from pure
+terms to terms containing constants. Suppose we
+are given a set C of typed constants equipped with
+an operational semantics opc given by C-conversions
+cr\... r n 8 for several cGC. These, together with
+/^-conversion and rj-expansion, induce a reduction re­
+lation —*c o r
+* the set Ac of λ-terms possibly containing
+constants from C. Call r G Ac in C-normal form if it
+is in normal form with respect to -+c> i.e., r is in long
+^-normal form and doesn't contain C-convertible sub-
+terms, ορς is weakly normalizing iff every term Ac is
+reducible oy —•c, ^-reduction and τ^-expansion to a
+term in C-normalform.
+A C-model is a λ-model Μ together with an inter­
+pretation CM G Μp
+for every constant c G C of type
+p. This extends to an interpretation |r|r;G C for all
+r G Ac and all η G ENV in the obvious way. A C-
+model Μ is called admissible for opc iff it is admissible
+(where of course [r] has to be defined for all r G Ac)
+and for all substitution θ the following holds:
+(CI) If r s by a C-conversion then |r|^ = \sfae.
+(C2) For all terms of type ο of the form csi... (c a
+constant) in C-normal form
+\c8i...8n\ = Φ(€πΛ[ο|)|5ι|7/*...|5η|τ7*.
+Now we may extend the results of Section 4:
+Lemma 6 (Extended Main Lemma). Let Μ be
+a C-model admissible for opc. Then for every r G A£
+in C-normal form and every substitution θ
+Φ,(|Γ|ι? ί ) = βιηΚΓΓ(?1)
+Moreover if ρ = ο then \rfa$ = \rff\.
+Proof: Copy the proof of Lemma 5. There is only one
+additional case, namely when ρ = ο and r has the form
+cs\ .. .<sn. But then (C2) applies. •
+209Theorem 2. Let opc be weakly normalizing and let
+Μ be a C-model admissible for opc .
+1. Inversion: If α G Mp
+is λ-definable from C then
+ρ-«ρ(α) is a closed term in A£ s.t. |ρ-Ηβρ(α)| = α.
+2. Normalization and confluence: The reduc­
+tion relation — • c is confluent. In particular every
+term r Ε A£ reduces to a unique C-norma Iform
+r* which my be computed by
+P^e,(|r|?7id) = r*
+3. Completeness: If Μ ^ r = 8 then r and 8 are
+provably equal in the ßrfi-calculus.
+Proof: Clearly, by (CI), \r\q$ = |«|ffe if r —>c s.
+Hence, if r — s with an β in C-normal form, then
+\Γ\η$ = |S|TJ0. NOW we may prove the theorem in the
+same manner as Theorem 1, using Lemma 6 instead
+of Lemma 5. •
+7 Normalization of proofs
+By the Curry-Howard correspondence every proof in
+the — » V-fragment of Gentzens natural deduction cal­
+culus may be represented as a typed λ-term. The
+type of a term (derivation) άφ
+is the formula φ being
+derived, variables correspond to assumptions and λ-
+abstraction resp. application correspond to the intro­
+duction resp. elimination rules for — • and V. This cor­
+respondence is the basis for the use of proofs as pro­
+grams, where execution of programs is performed by
+normalizing proofs [2].
+We now show how the normalization procedure de­
+rived in the previous sections may be used for the
+normalization of proofs. At first glance there seems
+to be a difficulty because we only considered terms
+typed by ο and ρ —• σ and not by arbitrary —* V-
+formulas. But note that the normal form of a typed
+term is completely determined by the underlying type
+free term (obtained by erasing all types). Therefore we
+only need to define for every — • V-formula φ a type
+τ(φ) (built up from ο and —•) such that if d is a de­
+rivation then r(d) is a wellformed typed term, where
+r(d) is obtained from d by replacing all formulas φ
+by τ{φ). The definition of τ is obvious: τ(π) = ο for
+atomic formulas π, τ(φ —> φ) τ{ψ) —• τ(φ) and
+r(Vxp
+<p) = τ(ρ) — • τ(φ), where for types ρ over gro­
+und types other than ο, r(p) is defined by replacing all
+ground types by o. Hence a derivation d of a formula φ
+may be normalized by computing p-H
+er(v>)(k(d)|^id).
+At least from this we obtain the type free term under­
+lying the normal form of d. At the end of this section
+it is indicated how we can recover therefrom the com­
+plete normalized derivation.
+One important point is still missing: In the V-
+elimination rule, which may be written as the term
+construction rule ( c f ^ r ) ^ / * ! the derived formula is
+obtained by a substitution. Therefore if r and s are of
+functional type then <p[r/x] may contain non-normal
+object terms which we may want to normalize. These
+substitutions and normalizations may be performed
+by our method if we represent formulas as λ-terms
+of a new ground type formula. Predicate symbols for
+predicates over objects of type p\,...,pn are then con­
+stants of type p\ pn — • formula, implication
+is a constant of type formula — • formula —* formula
+and quantification over objects of type ρ is represen­
+ted by a constant Vp of type (p — • formula) — • formula.
+Vxp
+<p then stands for Vp\xp
+.<p. Now the normal form
+of <p[r/x] may be computed by normalizing (λχ.^)Γ.
+Since we have no conversion rules for the logical
+constants — • and Vp , we have, by (C2) of the pre­
+vious section, to interpret them by mse0—0_>0(—•) and
+mse(T (p )^( < > )_0 (Vp) respectively, where for r Ε Ap
+we
+define msep (r) = *p (embfr]) (make self evaluating,
+see introduction).
+So far we have only considered pure logic. To nor­
+malize proofs in (higher order} arithmetic we have to
+deal with further constants: At the object level con­
+stants 0 for zero, flt, flf for the boolean objects, S for
+the successor and Rp for recursion operators of type
+rec(p) \— ρ —+ (nat —•/>-+/?)—• nat — • p.
+At the proof level constants I y * ^ ) for induction over
+the natural numbers
+ind(V*vK*)) := V>(0) — Vx(v?(z) — <p(Sx)) -+ Vx<p(x),
+constants IyJ^J*,) for boolean induction (case analysis)
+and a truth constant Τ of type atom(t)t), where atom is
+a constant of type boole — •formula, i.e., a predicate
+symbol (in fact it suffices to have atom as the only
+predicate symbol).
+Note that we can define proofs of the 'stability axioms'
+-i-i^ — • φ for every arithmetical formula φ by induc­
+tion on φ (~*<p := φ — • atom(jtf)). For prime formu­
+las atomitl stability is proved by boolean induction.
+Hence, it 3 and V are defined as usual, we get full
+classical arithmetic.
+In order to use arithmetical proofs as programs, the
+purely logical /^-conversion has to be supplemented
+by conversion rules for the recursion and induction
+constants. With a recursion constant Wp we associate
+the usual conversions
+RprsO r
+Rprs(St) st(Rprst)
+Similary for induction over the natual numbers I y * ^ )
+(omitting formulas)
+Inat
+</eO d
+Inat
+</e(S<) Η- etil^det)
+210and for case analysis IyJ^)
+Ib o o l e
+dettt i-> d
+Ib o o l e
+dejtf h-> e
+Note that r(ind(Vxy>(x))) = r(rec(/>)) provided
+τ(φ(χ)) = r(/>). Hence for the purpose of normaliza­
+tion, recursion and induction over the natural numbers
+may be identified.
+By the results of the previous section we have to inter­
+pret the arithmetical constants in an admissible mo­
+del Af in such a way that (CI) and (C2) are satis­
+fied. Hence we define OM = mse0(Q) (= [0]) etc.,
+SM = mse0_>0(S) and for a recursion constant Rp ,
+regarded as a constant of type r(rec(p)), we define
+(ommitting types)
+R M ab\0] = a,
+RMab\Si] =b\t}(RMab\t]),
+R M ate = mseRa6c otherwise.
+Case analysis is interpreted similary. Of course we
+must have chosen a model Μ in which RA/ exists (For
+the model defined in Section 5 this is certainly the
+case). The properties (CI) and (C2) are rather ob­
+vious. (CI) immediately follows from Lemma 6(a)
+(which doesn't use (CI)!). To prove (C2), Lemma
+6(a) is needed too. But Lemma 6 in turn needs (C2).
+Therefore one has to prove (C2) and Lemma 6 simoul-
+taneously by induction on the length of the term.
+Now, because of the well known fact that the ope­
+rative semantics defined by the conversions above is
+(even strongly) normalizing, we can apply Theorem
+2.2 which gives us a normalization algorithm.
+Remark: Our arithmetical system includes the calcu­
+lus of primitive recursive functional in all finite types
+(Gödels Τ, R-A-calculus [1]). Because the full type
+structure over the naturals T w clearly is admissible, we
+can conclude from Theorem 2.3 that for closed primi­
+tive recursive terms (of finite type) T w r = s holds
+if and only if r and s nave the same normal form. Since
+normal forms may be computed, this means that equa­
+lity between prim. rec. terms in Ύω is decidable. This
+sharply contrasts Friedmans result that, for prim. rec.
+terms r, s, the relation Ύω (= r = s is complete IIJ [1,
+Theorem 6]. The point is that the arithmetical con­
+stants are interpreted differently: In [1] they operate
+on the natural numbers as usual whereas we coded all
+(possibly open) terms into u>. Therefore Ύω \= r = s
+in our sense is much stronger than in the usual sense.
+Presently we experiment with an implementation of
+proofs along these lines. There are two technical
+points in this implementation which are worth noti­
+cing: 1. In an implication elimination (cf^~*^ex
+)^ we
+don't require the formulas φ and χ to be identical. It
+suffices if they have α-identical normal forms. This
+means that a big deal of (in most cases) uninteresting
+equational reasoning is shifted from the proof into the
+evaluation mechaism of the programming language.
+2. We don't save complete proofs but only three cha­
+racteristic components: a list of the free object and
+assumption variables together with their types, the
+derived formula and the underlying type-free λ-term
+of the proof. If the proof is in normalform then the
+completely typed proof expression may be recovered
+from these data. This yields a very compact represen­
+tation of proofs making it possible to handle even very
+large proofs. In [2] this has been done for proofs using
+the full strength of Peano arithmetic.
+8 Summary and conclusions
+It has been shown how to invert the evaluation func­
+tional for typed λ-calculus in a large class of models.
+The main consequences where an efficient normaliza­
+tion procedure for typed λ-terms and a completeness
+theorem for the /Jij-calculus. Furthermore we used the
+normalization procedure to normalize natural deduc­
+tion proofs of higher order arithmetic.
+We think that the normalization method presented
+here is an excellent example for the use of the abstract
+concept of functional of higher type in constructing
+and analyzing concrete algorithms: The normalization
+algorithm takes and returns concrete objects (terms)
+but it uses the evaluation procedure which returns fun­
+ctional in all higher types.
+Our technique may be extended to infinite terms and
+terms containing full recursion, i.e., fixed point ope­
+rators. We also plan to extend it to second order A -
+calculus.
+References
+[1] H. FRIEDMAN, Equality between functional,
+Lecture Notes in Mathematics(R. Parikh,
+Editor), vol. 453, Springer-Verlag, Berlin and
+New York, 1975, pp. 22-37.
+[2] H. SCHWICHTENBERG, Proofs as Programs,
+Leeds: Proof theory '90 (P. Aczel, H. Simmons,
+Editors), 1991.
+[3] R. STATMAN, Completeness, invariance and A-
+definability, The Journal of Symbolic Logic,
+Vol. 47, no. 1, 1982, pp. 17-26.
+[4] A. S. TROELSTRA, Metamathematical investi­
+gation of intuitionistic arithmetic and analysis,
+Lecture Notes in Mathematics, vol. 344,
+Springer-Verlag, Berlin and New York, 1973.
+211

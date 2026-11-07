@@ -1,0 +1,37 @@
+[
+  {
+    "path": "Definitions/Def_Schwichtenberg1976V2_Lambda.lean",
+    "kind": "definition",
+    "name": "Schwichtenberg1976V2_Lambda",
+    "old_id": "1b8fdb07-70ed-450d-a3a9-1ff2a939563f",
+    "key": "definition"
+  },
+  {
+    "path": "Theorems/Thm_Schwichtenberg1976V2_combinators_and_sufficiency.lean",
+    "kind": "theorem",
+    "name": "Schwichtenberg1976V2.combinators_and_sufficiency",
+    "old_id": "4694e83f-7878-4185-8cdf-964a0d906b8a",
+    "key": "combinators_and_sufficiency"
+  },
+  {
+    "path": "Theorems/Thm_Schwichtenberg1976V2_normal_subterm_structure.lean",
+    "kind": "theorem",
+    "name": "Schwichtenberg1976V2.normal_subterm_structure",
+    "old_id": "aadc9a8e-5141-4915-b574-db398c5d5716",
+    "key": "normal_subterm_structure"
+  },
+  {
+    "path": "Theorems/Thm_Schwichtenberg1976V2_subterm_polynomial_lemma.lean",
+    "kind": "theorem",
+    "name": "Schwichtenberg1976V2.subterm_polynomial_lemma",
+    "old_id": "8057498b-8e0a-4096-bdd4-ec2e8be75632",
+    "key": "subterm_polynomial_lemma"
+  },
+  {
+    "path": "Theorems/Thm_Schwichtenberg1976V2_definable_iff_extended_polynomial.lean",
+    "kind": "theorem",
+    "name": "Schwichtenberg1976V2.definable_iff_extended_polynomial",
+    "old_id": "d41263bd-5699-47e6-9aea-b2d2af7f2deb",
+    "key": "definable_iff_extended_polynomial"
+  }
+]

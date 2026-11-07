@@ -1,0 +1,1054 @@
+{
+  "created_at_utc": "2026-11-02T05:08:20.469280+00:00",
+  "toolchain": "leanprover/lean4:v4.33.1",
+  "mathlib_rev": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "verification": {
+    "checked_at_utc": "2026-11-02T04:32:50.492384+00:00",
+    "toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_rev": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "all_modules_checked": true,
+    "success": true,
+    "note": "Definitions compile independently. Each theorem is elaborated with its exact preamble; independent one-theorem files share a compilation group. Open target bodies are not proofs.",
+    "modules": [
+      {
+        "module": "Definitions.Def_friedmann_simplex",
+        "path": "Definitions/Def_friedmann_simplex.lean",
+        "sha256": "4512ffa0c1e3ad32c3fa57ab486acaa19ed2abe3f136e7969b45e9fa412ac277",
+        "exit_code": 0,
+        "elapsed_seconds": 70.503,
+        "log": "build-logs/Definitions.Def_friedmann_simplex.log",
+        "method": "standalone",
+        "reused_unchanged_success": true
+      },
+      {
+        "module": "Definitions.Def_friedmann_parity",
+        "path": "Definitions/Def_friedmann_parity.lean",
+        "sha256": "305b3ea8600395b1aa267571c7997a1cb00d281f837d1cb9a9c4d7dd0774eb45",
+        "exit_code": 0,
+        "elapsed_seconds": 37.375,
+        "log": "build-logs/Definitions.Def_friedmann_parity.log",
+        "method": "standalone",
+        "reused_unchanged_success": true
+      },
+      {
+        "module": "Definitions.Def_friedmann_multiplicity",
+        "path": "Definitions/Def_friedmann_multiplicity.lean",
+        "sha256": "64238c3bc6926cdf9242649d93bf2e3082906e43392274f4cdda67862df6a5f6",
+        "exit_code": 0,
+        "elapsed_seconds": 42.434,
+        "log": "build-logs/Definitions.Def_friedmann_multiplicity.log",
+        "method": "standalone",
+        "reused_unchanged_success": true
+      },
+      {
+        "module": "Definitions.Def_friedmann_cunningham",
+        "path": "Definitions/Def_friedmann_cunningham.lean",
+        "sha256": "72e58bee2bc88d22a17ca25c1dad59c0b977b4ca7c9afd02fa8865a5879feca4",
+        "exit_code": 0,
+        "elapsed_seconds": 26.996,
+        "log": "build-logs/Definitions.Def_friedmann_cunningham.log",
+        "method": "standalone"
+      },
+      {
+        "module": "Definitions.Def_friedmann_payoff",
+        "path": "Definitions/Def_friedmann_payoff.lean",
+        "sha256": "5c645883ae2c37078d5ad25e248b23a737581d142180fb4e43652c755adbf9e3",
+        "exit_code": 0,
+        "elapsed_seconds": 61.439,
+        "log": "build-logs/Definitions.Def_friedmann_payoff.log",
+        "method": "standalone",
+        "reused_unchanged_success": true
+      },
+      {
+        "module": "Definitions.Def_friedmann_zadeh",
+        "path": "Definitions/Def_friedmann_zadeh.lean",
+        "sha256": "f1e8ea7bdfe44abf095f7d7b4825509e6a0c2608e3dda120f033a24bb0bb29c3",
+        "exit_code": 0,
+        "elapsed_seconds": 34.884,
+        "log": "build-logs/Definitions.Def_friedmann_zadeh.log",
+        "method": "standalone",
+        "reused_unchanged_success": true
+      },
+      {
+        "module": "Theorems.Thm_friedmann_cunningham_auso_lower_bound",
+        "path": "Theorems/Thm_friedmann_cunningham_auso_lower_bound.lean",
+        "sha256": "a1c2b128af2091fdb1386404701bd025510d13d60a96eb814d266e9973e20c4c",
+        "exit_code": 0,
+        "elapsed_seconds": 46.987,
+        "log": "build-logs/TargetGroup1.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup1.lean",
+        "aggregate_sha256": "48e29b12c07d46a4c9359c93d1b8c38fa8283adc2716ba1936130d32d578d697"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_cunningham_counterstrategy",
+        "path": "Theorems/Thm_friedmann_cunningham_counterstrategy.lean",
+        "sha256": "0a4f5d420db1685bc753bb6865a43f00dc6d36167a346d04c7d6c88e8fb9ae6a",
+        "exit_code": 0,
+        "elapsed_seconds": 46.987,
+        "log": "build-logs/TargetGroup1.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup1.lean",
+        "aggregate_sha256": "48e29b12c07d46a4c9359c93d1b8c38fa8283adc2716ba1936130d32d578d697"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_cunningham_cube_realization",
+        "path": "Theorems/Thm_friedmann_cunningham_cube_realization.lean",
+        "sha256": "d4838a9230230284477c142912c5df85876d3441f62ee0377745205973b8d89d",
+        "exit_code": 0,
+        "elapsed_seconds": 46.987,
+        "log": "build-logs/TargetGroup1.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup1.lean",
+        "aggregate_sha256": "48e29b12c07d46a4c9359c93d1b8c38fa8283adc2716ba1936130d32d578d697"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_cunningham_lp_valid",
+        "path": "Theorems/Thm_friedmann_cunningham_lp_valid.lean",
+        "sha256": "fc42c6cf06c0ff5b2a7f83d3f7512870f397e7b4be2e74c3693d2a83ea901985",
+        "exit_code": 0,
+        "elapsed_seconds": 46.987,
+        "log": "build-logs/TargetGroup1.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup1.lean",
+        "aggregate_sha256": "48e29b12c07d46a4c9359c93d1b8c38fa8283adc2716ba1936130d32d578d697"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_cunningham_mdp_lower_bound",
+        "path": "Theorems/Thm_friedmann_cunningham_mdp_lower_bound.lean",
+        "sha256": "c62c1e23ca23fa8116906aed7cf9a69f527b551a9b4c7613d83a9bf38babe227",
+        "exit_code": 0,
+        "elapsed_seconds": 46.987,
+        "log": "build-logs/TargetGroup1.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup1.lean",
+        "aggregate_sha256": "48e29b12c07d46a4c9359c93d1b8c38fa8283adc2716ba1936130d32d578d697"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_cunningham_mdp_valid",
+        "path": "Theorems/Thm_friedmann_cunningham_mdp_valid.lean",
+        "sha256": "d2a4a318946f181457064179a1c97a07feb388d2c1dbfa4e430b758a0b5e66a3",
+        "exit_code": 0,
+        "elapsed_seconds": 46.987,
+        "log": "build-logs/TargetGroup1.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup1.lean",
+        "aggregate_sha256": "48e29b12c07d46a4c9359c93d1b8c38fa8283adc2716ba1936130d32d578d697"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_cunningham_parity_lower_bound",
+        "path": "Theorems/Thm_friedmann_cunningham_parity_lower_bound.lean",
+        "sha256": "b5627886a3214bcee72799206237f96bb4a8c0ec44d85849b87d1b71a9a14643",
+        "exit_code": 0,
+        "elapsed_seconds": 46.987,
+        "log": "build-logs/TargetGroup1.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup1.lean",
+        "aggregate_sha256": "48e29b12c07d46a4c9359c93d1b8c38fa8283adc2716ba1936130d32d578d697"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_cunningham_policy_pivot",
+        "path": "Theorems/Thm_friedmann_cunningham_policy_pivot.lean",
+        "sha256": "08bae07286bd8475e934946f3ac49b69a328efda66a0537e9d398ee955bd041d",
+        "exit_code": 0,
+        "elapsed_seconds": 46.987,
+        "log": "build-logs/TargetGroup1.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup1.lean",
+        "aggregate_sha256": "48e29b12c07d46a4c9359c93d1b8c38fa8283adc2716ba1936130d32d578d697"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_cunningham_simplex_lower_bound",
+        "path": "Theorems/Thm_friedmann_cunningham_simplex_lower_bound.lean",
+        "sha256": "553cf796890816f73903523a94704f3ed34cbbced552a069f0a6c195b02fc78a",
+        "exit_code": 0,
+        "elapsed_seconds": 46.987,
+        "log": "build-logs/TargetGroup1.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup1.lean",
+        "aggregate_sha256": "48e29b12c07d46a4c9359c93d1b8c38fa8283adc2716ba1936130d32d578d697"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_parity_binary",
+        "path": "Theorems/Thm_friedmann_parity_binary.lean",
+        "sha256": "ff257d6145b7012e28a934286c209385111cc0d782600bad287c4285e81bb311",
+        "exit_code": 0,
+        "elapsed_seconds": 4.555,
+        "log": "build-logs/TargetGroup2.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup2.lean",
+        "aggregate_sha256": "399a38b41f1a01da418abc40fa8336de44815b62611287ad2ca649801608ccc2"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_parity_counterstrategy",
+        "path": "Theorems/Thm_friedmann_parity_counterstrategy.lean",
+        "sha256": "ace1e07f917c8f4f6d297aec3d8093cbdf1dba4b35284efc3d0bd9864b06c89b",
+        "exit_code": 0,
+        "elapsed_seconds": 4.555,
+        "log": "build-logs/TargetGroup2.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup2.lean",
+        "aggregate_sha256": "399a38b41f1a01da418abc40fa8336de44815b62611287ad2ca649801608ccc2"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_parity_improvement",
+        "path": "Theorems/Thm_friedmann_parity_improvement.lean",
+        "sha256": "e312c94c31166dfde0f001604954155a9288d61c71d40ec0c5f21cc27766b7ab",
+        "exit_code": 0,
+        "elapsed_seconds": 4.555,
+        "log": "build-logs/TargetGroup2.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup2.lean",
+        "aggregate_sha256": "399a38b41f1a01da418abc40fa8336de44815b62611287ad2ca649801608ccc2"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_parity_local",
+        "path": "Theorems/Thm_friedmann_parity_local.lean",
+        "sha256": "052eb1299c2649b43352305a974f941c03a11cd520c83fafcf8c1a77e8f21e8b",
+        "exit_code": 0,
+        "elapsed_seconds": 4.555,
+        "log": "build-logs/TargetGroup2.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup2.lean",
+        "aggregate_sha256": "399a38b41f1a01da418abc40fa8336de44815b62611287ad2ca649801608ccc2"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_parity_winning",
+        "path": "Theorems/Thm_friedmann_parity_winning.lean",
+        "sha256": "2d460178ae97e86ab8ef4e974ad8f481373a77fe469bc41fce4e8bdb726ff8d5",
+        "exit_code": 0,
+        "elapsed_seconds": 4.555,
+        "log": "build-logs/TargetGroup2.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup2.lean",
+        "aggregate_sha256": "399a38b41f1a01da418abc40fa8336de44815b62611287ad2ca649801608ccc2"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_parity_discounted_bellman",
+        "path": "Theorems/Thm_friedmann_parity_discounted_bellman.lean",
+        "sha256": "260d2d46c2231c7f475122c73e51649ef4428bffbe83a758d627768b99e4ae8e",
+        "exit_code": 0,
+        "elapsed_seconds": 34.638,
+        "log": "build-logs/TargetGroup3.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup3.lean",
+        "aggregate_sha256": "d50f460e4f52cca898fb5bbe36720851861c42a52e0e05854fd86215a261e1fe"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_parity_goal",
+        "path": "Theorems/Thm_friedmann_parity_goal.lean",
+        "sha256": "51798bd2b7dbd41c298890871ab30b4753555811609cb032f4e220255d1fbcac",
+        "exit_code": 0,
+        "elapsed_seconds": 34.638,
+        "log": "build-logs/TargetGroup3.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup3.lean",
+        "aggregate_sha256": "d50f460e4f52cca898fb5bbe36720851861c42a52e0e05854fd86215a261e1fe"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_parity_payoff",
+        "path": "Theorems/Thm_friedmann_parity_payoff.lean",
+        "sha256": "328e32e74d43a517f24613ec7332628e4d4818c3f186ecf4bcf0b3a3761a93b6",
+        "exit_code": 0,
+        "elapsed_seconds": 34.638,
+        "log": "build-logs/TargetGroup3.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup3.lean",
+        "aggregate_sha256": "d50f460e4f52cca898fb5bbe36720851861c42a52e0e05854fd86215a261e1fe"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_parity_stochastic",
+        "path": "Theorems/Thm_friedmann_parity_stochastic.lean",
+        "sha256": "1bb2eec20c54ab8fb9946f5cb373d34108b2768dabde4b8be6eb8afe907da63c",
+        "exit_code": 0,
+        "elapsed_seconds": 34.638,
+        "log": "build-logs/TargetGroup3.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup3.lean",
+        "aggregate_sha256": "d50f460e4f52cca898fb5bbe36720851861c42a52e0e05854fd86215a261e1fe"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_parity_stochastic_semantics",
+        "path": "Theorems/Thm_friedmann_parity_stochastic_semantics.lean",
+        "sha256": "9321699c6bd12d27806f9abfb94d66c48e6fda3bd0e120b1068228b7ff76be6e",
+        "exit_code": 0,
+        "elapsed_seconds": 34.638,
+        "log": "build-logs/TargetGroup3.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup3.lean",
+        "aggregate_sha256": "d50f460e4f52cca898fb5bbe36720851861c42a52e0e05854fd86215a261e1fe"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_parity_transport",
+        "path": "Theorems/Thm_friedmann_parity_transport.lean",
+        "sha256": "642cbc50b031b2c9b122f563dba2de1070b1750ac04c5b538ac87d222fe17727",
+        "exit_code": 0,
+        "elapsed_seconds": 34.638,
+        "log": "build-logs/TargetGroup3.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup3.lean",
+        "aggregate_sha256": "d50f460e4f52cca898fb5bbe36720851861c42a52e0e05854fd86215a261e1fe"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_zadeh_counter_coverage",
+        "path": "Theorems/Thm_friedmann_zadeh_counter_coverage.lean",
+        "sha256": "6642049ead1d96602eb248570f075915103d89a2426374076ddbdb87766b1ffc",
+        "exit_code": 0,
+        "elapsed_seconds": 31.228,
+        "log": "build-logs/TargetGroup4.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup4.lean",
+        "aggregate_sha256": "9ea9ec511e334eb01805244052243439fafa94c6e5320aaeb31d4f085d836663"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_zadeh_goal",
+        "path": "Theorems/Thm_friedmann_zadeh_goal.lean",
+        "sha256": "6d4c6048f33338eceaee8c9456b4b1b8cf76a4d7cb1b0a2d797c4583ee7628b2",
+        "exit_code": 0,
+        "elapsed_seconds": 31.228,
+        "log": "build-logs/TargetGroup4.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup4.lean",
+        "aggregate_sha256": "9ea9ec511e334eb01805244052243439fafa94c6e5320aaeb31d4f085d836663"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_zadeh_lp_transfer",
+        "path": "Theorems/Thm_friedmann_zadeh_lp_transfer.lean",
+        "sha256": "6f1dbb3c127c44a21ce7d31d93065df427410f139ffad5542fe6569d4dd66c1b",
+        "exit_code": 0,
+        "elapsed_seconds": 31.228,
+        "log": "build-logs/TargetGroup4.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup4.lean",
+        "aggregate_sha256": "9ea9ec511e334eb01805244052243439fafa94c6e5320aaeb31d4f085d836663"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_zadeh_mdp_valid",
+        "path": "Theorems/Thm_friedmann_zadeh_mdp_valid.lean",
+        "sha256": "e663da0e074a568ab5846a08f42094e341a88ca05349c8770da54a5ace9df367",
+        "exit_code": 0,
+        "elapsed_seconds": 31.228,
+        "log": "build-logs/TargetGroup4.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup4.lean",
+        "aggregate_sha256": "9ea9ec511e334eb01805244052243439fafa94c6e5320aaeb31d4f085d836663"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_zadeh_sink",
+        "path": "Theorems/Thm_friedmann_zadeh_sink.lean",
+        "sha256": "7abc2caf0cc9d7d8038b7beee2acd3011c5f9191f11011910d73c39f97629115",
+        "exit_code": 0,
+        "elapsed_seconds": 31.228,
+        "log": "build-logs/TargetGroup4.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup4.lean",
+        "aggregate_sha256": "9ea9ec511e334eb01805244052243439fafa94c6e5320aaeb31d4f085d836663"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_zadeh_size",
+        "path": "Theorems/Thm_friedmann_zadeh_size.lean",
+        "sha256": "7a7dd4a4626ede89122c2f2f2acb2bfdc64bee8f3c4d4acef8c0f091c627016f",
+        "exit_code": 0,
+        "elapsed_seconds": 31.228,
+        "log": "build-logs/TargetGroup4.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup4.lean",
+        "aggregate_sha256": "9ea9ec511e334eb01805244052243439fafa94c6e5320aaeb31d4f085d836663"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_zadeh_source_realization",
+        "path": "Theorems/Thm_friedmann_zadeh_source_realization.lean",
+        "sha256": "a1c62c297f1cda14b33adab2e9771681a23beaf30a26c544405a744bf6dafa91",
+        "exit_code": 0,
+        "elapsed_seconds": 31.228,
+        "log": "build-logs/TargetGroup4.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup4.lean",
+        "aggregate_sha256": "9ea9ec511e334eb01805244052243439fafa94c6e5320aaeb31d4f085d836663"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_zadeh_tie_order",
+        "path": "Theorems/Thm_friedmann_zadeh_tie_order.lean",
+        "sha256": "0d5ac55c25f24283adbc86a12376f3d14a67a7a9f8be24535a13555ba1bafa01",
+        "exit_code": 0,
+        "elapsed_seconds": 31.228,
+        "log": "build-logs/TargetGroup4.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup4.lean",
+        "aggregate_sha256": "9ea9ec511e334eb01805244052243439fafa94c6e5320aaeb31d4f085d836663"
+      },
+      {
+        "module": "Theorems.Thm_friedmann_zadeh_valuation",
+        "path": "Theorems/Thm_friedmann_zadeh_valuation.lean",
+        "sha256": "2d705d2fc77cf82db8caa1c7fcc8ecbfa3bc8f4591e84ab94ae9ccd8d329ea60",
+        "exit_code": 0,
+        "elapsed_seconds": 31.228,
+        "log": "build-logs/TargetGroup4.log",
+        "method": "identical-preamble aggregate",
+        "aggregate": "checks/generated/TargetGroup4.lean",
+        "aggregate_sha256": "9ea9ec511e334eb01805244052243439fafa94c6e5320aaeb31d4f085d836663"
+      }
+    ]
+  },
+  "platform_upload": [
+    {
+      "uploaded_at_utc": "2026-11-02T05:05:07.991353+00:00",
+      "verified_at_utc": "2026-11-02T05:07:21.679658+00:00",
+      "service": "https://prove2.me",
+      "proposal_id": "56809bca-587b-4681-a37e-5c1a6151675c",
+      "name": "Exponential lower bounds for Cunningham\u2019s rule",
+      "status": "Draft",
+      "review_url": "https://prove2.me/my-missions",
+      "definition_modules": 4,
+      "theorem_targets": 9,
+      "milestones": 8,
+      "all_item_bodies_readbacks_order_goal_and_milestones_verified": true,
+      "human_confirmations": 0,
+      "submitted_at": null,
+      "draft_access": "private",
+      "eventual_visibility": "public",
+      "environment": "0df444a360eaa60ab8c11dca51a86af692955474",
+      "packet_digest": "3e99eae70709956dc984814dbe1335b05d680a24291db4dbb42125e35224f7ca",
+      "packet_file_sha256": "6266220be84173d4429bba3565d9a29b8bda0671e7f86bed5db30a41457d5725",
+      "local_audit_certificates_uploaded": false,
+      "items": [
+        {
+          "key": "def:friedmann_parity",
+          "id": "0d2f7121-a7ff-43a6-9ec8-1ca69cbf0ee0",
+          "kind": "definition",
+          "payload_digest": "a5f85a389bb2cbbfc5b0a594be917c346ebd5c900f232c2e7c92ce6c7e537280"
+        },
+        {
+          "key": "def:friedmann_multiplicity",
+          "id": "a747d224-9d3e-46a3-8b54-d0ba60690300",
+          "kind": "definition",
+          "payload_digest": "4eec7b6478becb2b465aa503fe27f5c773578e70a23d2dd05e72f50e1117894e"
+        },
+        {
+          "key": "def:friedmann_simplex",
+          "id": "beab4a14-3f64-49ed-81b3-db49b9f77c28",
+          "kind": "definition",
+          "payload_digest": "dc5c351a58c40c1b7647f61b65345120932d7015067a2590c49012ee864a9a16"
+        },
+        {
+          "key": "def:friedmann_cunningham",
+          "id": "570290a0-1ee3-4857-8590-26896eadb9e8",
+          "kind": "definition",
+          "payload_digest": "d1331cf9531a5bfddb3b52d80d697d018a52d7d6efb97ba56d7a3e8b3f61a171"
+        },
+        {
+          "key": "counterstrategy",
+          "id": "7f12b423-04d3-46eb-a250-89f84840320d",
+          "kind": "theorem",
+          "payload_digest": "b46af9ef72a1cf4dedfbf44805e3d78b964dda3363a244994e412790f3bd35ee"
+        },
+        {
+          "key": "parity_lower_bound",
+          "id": "1e243da2-c10b-423a-ba32-b9e967b183e2",
+          "kind": "theorem",
+          "payload_digest": "3229830357f3d156fbf5852fdfd9214492db9ccd7f93ef872ba6a85c9a7d0483"
+        },
+        {
+          "key": "mdp_valid",
+          "id": "56e18c91-86e9-4637-9ac7-e060bff8596c",
+          "kind": "theorem",
+          "payload_digest": "0a61d98b17e219b0db4776985b2acb41c16e9c79f99636b8c5de28ca982e717d"
+        },
+        {
+          "key": "lp_valid",
+          "id": "5dc1a9cf-60c3-4c0e-a3f1-aff2f5bbf503",
+          "kind": "theorem",
+          "payload_digest": "1f262de2d75206e84d84e8c6c2a19836185da9ceb383ce59ac760c7300307bf7"
+        },
+        {
+          "key": "policy_pivot",
+          "id": "d24afa5e-ff30-4f53-856c-0433bf9fba14",
+          "kind": "theorem",
+          "payload_digest": "b590d00cdacfdae712c201ec076b65bd76cb18bd3c0b7cc5e6728063c05f50b9"
+        },
+        {
+          "key": "mdp_lower_bound",
+          "id": "b2271fe7-3146-4435-8df8-8b35019e8820",
+          "kind": "theorem",
+          "payload_digest": "bced504634d66def8f56a26b8e889757c879222183d9ef5ff4946ba7b41400e9"
+        },
+        {
+          "key": "cube_realization",
+          "id": "1bbda392-1b13-42d8-91a1-ccf5d569e7c8",
+          "kind": "theorem",
+          "payload_digest": "9e463990db90f4be054f7d36eb6e0e44a2406a70269c164bcf4089a16abf62df"
+        },
+        {
+          "key": "auso_lower_bound",
+          "id": "b9fb76f1-ab85-4671-93e7-1195b85c65f3",
+          "kind": "theorem",
+          "payload_digest": "3e38a7e26f7d5f1ed81bae54fca31e8d9dbbd0e798e223e08f05fe6cf220aba2"
+        },
+        {
+          "key": "goal",
+          "id": "8e909f7e-d5be-44aa-8c78-d9b8a0095ca4",
+          "kind": "theorem",
+          "payload_digest": "952c7721450747c8d70e16573da146c0f988aa10686c94efeaeacc922544f6b7"
+        }
+      ]
+    }
+  ],
+  "note": "Theorem targets are open statements. Compilation is not a proof.",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 136,
+      "sha256": "170aa413297c7ed9729a8d2cf23db24efaddfd4eabc90bdee1dd6fbface48d62"
+    },
+    {
+      "path": "Definitions/Def_friedmann_cunningham.lean",
+      "bytes": 14341,
+      "sha256": "72e58bee2bc88d22a17ca25c1dad59c0b977b4ca7c9afd02fa8865a5879feca4"
+    },
+    {
+      "path": "Definitions/Def_friedmann_multiplicity.lean",
+      "bytes": 2058,
+      "sha256": "64238c3bc6926cdf9242649d93bf2e3082906e43392274f4cdda67862df6a5f6"
+    },
+    {
+      "path": "Definitions/Def_friedmann_parity.lean",
+      "bytes": 7038,
+      "sha256": "305b3ea8600395b1aa267571c7997a1cb00d281f837d1cb9a9c4d7dd0774eb45"
+    },
+    {
+      "path": "Definitions/Def_friedmann_payoff.lean",
+      "bytes": 7236,
+      "sha256": "5c645883ae2c37078d5ad25e248b23a737581d142180fb4e43652c755adbf9e3"
+    },
+    {
+      "path": "Definitions/Def_friedmann_simplex.lean",
+      "bytes": 4062,
+      "sha256": "4512ffa0c1e3ad32c3fa57ab486acaa19ed2abe3f136e7969b45e9fa412ac277"
+    },
+    {
+      "path": "Definitions/Def_friedmann_zadeh.lean",
+      "bytes": 20741,
+      "sha256": "f1e8ea7bdfe44abf095f7d7b4825509e6a0c2608e3dda120f033a24bb0bb29c3"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8245,
+      "sha256": "7f4d51df84341541e4a815879dbd5c99e0dba5a723becd84a04dd324b2e30afd"
+    },
+    {
+      "path": "Solutions/CoreSmoke.lean",
+      "bytes": 65,
+      "sha256": "4bdca8986c9eff72f32d2ed38378a55766f54733ca04ad175119173d300938c8"
+    },
+    {
+      "path": "Solutions/SmokeTest.lean",
+      "bytes": 153,
+      "sha256": "3773e5f8825e4f71cdc4056f32400012e801a0aa6638bce883b126c5f1b8d50c"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_cunningham_auso_lower_bound.lean",
+      "bytes": 607,
+      "sha256": "a1c2b128af2091fdb1386404701bd025510d13d60a96eb814d266e9973e20c4c"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_cunningham_counterstrategy.lean",
+      "bytes": 809,
+      "sha256": "0a4f5d420db1685bc753bb6865a43f00dc6d36167a346d04c7d6c88e8fb9ae6a"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_cunningham_cube_realization.lean",
+      "bytes": 509,
+      "sha256": "d4838a9230230284477c142912c5df85876d3441f62ee0377745205973b8d89d"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_cunningham_lp_valid.lean",
+      "bytes": 569,
+      "sha256": "fc42c6cf06c0ff5b2a7f83d3f7512870f397e7b4be2e74c3693d2a83ea901985"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_cunningham_mdp_lower_bound.lean",
+      "bytes": 339,
+      "sha256": "c62c1e23ca23fa8116906aed7cf9a69f527b551a9b4c7613d83a9bf38babe227"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_cunningham_mdp_valid.lean",
+      "bytes": 608,
+      "sha256": "d2a4a318946f181457064179a1c97a07feb388d2c1dbfa4e430b758a0b5e66a3"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_cunningham_parity_lower_bound.lean",
+      "bytes": 362,
+      "sha256": "b5627886a3214bcee72799206237f96bb4a8c0ec44d85849b87d1b71a9a14643"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_cunningham_policy_pivot.lean",
+      "bytes": 803,
+      "sha256": "08bae07286bd8475e934946f3ac49b69a328efda66a0537e9d398ee955bd041d"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_cunningham_simplex_lower_bound.lean",
+      "bytes": 706,
+      "sha256": "553cf796890816f73903523a94704f3ed34cbbced552a069f0a6c195b02fc78a"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_parity_binary.lean",
+      "bytes": 181,
+      "sha256": "ff257d6145b7012e28a934286c209385111cc0d782600bad287c4285e81bb311"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_parity_counterstrategy.lean",
+      "bytes": 372,
+      "sha256": "ace1e07f917c8f4f6d297aec3d8093cbdf1dba4b35284efc3d0bd9864b06c89b"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_parity_discounted_bellman.lean",
+      "bytes": 558,
+      "sha256": "260d2d46c2231c7f475122c73e51649ef4428bffbe83a758d627768b99e4ae8e"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_parity_goal.lean",
+      "bytes": 343,
+      "sha256": "51798bd2b7dbd41c298890871ab30b4753555811609cb032f4e220255d1fbcac"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_parity_improvement.lean",
+      "bytes": 448,
+      "sha256": "e312c94c31166dfde0f001604954155a9288d61c71d40ec0c5f21cc27766b7ab"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_parity_local.lean",
+      "bytes": 179,
+      "sha256": "052eb1299c2649b43352305a974f941c03a11cd520c83fafcf8c1a77e8f21e8b"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_parity_payoff.lean",
+      "bytes": 251,
+      "sha256": "328e32e74d43a517f24613ec7332628e4d4818c3f186ecf4bcf0b3a3761a93b6"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_parity_stochastic.lean",
+      "bytes": 199,
+      "sha256": "1bb2eec20c54ab8fb9946f5cb373d34108b2768dabde4b8be6eb8afe907da63c"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_parity_stochastic_semantics.lean",
+      "bytes": 621,
+      "sha256": "9321699c6bd12d27806f9abfb94d66c48e6fda3bd0e120b1068228b7ff76be6e"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_parity_transport.lean",
+      "bytes": 631,
+      "sha256": "642cbc50b031b2c9b122f563dba2de1070b1750ac04c5b538ac87d222fe17727"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_parity_winning.lean",
+      "bytes": 749,
+      "sha256": "2d460178ae97e86ab8ef4e974ad8f481373a77fe469bc41fce4e8bdb726ff8d5"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_zadeh_counter_coverage.lean",
+      "bytes": 530,
+      "sha256": "6642049ead1d96602eb248570f075915103d89a2426374076ddbdb87766b1ffc"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_zadeh_goal.lean",
+      "bytes": 311,
+      "sha256": "6d4c6048f33338eceaee8c9456b4b1b8cf76a4d7cb1b0a2d797c4583ee7628b2"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_zadeh_lp_transfer.lean",
+      "bytes": 573,
+      "sha256": "6f1dbb3c127c44a21ce7d31d93065df427410f139ffad5542fe6569d4dd66c1b"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_zadeh_mdp_valid.lean",
+      "bytes": 466,
+      "sha256": "e663da0e074a568ab5846a08f42094e341a88ca05349c8770da54a5ace9df367"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_zadeh_sink.lean",
+      "bytes": 418,
+      "sha256": "7abc2caf0cc9d7d8038b7beee2acd3011c5f9191f11011910d73c39f97629115"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_zadeh_size.lean",
+      "bytes": 349,
+      "sha256": "7a7dd4a4626ede89122c2f2f2acb2bfdc64bee8f3c4d4acef8c0f091c627016f"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_zadeh_source_realization.lean",
+      "bytes": 846,
+      "sha256": "a1c62c297f1cda14b33adab2e9771681a23beaf30a26c544405a744bf6dafa91"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_zadeh_tie_order.lean",
+      "bytes": 442,
+      "sha256": "0d5ac55c25f24283adbc86a12376f3d14a67a7a9f8be24535a13555ba1bafa01"
+    },
+    {
+      "path": "Theorems/Thm_friedmann_zadeh_valuation.lean",
+      "bytes": 556,
+      "sha256": "2d705d2fc77cf82db8caa1c7fcc8ecbfa3bc8f4591e84ab94ae9ccd8d329ea60"
+    },
+    {
+      "path": "audits/cunningham-final-readbacks.json",
+      "bytes": 243635,
+      "sha256": "98ec9261e358fdec6df813835991bfd4ec46fcc406c2dfc294127c4767d0abe5"
+    },
+    {
+      "path": "audits/cunningham-graph-comparison.json",
+      "bytes": 1886,
+      "sha256": "be4e4c62a447f886c5afa538d441e2f6a9636448533ea11c359071b6455044f7"
+    },
+    {
+      "path": "audits/cunningham-readbacks.json",
+      "bytes": 329573,
+      "sha256": "15563699345162bac56cc66c0598cc23c8c360f905dd0cfe301f5982caf75018"
+    },
+    {
+      "path": "audits/cunningham-source-review.json",
+      "bytes": 4460,
+      "sha256": "18f39c85ec6ffa5d37ed079fa773bf2ff40109501980887153d92462191b44f2"
+    },
+    {
+      "path": "audits/parity-readbacks.json",
+      "bytes": 71733,
+      "sha256": "531afb92433dd77d213becb3a26e8ccce4e4657bd01730a6c9765af3c6927d03"
+    },
+    {
+      "path": "audits/zadeh-readbacks.json",
+      "bytes": 114703,
+      "sha256": "ce4a3346a2a9faa702c4c0761609e404822f9159403ab94f8b6c3ceea346800b"
+    },
+    {
+      "path": "build-logs/CunninghamExport.log",
+      "bytes": 77234,
+      "sha256": "6627d9a04a230b1bff333043d83291bf5e316ff6de4dbe3f6b41669701fd77c5"
+    },
+    {
+      "path": "build-logs/CunninghamNonconstantObjective.log",
+      "bytes": 565,
+      "sha256": "ebe6a973a4a332c493fb4b92934b6ad4c7c3e904a7c09473da865d7c9ae15b81"
+    },
+    {
+      "path": "build-logs/CunninghamObjectiveWitness.log",
+      "bytes": 2211,
+      "sha256": "a103a71bea9cf8fa6fd653d782686527bb1512e2d64db43c010b432c60172630"
+    },
+    {
+      "path": "build-logs/CunninghamRewardTranslation.log",
+      "bytes": 1250,
+      "sha256": "afa1ba837dcc831394cd2bdebd19e2a91b1a7e68878776d8866fbe0edba8f544"
+    },
+    {
+      "path": "build-logs/CunninghamSemanticProbe.log",
+      "bytes": 274,
+      "sha256": "d65cea62ae620019df888c308ec8241bba0429da38d23c5af3464bc8249d095b"
+    },
+    {
+      "path": "build-logs/Definitions.Def_friedmann_cunningham.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build-logs/Definitions.Def_friedmann_multiplicity.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build-logs/Definitions.Def_friedmann_parity.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build-logs/Definitions.Def_friedmann_payoff.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build-logs/Definitions.Def_friedmann_simplex.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build-logs/Definitions.Def_friedmann_zadeh.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build-logs/TargetGroup1.log",
+      "bytes": 676,
+      "sha256": "feab8db15b61aa20f50afd77bca27fd7cef86f6de8707c22d459cc2babdd5398"
+    },
+    {
+      "path": "build-logs/TargetGroup2.log",
+      "bytes": 374,
+      "sha256": "53624aaa8458b6006a981a8f83432584817196272f18bb1d2264227ea0483427"
+    },
+    {
+      "path": "build-logs/TargetGroup3.log",
+      "bytes": 449,
+      "sha256": "69543f1b7a591b32175b9800da5256a31d5d407783e442b4927f74b39736281a"
+    },
+    {
+      "path": "build-logs/TargetGroup4.log",
+      "bytes": 675,
+      "sha256": "d4c4883cf9374d82c665649fd50a96f9ce997de6f5925fe363861d5e34d0efcb"
+    },
+    {
+      "path": "build-logs/verification.json",
+      "bytes": 17874,
+      "sha256": "a44433b6bc1e74d12fc817b60711e5f339d9d178ea51f35e670cc948eec370ee"
+    },
+    {
+      "path": "checks/CunninghamExport.lean",
+      "bytes": 1350,
+      "sha256": "6766da46be56721b265785674b935588dfca9e363fc4ebf6adf6883acad2c3c2"
+    },
+    {
+      "path": "checks/CunninghamNonconstantObjective.lean",
+      "bytes": 3911,
+      "sha256": "6165b2021871a7caf71575332dd84cb8c1ff3045b3e5d23be06bafc057979471"
+    },
+    {
+      "path": "checks/CunninghamRewardTranslation.lean",
+      "bytes": 7878,
+      "sha256": "829b58c53b02a409684959c12bee88df11a4a5c2c3ec55a2337d525ae81ef205"
+    },
+    {
+      "path": "checks/CunninghamStatements.lean",
+      "bytes": 4731,
+      "sha256": "4abd8e16e527a5cb64e8827c5a47e212930b5bcf2e531033d2e9df71e659e50d"
+    },
+    {
+      "path": "checks/ZadehStatements.lean",
+      "bytes": 3939,
+      "sha256": "219997015ee74934edec430d68bd4e7ee910430cd8f3dfa45863fbaa96401f77"
+    },
+    {
+      "path": "checks/cunningham-statements-hashes.json",
+      "bytes": 1148,
+      "sha256": "acf9283f3a55dc174c2702f1379a37f6d1ff66a6cf4eb6fe8a6f8fdb42c8bd7f"
+    },
+    {
+      "path": "checks/generated/TargetGroup1.lean",
+      "bytes": 4720,
+      "sha256": "48e29b12c07d46a4c9359c93d1b8c38fa8283adc2716ba1936130d32d578d697"
+    },
+    {
+      "path": "checks/generated/TargetGroup2.lean",
+      "bytes": 1649,
+      "sha256": "399a38b41f1a01da418abc40fa8336de44815b62611287ad2ca649801608ccc2"
+    },
+    {
+      "path": "checks/generated/TargetGroup3.lean",
+      "bytes": 2253,
+      "sha256": "d50f460e4f52cca898fb5bbe36720851861c42a52e0e05854fd86215a261e1fe"
+    },
+    {
+      "path": "checks/generated/TargetGroup4.lean",
+      "bytes": 3939,
+      "sha256": "9ea9ec511e334eb01805244052243439fafa94c6e5320aaeb31d4f085d836663"
+    },
+    {
+      "path": "checks/zadeh-statements-hashes.json",
+      "bytes": 1059,
+      "sha256": "99d3347b95e26a00352e86bca408693dfe75e75c3f7ef61d20fb6a692971d227"
+    },
+    {
+      "path": "cloud/README.md",
+      "bytes": 2241,
+      "sha256": "594a135292cfbf3e6ea7bef022915e257f5fe1a0c063a224626636a0b3b857ec"
+    },
+    {
+      "path": "cloud/bootstrap-lean.sh",
+      "bytes": 1362,
+      "sha256": "37151c7091f1b0c06918d302a150e1cdf5458e18ede3da2c547d6349f1135632"
+    },
+    {
+      "path": "cloud/mock-checks.json",
+      "bytes": 510,
+      "sha256": "6995031c4e5d2d85624ab1ba89ae250b7b7a105d85f109c8784c40c183133375"
+    },
+    {
+      "path": "cloud/setup_vms.py",
+      "bytes": 4205,
+      "sha256": "0634930de8d008e0c835a03b9d8f93aa12acfc5f00011131a4a5bfa030388200"
+    },
+    {
+      "path": "cloud/status.json",
+      "bytes": 741,
+      "sha256": "9aad853aab7005a31f8bca9d84e5cb36018a7bda7813272f4fe8e12e132a8802"
+    },
+    {
+      "path": "lake-manifest.json",
+      "bytes": 3572,
+      "sha256": "9718f5970065c74cc01dab3eeadb98548b6919c8fc8e9a02d706c2af6dc4497b"
+    },
+    {
+      "path": "lakefile.lean",
+      "bytes": 348,
+      "sha256": "47c5e8f1f6e1252cc09f43d886c37e0004a1f4e2ae8d4135d3d78cd36b8050bb"
+    },
+    {
+      "path": "lean-toolchain",
+      "bytes": 25,
+      "sha256": "3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71"
+    },
+    {
+      "path": "mission-data/cunningham.json",
+      "bytes": 27561,
+      "sha256": "df23a8c237ab54bbd8ca4629bdf7eabb4cc01a9ce9929477ba36c519497e6bb7"
+    },
+    {
+      "path": "mission-data/parity.json",
+      "bytes": 21588,
+      "sha256": "d075e9bea97839d86c561cb9e6652ded32e6925a1ea14e6175a714badd99641b"
+    },
+    {
+      "path": "mission-data/zadeh.json",
+      "bytes": 16309,
+      "sha256": "aa6ff0a2de90e94bb57f22237c98bfd785619f68ee8ea594fe01249f4d77d937"
+    },
+    {
+      "path": "notes/cunningham-audit-summary.txt",
+      "bytes": 7295,
+      "sha256": "ddd4ec1b3a69243d94d370b1ca2af1556cec0dc76a4b755bce14dd2bae53e1ce"
+    },
+    {
+      "path": "notes/cunningham-objective-witness.json",
+      "bytes": 2211,
+      "sha256": "a103a71bea9cf8fa6fd653d782686527bb1512e2d64db43c010b432c60172630"
+    },
+    {
+      "path": "notes/cunningham-semantic-audit.txt",
+      "bytes": 10728,
+      "sha256": "2326a01db870cf39f0004d0115baf9831ca0e91051658d331d997a1fdc24391a"
+    },
+    {
+      "path": "notes/cunningham-source-crosswalk.txt",
+      "bytes": 8263,
+      "sha256": "6d3445d1b12e4feda97e9f0e498e4a3328b434452468f2ca946068fdf774b9a4"
+    },
+    {
+      "path": "notes/cunningham_graph_audit.py",
+      "bytes": 6350,
+      "sha256": "1b0c64e4f5c25aeb1b34c98f37c6421b6e81d49c1ae702d3568ec31d2fd2f8a6"
+    },
+    {
+      "path": "notes/cunningham_numeric.py",
+      "bytes": 4666,
+      "sha256": "6e661a323ce88a1d1adb631753c3f39c85c8e9ad442a09c507fe5e34bc3c2e7e"
+    },
+    {
+      "path": "notes/cunningham_objective_witness.py",
+      "bytes": 3466,
+      "sha256": "6c13a072b94601d367d4a4d17366d9b6d7bd44dc26aa2caf1b01514444bc6279"
+    },
+    {
+      "path": "notes/cunningham_semantic_probe.py",
+      "bytes": 3981,
+      "sha256": "7017a9ff937e1a39017578c5aead3ea6e72842862a0e4de865bef1ec2083ce8f"
+    },
+    {
+      "path": "notes/field-snapshot.json",
+      "bytes": 307,
+      "sha256": "e4a184ba870addfe8b99197bd9dc4496adc6786b01fa723efa682f2015c044f7"
+    },
+    {
+      "path": "notes/parity-source-crosswalk.txt",
+      "bytes": 1785,
+      "sha256": "6e52939ca342ddc6fbc47db71e44112313efbd09882e40fc4bcfe62fc88b2c44"
+    },
+    {
+      "path": "notes/platform-environment.txt",
+      "bytes": 930,
+      "sha256": "26b93dbb5f6598b43ddaf7b3f1ffc5a5e9d4334b30c590a6ea664cf932a469d1"
+    },
+    {
+      "path": "notes/platform-status.json",
+      "bytes": 534,
+      "sha256": "c7186471064f6de184679ec6b8fdf183ecb18537f0e52a35a1e1023e235f6e52"
+    },
+    {
+      "path": "notes/source-independent-audit.txt",
+      "bytes": 10709,
+      "sha256": "43eacb4ee4810cc13191e61d4c59b24804b0a5bf3be2f73b9932b2434bd0f915"
+    },
+    {
+      "path": "notes/zadeh-source-crosswalk.txt",
+      "bytes": 6827,
+      "sha256": "39b5082db47e4f38dce063532f81c71603db94abe2a8c29f110e419fd1d945a9"
+    },
+    {
+      "path": "notes/zadeh_explore.py",
+      "bytes": 8764,
+      "sha256": "e13603a77ae8ea05447e795fce83b223f496e1c2ae88df064c48b689caf9ea60"
+    },
+    {
+      "path": "references.bib",
+      "bytes": 1023,
+      "sha256": "ee692604144fc2be9367632c342e53b606cd73c3649de84293393ea4e65b559a"
+    },
+    {
+      "path": "scripts/assemble_packets.py",
+      "bytes": 6003,
+      "sha256": "0b46c5ca466900f8b27b217e5eae47cee12e4e8a35d1bddac9ea0c383e2de7d6"
+    },
+    {
+      "path": "scripts/check_all.py",
+      "bytes": 6344,
+      "sha256": "fd0a01dac8954351208a816aa4cb3c3b497e05253ed829770c2c94ad6d4df9a2"
+    },
+    {
+      "path": "scripts/lean_check.py",
+      "bytes": 1685,
+      "sha256": "83179998eeb5f965e5d86d7de8abb7249a942bfa2cb1db0794b05e15440e7b24"
+    },
+    {
+      "path": "scripts/make_archive.py",
+      "bytes": 2702,
+      "sha256": "b8ff05e32144e47217b2c0c3846f696b5338e1bca660b3feaaa3316884658d2b"
+    },
+    {
+      "path": "scripts/stage_drafts.py",
+      "bytes": 21301,
+      "sha256": "94d5133f6a79cfa7d61dfaaafc4889cfe33f39b350b41abf007656f78e733bf9"
+    },
+    {
+      "path": "scripts/test_stage_drafts.py",
+      "bytes": 3743,
+      "sha256": "9ce169d167ef7abab007206efecabcdbc451e1f742a35201e5cbc72e3f6a8af2"
+    },
+    {
+      "path": "sources.json",
+      "bytes": 4264,
+      "sha256": "c5c4b2f142846c9a04112516cb0fdba170fe81e2eec4cfc4155fcc419a91c69e"
+    },
+    {
+      "path": "upload/cunningham.json",
+      "bytes": 382202,
+      "sha256": "6266220be84173d4429bba3565d9a29b8bda0671e7f86bed5db30a41457d5725"
+    },
+    {
+      "path": "upload/cunningham.receipt.json",
+      "bytes": 3691,
+      "sha256": "bb0f4005ce8a59e62b5fba84f9f5e047a7679f1b372b79bb30fecb4a97f45b54"
+    },
+    {
+      "path": "upload/index.json",
+      "bytes": 4897,
+      "sha256": "9e11d5c05106a25e69f7cafc7cf37a135e0d7bc867d276e8d91d2d3493ad88b9"
+    },
+    {
+      "path": "upload/parity.json",
+      "bytes": 113763,
+      "sha256": "207b0eb2ec5bb4b0ec54028dfdd51373adac78ca024584850f240519030a2b7e"
+    },
+    {
+      "path": "upload/zadeh.json",
+      "bytes": 169667,
+      "sha256": "894c7d29e2e5d129e5b920e88bdcef1a505405ba61209032886503567c49940d"
+    }
+  ]
+}

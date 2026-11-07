@@ -1,0 +1,121 @@
+{
+  "name": "Exponential lower bounds for deterministic strategy iteration",
+  "description": "## Motivation\n\nA **parity game** is a finite graph game in which two players choose an infinite walk and the largest priority recurring on the walk determines the winner. Such games supply algorithmic tasks in verification. An algorithm may solve many practical instances quickly and still require many updates on a deliberately constructed family. This mission concerns the number of updates made by two specified strategy-improvement rules. It formalizes a known lower-bound result, rather than asking whether parity games themselves have polynomial-time algorithms. The source is [Friedmann's 2011 journal treatment](https://arxiv.org/abs/1106.0778), extending his LICS 2009 work.\n\n## Setting\n\nThe formal model uses finite vertex sets, a total directed edge relation, an owner for each vertex, and distinct natural-number priorities. Player 0 is encoded by `false`; player 1 is encoded by `true`. A **positional strategy** chooses one legal successor at each vertex owned by that player. Its values at other vertices are ignored.\n\nTwo strategies and a starting vertex determine an eventually periodic walk. Its **valuation** has three components: the largest recurring priority, the set of more important vertices preceding the first visit to its dominating cycle vertex, and the number of steps before that visit. The cycle component is compared first. For equal cycle components, the largest priority in the symmetric difference of the two path sets decides their ordering, with an even priority favorable to player 0. A remaining length comparison favors a shorter route to an even cycle and a longer route to an odd cycle. The valuation of one player-0 strategy at a vertex is the minimum over actual legal player-1 replies.\n\nA **local update** chooses a successor with greatest current valuation at every player-0 vertex. A **global update** chooses a strategy with greatest resulting valuations among strategies allowed by the current improvement arena. Every active update must contain a strict improvement. A complete execution starts at its stated initial strategy, performs improving updates, and stops precisely when no improving switch remains. Its cost counts updates, excluding the initial strategy.\n\n## Formalization targets\n\nThe goal includes the two parity-game rules and their payoff-game counterparts. For each rule the required family has a constant $C>0$, independent of its parameter $n$, such that\n\n$$|E_n|\\le Cn,\\qquad T_n\\ge 2^n\\quad(n>0).$$\n\nFor parity games the priorities are also bounded by $Cn$. An instance must admit a complete execution, and every complete execution respecting the stated rule must meet the lower bound. This explicitly prevents a universal claim about executions from becoming true merely because no execution exists. The two rules may use different hard families.\n\nSupporting targets cover simultaneous optimal counterstrategies, strict improvement, extraction of both winning regions at termination, the local-rule lower bound, binary-outdegree refinements, discounted payoff equations, comparison preservation under reduction, and absorption values for stopping stochastic games. Discounted and stochastic lower bounds are separate supporting results within this paper's mission. Mean-payoff policy iteration is represented through the paper's specified reduction to discounted games.\n\n## Significance\n\nThe requested artifact is a reusable formal interface for constructing and analyzing long algorithm executions. It exposes the improvement arena, counterstrategy minimization, strictness of updates, termination condition, and cost model. Subsequent constructions can use those interfaces without encoding their own meaning of an iteration.\n\nThe mathematical lower bounds are already published. The open items here are proof obligations for these explicit Lean models. Successful elaboration checks the declarations' types; it does not prove the lower bounds or establish that the definitions match the paper. The goal needs actual witness games and initial strategies, together with execution analysis. Neither a structure field assuming a long run nor a hypothesis asserting the desired growth can discharge it.\n\n## Difficulty\n\nA large number of possible strategies does not establish that an algorithm visits them. The lower-bound obligation concerns the updates actually permitted by the selected rule and their stopping condition. Global updates additionally compare the resulting valuations of complete successor strategies, so a definition based only on locally greatest current values would describe a different rule. Equal-valued choices also need care: the target ranges over every complete execution admitted by its relation.\n\nCounterstrategy minima are constrained by legal replies. Their existence, the validity of the ultimately periodic valuation, and the connection between non-improvability and winning regions remain mathematical proof obligations. The payoff models add matrix nonsingularity and the interpretation of rational equation solutions.\n\n## Formalization scope\n\nGame size means edge count. It does not mean binary coefficient encoding length. The parity targets retain the linear-edge refinement in the source's Section 7 and the corresponding global-rule refinement in Section 8; the basic quadratic-edge drawings alone are insufficient for that stated size bound. The goal states existence of hard families, leaving their construction to the proof. It does not transcribe the source's specific vertex-label tables as unchecked constants.\n\nDiscounted games use rational rewards and a rational discount strictly between zero and one. For fixed strategies, values are defined by the exact rational inverse of $I-\\beta P$. The associated milestone requires the unique discounted Bellman solution. The mean-payoff target explicitly uses rewards $(-|V|)^{\\Omega(v)}$ and the specified near-one discount. It does not replace the source algorithm with an update based only on raw mean rewards, which the source warns can stall.\n\nStopping stochastic games have separate Max, Min and random vertices, two distinct terminals, nonnegative rational transition probabilities with row sum one, and a positive-probability route to a terminal from each state under every legal strategy pair. Values solve the finite absorption equations. The model allows arbitrary random probabilities and outdegrees, as in the source's treatment. The matrix and counterstrategy definitions are shared infrastructure; none contains an unproved lower-bound assertion.\n\n## Selected references\n\n- Oliver Friedmann, *An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms*, Logical Methods in Computer Science, 2011. [Author PDF](https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf), [arXiv version](https://arxiv.org/abs/1106.0778).\n- Oliver Friedmann, *An Exponential Lower Bound for the Parity Game Strategy Improvement Algorithm as We Know it*, LICS, 2009. [Author PDF](https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound.pdf).\n",
+  "source": "Oliver Friedmann, An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms, LMCS 2011, author PDF https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf; arXiv:1106.0778v2 https://arxiv.org/abs/1106.0778",
+  "definition_files": [
+    "Definitions/Def_friedmann_parity.lean",
+    "Definitions/Def_friedmann_payoff.lean"
+  ],
+  "theorems": [
+    {
+      "file": "Theorems/Thm_friedmann_parity_counterstrategy.lean",
+      "key": "counterstrategy",
+      "theorem_name": "FriedmannParity.counterstrategy_exists",
+      "theorem_title": "Optimal replies and attained valuations",
+      "natural_language_statement": "For every finite total parity game with distinct priorities and every legal positional player-0 strategy, one legal positional player-1 reply simultaneously minimizes the play valuation at all starting vertices and realizes the defined valuation.",
+      "source": "Oliver Friedmann, An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms, LMCS 2011, author PDF https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf; arXiv:1106.0778v2 https://arxiv.org/abs/1106.0778; §3, Lemma 3.1, existence clause and definition of the game valuation",
+      "milestone_title": "Lemma 3.1 — optimal counterstrategy existence",
+      "milestone_description": "For every finite total parity game with distinct priorities and every legal positional player-0 strategy, one legal positional player-1 reply simultaneously minimizes the play valuation at all starting vertices and realizes the defined valuation."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_parity_improvement.lean",
+      "key": "improvement",
+      "theorem_name": "FriedmannParity.improvement_strict",
+      "theorem_title": "Strict improvement of game valuations",
+      "natural_language_statement": "A legal strategy update in the improvement arena, containing a strict switch whenever the original strategy is improvable, weakly raises every vertex valuation and strictly raises at least one.",
+      "source": "Oliver Friedmann, An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms, LMCS 2011, author PDF https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf; arXiv:1106.0778v2 https://arxiv.org/abs/1106.0778; §3, Theorem 3.2",
+      "milestone_title": "Theorem 3.2 — strict strategy improvement",
+      "milestone_description": "A legal strategy update in the improvement arena, containing a strict switch whenever the original strategy is improvable, weakly raises every vertex valuation and strictly raises at least one."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_parity_winning.lean",
+      "key": "winning",
+      "theorem_name": "FriedmannParity.nonimprovable_solves",
+      "theorem_title": "Winning regions at a terminal strategy",
+      "natural_language_statement": "For a non-improvable legal strategy, even and odd dominating cycle priorities identify exactly the two positional winning regions. The current player-0 strategy wins on its region; every optimal player-1 counterstrategy wins on the other region; and the current strategy has pointwise greatest valuation.",
+      "source": "Oliver Friedmann, An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms, LMCS 2011, author PDF https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf; arXiv:1106.0778v2 https://arxiv.org/abs/1106.0778; §3, Theorem 3.3, all five conclusions",
+      "milestone_title": "Theorem 3.3 — termination solves the game",
+      "milestone_description": "For a non-improvable legal strategy, even and odd dominating cycle priorities identify exactly the two positional winning regions. The current player-0 strategy wins on its region; every optimal player-1 counterstrategy wins on the other region; and the current strategy has pointwise greatest valuation."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_parity_local.lean",
+      "key": "local",
+      "theorem_name": "FriedmannParity.exponential_local",
+      "theorem_title": "Exponential local strategy improvement",
+      "natural_language_statement": "There is a uniform linear-size family of finite total parity games with distinct, linearly bounded priorities and legal initial strategies such that complete local-update executions exist and every such execution performs at least $2^n$ improving updates.",
+      "source": "Oliver Friedmann, An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms, LMCS 2011, author PDF https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf; arXiv:1106.0778v2 https://arxiv.org/abs/1106.0778; §6, Theorem 6.14 together with §7.1 linear-edge refinement",
+      "milestone_title": "Sections 6 and 7 — linear-size local lower bound",
+      "milestone_description": "There is a uniform linear-size family of finite total parity games with distinct, linearly bounded priorities and legal initial strategies such that complete local-update executions exist and every such execution performs at least $2^n$ improving updates."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_parity_discounted_bellman.lean",
+      "key": "bellman",
+      "theorem_name": "FriedmannDiscounted.discounted_bellman",
+      "theorem_title": "Unique discounted Bellman solution",
+      "natural_language_statement": "For any finite total rational-reward game, any rational discount strictly between zero and one, and any pair of successor functions, the matrix-defined payoff vector satisfies the fixed-strategy discounted Bellman equations, and every rational solution equals that vector. Legality of the functions is unnecessary for this equation-level statement.",
+      "source": "Oliver Friedmann, An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms, LMCS 2011, author PDF https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf; arXiv:1106.0778v2 https://arxiv.org/abs/1106.0778; §9, discounted payoff definition and Algorithm 2; equation-level infrastructure consequence",
+      "milestone_title": "Discounted Bellman equations — semantic infrastructure",
+      "milestone_description": "For any finite total rational-reward game, any rational discount strictly between zero and one, and any pair of successor functions, the matrix-defined payoff vector satisfies the fixed-strategy discounted Bellman equations, and every rational solution equals that vector. Legality of the functions is unnecessary for this equation-level statement."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_parity_stochastic_semantics.lean",
+      "key": "absorption",
+      "theorem_name": "FriedmannStochastic.absorption_values",
+      "theorem_title": "Absorption values for stopping stochastic games",
+      "natural_language_statement": "For every well-formed stopping stochastic game and legal strategy pair, $I-P$ is nonsingular. Its absorption solution is one at the winning terminal, zero at the losing terminal, lies in $[0,1]$ everywhere, and satisfies the transition equations at every nonterminal state.",
+      "source": "Oliver Friedmann, An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms, LMCS 2011, author PDF https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf; arXiv:1106.0778v2 https://arxiv.org/abs/1106.0778; §9, almost-sure halting convention and Algorithm 4; equation-level infrastructure consequence",
+      "milestone_title": "Stopping-game equations — semantic infrastructure",
+      "milestone_description": "For every well-formed stopping stochastic game and legal strategy pair, $I-P$ is nonsingular. Its absorption solution is one at the winning terminal, zero at the losing terminal, lies in $[0,1]$ everywhere, and satisfies the transition equations at every nonterminal state."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_parity_payoff.lean",
+      "key": "payoff",
+      "theorem_name": "FriedmannParity.exponential_payoff",
+      "theorem_title": "Exponential payoff strategy iteration",
+      "natural_language_statement": "Both local and global improvement require at least $2^n$ updates on uniform linear-edge families of discounted games. The same lower bound holds for mean-payoff inputs when the algorithm runs through the explicitly defined standard discounted reduction. Every hard instance admits a complete execution.",
+      "source": "Oliver Friedmann, An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms, LMCS 2011, author PDF https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf; arXiv:1106.0778v2 https://arxiv.org/abs/1106.0778; §9, payoff-game lower-bound corollary and standard mean-to-discounted reduction",
+      "milestone_title": "Section 9 — payoff-game lower bounds",
+      "milestone_description": "Both local and global improvement require at least $2^n$ updates on uniform linear-edge families of discounted games. The same lower bound holds for mean-payoff inputs when the algorithm runs through the explicitly defined standard discounted reduction. Every hard instance admits a complete execution."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_parity_stochastic.lean",
+      "key": "stochastic",
+      "theorem_name": "FriedmannParity.exponential_stochastic",
+      "theorem_title": "Exponential stochastic strategy iteration",
+      "natural_language_statement": "Both local and global strategy improvement have uniform linear-edge families of stopping stochastic games on which complete executions exist and every complete execution makes at least $2^n$ updates.",
+      "source": "Oliver Friedmann, An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms, LMCS 2011, author PDF https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf; arXiv:1106.0778v2 https://arxiv.org/abs/1106.0778; §9, final simple-stochastic-game lower-bound corollary",
+      "milestone_title": "Section 9 — stochastic-game lower bounds",
+      "milestone_description": "Both local and global strategy improvement have uniform linear-edge families of stopping stochastic games on which complete executions exist and every complete execution makes at least $2^n$ updates."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_parity_binary.lean",
+      "key": "binary",
+      "theorem_name": "FriedmannParity.exponential_binary",
+      "theorem_title": "Exponential lower bounds with binary outdegree",
+      "natural_language_statement": "For each of the local and global rules, uniform linear-edge hard families with linearly bounded priorities can be chosen with at most two distinct outgoing neighbors per vertex. Complete executions exist and every such execution takes at least $2^n$ updates.",
+      "source": "Oliver Friedmann, An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms, LMCS 2011, author PDF https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf; arXiv:1106.0778v2 https://arxiv.org/abs/1106.0778; §7.2 binary-outdegree refinement and §8.4 corresponding global-rule refinement",
+      "milestone_title": "Sections 7 and 8 — binary-outdegree hard families",
+      "milestone_description": "For each of the local and global rules, uniform linear-edge hard families with linearly bounded priorities can be chosen with at most two distinct outgoing neighbors per vertex. Complete executions exist and every such execution takes at least $2^n$ updates."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_parity_transport.lean",
+      "key": "transport",
+      "theorem_name": "FriedmannParity.sink_discounted_order",
+      "theorem_title": "Preservation of valuation comparisons under reduction",
+      "natural_language_statement": "In a finite injective-priority 1-sink game, take any legal strategy whose valuations are pointwise no worse than the initial strategy. Strict comparisons between the valuations of any two vertices agree exactly with strict comparisons of their values in the specified induced discounted game.",
+      "source": "Oliver Friedmann, An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms, LMCS 2011, author PDF https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf; arXiv:1106.0778v2 https://arxiv.org/abs/1106.0778; §9, valuation-comparison equivalence corollary following the optimal-counterstrategy correspondence",
+      "milestone_title": "Section 9 — parity to discounted comparison equivalence",
+      "milestone_description": "In a finite injective-priority 1-sink game, take any legal strategy whose valuations are pointwise no worse than the initial strategy. Strict comparisons between the valuations of any two vertices agree exactly with strict comparisons of their values in the specified induced discounted game."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_parity_goal.lean",
+      "key": "goal",
+      "theorem_name": "FriedmannParity.exponential_deterministic",
+      "theorem_title": "Exponential lower bounds for deterministic strategy iteration",
+      "natural_language_statement": "Finite parity, discounted-payoff, mean-payoff-through-reduction, and stopping stochastic games admit the exponential local and global strategy-iteration lower bounds specified in the public models. The bounds use uniform linear edge count, actual legal initial strategies, existence of completed executions, and a lower bound on every completed execution.",
+      "source": "Oliver Friedmann, An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms, LMCS 2011, author PDF https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf; arXiv:1106.0778v2 https://arxiv.org/abs/1106.0778; §§6–9, local/global lower bounds, linear-edge refinements, and payoff/stochastic extensions"
+    }
+  ],
+  "main_key": "goal",
+  "source_scope": "Existential hard-family formulation of the source lower bounds; semantic infrastructure consequences are labeled separately."
+}

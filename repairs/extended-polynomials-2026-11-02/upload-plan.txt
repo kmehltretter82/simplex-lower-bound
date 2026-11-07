@@ -1,0 +1,164 @@
+Extended Polynomials draft-repair upload plan (read-only workflow review)
+Prepared 2026-11-02. No API calls, credential reads, or remote mutations performed.
+
+Target existing proposal:
+  059a0f02-b778-44fd-9e95-ec7cbdba9cbc
+  https://prove2.me/my-missions/059a0f02-b778-44fd-9e95-ec7cbdba9cbc
+Do not create a second proposal for this paper.
+
+Preserve metadata unless the mathematical repair requires prose changes:
+  name: Definable Functions in the Simply Typed Lambda-Calculus (Extended Polynomials Theorem)
+  mission_type: ResearchPaper
+  visibility: public (eventual mission visibility; Draft itself is private)
+  env: 0df444a360eaa60ab8c11dca51a86af692955474
+  field_ids:
+    2d847ee0-9ed4-4265-a907-547a8959dec6 (Mathematical Logic)
+    09f0cbd0-0b0c-49c5-9835-b32732908364 (Type Theory)
+
+Old items, in dependency order (proposal item ID / published artifact ID):
+  definition Lambda:
+    d07ad5a1-b497-4253-be46-eb89793c50a6 / 1b8fdb07-70ed-450d-a3a9-1ff2a939563f
+  combinators_and_sufficiency, milestone:
+    6e273f62-64c5-4318-a05a-8a39e52eee4b / 4694e83f-7878-4185-8cdf-964a0d906b8a
+  normal_subterm_structure, milestone:
+    642dc3db-853f-4e6d-bd9b-14deebeae480 / aadc9a8e-5141-4915-b574-db398c5d5716
+  subterm_polynomial_lemma, milestone:
+    2d2c21d1-df7a-4961-a241-c2df62884098 / 8057498b-8e0a-4096-bdd4-ec2e8be75632
+  definable_iff_extended_polynomial, goal:
+    8f16f779-9541-4d5f-806c-a29a44f333c7 / d41263bd-5699-47e6-9aea-b2d2af7f2deb
+
+Authoritative local references read:
+  /Users/kmehltretter/codex/collaboration/skills/prove2me/SKILL.md (0.13.6)
+  references/mission_captain.md: Add a draft item, immutable references,
+    Update proposal metadata, proposal milestones, Handing off to your human,
+    When the moderator requests changes.
+  references/contribute.md: theorem/definition body schemas, name immutability,
+    deprecation and its explanation requirement.
+  references/discover.md: keyword/exact-name search and include_deprecated.
+  scripts/stage_drafts.py: validation, api_body, state/reconciliation and transport.
+
+PREPARATION AND READ PREFLIGHT
+
+1. Complete the local correction, meaningful Lean freshness proofs, compilation of
+   the definition and all four target modules, source comparison, and independent
+   fresh-context readbacks. Compile against the existing pinned environment.
+   The four research targets remain open; the repair's freshness lemmas must not
+   contain sorry/custom axioms. Definitions permit only necessary structural
+   helper proofs; keep extensive audit/regression proofs in separate local files.
+
+2. Authenticate through the exact API base https://prove2.me/api/v1 only. Verify
+   platform version against skill 0.13.6 and offered environment. Refuse redirects;
+   preserve the existing secure curl-config approach. Record receipts but never
+   tokens/API keys/configs in workspace bundles or logs.
+
+3. GET /mission-proposals/059a0f02-b778-44fd-9e95-ec7cbdba9cbc and its /milestones.
+   Confirm current status is Draft; the before-review snapshot is not current
+   status evidence. Save a fresh before-repair snapshot. Inspect latest reviews
+   and flags. Check metadata and item IDs against the known snapshot. Do not
+   overwrite unexpected concurrent changes or an already completed repair.
+
+4. Search the library for existing faithful repairs using q=Schwichtenberg (and
+   optionally q=extended polynomial), constrained to the pinned env. Also exact-
+   search EACH proposed new name with include_deprecated=true. Retired names are
+   still occupied. An empty ordinary search excluding deprecated entries is not
+   sufficient collision evidence. All search calls are read-only and independent.
+   Exact-name params: definition_name on /definitions, theorem_name on /theorems.
+   Inspect exact code/preamble for matches; reuse a faithful identical published
+   item as a reference, otherwise choose an unused versioned identifier.
+
+5. Definition module name must match [A-Za-z_][A-Za-z0-9_]* (no dot). Its internal
+   declarations may use a mission-wide versioned namespace. Theorems use fully
+   qualified names matching that namespace. Imports must name the new definition
+   module: import Definitions.Def_<new_definition_name>.
+
+SAFE MUTATION ORDER: ADD, VERIFY, RELINK, REMOVE
+
+Use /mission-proposals/P/items throughout. These are editable draft writes, not
+the direct /submit-definition or /submit-problem publishing endpoints.
+
+A. POST the new definition draft and four theorem drafts, one after another in
+   dependency order, attaching fresh independent readbacks. Persist each returned
+   proposal item ID immediately. Re-POST same-name draft is documented as update,
+   but after any ambiguous response first GET the proposal and compare exact
+   content; never blindly repeat a write or create a second item.
+
+   Definition body:
+     kind: definition
+     definition_name, definition_title, definition
+     natural_language_statement, source, tags
+     readback, readback_model
+   Theorem body:
+     kind: theorem
+     theorem_name, theorem_title, formal_statement, preamble
+     natural_language_statement, source, tags
+     readback, readback_model
+   Do not include env on items: the proposal owns it. Do not copy reference-only
+   fields such as theorem_id, status, role, confirmed_at, or flags into drafts.
+
+B. GET proposal; verify all five new draft bodies/readbacks byte-for-byte against
+   the local upload packet. Retain old reference items until this succeeds.
+
+C. POST /mission-proposals/P/milestones for each of the three new supporting
+   theorem items. Body is {item_id, milestone_title, milestone_description}.
+   Both milestone text fields are required. Do not mark definition or goal as a
+   milestone. Preserve the original three roles and their source numbering;
+   improve text only where needed to reflect the final correction accurately.
+
+D. PATCH /mission-proposals/P with main_item_id = the new goal's ITEM ID.
+   No need to set main_item_id:null; nullability is not clearly documented.
+   Switching directly to the new goal avoids deleting the selected main item.
+   If sending item_order at this stage, include ALL current old+new item IDs.
+   The API describes item_order as the full ordered list, not a subset/delta.
+
+E. Remove the old three milestone roles explicitly if needed via
+   DELETE /mission-proposals/P/milestones/OLD_ITEM_ID, then remove the five old
+   references via DELETE /mission-proposals/P/items/OLD_ITEM_ID. Deleting a draft
+   reference removes only its association with this proposal, not the underlying
+   published artifact. This is the intended replacement workflow. These deletes
+   return204 with NO JSON BODY. They automatically drop item_order entries.
+   Never PATCH old reference items: references are immutable.
+
+F. PATCH proposal description and full final item_order = [new definition,
+   new sufficiency, new subterm structure, new polynomial lemma, new goal].
+   Include main_item_id again if useful for an explicit final state. Do not reset
+   unrelated fields; omit name/visibility/fields/env unless intentionally changing
+   them. A fresh metadata snapshot lets the final comparison check preservation.
+
+G. GET proposal and /milestones; verify status Draft, exactly five intended items,
+   zero stale references, correct declaration imports/bodies/readbacks, exactly
+   three intended milestones, correct main_item_id and dependency order, and
+   preserved metadata. New draft items require fresh human confirmations. Save a
+   receipt with old-to-new item map, code/packet digests and final server state.
+
+SCRIPT CAVEATS
+
+scripts/stage_drafts.py can be reused for body construction and offline validation,
+but its normal --write path is not a complete existing-proposal replacement:
+- It creates a new proposal unless state.proposal_id is pre-seeded.
+- Its API allowlist excludes DELETE.
+- Its transport unconditionally JSON-parses responses, so204 deletion fails.
+- It does not remove old reference items or old milestone roles.
+- It finally sends order containing only packet item IDs, which is problematic
+  while old items remain if the server enforces the full-list rule.
+- Its library check omits include_deprecated, so supplement the name preflight.
+- Its no-op decisions use local stored hashes without verifying all current remote
+  content, so the final readback equality check is still essential.
+Prefer a narrowly scoped repair driver or explicit sequential requests to P,
+retaining the existing secure credential transport and ambiguous-write journal.
+
+DEPRECATION AND HUMAN HANDOFF
+
+The generic helper defect does not establish that the four old theorem targets
+are false: current specializations are safe. Do not label them false or retire
+them indiscriminately. The captain guide asks for retiring a bad published node
+you created, but deprecation should preserve an accurate explanation and name the
+replacement. Do not claim a draft replacement is already published. At minimum,
+finish the corrected proposal and document the old-definition issue; any public
+retirement should accurately state the limited helper defect and replacement
+status. Existing imports remain valid after deprecation.
+
+Only the human can confirm items and click Submit Proposal; do not call a confirm,
+launch, or review-submission endpoint. The final message should say the corrected
+draft is ready, give its exact link, and explain the required human action with
+the specific captain-skill quote if handing off for that reason. Submission then
+publishes the new immutable items and sends the proposal back for review.

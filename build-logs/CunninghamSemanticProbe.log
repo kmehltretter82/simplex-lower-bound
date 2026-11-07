@@ -1,0 +1,3 @@
+{'n': 3, 'parity_switches': 36, 'simplex_pivots': 36, 'full_action_sequence_equal': True}
+{'n': 4, 'parity_switches': 118, 'simplex_pivots': 118, 'full_action_sequence_equal': True}
+{'n': 5, 'parity_switches': 320, 'simplex_pivots': 320, 'full_action_sequence_equal': True}

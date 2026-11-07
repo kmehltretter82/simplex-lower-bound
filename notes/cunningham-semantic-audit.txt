@@ -1,0 +1,179 @@
+Cunningham mission semantic audit
+================================
+Audit date: 2026-11-02
+Auditor: independent Codex agent; model identifier unavailable.
+Scope: Definitions/Def_friedmann_simplex.lean,
+Definitions/Def_friedmann_multiplicity.lean,
+Definitions/Def_friedmann_cunningham.lean, the shared playValue definition,
+and all nine Cunningham theorem statements. This audit did not alter them.
+
+Primary source: Avis and Friedmann, author's accepted manuscript,
+https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf
+Page numbers below are the printed manuscript pages (PDF index + 1).
+
+Findings requiring action
+------------------------
+1. MEDIUM, documentation error: the source crosswalk says that changing the
+initial e_1 action to e_1^0 makes the MDP nonabsorbing and its basis singular.
+That is false for the currently implemented graph-derived matrix. Exact
+rational elimination for n=3 and n=4 gives an invertible matrix and minimum
+basic value 1. There is also a graph explanation: e_1^0 goes through s and
+the c ladder to g_1, and F_1 has a positive-probability escape through h_1
+and the a ladder to the sink. The reason to use e_1^1 is agreement with the
+explicit counter initialization in Section 2.3 (p13) and the starting basis
+in Section 4.4 (p31). Section 3.3 and Section 5.2 have abbreviated e_*^0
+lists that conflict with those explicit descriptions. Remove the singularity
+claim; retain the implemented initial policy.
+
+2. MEDIUM, statement-strength gap: at audit start, realizesCube in
+Def_friedmann_cunningham.lean:228 asserted the vertex and adjacency
+correspondences but did not assert boundedness. Its midpoint and common-zero
+support predicates alone describe a polyhedron; they do not exclude
+unbounded rays. Although lp_valid separately targets boundedness, the
+cube_realization and auso_lower_bound statements should include it themselves
+when claiming a polytope realization. Suggested fix: add
+FriedmannSimplex.bounded (program n) as a conjunct of realizesCube.
+This is a strengthening of the specification, not evidence that this concrete
+family is actually unbounded.
+
+3. LOW, representation boundary: geometry is quantified over rational points
+(Def_friedmann_cunningham.lean:216-234), whereas polytopes are normally
+interpreted over the reals. For these rational standard-form coefficients,
+the representation is mathematically adequate: every vertex is a rational
+basic solution, and any nontrivial real feasible direction within a rational
+face has a rational counterpart obtained from the rational kernel. Thus
+vertex and edge tests agree after extension to the reals. This bridge is not
+currently a Lean theorem. Document the rational formulation or add a general
+rational-to-real transport result; do not advertise that transport as proved.
+
+The transport argument can be made precise without an approximation premise.
+Let S be the support of a feasible point. That point is extreme precisely
+when the columns A_S are linearly independent: a dependence gives a kernel
+direction, which can be multiplied by a sufficiently small scalar so both
+signs retain nonnegative coordinates; conversely a midpoint decomposition
+gives a nonzero supported kernel direction. Rational Gaussian elimination
+shows that rational and real column independence agree. If the columns are
+independent, the unique solution of A_S x_S=b is rational, so every real
+vertex is rational. For two vertices, their minimal common face has support
+S=support(x) union support(y), with (x+y)/2 positive on every coordinate of
+S. Its affine dimension is |S|-rank(A_S), equally over either field. If that
+dimension exceeds one, a rational kernel direction independent of y-x gives
+a rational feasible point outside their segment. If it is one and the face
+is bounded, the two extreme endpoints determine the whole face. This proves
+equivalence of the implemented rational vertex/edge tests with the real
+polytope skeleton once boundedness has been established. A rational uniform
+coordinate bound also extends to the real feasible set: any violation would
+admit a rational feasible violation, by a rational affine basis within its
+support and rational parameter approximation preserving its strictly
+positive coordinates and the violated bound.
+
+Specification checks that passed
+--------------------------------
+Simplex layer, Def_friedmann_simplex.lean:
+* Lines22-35 use actual selected-column basis matrices, require injective
+  column selection and nonzero determinant, and impose nonnegative basic
+  coordinates. The total inverse therefore does not create spurious legal
+  simplex bases.
+* Lines43-65 implement B^-1 A_j, c_j-c_B^T B^-1 A_j, and the minimum positive
+  ratio leaving test. Both endpoints must be feasible. No iteration count is
+  assumed in the LP or pivot data.
+* Lines78-93 use rank-valued cursor storage consistently: last is a rank,
+  and after entering j it becomes order(j). For the concrete family the
+  column order is already the source order, so the permutation is identity.
+* Lines97-101 require a feasible start, every pivot, and an optimal endpoint.
+  The main theorem additionally fixes the start and asserts strict objective
+  increase. Existence of a complete run is part of its conclusion, so there
+  is no vacuous universal-over-empty-runs lower bound.
+
+Concrete family, Def_friedmann_cunningham.lean:
+* Lines29-68 enumerate the source decision nodes and the two outgoing actions
+  per node, in its signed-action order (1), including the absent b_n.
+* Lines73-76 choose legal source parameters and priority-induced rewards.
+  For n>=3, N=2n+1>=2n and epsilon=N^(-2n-2)<=N^(-2n).
+* Lines79-100 match the conservation equations, including the exceptional
+  F_1 boundary and the terminal a_(n+1)=t omission.
+* Lines102-109 include the three alias rewards whose separate source
+  derivation is being audited by another agent. This semantic audit confirms
+  their placement, not a literal identity with the displayed shorthand LP.
+* Lines116-129 and313-325 use the explicit source counter initialization and
+  the minimum initial cursor. Choosing e_1^1 is supported by the explicit
+  source paragraphs identified above.
+* Lines159-174 use the correct matrix orientation: columns store incoming
+  flow, so policy values solve the transpose basis system. The Bellman
+  improvement inequality includes immediate reward and expected continuation.
+* The source graph and priorities in lines253-311 match Figure2, with b_1
+  and c_1 identified with g_1. The terminal, F_1 boundary, and all forced
+  one-successor vertices are retained. Assigning forced vertices to the
+  opponent makes no semantic change because their moves are unique.
+
+Multiplicity valuation:
+Def_friedmann_multiplicity.lean:14-35 compares counts at the greatest
+differing priority, preferring larger even and smaller odd counts. This
+matches Section2.2. The final length comparison has the correct sign for
+even/odd dominant cycles. ValueLE defined by the negation of the reversed
+strict comparison includes the intended equivalence of equal count vectors.
+The common playValue uses a genuinely recurring maximal vertex and its first
+visit, not a transient vertex with a coinciding priority. The concrete graph
+has a unique maximal-priority vertex on each directed cycle.
+
+Geometry and companion targets:
+* isVertex is the midpoint-extremality criterion, valid over rationals.
+* polytopeAdjacent uses the minimal standard-form face determined by the
+  common active zero coordinates. For distinct vertices it tests exactly
+  whether that face is their segment. It is not an arbitrary graph field.
+* cubeAdjacent is Hamming distance one; all nonempty cube faces are represented
+  by partial Boolean assignments; isAUSO enforces every edge orientation,
+  acyclicity, and exactly one sink on each such face.
+* policy_pivot asks for an actual minimum-ratio pivot, not merely matching
+  improving labels. The LP-to-MDP identity has the correct transpose.
+* All nine theorem files import definitions only and contain one intentional
+  sorry each. There is no hidden proved lower-bound assumption. Their proofs
+  are still open; this audit is not proof completion.
+
+Independent execution check
+--------------------------
+Added notes/cunningham_semantic_probe.py. Its parity evaluator builds Figure2
+directly by named vertices, enumerates all opponent choices at F vertices,
+evaluates the actual eventual cycle of each deterministic play, and takes
+the minimum multiplicity valuation. It does not use the LP's reward formula
+or linear equations. It compares the entire selected-action sequence against
+the exact-rational simplex implementation, not merely the number of steps.
+
+Run: python3 notes/cunningham_semantic_probe.py 3 4 5
+ n   PG switches   LP pivots   full action sequences equal
+ 3       36           36                yes
+ 4      118          118                yes
+ 5      320          320                yes
+
+Each opponent play checked had a unique maximum-priority cycle vertex, and
+every simplex pivot had a unique minimum-ratio leaving row. The n=3 count
+also agrees with the source's explicit worked example (p15). These are
+independent finite checks; the arbitrary-n binary-counter argument and
+source-equivalence theorem still require proofs.
+
+Conclusion
+----------
+No false or vacuous core lower-bound statement was found in this review.
+The initial-policy rationale needs correction, and polytope boundedness
+should be included in the realization predicate. Subject to those repairs,
+the inspected definitions form a faithful rational reconstruction of the
+source graph, algorithms, and mathematical targets. This conclusion is an
+independent mathematical/code review, not a Lean proof of the open claims.
+
+Post-review resolution
+----------------------
+The parent applied and I re-read both requested repairs on 2026-11-02:
+* realizesCube now begins with bounded (program n), at line229.
+* The source crosswalk removes the false singularity claim and identifies
+  the explicit Section2.3/Section4.4 initialization as the reason for e_1^1.
+  Independently, exact n=3,4 probes of the alternative all-e-zero start show
+  its first simplex pivot enters e_1^1 and leaves e_1^0, reaching the package's
+  initial basis. Thus the alternative is an extra prefix, not an invalid LP.
+The parent reports successful recompilation of the changed definition.
+
+Reviewed post-fix Def_friedmann_cunningham.lean SHA-256:
+72e58bee2bc88d22a17ca25c1dad59c0b977b4ca7c9afd02fa8865a5879feca4
+
+The two identified concrete issues are resolved. The rational-to-real bridge
+above remains a documented mathematical justification, not a checked Lean
+transport theorem; all nine research proof targets remain open.

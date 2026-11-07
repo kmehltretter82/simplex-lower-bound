@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+  <head>
+	<title> An inverse of the evaluation functional for typed Lambda-calculus </title>
+	<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" href="/lmu_favicon.png" />
+  	<!-- Headstart -->
+    <meta name="eprints.creators_name" content="Berger, Ulrich" />
+<meta name="eprints.creators_name" content="Schwichtenberg, Helmut" />
+<meta name="eprints.editors_name" content="Vermuri, R." />
+<meta name="eprints.type" content="conference_item" />
+<meta name="eprints.datestamp" content="2008-06-05 13:08:09" />
+<meta name="eprints.lastmod" content="2024-08-13 12:40:32" />
+<meta name="eprints.metadata_visibility" content="show" />
+<meta name="eprints.subject" content="Mathematik" />
+<meta name="eprints.subject" content="510 Mathematik" />
+<meta name="eprints.title_name" content="An inverse of the evaluation functional for typed Lambda-calculus" />
+<meta name="eprints.full_text_status" content="public" />
+<meta name="eprints.pres_type" content="other" />
+<meta name="eprints.abstract_name" content="In any model of typed λ-calculus conianing some basic
+arithmetic, a functional p - * (procedure—* expression)
+will be defined which inverts the evaluation functional
+for typed X-terms, Combined with the evaluation
+functional, p-e yields an efficient normalization algorithm.
+The method is extended to X-calculi with constants
+and is used to normalize (the X-representations
+of) natural deduction proofs of (higher order) arithmetic.
+A consequence of theoretical interest is a strong
+completeness theorem for βη-reduction, generalizing
+results of Friedman [1] and Statman [31: If two Xterms
+have the same value in some model containing
+representations of the primitive recursive functions
+(of level 1) then they are provably equal in the βη-
+calculus." />
+<meta name="eprints.date" content="1991" />
+<meta name="eprints.publisher" content="IEEE Computer  Society Press, Los Alamitos" />
+<meta name="eprints.pagerange" content="203-211" />
+<meta name="eprints.event_title" content="6th Annual IEE Symposium on Logic in Computer Science (LICS'91)" />
+<meta name="eprints.event_location" content="Amsterdam" />
+<meta name="eprints.event_dates" content="15. - 18. Juli 1991" />
+<meta name="eprints.event_type" content="conference" />
+<meta name="eprints.book_title" content="Proceedings of the 6th Symposium on Logic in Computer Science (LICS'91)" />
+<meta name="eprints.urn" content="urn:nbn:de:bvb:19-epub-4261-0" />
+<meta name="eprints.citation" content="    Berger, Ulrich und Schwichtenberg, Helmut  (1991):   An inverse of the evaluation functional for typed Lambda-calculus.    6th Annual IEE Symposium on Logic in Computer Science (LICS'91), Amsterdam, 15. - 18. Juli 1991.   Vermuri, R. (Hrsg.):   In: Proceedings of the 6th Symposium on Logic in Computer Science (LICS'91),     IEEE Computer Society Press, Los Alamitos. S. 203-211      [PDF, 1MB]      " />
+<meta name="eprints.document_url" content="https://epub.ub.uni-muenchen.de/4261/1/4261.pdf" />
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/" />
+<meta name="DC.title" content="An inverse of the evaluation functional for typed Lambda-calculus" />
+<meta name="DC.creator" content="Berger, Ulrich" />
+<meta name="DC.creator" content="Schwichtenberg, Helmut" />
+<meta name="DC.creator" content="Vermuri, R." />
+<meta name="DC.subject" content="Mathematik" />
+<meta name="DC.subject" content="ddc:510" />
+<meta name="DC.description" content="In any model of typed λ-calculus conianing some basic
+arithmetic, a functional p - * (procedure—* expression)
+will be defined which inverts the evaluation functional
+for typed X-terms, Combined with the evaluation
+functional, p-e yields an efficient normalization algorithm.
+The method is extended to X-calculi with constants
+and is used to normalize (the X-representations
+of) natural deduction proofs of (higher order) arithmetic.
+A consequence of theoretical interest is a strong
+completeness theorem for βη-reduction, generalizing
+results of Friedman [1] and Statman [31: If two Xterms
+have the same value in some model containing
+representations of the primitive recursive functions
+(of level 1) then they are provably equal in the βη-
+calculus." />
+<meta name="DC.publisher" content="Ludwig-Maximilians-Universität München" />
+<meta name="DC.contributor" content="Vermuri, R." />
+<meta name="DC.date" content="1991-01-01" />
+<meta name="DC.language" content="eng" />
+<meta name="DC.type" content="doc-type:conferenceObject" />
+<meta name="DC.type" content="Konferenzbeitrag" />
+<meta name="DC.identifier" content="    Berger, Ulrich und Schwichtenberg, Helmut  (1991):   An inverse of the evaluation functional for typed Lambda-calculus.    6th Annual IEE Symposium on Logic in Computer Science (LICS'91), Amsterdam, 15. - 18. Juli 1991.   Vermuri, R. (Hrsg.):   In: Proceedings of the 6th Symposium on Logic in Computer Science (LICS'91),     IEEE Computer Society Press, Los Alamitos. S. 203-211      [PDF, 1MB]      " />
+<meta name="DC.type" content="NonPeerReviewed" />
+<meta name="DC.identifier" content="https://epub.ub.uni-muenchen.de/4261/1/4261.pdf" />
+<meta name="DC.format" content="application/pdf" />
+<meta name="DC.identifier" content="http://nbn-resolving.de/urn:nbn:de:bvb:19-epub-4261-0" />
+<meta name="DC.identifier" content="https://epub.ub.uni-muenchen.de/4261/" />
+<meta name="DC.identifier" content="10.5282/ubm/epub.4261" />
+<link rel="canonical" href="https://epub.ub.uni-muenchen.de/4261/" />
+<link title="JSON_EPUB_FSP" type="application/json; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/JSON_EPUB_FSP/epub-eprint-4261.js" />
+<link title="Reference Manager" type="text/plain" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/RIS/epub-eprint-4261.ris" />
+<link title="METS" type="text/xml; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/METS/epub-eprint-4261.xml" />
+<link title="RDF+N3" type="text/n3" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/RDFN3/epub-eprint-4261.n3" />
+<link title="ASCII Citation" type="text/plain; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/Text/epub-eprint-4261.txt" />
+<link title="BibTeX" type="text/plain; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/BibTeX/epub-eprint-4261.bib" />
+<link title="OpenURL ContextObject in Span" type="text/plain; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/COinS/epub-eprint-4261.txt" />
+<link title="Dublin Core" type="text/plain" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/DC/epub-eprint-4261.txt" />
+<link title="epicur" type="text/xml" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/EPICUR_epub/epub-eprint-4261.xml" />
+<link title="OPENAIRE" type="application/xml; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/OPENAIRE/epub-eprint-4261.xml" />
+<link title="RDF+N-Triples" type="text/plain" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/RDFNT/epub-eprint-4261.nt" />
+<link title="Simple Metadata" type="text/plain; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/Simple/epub-eprint-4261.txt" />
+<link title="MODS" type="text/xml; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/MODS/epub-eprint-4261.xml" />
+<link title="Multiline CSV" type="text/csv; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/CSV/epub-eprint-4261.csv" />
+<link title="EP3 XML" type="application/vnd.eprints.data+xml; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/XML/epub-eprint-4261.xml" />
+<link title="JSON" type="application/json; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/JSON/epub-eprint-4261.js" />
+<link title="RDF+XML" type="application/rdf+xml" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/RDFXML/epub-eprint-4261.rdf" />
+<link title="JSON_EPUB_DOCTYPES" type="application/json; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/JSON_EPUB_DOCTYPES/epub-eprint-4261.js" />
+<link title="Refer" type="text/plain" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/Refer/epub-eprint-4261.refer" />
+<link title="MPEG-21 DIDL" type="text/xml; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/DIDL/epub-eprint-4261.xml" />
+<link title="OpenURL ContextObject" type="text/xml; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/ContextObject/epub-eprint-4261.xml" />
+<link title="JSON_EPUB" type="application/json; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/JSON_EPUB/epub-eprint-4261.js" />
+<link title="JSON_EPUB_NEW" type="application/json; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/JSON_EPUB_NEW/epub-eprint-4261.js" />
+<link title="xMetaDissPlus" type="text/xml; charset=UTF-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/XMETADISSPLUS/epub-eprint-4261.xml" />
+<link title="Dublin Core" type="text/plain" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/DC_OPENAIRE/epub-eprint-4261.txt" />
+<link title="Data Cite XML" type="application/xml; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/DataCiteXML/epub-eprint-4261.xml" />
+<link title="HTML Citation" type="text/html; charset=utf-8" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/HTML/epub-eprint-4261.html" />
+<link title="EndNote" type="text/plain" rel="alternate" href="https://epub.ub.uni-muenchen.de/cgi/export/eprint/4261/EndNote/epub-eprint-4261.enw" />
+<link rel="Top" href="https://epub.ub.uni-muenchen.de/" />
+    <link href="https://epub.ub.uni-muenchen.de/sword-app/servicedocument" rel="Sword" />
+    <link rel="SwordDeposit" href="https://epub.ub.uni-muenchen.de/id/contents" />
+    <link rel="Search" type="text/html" href="https://epub.ub.uni-muenchen.de/cgi/search" />
+    <link rel="Search" title="Open Access LMU" type="application/opensearchdescription+xml" href="https://epub.ub.uni-muenchen.de/cgi/opensearchdescription" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
+//padder
+</script><script type="text/javascript">
+// <![CDATA[
+google.load("visualization", "48", {packages:["corechart", "geochart"]});
+// ]]></script><script type="text/javascript">
+// <![CDATA[
+var eprints_http_root = "https://epub.ub.uni-muenchen.de";
+var eprints_http_cgiroot = "https://epub.ub.uni-muenchen.de/cgi";
+var eprints_oai_archive_id = "epub.ub.uni-muenchen.de";
+var eprints_logged_in = false;
+var eprints_logged_in_userid = 0; 
+var eprints_logged_in_username = ""; 
+var eprints_logged_in_usertype = ""; 
+var eprints_lang_id = "de";
+// ]]></script>
+    <style type="text/css">.ep_logged_in { display: none }</style>
+    <link rel="stylesheet" href="/style/auto-3.4.6.css?1761230469" type="text/css" />
+    <script src="/javascript/auto-3.4.6.js?1729862533" type="text/javascript">
+//padder
+</script>
+    <!--[if lte IE 6]>
+        <link rel="stylesheet" type="text/css" href="/style/ie6.css" />
+   <![endif]-->
+    <meta content="EPrints 3.4.6" name="Generator" />
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta http-equiv="Content-Language" content="de" />
+    
+    <!-- Headende -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+    <script type="text/javascript" src="/javascript/lmu.js"><!--padder--></script>
+	<script type="text/javascript" src="/javascript/epub.js">// <!-- No script --></script>
+    <!-- <script type="text/javascript" src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script> -->
+  </head>
+  <body>
+ <div id="ep_tm_wrapper">
+    
+    
+<div id="ep_resp_head">
+	<a href="https://epub.ub.uni-muenchen.de/" title="Open Access LMU">
+		<img class="ep_resp_desktop" alt="Logo" width="975" height="177" border="0" src="/images/epub_logo_de.png" />
+		<img class="ep_resp_mobile" alt="Logo" width="620" height="144" border="0" src="/images/header_open-access-lmu_mobile.png" />
+	</a>
+	<div id="ep_tm_funktionsbereich" class="ep_resp_desktop">
+		<div id="ep_tm_funktionen">
+			<a href="http://www.lmu.de/">www.lmu.de</a>  | 
+			<a href="http://www.ub.lmu.de/">UB</a>  | 
+			<a href="/view/">Blättern</a>  | 
+			<a href="/help/index.html">Hilfe</a>
+		</div>
+		<div id="ep_tm_suche" class="ep_resp_desktop">
+			<a href="/cgi/search/advanced">Zur erweiterten Suche</a>
+			<form method="get" accept-charset="utf-8" action="/cgi/search">
+				<fieldset class="searchwrapper">
+					<input class="ep_tm_suchfeld" type="text" name="q" />
+					<input value="Suchen" class="ep_tm_suchimage" src="/images/search-gelb.png" type="image" title="Suche starten" alt="Suche starten" />
+				</fieldset>
+				<input type="hidden" name="_action_search" value="Search" />
+				<input type="hidden" name="_order" value="bytitle" />
+				<input type="hidden" name="basic_srchtype" value="ALL" />
+				<input type="hidden" name="_satisfyall" value="ALL" />
+			</form>
+		</div>
+		<div id="ep_tm_sprachumschaltung" class="ep_resp_desktop"><a href="/cgi/set_lang?lang=en">English</a></div>
+	</div>
+</div>
+<div id="ep_tm_login_status" class="ep_resp_desktop"><ul id="ep_tm_menu_tools" class="ep_tm_key_tools"><li class="ep_tm_key_tools_item"><a href="/cgi/users/home" class="ep_tm_key_tools_item_link">Login</a></li><li class="ep_tm_key_tools_item"><a class="ep_tm_key_tools_item_link" href="/cgi/register">Registrieren</a></li><li class="ep_tm_key_tools_item"><a href="/cgi/users/home?screen=Admin" class="ep_tm_key_tools_item_link">Admin</a></li></ul></div>
+    
+<div id="ep_tm_main">
+<div id="ep_tm_navigation">
+  <div class="ep_tm_servicebutton ep_resp_mobile">
+    <a id="ep_resp_menu_btn" href="#">
+      <img class="ep_tm_scale ep_resp_mobile" alt="Hamburger Icon" src="/images/mobile_icon_hamburger-menu.png" />
+    </a>
+  </div>
+
+  <div id="ep_resp_topmenu">
+     <ul class="topmenu">
+		<li class="topfirst ep_resp_mobile"><a href="https://epub.ub.uni-muenchen.de/"><span>Home</span></a></li>
+		<li class="ep_resp_mobile"><a href="/view/"><span>Blättern</span></a></li>
+		<li class="ep_resp_mobile"><a href="/help/index.html"><span>Hilfe</span></a></li>
+     	<li><a href="/view/subjects/subjects.html"><span>Fakultäten</span></a></li>
+		<li><a href="/view/research_centers/"><span>Fakultätsübergreifende Einrichtungen</span></a></li>
+     	<li><a href="/view/autoren/index.html">Personen</a></li>
+     	<li><a href="/view/ddc/">Themengebiete</a></li>
+     	<li><a href="/keimelion.html" title="Cimelien der Universitätsbibliothek">Keimelion</a></li>
+     	<li><a href="/ludovico.html"><span>Ludovico-Maximilianea</span></a></li>
+     	<li class="toplast"><a href="/malte.html" title="Münchner Altbestände"><span>MALTE</span></a></li>
+     </ul>
+ </div>
+ </div>
+  <div id="ep_tm_servicebereich">
+	<div class="ep_tm_servicebutton ep_resp_mobile">
+		<a href="/help/"><img class="ep_tm_scale ep_resp_mobile" alt="Hilfe" src="/images/mobile_icon_hilfe.png" /></a>
+	</div>
+	<div class="ep_tm_servicebutton ep_resp_mobile">
+		<a href="/contact.html"><img class="ep_tm_scale ep_resp_mobile" alt="Hilfe" src="/images/mobile_icon_kontakt.png" /></a>
+	</div>
+	<div class="ep_tm_servicebutton ep_resp_mobile">
+      <a href="https://epub.ub.uni-muenchen.de/cgi/set_lang?lang=en"><img class="ep_tm_scale ep_resp_mobile" alt="Switch Language to English" src="/images/mobile_icon_languages_en.png" /></a>
+    </div>
+</div>
+<div id="ep_tm_inhaltsbereich_abstract">
+  <div id="ep_resp_search" class="ep_resp_mobile">
+    <a href="/cgi/search/advanced">Zur erweiterten Suche</a>
+    <form method="get" accept-charset="utf-8" action="/cgi/search">
+      <fieldset class="searchwrapper">
+        <input class="ep_tm_suchfeld" name="q" type="text" />
+        <input value="Suchen" class="ep_tm_suchimage" src="/images/search-gelb.png" title="Suche starten" alt="Suche starten" type="image" />
+       </fieldset>
+        <input name="_action_search" value="Search" type="hidden" />
+        <input name="_order" value="bytitle" type="hidden" />
+        <input name="basic_srchtype" value="ALL" type="hidden" />
+        <input name="_satisfyall" value="ALL" type="hidden" />
+    </form>
+</div>
+<div class="ep_summary_content"><div class="ep_summary_content_top"></div><div class="ep_summary_content_left"></div><div class="ep_summary_content_right"></div><div class="ep_summary_content_main">
+
+<div class="ep_content">
+  <p style="margin-bottom: 1em">
+    <b>
+<div style="margin: 0">
+
+<span class="creator">
+
+    <span class="person"><span class="person_name">Berger, Ulrich</span></span> und <span class="person"><span class="person_name">Schwichtenberg, Helmut</span></span>
+  
+
+(1991):
+</span>
+
+
+		<span class="title">An inverse of the evaluation functional for typed Lambda-calculus.</span>
+	
+
+<span class="publ_in">
+
+	  <i>6th Annual IEE Symposium on Logic in Computer Science (LICS'91), Amsterdam, 15. - 18. Juli 1991</i>.
+	  
+	 <!-- <if test="is_set(creators) and !is_set( editors ) and !is_set( corp_creators )">In: </if>-->
+	  
+	   <span class="person"><span class="person_name">Vermuri, R.</span></span> (Hrsg.):  
+	  
+	  
+	  
+	  In: Proceedings of the 6th Symposium on Logic in Computer Science (LICS'91),   
+	  
+	  
+	  
+	  
+	  
+	  IEEE Computer  Society Press, Los Alamitos. S. 203-211
+	
+  
+      
+        
+          
+             <span class="ep_fileformat">[PDF, 1MB]</span>
+          
+        
+      
+</span>
+</div>
+</b>
+  </p>
+
+  
+
+  
+
+    
+  
+    
+      
+      <div style="border: 0px solid red">
+        
+          <div class="ep_summary_page_document">
+            <span class="document_file_citation"><a onblur="EPJS_HidePreview( event, 'doc_preview_123602', 'right' );" onmouseout="EPJS_HidePreview( event, 'doc_preview_123602', 'right' );" onfocus="EPJS_ShowPreview( event, 'doc_preview_123602', 'right' );" class="ep_document_link" onmouseover="EPJS_ShowPreview( event, 'doc_preview_123602', 'right' );" href="https://epub.ub.uni-muenchen.de/4261/1/4261.pdf"><img title="4261.pdf" class="ep_doc_icon" alt="[thumbnail of 4261.pdf]" src="https://epub.ub.uni-muenchen.de/4261/1.hassmallThumbnailVersion/4261.pdf" border="0" /></a><div class="ep_preview" id="doc_preview_123602"><div><div><span><img class="ep_preview_image" alt="" src="https://epub.ub.uni-muenchen.de/4261/1.haspreviewThumbnailVersion/4261.pdf" id="doc_preview_123602_img" border="0" /><div class="ep_preview_title">Vorschau</div></span></div></div></div></span>
+            <span class="document_download_citation">
+        	  
+
+<!-- document citation -->
+
+
+<span class="ep_document_citation">
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br />
+
+<!-- <br /><cite:linkhere><span class="document_format"><epc:print expr='format'/><epc:if test="formatdesc"> (<epc:print expr="formatdesc"/>)</epc:if></span></cite:linkhere>
+ <epc:if test="main"><br/><span class="document_filename"><print expr="main"/></span></epc:if> -->
+
+<div class="ep_summary_docformat">
+	
+	
+		
+	
+</div>
+
+
+
+
+
+</span>
+
+
+              <a href="https://epub.ub.uni-muenchen.de/4261/1/4261.pdf"><img width="138px" height="25px" src="/images/volltext.png" /></a>
+			  <a href="https://epub.ub.uni-muenchen.de/4261/1/4261.pdf"></a>
+			  <!-- <a href="{$doc.url()}" class="ep_document_link"><epc:phrase ref="summary_page:download"/> (<epc:print expr="$doc.doc_size().human_filesize()" />)</a> -->
+               
+              
+  
+              <ul>
+              
+              </ul>
+            </span>
+          </div>
+        
+      </div>
+      <div class="ep_summary_page_document"></div>
+    
+
+  
+
+  
+    <div style="margin-bottom: 1.5em">
+      DOI: <a href="https://doi.org/10.5282/ubm/epub.4261">10.5282/ubm/epub.4261</a>
+    </div>
+  
+
+  
+
+  
+
+ 
+       
+			<h2>Abstract</h2>
+			<div style="text-align: left; margin: 1em auto 0em auto"><p>In any model of typed λ-calculus conianing some basic&#13;
+arithmetic, a functional p - * (procedure—* expression)&#13;
+will be defined which inverts the evaluation functional&#13;
+for typed X-terms, Combined with the evaluation&#13;
+functional, p-e yields an efficient normalization algorithm.&#13;
+The method is extended to X-calculi with constants&#13;
+and is used to normalize (the X-representations&#13;
+of) natural deduction proofs of (higher order) arithmetic.&#13;
+A consequence of theoretical interest is a strong&#13;
+completeness theorem for βη-reduction, generalizing&#13;
+results of Friedman [1] and Statman [31: If two Xterms&#13;
+have the same value in some model containing&#13;
+representations of the primitive recursive functions&#13;
+(of level 1) then they are provably equal in the βη-&#13;
+calculus.</p></div>
+       
+
+
+
+  <table class="metadata_abstract_page">
+    <tr>
+      <th>Dokumententyp:</th>
+      <td>
+        Konferenzbeitrag
+        (Anderer)
+        
+        
+      </td>
+    </tr>
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <tr>
+          <th align="right">Fakultät:</th>
+          <td valign="top"><a href="https://epub.ub.uni-muenchen.de/view/subjects/16.html">Mathematik, Informatik und Statistik</a> &gt; <a href="https://epub.ub.uni-muenchen.de/view/subjects/1602.html">Mathematik</a></td>
+        </tr>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <tr>
+          <th align="right">Themengebiete:</th>
+          <td valign="top"><a href="https://epub.ub.uni-muenchen.de/view/ddc/500a.html">500 Naturwissenschaften und Mathematik</a> &gt; <a href="https://epub.ub.uni-muenchen.de/view/ddc/510.html">510 Mathematik</a></td>
+        </tr>
+      
+    
+      
+    
+      
+        <tr>
+          <th align="right">URN:</th>
+          <td valign="top"><a href="https://nbn-resolving.org/urn:nbn:de:bvb:19-epub-4261-0">urn:nbn:de:bvb:19-epub-4261-0</a></td>
+        </tr>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <tr>
+          <th align="right">Sprache:</th>
+          <td valign="top">Englisch</td>
+        </tr>
+      
+    
+      
+        <tr>
+          <th align="right">Dokumenten ID:</th>
+          <td valign="top">4261</td>
+        </tr>
+      
+    
+      
+        <tr>
+          <th align="right">Datum der Veröffentlichung auf Open Access LMU:</th>
+          <td valign="top">05. Jun. 2008 13:08</td>
+        </tr>
+      
+    
+      
+        <tr>
+          <th align="right">Letzte Änderungen:</th>
+          <td valign="top">13. Aug. 2024 12:40</td>
+        </tr>
+      
+    
+      
+    
+	
+
+	
+	
+  </table>
+
+  
+  
+
+  
+    
+    <dl class="ep_summary_page_actions">
+    
+      <dt>Dokument bearbeiten <a href="/cgi/users/home?screen=EPrint%3A%3AView&amp;eprintid=4261"><img role="button" title="Dokument bearbeiten button" class="ep_form_action_icon" alt="Dokument bearbeiten" src="/style/images/action_view.png" /></a></dt>
+      <!-- <dd><epc:print expr="$action.action_title()" /></dd> -->
+    
+    </dl>
+  
+</div>
+
+ 
+<div class="ep_bibtools">
+
+	
+	<div class="ep_tm_servicetitel"><img alt="Search for authors" src="/images/autor-author.svg" border="0" />
+	<ul class="ep_bibautools_ul">
+		<li class="ausklappbasis">
+			<a href="javascript:changeList('zielgruppe1');">BASE</a>
+		<ul id="zielgruppe1">
+			
+				
+					<li><a href="http://www.base-search.net/Search/Results?lookfor=%22Berger, Ulrich%22&amp;type=aut"><span class="person_name">Berger, Ulrich</span></a></li>
+				
+					<li><a href="http://www.base-search.net/Search/Results?lookfor=%22Schwichtenberg, Helmut%22&amp;type=aut"><span class="person_name">Schwichtenberg, Helmut</span></a></li>
+				
+			 
+			
+			
+				<li><a href="http://www.base-search.net/Search/Results?lookfor=%22Vermuri, R.%22&amp;type=aut"><span class="person_name">Vermuri, R.</span></a></li>
+			
+			 
+		</ul>
+		</li>
+		<li class="ausklappbasis">
+			<a href="javascript:changeList('zielgruppe2');">Google Scholar</a>
+		<ul id="zielgruppe2">
+			
+				
+					<li><a href="https://scholar.google.com/scholar?as_q=&amp;as_sauthors=%22Berger, Ulrich%22"><span class="person_name">Berger, Ulrich</span></a></li>
+				
+					<li><a href="https://scholar.google.com/scholar?as_q=&amp;as_sauthors=%22Schwichtenberg, Helmut%22"><span class="person_name">Schwichtenberg, Helmut</span></a></li>
+				
+			
+			
+				
+					<li><a href="https://scholar.google.com/scholar?as_q=&amp;as_sauthors=%22Vermuri, R.%22"><span class="person_name">Vermuri, R.</span></a></li>
+				
+			
+		</ul>
+		</li>
+	</ul>
+	</div>
+	
+	
+	<div class="ep_tm_servicetitel"><img alt="Export" src="/images/export.svg" />
+		<ul class="ep_bibtools_ul">
+			<li class="ep_bibtools_li"><a href="/cgi/export/4261/BibTeX/epub-eprint-4261.bib">BibTeX</a></li>
+			<li class="ep_bibtools_li"><a href="/cgi/export/4261/EndNote/epub-eprint-4261.enw">EndNote</a></li>
+			<li class="ep_bibtools_li"><a href="/cgi/export/4261/HTML/epub-eprint-4261.html">HTML</a></li>
+			<li class="ep_bibtools_li"><a href="/cgi/export/4261/RIS/epub-eprint-4261.ris">Reference Manager</a></li>
+			<li class="ep_bibtools_li"><a href="/cgi/export/4261/Text/epub-eprint-4261.txt">Text Citation</a></li>
+		</ul>
+	</div> 
+</div>
+
+</div><div class="ep_summary_content_bottom"></div><div class="ep_summary_content_after"></div></div>
+</div>
+</div>
+</div> 
+<div class="ep_tm_footer">
+	<p>
+	Open Access LMU verwendet <em><a href="http://eprints.org/software/">EPrints 3,</a></em> das an der <a href="http://www.ecs.soton.ac.uk/">School of Electronics and Computer Science</a> der Universität Southampton entwickelt wurde.<br />
+	<a href="http://www.ub.lmu.de/de/footer/impressum/">Impressum</a> − <a href="https://www.ub.lmu.de/de/footer/datenschutz/">Datenschutz</a><br /><br />
+	</p>
+</div>
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setExcludedQueryParams", ["cHash","phpsessid","debug"]]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://piwik.ub.uni-muenchen.de/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '4']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="https://piwik.ub.uni-muenchen.de/piwik.php?idsite=4" style="border:0;" alt="" /></p></noscript>
+<!-- End Matomo Code -->
+</body>
+</html>

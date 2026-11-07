@@ -1,0 +1,9 @@
+checks/generated/TargetGroup1.lean:9:8: warning: declaration uses `sorry`
+checks/generated/TargetGroup1.lean:24:8: warning: declaration uses `sorry`
+checks/generated/TargetGroup1.lean:42:8: warning: declaration uses `sorry`
+checks/generated/TargetGroup1.lean:55:8: warning: declaration uses `sorry`
+checks/generated/TargetGroup1.lean:68:8: warning: declaration uses `sorry`
+checks/generated/TargetGroup1.lean:81:8: warning: declaration uses `sorry`
+checks/generated/TargetGroup1.lean:94:8: warning: declaration uses `sorry`
+checks/generated/TargetGroup1.lean:106:8: warning: declaration uses `sorry`
+checks/generated/TargetGroup1.lean:126:8: warning: declaration uses `sorry`

@@ -1,0 +1,18 @@
+CHECK arithmetic_nsi/Axiom16Audit.lean
+'ABHS2004.Audit.badAx_extraction_not_typed' depends on axioms: [propext, Quot.sound]
+'ABHS2004.Audit.badAx_derivable' depends on axioms: [propext, Quot.sound]
+'ABHS2004.Audit.badAx_fresh' depends on axioms: [propext, Quot.sound]
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/arithmetic_nsi/Axiom16Audit.lean:32:5: warning: Variable name `hd` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hd
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/arithmetic_nsi/Axiom16Audit.lean:33:5: warning: Variable name `hfresh` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hfresh
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'ABHS2004.Audit.refute_submitted_4_7' depends on axioms: [propext, Quot.sound]
+Checked 1 files; failed 0.

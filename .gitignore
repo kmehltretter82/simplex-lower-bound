@@ -1,0 +1,12 @@
+.lake/
+*.olean
+*.ilean
+.DS_Store
+friedmann-missions.zip
+credentials.json
+upload/state.json
+upload/*.pending.json
+__pycache__/
+
+cloud/local-config-path.txt
+cloud/.local/

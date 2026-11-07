@@ -1,0 +1,1383 @@
+               An arithmetic for non-size-increasing
+                  polynomial-time computation
+
+
+            Klaus Aehlig a,1 Ulrich Berger b,2,3 Martin Hofmann c
+                       Helmut Schwichtenberg a,∗,2
+    a Universität München, Mathematisches Institut, Theresienstraße. 39, 80333 München,
+
+                                          Germany
+      b University of Wales Swansea, Department of Computer Science, Singleton Park,
+
+                                    Swansea SA2 8PP, UK
+     c Universität München, Institut für Informatik, Oettingenstraße 67, 80538 München,
+
+                                          Germany
+
+
+
+Abstract
+
+An arithmetical system is presented with the property that from every proof a realizing term
+can be extracted that is definable in a certain affine linear typed variant of Gödel’s T and
+therefore defines a non-size-increasing polynomial time computable function.
+
+Key words: logic, arithmetic, implicit computational complexity, non-size-increasing
+polynomial time computation, realizability, higher types, lambda calculus
+
+
+
+
+1     Introduction
+
+
+There is an increasing interest in recent research in “implicit computational com-
+plexity”, e.g. by means of global restrictions on simply typed term systems to en-
+∗ Corresponding author.
+   Email addresses: aehlig@mathematik.uni-muenchen.de (Klaus Aehlig),
+u.berger@swansea.ac.uk (Ulrich Berger),
+mhofmann@mathematik.uni-muenchen.de (Martin Hofmann),
+schwicht@mathematik.uni-muenchen.de (Helmut Schwichtenberg).
+1 Supported by the Graduiertenkolleg Logik in der Informatik of the Deutsche Forschungs-
+
+gemeinschaft.
+2 The hospitality of the Mittag-Leffler Institute in the spring of 2001 is gratefully acknow-
+
+ledged.
+3 Supported by the British Engineering and Physical Research Council.
+
+
+
+
+Preprint submitted to Elsevier Science                                       7 February 2006
+sure computability in polynomial time [2,7,10,1]. One such approach has its roots
+in a careful study by Caseiro [4] of many examples of natural algorithms, and her
+formulation of (partially semantic) criteria ensuring computability in polynomial
+time. The third author identified in [7] an important aspect of this analysis: the role
+played by non-size-increasing functions. He designed a new (affine linear) term
+system which can only define non-size-increasing functions, but still allows nested
+recursion. One important restriction is that the step terms in recursion operators
+must be closed, since when unfolding the recursion they will be duplicated and
+hence would violate linearity otherwise. The first and fourth author gave in [1]
+a proof of the main result of [7] by a different (syntactical) method, which also
+provides an explicit construction of the bounding polynomials. One motivation for
+this work was the expectation that the simple approach chosen should make it easy
+to design a reasonably rich and flexible (higher type) arithmetical system, whose
+provably recursive functions can be computed in polynomial time. It is the purpose
+of the present paper to carry this out.
+
+
+
+
+The leading intuition is of course that one should use the Curry-Howard correspon-
+dence between terms in lambda-calculus and derivations in arithmetic. However,
+care is taken to arrive at a flexible and easy to use arithmetical system, which can
+be understood in its own right.
+
+
+
+
+The paper is structured as follows. In section 2 we present a variant of the linear
+term system of [7,1] defining non-size-increasing polynomial time functions only.
+Tailored for these terms is the arithmetic proof calculus introduced in section 3.
+In order to obtain a flexible and expressive system we included some unusual fea-
+tures: there are two forms of conjunction, A⊗B and A∧B, to account for the linear
+aspects of our logic. We also distinguish (as in [3]) between quantifiers with and
+without computational content. The former are obtained by relativizing to special
+“existence predicates” Eρ . So ∀x.Eρ (x) → . . . and ∃x.Eρ (x) ⊗ . . . indicate that
+x has computational meaning for the extracted program. The possibility to make
+this distinction is crucial for obtaining reasonable programs. We also split proof
+contexts into a “passive” and an “active” part (as done by Reynolds in [13] and by
+Reddy in [12]), where the latter controls the variables free in the realizing terms. A
+number of examples shows how the system might be used. In particular we sketch
+a proof that every list can be sorted. The extracted program is the usual formulation
+of insertion sort in our term system. In section 4 the link between proofs and pro-
+grams is made precise via a suitable variant of Kreisel’s modified realizability. As
+corollaries to the soundness theorem we obtain a proof that the provably recursive
+functions of our system are non-size-increasing and polynomial time computable,
+and some metamathematical results on our arithmetic system.
+
+
+                                          2
+2     A term system for non-size-increasing polynomial time computation
+
+
+We introduce a term system similar to the system in [7]. It will play the same role
+for our arithmetical system as Gödel’s T [5] does for Heyting Arithmetic.
+
+
+2.1    Types and terms
+
+
+Definition 2.1 (Finite linear types) Linear types are defined inductively as
+
+               ρ, σ ::= U |  | L(ρ) | ρ ( σ | ρ ⊗ σ | ρ × σ | ρ + σ.
+
+Definition 2.2 (Set model) In the (naive) set model every type ρ in the left column,
+below, is interpreted by the set Sρ given in the right column:
+
+            U                      a special singleton set
+                                  an unspecified nonempty set
+            L(ρ)                   the set of lists of elements of Sρ
+            ρ(σ                    the set of total functions from Sρ to Sσ
+            ρ ⊗ σ and ρ × σ        the cartesian product of Sρ and Sσ
+            ρ+σ                    the disjoint sum of Sρ and Sσ
+
+Remark 2.3 Common basic data types like the booleans, as well as unary and
+binary natural numbers can be defined by B := U+U, N := L(U), Bin := L(B).
+
+The intuition for the special type  is a pointer to free memory, as in [6]. Since there
+will be no closed terms of this type, it can be used to ensure that terms contain free
+variables. For example the type  ( N ( N of the successor function together
+with the linear typing discipline will make sure that the length of (unary) natural
+numbers and the more technical measure “number of free variables” will coincide.
+
+Although in the naive set model above ρ ( σ is interpreted as the full function
+space, computationally it should be viewed as the type of functions from ρ to σ
+that are linear in the sense that an argument is used at most once. This aspect will
+become visible in the typing discipline (definition 2.6).
+
+Similarly, the denotationally equal types ρ ⊗ σ and ρ × σ have different computa-
+tional interpretations: from a tensor product ρ ⊗ σ both components can be used
+once, whereas in the case of an ordinary pair of type ρ × σ, the pair itself can be
+used only once, i.e. one has to choose one component of the pair. Conversely, when
+forming an element of type ρ ⊗ σ from elements rρ and sσ we insist that r and s do
+not share common free variables, whereas for the construction of elements of type
+ρ × σ no such restriction applies.
+
+
+                                          3
+Terms are built from variables x, y, z, . . . and constants c (definition 2.5). Each
+variable has a type and it is assumed that there are infinitely many variables of each
+type. The notation xρ should express that the variable x has type ρ.
+
+Definition 2.4 (Terms) The set of terms is inductively defined by
+
+                          r, s ::= xρ | c | λxρ r | rs | r {s}
+
+These terms should be seen as our “raw syntax”; only correctly typed terms (defi-
+nition 2.6) will be meaningful. The notation r {s} (for iteration; cf. the conversion
+rules in definition 2.9, and remark 3.10) is taken from Joachimski and Matthes
+[9]. The set FV(r) of free variables of a term r is defined as usual. In particular
+FV(r {s}) = FV(r) ∪ FV(s). By r[s/x] we denote the usual substitution of every
+free occurrence of x in r by s (renaming bound variables in r if necessary). Terms
+that only differ in the naming of bound variables are identified.
+
+Definition 2.5 (Constants) The constants and their types are
+
+                  ε        :U
+                  nilρ     : L(ρ)
+                  consρ    :  ( ρ ( L(ρ) ( L(ρ)
+                  ⊗+ρσ     : ρ(σ (ρ⊗σ
+                  ⊗−ρστ    : ρ ⊗ σ ( (ρ ( σ ( τ ) ( τ
+                  ×+ρστ    : (τ ( ρ) ( (τ ( σ) ( τ ( ρ × σ
+                  fstρσ    : ρ×σ (ρ
+                  sndρσ    : ρ×σ (σ
+                  inlρσ    : ρ(ρ+σ
+                  inrρσ    : σ (ρ+σ
+                  +−ρστ    : ρ + σ ( (ρ ( τ ) × (σ ( τ ) ( τ
+
+Definition 2.6 (Typing) The relation rρ , which should be read ‘r has type ρ’ is
+inductively defined as follows:
+
+                                                                           (Variable)
+                                             ρ ρ
+                                         (x )
+
+
+                                         c:ρ
+                                                                          (Constant)
+                                              ρ
+                                          c
+
+
+                                          rσ
+                                                                               ((+ )
+                                         ρ        ρ(σ
+                                     (λx r)
+
+
+                                             4
+                          rρ(σ       sρ       FV(r) ∩ FV(s) = ∅
+                                                                                         ((− )
+                                                  σ
+                                            (rs)
+
+
+
+                          rL(ρ)       s(ρ(τ (τ           FV(s) = ∅
+                                                                                      (L(ρ)− )
+                                                   τ (τ
+                                          (r {s})
+
+
+Lemma 2.7 If rρ and sσ with (FV(r) \ {xσ }) ∩ FV(s) = ∅, then r[s/xσ ]ρ .
+
+
+PROOF. Easy induction on r.
+
+
+2.2   Reductions
+
+
+We now define reduction rules on terms. In order to be able to control the effects
+of iteration we allow conversion of a term r {s} only if the iteration argument is
+already calculated, i.e. if r is a list.
+
+Definition 2.8 (Lists) Terms of the form consρ d1 r1ρ (. . . (consρ dn rnρ nilρ )) will be called
+lists (with n entries).
+
+Definition 2.9 (Conversions) 7→ is defined as:
+
+                 (λxr)s              7→ r[s/x]      (β-conversion)
+                    −       +
+                  ⊗ρστ (⊗ρσ rs)t 7→ trs
+                 fstρσ (×+ρστ rst) 7→ rt
+                 sndρσ (×+ ρστ rst) 7→ st
+                    −
+                  +ρστ (inlρσ r)s 7→ fstρσ sr
+                  +−ρστ (inrρσ r)s 7→ sndρσ sr
+                 nilρ {s} t         7→ t
+                 consρ d rl {s} t 7→ sd r(l {s} t) provided l is a list
+                         
+
+
+
+
+Notice that the conversion rules are all correct, with respect to the obvious interpre-
+tation of terms in the set model 2.2.
+
+Definition 2.10 (Reduction) The relation r → r0 is inductively defined by
+
+       r 7→ r0      r → r0         s → s0             r → r0              s → s0
+       r → r0      rs → r0 s      rs → rs0        r {s} → r0 {s}      r {s} → r {s0 }
+
+
+                                              5
+This means, to reduce a term we may convert anywhere, except under λ. A term is
+called normal, if it cannot be reduced. We will write →∗ for the reflexive transitive
+closure of →.
+
+Lemma 2.11 (Subject reduction) If rρ and r → s, then sρ and FV(s) ⊆ FV(r).
+
+
+PROOF. Induction on r shows that only conversions need to be considered. The
+only non-trivial case is handled in lemma 2.7.
+
+Definition 2.12 (Almost closed terms) A term is almost closed if all its free vari-
+ables are of type .
+
+Proposition 2.13 Every normal, almost closed term of a type as in the left column
+is of the form given in the right column:
+
+                           U            ε
+                                       variable
+                           L(ρ)         list
+                           ρ⊗σ           ⊗+ rs
+                           ρ×σ           ×+ρ,σ,τ rst
+                           ρ+σ          inl r or inr r
+                           ρ(σ          λxr or c~r or r {s}
+
+
+PROOF. Induction on the typing.
+
+Definition 2.14 (Projections) For terms r of type ρ ⊗ σ we will use the abbrevi-
+                                                 −
+ations π0 (r) := ⊗−       ρ σ                           ρ σ
+                   ρσρ rλx , y .x and π1 (r) := ⊗ρσσ rλx , y .y. Clearly one has
+              ∗           +        ∗
+π0 (⊗+
+     ρσ st) → s and π1 (⊗ρσ st) → t.
+
+Example 2.15 (Predecessor) Let us use the abbreviations 0 := nilU and Sdr :=
+consU dεr for the zero and the successor operation on the type N := L(U). By the
+letter ν we will denote numerals, i.e., terms of the form Sd1 (. . . (Sdn 0) . . .). Let
+
+                s0 := λd λz N⊗(N(N) . ⊗+ (⊗− zλnλf.f n)λy N .Sdy
+                t0 := ⊗+ 0 id
+
+Then the conversion rules imply
+
+                            0 {s0 } t0 7→ ⊗+ 0 id                                   (1)
+                            Sdν {s0 } t0 →∗ ⊗+ νλy.Sdy                              (2)
+
+The latter can be seen easily by induction on ν. Now the predecessor P can be
+defined by
+                            P := λxN .π0 (x {s0 } t0 ).
+
+
+                                          6
+Definition 2.16 (Pairing) It is easy to define closed terms
+
+                         ⊗+
+                          ρ~ : ρ~ ( ρ1 ⊗ . . . ⊗ ρn
+                          −
+                         ⊗ρ~τ : ρ1 ⊗ . . . ⊗ ρn ( (~
+                                                   ρ ( τ) ( τ
+
+that behave like the corresponding constant, i.e.
+
+                            ⊗−    +                 ∗
+                                  ~ r1 . . . rn )t → tr1 . . . rn
+                             ~τ (⊗ρ
+                             ρ
+
+Using these we define a closed term
+
+                     ×+      τ ( ρ) ( (~τ ( σ) ( τ~ ( ρ × σ
+                        τ : (~
+                      ρσ~
+
+by, setting τ := τ1 ⊗ . . . ⊗ τn ,
+                                          −              −         +
+             ×+            x. ×+
+                τ := λf λgλ~
+              ρσ~              ρστ (λz. ⊗τ~ ρ zf )(λz. ⊗τ~ σ zg)(⊗τ~ ~
+                                                                     x)
+
+such that fstρσ (×+     ~      ∗ ~
+                    τ rst) → r t and sndρσ (×ρσ~
+                  ρσ~
+                                                +     ~    ∗ ~
+                                                  τ rst) → st. Now we can define a
+pairing operation
+                         hrρ , sσ iρ×σ := ×+ τ (λ~
+                                           ρσ~    x.r)(λ~x.s)~x
+where ~x is a list of the free variables common to r and s. Obviously
+
+                         fstρσ hr, si →∗ r,        sndρσ hr, si →∗ s.
+
+Note that although the terms r and s may have variables in common, in the term
+hr, si every free variable occurs only once.
+
+
+2.3   Lengths of reduction chains
+
+
+Now we show that every almost closed term of appropriate type in the present
+system denotes a non-size-increasing polynomial time computable function. We
+adapt the proof in [7,1] by constructing to every such term a polynomial, whose
+degree is the nesting of {.}, bounding the number of reduction steps necessary for
+computing the result.
+
+Definition 2.17 For every natural number n and every term r we define natural
+numbers #n (r) and ϑn (r) by
+                            
+                            k       if r is a list with k entries and k ≤ n
+                #n (r) :=
+                            n       otherwise
+
+
+                ϑn (x) := ϑn (c)       :=    1
+                ϑn (rs)                :=    ϑn (r) + ϑn (s)
+
+
+                                               7
+               ϑn (λxr)           :=    ϑn (r) + 1
+               ϑn (r {s})         :=    ϑn (r) + (#n (r) + 1) · ϑn (s)
+
+ Clearly the function mapping n to ϑn (r) is bounded by a polynomial of degree p
+ where p is the nesting of {.} in r.
+
+  Lemma 2.18(a) #n (r) ≥ #n (r[s/x]).
+(b) If r → r0 then #n (r) ≥ #n (r0 ).
+
+
+ PROOF. Obvious from the definition of #n (r), using the fact that neither substi-
+ tution nor reduction change the number of entries of a list.
+
+ Lemma 2.19 If rρ then ϑn (r[s/x]) ≤ ϑn (r) + ϑn (s).
+
+
+ PROOF. Induction on r using lemma 2.18 (a) and the fact that in a typed term a
+ free variable can have at most one occurrence .
+
+ Definition 2.20 We write r →n r0 if r → r0 by converting a subterm s of r with
+ |FV(s)| ≤ n, where |FV(s)| is the number of occurrences of free variables in s.
+
+ Lemma 2.21 If rρ and r →n r0 , then ϑn (r) > ϑn (r0 ).
+
+
+ PROOF. Induction on r.
+
+ Case r →n r0 is a conversion (definition 2.9), i.e. r 7→ r0 where |FV(r)| ≤ n.
+
+ Only β-conversion and recursion are critical. While the former is taken care of
+ by lemma 2.19, in a conversion consρ d rl {s} t 7→ sd r(l {s} t) the hypothesis
+ |FV(consρ d rl {s} t)| ≤ n is used: Suppose the list l has k entries. Then k +
+ 1 ≤ n because due to the typing rules for terms (definition 2.6) a typed list with
+ k + 1 entries must have at least k + 1 occurrences of free variables. Consequently
+ #n (consρ d rl) = k + 1 and #n (l) = k. Therefore
+
+           ϑn (consρ drl {s} t)
+           = 1 + ϑn (d) + ϑn (r) + ϑn (l) + (k + 2) · ϑn (s) + ϑn (t)
+           > ϑn (s) + ϑn (d) + ϑn (r) + ϑn (l) + (k + 1) · ϑn (s) + ϑn (t)
+           = ϑn (sdr(l {s} t))
+
+ Case r →n r0 , by converting a proper subterm of r. Easy by induction hypothesis,
+ referring in the case r {s} → r0 {s}, with r → r0 , to lemma 2.18 (b).
+
+ Corollary 2.22 If rρ then every reduction sequence starting with r has length ≤
+ ϑN (r) where N := |FV(r)|.
+
+
+                                         8
+PROOF. Clearly if r → r0 then r →n r0 for every n ≥ |FV(r)|. Therefore the
+corollary follows from lemma 2.21 and the subject reduction lemma 2.11.
+
+Proposition 2.23 Let rρ(σ be a typed term with p nestings of {.}. Then there is
+a polynomial B of degree max {p, 1} such that for all terms sρ containing no {.}
+the term rs reduces to normal form in ≤ B(length(s)) steps, where length(s) is the
+ordinary (syntactical) length of s.
+
+
+
+PROOF. Let K := length(r) and L := length(s). Then |FV(rs)| ≤ K + L.
+Therefore, by lemma 2.22, rs normalizes in ≤ ϑK+L (rs) steps. Because s doesn’t
+contain {.} we have ϑn (s) = L for all n. Consequently
+
+                              ϑK+L (rs) = ϑK+L (r) + L
+
+which is bounded by a polynomial in L of degree max {p, 1}.
+
+Definition 2.24 (Data types, data objects, non-size-increasing functions) A type
+is called data type if it is built from U, L(.), ⊗, and + only (examples: N, Bin,
+L(Bin)). A data object of data type τ is an almost closed term wτ in normal form.
+The size of a data object wτ is the natural size of its denotation, which, by proposi-
+tion 2.13, essentially, i.e. up to a constant depending only on τ , coincides with the
+syntactical length, length(w), and also with the number of free variables, |FV(w)|.
+
+A function f from Sτ~ to Sτ , where τ~ , τ are data types, is called non-size-increasing
+if there is a number k such that for all data objects ~a of type τ~ the result f (~a) has a
+size less than or equal to the sum of the sizes of the ai plus k.
+
+Theorem 2.25 Let τ~ , τ be data types and rτ~ (τ be an almost closed term with
+p nestings of {.}. Then r defines a polynomial time algorithm for a non-size-
+increasing function from Sτ~ to Sτ with computation time bounded by a polynomial
+of degree max {p, 1}.
+
+
+
+PROOF. By proposition 2.13 r defines indeed a function from Sτ~ to Sτ . The as-
+sertion about the computation time is proved in proposition 2.23. That r is non-
+size-increasing follows from the already mentioned facts that reduction does not
+increase the number of free variables of a term, and that the the size of a data object
+is essentially the number of its free variables.
+
+Remark 2.26 In [8] it is shown for a similar term calculus that the converse of
+theorem 2.25 also holds: Every non-size-increasing function from Sτ~ to Sτ with
+computation time bounded by a polynomial is definable by an almost closed term.
+
+
+                                            9
+3     Linear arithmetic
+
+
+We now set up a linear arithmetic tailored for the term system introduced in the
+previous section.
+
+
+3.1    Formulas
+
+
+We assume a fixed set of predicate symbols of fixed arity.
+
+When writing R(~r), R a predicate symbol, we implicitly assume correct length and
+types of ~r. However we only assume that the terms in ~r are weakly typed, that is,
+all restrictions on free variables (when typing terms of the form rs or {r} s) are
+dropped. This relaxation of the typing rules is necessary because of unrestricted
+substitutions into formulas allowed by the ∀-elimination rule (see definition 3.7).
+
+For every type ρ we assume special predicate symbols Eρ and =ρ , called existence
+and equality. We sometimes abbreviate =ρ (r, s) by r =ρ s or even r = s. The
+intended interpretation of =ρ is ordinary extensional equality between objects of
+type ρ and Eρ is to be interpreted as the set of all objects of type ρ, that is, all objects
+do exist. Nevertheless, we will refrain from simply stating the formula Eρ (x) as an
+axiom, because we want a proof of Eρ (t) to provide a construction of the object
+denoted by t. We will postulate the fact that Eρ (x) always holds only in a context
+where the construction of x does not matter. This can be expressed by the axiom
+scheme (Eρ (x) → A) → A, where A is an arbitrary computationally irrelevant
+formula (see definition 3.5).
+
+In the following the letters P, Q range over predicate symbols different from the
+existence predicates Eρ (but including equality =ρ ).
+
+Definition 3.1 (Formulas) The set of formulas is defined inductively:
+
+    A, B, C ::= P (~r) | Eρ (r) | A → B | A ⊗ B | A ∧ B | A ∨ B | ∀xρ A | ∃xρ A.
+
+Remark 3.2 We define falsity ⊥ by tt = ff, where tt := inlU,U ε and ff := inrU,U ε.
+Negation ¬A is an abbreviation for A → ⊥ and r 6= s is shorthand for ¬(r = s).
+
+The conjunction ∧ is the “weak” one corresponding to the ordinary product ×, i.e.
+A∧B → A and A∧B → B will be provable, but (A → B → C) → (A∧B → C)
+will not.
+
+The quantifiers correspond to the {∀} in [3] (or the “underlined quantification”
+in [11]) and mean “quantification without computational content”, i.e. a proof of
+∀xA is of such a form that the realizing term does not depend on x. When we
+
+
+                                            10
+want computational content, the quantifiers have to be relativized to the existence
+predicate, i.e. ∀x.E(x) → A or ∃x.E(x) ⊗ A.
+
+Ex falso quodlibet in the form ⊥ → A will not be provable in general: we will not
+have ⊥ → ∃p E(p), since there is no closed term of type . This is also the reason
+why disjunction A ∨ B cannot be defined by ∃xB .E(x) ⊗ (x = tt → A) ∧ (x =
+ff → B): from A we could not conclude e.g. A ∨ ∃p E(p).
+
+Definition 3.3 (Computational content) For a formula A we define the computa-
+tional content τ (A), i.e. the type of its potential realizers, by induction on A.
+
+                           τ (Eρ (r)) := ρ
+                           τ (P (~r)) := U
+                           τ (A → B) := τ (A) ( τ (B)
+                           τ (A ⊗ B) := τ (A) ⊗ τ (B)
+                           τ (A ∧ B) := τ (A) × τ (B)
+                           τ (A ∨ B) := τ (A) + τ (B)
+                           τ (∀xρ A) := τ (A)
+                           τ (∃xρ A) := τ (A)
+
+
+Due to the presence of the type U types may contain some redundancies. For ex-
+ample, ρ ( U denotes a singleton in the set model and could hence be simplified
+to U. Let us call a type clean if it does not contain redundant parts. Hence the base
+types U and  are clean, the types ρ ( σ, ρ ⊗ σ, and ρ × σ are clean if their com-
+ponents ρ and σ are both clean and different from U, and the types L(ρ) and ρ + σ
+are clean if their components ρ and σ are both clean. To every type ρ we define a
+canonically isomorphic clean type c(ρ) as follows.
+
+Definition 3.4 (Cleaning of types)
+
+                    c(U) := U
+                    c() := 
+                                  
+                                  U         if c(σ) = U
+                                  
+                                  
+                    c(ρ ( σ) := c(σ)        if c(ρ) = U
+                                
+                                
+                                 c(ρ) ( c(σ) otherwise
+                                 
+                                 c(ρ)      if c(σ) = U
+                                 
+                                 
+                    c(ρ ⊗ σ) := c(σ)        if c(ρ) = U
+                               
+                               
+                               
+                                c(ρ) ⊗ c(σ) otherwise
+                                 
+                                 c(ρ)      if c(σ) = U
+                                 
+                                 
+                    c(ρ × σ) := c(σ)        if c(ρ) = U
+                               
+                               
+                               
+                                c(ρ) × c(σ) otherwise
+
+
+                                         11
+                    c(ρ + σ) := c(ρ) + c(σ)
+                    c(L(ρ)) := L(c(ρ))
+
+We set τ c (A) := c(τ (A))
+
+Essentially we are interested in τ c (A) only. However, in order to keep cumbersome
+case distinctions at bay it will be convenient to consider the uncleaned version τ (A)
+as well.
+
+Definition 3.5 (Harrop formulas) We say that a formula A has no computational
+content if τ c (A) = U. Formulas without computational content are also called
+Harrop formulas, or computationally irrelevant (c.i.), non-Harrop formulas are also
+called computationally relevant (c.r.).
+
+So, a formula is c.i. iff it contains no existence predicate Eρ with c(ρ) 6= U and no
+disjunction in a strictly positive position.
+
+
+3.2   Derivations
+
+
+Proof terms are intended to denote proofs in natural deduction style. They are built
+up from ordinary terms r, axioms c and assumption variables u, v, w, . . . . Each
+assumption variables has a formula as type (in the sense of the Curry-Howard cor-
+respondence). For each formula there are infinitely many variables of this type. We
+write uA or u : A to indicate that the variable u has type A.
+
+Definition 3.6 (Raw proof terms)
+
+            M, N, L ::= uA | c | λuA M | λxρ M | M N | M r | M {N }
+
+
+Proof contexts are sets of assumption variables. We denote proof contexts by Π, Γ, . . . ,
+and write Π, Γ for the union Π ∪ Γ, expressing that Π and Γ are disjoint. For con-
+texts consisting of one element we also write uA instead of {uA }. Let · denote the
+empty proof context.
+
+The term system was based on linearity constraints, hence linearity has to be re-
+flected by the arithmetic in order to achieve a realizability result. However, linearity
+itself would be too a strong restriction since we will often need to instantiate uni-
+versal formulas to special terms in order to prove that a certain (c.i.) property holds
+without actually using the variable (in a relevant way). Therefore we have to allow
+ourselves to keep assumptions in the context that must not be used in a c.r. way.
+To achieve this we split the context into two parts: one to control correctness and
+another one to control linearity. This setup also allows (by the rule (Passification)
+below) to easily reflect the fact that Harrop formulas have no computational mean-
+
+
+                                          12
+ing and that therefore the proof of a Harrop formula cannot use any assumption in
+a c.r. way.
+
+A similar phenomenon appears in the area of syntactic control of interference (SCI),
+cf. Reynolds [13] or Reddy [12]. There, in a function application rs the two phrases
+r and s should be “independent”, i.e. r should not change something s is reading
+from or writing to, and conversely. One way to guarantee this is to require that
+r and s do not share common free variables. However, this requirement seems to
+be too stringent: one e.g. could not write +xx. To relax it, Reynolds identified a
+special class of values called “passive”, which never change the state. Free variables
+denoting passive values can then be shared by r and s.
+
+Following Reddy [12] we write our typing judgments in the form Π | Γ ` M : A,
+where the context is split into two parts Π and Γ, with Π considered passive. This is
+to be read as “M denotes a proof of A in the passive context Π and the potentially
+active or linear context Γ”. The active context controls the variables free in the
+realizing terms.
+
+Definition 3.7 The relation Π | Γ ` M : A is inductively defined as follows.
+
+                                                                      (Assumption)
+                                 Π | Γ, uA ` uA : A
+
+
+                                                                            (Axiom)
+                                   Π | Γ ` cA : A
+
+
+                                 Π | Γ, uA ` M : B
+                                                                                (→+ )
+                              Π | Γ ` λuA M : A → B
+
+
+                     Π | Γ1 ` M : A → B           Π | Γ2 ` N : A
+                                                                                (→− )
+                               Π | Γ1 , Γ2 ` M N : B
+
+
+                           Π|Γ`M: A              VarCond
+                                                                                 (∀+ )
+                                           ρ         ρ
+                               Π | Γ ` λx M : ∀x A
+
+
+                    Π | Γ ` M : ∀xρ A          r weakly typed by ρ
+                                                                                 (∀− )
+                                Π | Γ ` M r : A[r/x]
+
+
+                                         13
+Here VarCond is the usual condition on free variables, i.e. that x must not be free
+in the type of any element of Π ∪ Γ.
+
+We add a rule (Passification) describing the meaning of the active context: it is
+only needed to prove non-Harrop formulas. Moreover we add a contraction rule,
+which can be used to contract the passive part of the context.
+
+                           Π | uB , Γ ` M : A         A c.i.
+                                                                    (Passification)
+                                Π, uB | Γ ` M : A
+
+
+
+                              uA , Π | v A , Γ ` M : B
+                                                                     (Contraction)
+                                  A           A   A
+                            Π | v , Γ ` M [v /u ] : B
+
+
+We call these rules structural. The last rule concerns induction.
+  Π | Γ ` N : E(t)       Π | · ` M : ∀p , xτ , l.E(p, x) → A → A[cons(p, x, l)/l]
+                        Π | Γ ` N {M } : A[nil/l] → A[t/l]
+                                                                      (L(τ )−Ind)
+Here E(p, x) → . . . is short for E(p) → E(x) → . . . .
+
+The axioms can be divided into four groups: logical axioms, equality axioms,
+axioms for existence predicates, and axioms specifying the additional predicates
+P, Q, . . .. We will only give the axioms of the first three groups. They define the
+core system. The last group depends on particular applications of the system; ex-
+amples will be given in section 3.4.
+
+Definition 3.8 (Axioms for the core system)
+
+
+Logical axioms.
+ (C → A) → (C → B) → C → A ∧ B                                                  (3)
+ A 0 ∧ A 1 → Ai                                                                 (4)
+ A→B →A⊗B                                                                       (5)
+ A ⊗ B → (A → B → C) → C                                                        (6)
+ Ai → A0 ∨ A1                                                                   (7)
+ (A → C) ∧ (B → C) → A ∨ B → C                                                  (8)
+ ∀x.A → ∃xA                                                                     (9)
+ ∃xA → (∀x.A → B) → B if x ∈
+                           / FV(B)                                             (10)
+ ⊥ → P (~r)                                                                    (11)
+
+Equality axioms.
+
+
+                                        14
+ Transitivity, symmetry and reflexivity of =ρ .                                    (12)
+
+  Equations corresponding to the conversion rules 2.9, where in the
+ equation consρ d rl {s} t = sd r(l {s} t) the term l can be arbitrary.          (13)
+ f =ρ(σ g → x =ρ y → f x =σ gy                                                     (14)
+ x1 = y1 → · · · → xn = yn → P (x1 , . . . , xn ) → P (y1 , . . . , yn )           (15)
+ x =ρ y → E(x) → E(y)                                                              (16)
+ x =U ε                                                                            (17)
+ ∀x f x =σ gx → f =ρ(σ g                                                           (18)
+ fst z =ρ fst z 0 ∧ snd z =σ snd z 0 → z =ρ×σ z 0                                  (19)
+
+Axioms for existence predicates.
+ Eρ(σ (f ) ↔ ∀x.Eρ (x) → Eσ (f x)                                 (20)
+ Eρ×σ (z) ↔ Eρ (fst z) ∧ Eσ (snd z)                               (21)
+                                        +
+ E(c) for each of the constructors ε, ⊗ , inl, inr, nil, cons     (22)
+     ρ σ                  +            ρ⊗σ
+ (∀x , y .E(x, y) → A[⊗ xy/z]) → ∀z .E(z) → A                     (23)
+     ρ                           σ                            ρ+σ
+ (∀x .E(x) → A[inl x/z]) ∧ (∀y .E(y) → A[inr y/z]) → ∀z .E(z) → A (24)
+ (Eρ (x) → A) → A for every c.i. formula A                        (25)
+
+
+We write M A for M if there are Π and Γ such that Π | Γ ` M : A. Obviously, A is
+uniquely determined by M . If we are not interested in the proof term we will also
+write Π | Γ ` A to mean that there exists a proof term M such that Π | Γ ` M : A
+is derivable.
+
+
+3.3   Remarks
+
+
+Remark 3.9 It is easy to see that the following rules are admissible:
+
+                                        Π|Γ`A
+                                                                           (Weakening)
+                                    Π0 , Π | Γ, Γ0 ` A
+
+
+
+                                      Π0 , Π | Γ ` A
+                                                                           (Activation)
+                                                 0
+                                      Π | Γ, Π ` A
+
+
+Remark 3.10 Our induction rule (L(τ )−Ind) corresponds to iteration rather than
+primitive recursion, since for its premise we must prove A[cons(p, x, l)/l] from
+
+
+                                            15
+(E(p, x) and) A alone, without having access to the previous induction argument l
+in the form of an E(l)-resource. By mimicking the method in [7] one can see that a
+strengthened induction rule corresponding to primitive recursion, in the form
+     Π | Γ ` E(t)    Π | · ` ∀p, x, l.E(p, x) → A ∧ E(l) → A[cons(p, x, l)/l]
+                             Π | Γ ` A[nil/l] → A[t/l]
+                                                                     (L(τ )−Ind+ )
+is admissible, by invoking (L(τ )−Ind) with goal formula A ∧ E(l). Its premise can
+be proved from the given premise using E(p, x, l) → E(cons(p, x, l)), and from its
+conclusion
+
+                Π | Γ ` N {M } : A[nil/l] ∧ E(nil) → A[t/l] ∧ E(t)
+
+we clearly obtain A[nil/l] → A[t/l], using E(nil).
+
+Notice that due to the use of ∧ rather than ⊗ we can access either the induction
+variable or else the previous result, but are not allowed to do both. It is not possible
+to derive a strengthened induction rule with ⊗ instead of ∧.
+
+Remark 3.11 We list some further useful facts about the system.
+
+ (1) A ⊗ B → A ∧ B is provable in general, but not A ∧ B → A ⊗ B. However,
+     for c.i. formulas A, B we can prove A ∧ B ↔ A ⊗ B.
+ (2) x =ρ y → A(x) → A(y) is provable for all formulas A.
+ (3) If c(ρ) = U then x =ρ y is provable.
+ (4) The constructors, ⊗+ , ×+ , inl, inr, nil and cons are injective, and have mu-
+     tually disjoint ranges. ⊗+ and ×+ are also surjective. That is, the following
+     formulas are provable.
+
+       c~x = c~y → ~x = ~y for each constructor c
+       c~x 6= c0~x for each pair of different constructor c, c0 of appropriate types.
+       ∀z ρ⊗σ ∃x, y . z = ⊗+ xy
+       ∀z ρ×σ ∃x, y . z = ×+ xy
+
+ (5) The following formulas are provable.
+
+            Eρ⊗σ (z) ↔ ∃xρ ∃y σ .Eρ (x) ⊗ Eσ (y) ⊗ z = ⊗+ xy
+            Eρ+σ (z) ↔ (∃xρ .Eρ (x) ⊗ z = inl x) ∨ (∃y σ .Eσ (y) ⊗ z = inr y)
+            EL(ρ) (z) ↔ z = nil ∨ (∃d , xρ , xL(ρ) .E(d, x, y) ⊗ z = cons dxy)
+
+ (6) E(~x) → E(t) is provable for every term t which is correctly typed according
+     to definition 2.6 and whose free variables are among ~x.
+ (7) ⊥ → A is provable provided in τ (A) (or equivalently in τ c (A)) the type 
+     does not occur strictly positive.
+
+
+PROOF. 1. For the underivability statement see corollary 4.8. The rest follows
+
+
+                                          16
+directly from the inference rules in definition 3.7.
+
+2. Easy induction on A.
+
+3. Easy induction on ρ.
+
+4. Note that all formulas to be proven are c.i. Therefore axiom scheme (25) allows
+us to prove them under the additional assumption that all objects involved exist.
+But this is easy, using the other existence axioms and our conversion rules, that is,
+axioms (13).
+
+5. The implications from right to left follow from the axioms (22). The other impli-
+cations follow from the elimination schemes (23), (24) and induction (which can
+be viewed as EL(τ ) -elimination). As an example let us assume Eρ+σ (z) and prove
+(∃xρ .Eρ (x) ⊗ z = inl x) ∨ (∃y σ .Eσ (y) ⊗ z = inr y). By (24) it suffices to prove this
+for z of the form inl x0 where E(x0 ), and also for z of the form inl y 0 where E(y 0 ).
+But this is obvious.
+
+6. It suffices to prove that all constants exist and that existence is preserved under
+the formation of t{s}. For the constructors this follows directly from the axioms
+concerning the existence predicates. For the other constants and induction one uses
+the elimination axioms, (23,24) and induction, as well as the conversion rules (13).
+
+7. First one proves the assertion for formulas A of the form Eρ (t), by induction on
+ρ. The general case follows by induction on A, using axiom scheme (11).
+
+
+
+3.4   Examples
+
+
+The following examples are intended to demonstrate the flexibility of the system.
+Some of the system’s (inevitable) limitations are expressed by the underivability
+results in section 4 (e.g. corollary 4.8).
+
+Example 3.12 (Addition) Assume Add(x, y, z) expresses x + y = z for natural
+numbers, for example, via the computational irrelevant axioms
+
+              ax0 : ∀x. Add(x, 0, x)
+              ax1 : ∀x, y, z, p. Add(x, y, z) → Add(x, S(p, y), S(p, z))
+
+We prove
+               ∀x.EN (x) → ∀y.EN (y) → ∃z.EN (z) ⊗ Add(x, y, z)
+(which will give us, via program extraction (section 4) a polynomial time algorithm
+for addition). We argue informally. Assume u0 : EN (x) and u1 : EN (y). We have to
+show ∃z.EN (z) ⊗ Add(x, y, z). Because of the assumption u1 we can do this by
+
+
+                                          17
+induction on y. We need to prove base and step, that is,
+
+ ∃z. EN (z) ⊗ Add(x, 0, z)
+ ∀p, y. E (p) → (∃z. EN (z) ⊗ Add(x, y, z)) → ∃z 0 . EN (z 0 ) ⊗ Add(x, S(p, y), z 0 )
+
+For the base we take z := x and use assumption u0 and axiom ax0 . For the step we
+assume v : E (p) and also that we have z with ih1 : EN (z) and ih2 : Add(x, y, z).
+We set z 0 := S(p, z) and prove EN (z 0 ) using v and ih1 , and Add(x, S(p, y), z 0 )
+using ax1 and ih2 .
+
+This is a valid proof in our system since every assumption is used only once and the
+proof of the step is almost closed, that is, does not use any of the assumtions u0 or
+u1 . The corresponding derivation term is (using variables with the same types and
+formulas as in the informal proof)
+
+                           λx, u0 , y, u1 . u1 {STEP} BASE
+
+where BASE := ∃+ xu0 (ax0 x) and STEP :=
+
+ λp, y, v, ih . ∃− ihλz, ih0 . ⊗− λih1 , ih2 . ∃+ S(p, z)(⊗+ (M pzv ih1 )(ax1 xyzp ih2 ))
+
+with ih : ∃z. EN (z) ⊗ Add(x, y, z), ih0 : EN (z) ⊗ Add(x, y, z), and a trivial deriva-
+tion M : ∀p, x . E(p) → E(x) → E(S(p, x)) which is easily obtained from axioms
+about the predicate E.
+
+Notice that we cannot deduce ∀x.EN (x) → ∃z.EN (z)⊗Add(x, x, z) (see corollary
+4.10), because we would lack one EN assumption.
+
+Example 3.13 (Recycling of existence) By induction we can prove
+
+                      ∀x.EN (x) → (x = 0 ∨ x 6= 0) ⊗ EN (x).
+
+In the base case we use the axiom E(0) and prove the left branch of the disjunction,
+which is an axiom. The step requires
+
+               ∀p, x.E (p) → EN (x) → EN (S(p, x)) ⊗ S(p, x) 6= 0,
+
+which follows from the axiom E (p) → EN (x) → EN (S(p, x)).
+
+Notice that since disjunction is computationally relevant, we cannot establish
+
+                                  ∀x.x = 0 ∨ x 6= 0,
+
+i.e. decidability of equality without an existence assumption (see corollary 4.10).
+Notice that the more natural statement
+
+                             ∀x.EN (x) → x = 0 ∨ x 6= 0
+
+
+                                           18
+follows from the one we’ve shown, but is strictly weaker since it doesn’t allow us to
+“recycle” the information that x “exists”.
+
+We can establish
+
+        ` ∀x.EN (x) → ∀y.EN (y) → (x = y ∨ x 6= y) ⊗ EN (x) ⊗ EN (y).
+
+Example 3.14 (Sorting) Assume that we are given a binary relation ≤ of arity
+(ρ, ρ) such that we can prove
+
+           ∀x.Eρ (x) → ∀y.Eρ (y) → (x ≤ y ∨ x 6≤ y) ⊗ Eρ (x) ⊗ Eρ (y)
+
+Furthermore, we assume a ternary relation Ins axiomatized by c.i. axioms such that
+Ins(x, l, l0 ) expresses that if l is a sorted list w.r.t. ≤, then so is l0 , and the members
+of l0 are those of l together with x. From the strengthened induction rule (N−Ind+ )
+(cf. remark 3.10) we can derive
+
+                     ∀l, x, p.E(l, x, p) → ∃l0 .E(l0 ) ⊗ Ins(x, l, l0 ),                (26)
+
+by induction on l. Base: Take l0 = cons(p, x, nil) (using E(p, x)). Step: We have
+E(y, q) and the (strengthened) IH
+
+                  (∀x, p.E(x, p) → ∃l0 .E(l0 ) ⊗ Ins(x, l, l0 )) ∧ E(l).
+
+We need to show
+
+                ∀x, p.E(x, p) → ∃l00 .E(l00 ) ⊗ Ins(x, cons(q, y, l), l00 ).
+
+So assume E(x, p). Compare x and y without destroying them, i.e. such that after
+comparison we still have E(x, y). Case x ≤ y. Take l00 = cons(p, x, cons(q, y, l));
+here we need the right hand part E(l) of the IH, which together with E(y, q) gives
+us E(cons(q, y, l)). Case y ≤ x. Using the left hand part of the IH for our x, p gives
+l0 such that E(l0 ) ⊗ Ins(x, l, l0 ). Take l00 = cons(q, y, l0 ).
+
+From this, we prove that every list can be sorted. Let Sort(l, l0 ) express that l0 is an
+ordered permutation of l. We want to show
+
+                       ∀l.EL(ρ) (l) → ∃l0 .EL(ρ) (l0 ) ⊗ Sort(l, l0 ).
+
+Induction on l. In the step case we argue as follows. We have E(p, x) and the IH
+
+                                ∃l0 .EL(ρ) (l0 ) ⊗ Sort(l, l0 ).
+
+We need to show
+                          ∃l00 .EL(ρ) (l00 ) ⊗ Sort(cons(p, x, l), l00 ).
+We have an l0 such that E(l0 ) ⊗ Sort(l, l0 ). Apply (26) to l0 , x.p. This gives an l00 such
+that E(l00 ) ⊗ Ins(x, l0 , l00 ). The claim follows from the computationally irrelevant
+axiom
+                 Sort(l, l0 ) → Ins(x, l0 , l00 ) → Sort(cons(p, x, l), l00 ).
+
+
+                                              19
+For the base case we need the computationally irrelevant axiom Sort(nil, nil).
+
+
+
+4     Realizability
+
+
+4.1    Definition of modified realizability
+
+
+We now define what it means for a term r to realize a formula A. The intuition of
+r being a program calculating examples for existential quantifiers is formalized by
+the (computationally irrelevant) formula r mr A.
+
+Definition 4.1 ( mr ) By induction on A we define a formula r mr A for arbitrary
+rτ (A) .
+
+               r mr Eρ (s)  := (r =ρ s)
+               r mr P (~s)  := P (~s)
+               r mr ∀xA     := ∀x.r mr A
+               r mr ∃xA     := ∃x.r mr A
+               r mr (A → B) := ∀x.x mr A → rx mr B
+               r mr (A ⊗ B) := π0 (r) mr A ∧ π1 (r) mr B
+               r mr (A ∧ B) := fst r mr A ∧ snd r mr B
+               r mr (A ∨ B) := (∀x.r = inlτ (A),τ (B) x → x mr A) ∧
+                               (∀y.r = inrτ (A),τ (B) y → y mr B)
+
+Note that r mr A contains neither Eρ nor ⊗ nor ∨.
+
+Proposition 4.2 (1) If A contains neither existence predicates nor disjunctions,
+     then r mr A is provably equivalent to A.
+ (2) r mr ∀x.E(x) → A is provably equivalent to ∀x.rx mr A.
+ (3) r mr ∃x.E(x) ⊗ A is provably equivalent to π1 (r) mr A[π0 (r)/x].
+
+
+PROOF. Immediate form the definition and the equality axioms.
+
+
+4.2    Extracted terms
+
+
+For each variable uA we choose a unique variable xuA of type τ (A) that is suffi-
+ciently different to all variables used so far.
+
+Definition 4.3 (Extracted terms) For a proof M A we define its extracted term
+
+
+                                          20
+[[M ]] by
+
+                          [[uA ]]               := xτu(A)
+                          [[λuA M B ]]          := λxτu(A) [[M ]]
+                          [[M A→B N ]]          := [[M ]] [[N ]]
+                          [[λxρ M A ]]          := [[M ]]
+                                ρ
+                          [[M ∀x A r]]          := [[M ]]
+                          [[N EL(ρ) (t) {M }]] := [[N ]] {[[M ]] }
+
+We now define extracted terms for the axioms. We write [[A]] for [[c : A]] . If A is the
+Efq-axiom (11), or the axiom (25), or one of the equality axioms except (16), then
+we define [[A]] := ετ (A) , where for any type ρ we let ερ be some closed term of type
+ρ. For the remaining axioms we define
+
+ [[(C → A) → (C → B) → C → A ∧ B]] := ×+
+                                       τ (A),τ (B),τ (C)
+ [[A ∧ B → A]]                                   := fstτ (A),τ (B)
+ [[A ∧ B → B]]                                   := sndτ (A),τ (B)
+ [[A → B → A ⊗ B]]                               := ⊗+τ (A),τ (B)
+ [[A ⊗ B → (A → B → C) → C]]                     := ⊗−
+                                                     τ (A),τ (B),τ (C)
+ [[A → A ∨ B]]                     := inlτ (A),τ (B)
+ [[B → A ∨ B]]                     := inrτ (A),τ (B)
+ [[(A → C) ∧ (B → C) → A ∨ B → C]] := λz1 λz2 . +−  ρ,σ,τ (A) z2 z1
+ [[∀x.A → ∃xA]]                                  := idτ (A)
+ [[∃xA → (∀x.A → B) → B]]                        := λxτ (A) λf τ (A)(τ (B) .f x
+ [[x =ρ y → E(x) → E(y)]]                        := idρ
+ [[Eρ(σ (f ) → ∀x.Eρ (x) → Eσ (f x)]]            := idρ(σ
+ [[(∀x.Eρ (x) → Eσ (f x)) → Eρ(σ (f )]]          := idρ(σ
+ [[Eρ×σ (z) → Eρ (ztt) ∧ Eσ (zff)]]              := idρ×σ
+ [[Eρ (ztt) ∧ Eσ (zff) → Eρ×σ (z)]]              := idρ×σ
+ [[E(c)]]                                        := c for c = ε, ⊗+ , inl, inr, nil, cons
+
+[[(∀xρ , y σ .E(x, y) → A[⊗+ xy/z]) → ∀z ρ⊗σ .E(z) → A]]
+                                           := λf λz . ⊗− zf
+
+ [[(∀xρ .E(x) → A[inl x/z]) ∧ (∀y σ .E(y) → A[inr y/z]) → ∀z ρ+σ .E(z) → A]]
+                                           := λz1 λz2 . +−
+                                                         ρ,σ,τ (A) z2 z1
+
+
+
+
+Depending on applications there may be more axioms. For each such axiom ax : C
+one has to chose a term [[ax]] τ (C) such that [[ax]] mr C is provable.
+
+
+                                           21
+As for the extracted types, also the extracted terms may contain redundant parts
+which can be removed by an obvious cleaning procedure for terms. Note that the
+extracted term of a derivation Π | Γ ` M : A is weakly typed (cf. section 3.1) with
+type τ (A) (see theorem 4.7).
+
+Definition 4.4 (Cleaning of terms) For every variable xρ such that c(ρ) 6= U we
+choose a sufficiently different variable x̃c(ρ) . Relative to this choice we define for
+every weakly typed term rρ a cleaned term c(r).
+
+                         c(rρ ) := ε    if c(ρ) = U
+
+otherwise
+
+                         c(xρ ) := x̃c(ρ)
+                         c(c) see below
+                                         
+                                         c(r)           if c(ρ) = U
+                         c(λxρ rσ ) :=
+                                         λx̃c(ρ) c(r) otherwise
+                                         
+                                         c(r)        if c(ρ) = U
+                         c(rρ(σ sρ ) := 
+                                         c(r)c(s) otherwise
+                         c(r {s}) := c(r) {c(s)}
+
+We still have to define c(c) for constants cρ such that c(ρ) 6= U. Obviously
+                                                         
+                                                         S             if c(ρ) = U
+            c(nilρ ) := nilc(ρ)   and     c(consρ ) :=
+                                                         cons          otherwise
+                                                                 c(ρ)
+
+
+For the remaining constants the definition of c(c) is also straightforward, but re-
+quires a somewhat tedious case analysis on whether the corresponding type in-
+dices are c.i. or not. For example, for ⊗−ρστ , case c(ρ) = U 6= c(σ), we have
+    −          c(σ)   c(σ)(c(τ )
+c(⊗ρστ ) := λx λf                .f x.
+
+ Remark 4.5 It is easy to see that if r is weakly typed and r → r0 , then r0 is weakly
+ typed and c(r) →∗ c(r0 ). Hence for a weakly typed almost closed term r of type
+τ~ ( τ , where τ~ , τ are data types, the terms r and c(r) essentially define the same
+ function on data types.
+
+Example 4.6 (Addition, extracted program) Let us extract a program from the
+derivation
+                      λx, u0 , y, u1 . u1 {STEP} BASE
+of ∀x.EN (x) → ∀y.EN (y) → ∃z.EN (z) ⊗ Add(x, y, z) given in example 3.12.
+We only show cleaned and normalized programs. From the derivation BASE we
+extract the program x0 . The program extracted from the derivation STEP is the
+same as the program extracted from M : ∀p, x . E(p) → E(x) → E(S(p, x)),
+
+
+                                             22
+namely λd, i . S(d, i). Therefore the program extracted from the complete deriva-
+tion is λx0 , x1 . x1 {λd, i . S(d, i)} x0 .
+
+
+4.3   Soundness
+
+
+For a derivation term M we set [[M ]] c := c([[M ]]), and for a derivation context Π,
+                                                c
+[[Π]] := {xτu(A) | uA ∈ Π} and [[Π]] c := {xfu τ (A) | uA ∈ Π, τ c (A) 6= U}.
+
+Theorem 4.7 (Soundness of typing) Assume Π | Γ ` M : A. Then [[M ]] is weakly
+typed with type τ (A) and FV([[M ]]) ⊆ [[Π, Γ]] . Moreover,
+                                                       τ c (A)
+                                   [[Γ]] c ` ([[M ]] c )
+
+
+PROOF. Inspection of the proof rules and the (cleanings of) extracted terms for
+the c.r. axioms.
+
+
+Since by proposition 2.13 we have some knowledge of almost closed, normal terms
+of the different types, we can as a corollary obtain some underivability results.
+
+Corollary 4.8 Let 3 := ∃p E(p). The following formulas and schemes are under-
+ivable:
+
+                            ⊥→3
+                            3→3⊗3
+                            (A → B → C) → A ∧ B → C
+
+
+PROOF. Case ⊥ → 3. Recall that 3 := ∃p E(p), hence τ c (⊥ → 3) = . So if
+⊥ → 3 were derivable, then by soundness of typing we would have a closed term
+of type , contradicting proposition 2.13 and the fact that every term reduces to a
+normal form.
+
+Case 3 → 3 ⊗ 3. If this formula were derivable, then by soundness of typing
+we would have a closed term r of type  (  ⊗ . Let p be a variable of type .
+Then by proposition 2.13 the normal form of rp would be of the form ⊗+ d0 d1 , with
+normal terms d0 , d1 . By proposition 2.13 d0 , d1 have to be variables, hence distinct.
+This is the desired contradiction.
+
+Case (A → B → C) → A ∧ B → C. Instantiate A, B by 3 and C by 3 ⊗ 3. Then
+since the premise 3 → 3 → 3 ⊗ 3 and also 3 → 3 ∧ 3 clearly are derivable,
+we could also derive 3 → 3 ⊗ 3, which we have just shown to be impossible.
+
+
+                                              23
+Theorem 4.9 (Soundness) Assume Π | Γ ` M : A. Then there is a derivation of
+[[M ]] mr A from assumptions xu mr B for uB ∈ Π ∪ Γ.
+
+
+PROOF. By induction on the definition of Π | Γ ` M : A. Only the axioms and
+induction are of interest. For the Efq-axioms (11) and the equality axioms except
+(16) the claim is trivial, since they neither contain existence predicates nor disjunc-
+tions, and therefore, by proposition 4.2, part 1., their realization is equivalent to
+themselves. As for the remaining axioms we restrict ourselves to some of the more
+interesting cases. Note that because the formula [[M ]] mr A is c.i. we may, using
+axiom (25), assume that all objects involved exist. More precisely, if [[M ]] mr A is
+of the form ∀~z.B we may instead prove ∀~z.E(~z) → B.
+
+Case A⊗B → (A → B → C) → C. Assume z mr (A⊗B), i.e. that π0 (z) mr A∧
+π1 (z) mr B. As indicated above we may assume that z exists. We must show
+(λf.zf ) mr ((A → B → C) → C). Assume f mr (A → B → C), i.e. ∀x, y.x mr A →
+y mr B → f xy mr C. We must show that zf mr C. Using axiom (23), we may
+also assume that z = ⊗+ xy for some existing xρ , y σ . Then π0 (z) = x and π1 (z) =
+y, so x mr A ∧ y mr B. Now from zf = ⊗+ xyf 7→ f xy the claim follows.
+
+Case A → A∨B. Assume x mr A. We must show inl x mr (A∨B), i.e. ∀x1 .inl x =
+inl x1 → x1 mr A and ∀y.inl x = inr y → y mr A. The former follows from the
+injectivity of the constructor inl, and the latter from the disjointness of the ranges
+of the constructors inl and inr.
+
+Case (A → C)∧(B → C) → A∨B → C. Assume z1 mr ((A → C)∧(B → C)),
+i.e. fst z1 mr (A → C) ∧ snd z1 mr (B → C). Assume further z2 mr (A ∨ B), i.e.
+
+     (∀x.z2 = inlτ (A),τ (B) x → x mr A) ∧ (∀y.z2 = inrτ (A),τ (B) y → y mr B).
+
+We have to show +− z2 z1 mr C. Because we may assume that z2 exists we can use
+axiom (24) to write z2 , w.l.o.g., as z2 = inl x. It follows x mr A and subsequently
+z1 ttx mr C. Since +− z2 z1 = +− (inl x)z1 7→ z1 ttx we may conclude +− z2 z1 mr C.
+
+Case (Eρ (x) → A) → A where A is c.i. Assume f mr Eρ (x) → A, i.e. ∀y.y =
+x → f y mr A(x). This is equivalent to f x mr A(x), and in turn, by remark 3.11,
+part 3, equivalent to εσf mr A(x), which is what we have to show.
+
+Case L(τ )−Ind. By IH [[N ]] mr E(t), i.e. [[N ]] = t, and
+
+                [[M ]] mr ∀p, x, l.E(p, x) → A → A[cons(p, x, l)/l],
+
+i.e. by proposition 4.2
+
+     ∀p, x, l, z τ (A) .E(p, x) → z mr A → [[M ]] pxz mr A[cons(p, x, l)/l].      (27)
+
+
+                                         24
+We must show [[N ]] { [[M ]] } mr (A[nil/l] → A[t/l]). Thanks to axiom (25) we may
+assume E(t). This allows us to use induction on t to prove
+
+                           [[N ]] { [[M ]] } mr (A[nil/l] → A[t/l])
+
+Since nil { [[M ]] } 7→ id and id mr (A[nil/l] → A[nil/l]) by proposition 4.2, it suf-
+fices to prove
+
+          ∀p, x, l.(l { [[M ]] } mr (A[nil/l] → A)) →
+                   cons(p, x, l) { [[M ]] } mr (A[nil/l] → A[cons(p, x, l)/l]).
+
+Let p, x, l be given and assume
+
+                          ∀z.z mr A[nil/l] → l {[[M ]] } z mr A                   (28)
+                          z mr A[nil/l]                                           (29)
+
+We must show
+                       cons(p, x, l) { [[M ]] } z mr A[cons(p, x, l)/l]
+i.e.
+                       [[M ]] px(l { [[M ]] } z) mr A[cons(p, x, l)/l].
+This follows from (27) with l { [[M ]] } z for z, using (28) and (29).
+
+
+4.4    Applications
+
+
+From the soundness theorem 4.9 together with proposition 2.13 we can obtain more
+underivability results, making use of the set-theoretic model (cf. definition 2.2).
+
+Corollary 4.10 The following formulas are underivable:
+
+                        ∃p, p0 EN (S(p, S(p0 , 0))),
+                        ∀x.EN (x) → ∃z.EN (z) ⊗ Add(x, x, z),
+                        ∀x.x = 0 ∨ x 6= 0.
+
+
+PROOF. Case ∃p, p0 EN (S(p, S(p0 , 0))) =: A. If A were derivable, then by the
+soundness theorem 4.9 we would have a closed term rN such that r mr A, i.e.
+
+                      ∃p, p0 r mr EN (S(p, S(p0 , 0))),
+                      ∃p, p0 EN (S(p, S(p0 , 0))) ⊗ r = S(p, S(p0 , 0)).
+
+Because of soundness w.r.t. the set-theoretic interpretation, the value of the closed
+term r in the model is 2. By proposition 2.13 the normal form of r is a numeral,
+hence of the form Sd0 (Sd1 0). This implies that we would have a closed term of
+type , contradicting proposition 2.13.
+
+
+                                             25
+Case ∀x.EN (x) → ∃z.EN (z) ⊗ Add(x, x, z). Instantiate this formula with Sd0. If
+the result were derivable, then by the soundness theorem we would have a closed
+term r of type N ( N such that
+
+            r mr EN (Sd0) → ∃z.EN (z) ⊗ Add(Sd0, Sd0, z)
+            ∀x.x mr EN (Sd0) → rx mr ∃z.EN (z) ⊗ Add(Sd0, Sd0, z).
+
+Instantiate this formula with Sd0. Then in the set-theoretic model the premise is
+true, hence also
+
+                      ∃z.r(Sd0) mr EN (z) ⊗ Add(Sd0, Sd0, z).
+
+Therefore the closed term r(Sd0) has value 2, which is impossible by the argument
+of the previous case.
+
+Case ∀x.x = 0 ∨ x 6= 0. If this formula were derivable, then by the soundness
+theorem it would be realized by a closed term r of type U + U, i.e.
+
+                    r mr ∀x.x = 0 ∨ x 6= 0,
+                    ∀x.r mr (x = 0 ∨ x 6= 0),
+                    ∀x.(r = inl ε ⊗ x = 0) ∨ (r = inr ε ⊗ x 6= 0).
+
+By proposition 2.13 r reduces to either inl ε or inr ε. Therefore in the set-theoretic
+model we would have either ∀xx = 0 or ∀xx 6= 0, which is the desired contradic-
+tion.
+
+Corollary 4.11 Let M be an almost closed derivation of
+
+                          ∀~xτ~ .E(~x) → ∃y τ .E(y) ⊗ A(~x, y)
+
+(~τ , τ data types) where A contains neither existence predicates nor disjunctions.
+Then [[M ]] c defines a polynomial time algorithm for a non-size-increasing function
+from Sτ~ to Sτ satisfying the specification. That is, for every tuple w
+                                                                      ~ τ~ of data objects,
+the term [[M ]] c w
+                  ~ normalizes in polynomial many steps (in the term length of l) to
+a data object wτ of the same term length (plus a constant depending only on M )
+such that A( ~ w, w) is provable.
+
+
+PROOF. Proposition 4.2, theorem 4.7, theorem 2.25 and corollary 4.5.
+
+Corollary 4.12 Let ∀xρ .E(x) → ∃y σ .E(y) ⊗ A(x, y), A as above, be provable
+(by an almost closed proof). Then ∃f ρ(σ .E(f ) ⊗ ∀xρ .E(x) → A(x, f x) is also
+provable.
+
+Remark 4.13 As for theorem 2.25 also for corollary 4.11 a converse holds: Every
+polynomial time computable non-size-increasing function f from Sτ~ to Sτ can be
+
+
+                                           26
+extracted from an almost closed derivation of a formula of the form ∀~xτ~ .E(~x) →
+∃y τ .E(y) ⊗ A(~x, y). This follows from remarks 2.26 and 3.11 (6) according to
+which we can prove ∀~xτ~ .E(~x) → ∃y τ .E(y) ⊗ y = t~x for some almost closed term
+t defining f .
+
+
+References
+
+
+[1] Klaus Aehlig and Helmut Schwichtenberg. A syntactical analysis of non-size-
+    increasing polynomial time computation. In Proceedings of the 15’th IEEE Symposium
+    on Logic in Computer Science (LICS ’00), pages 84 – 91, June 2000.
+[2] Stephen Bellantoni, Karl-Heinz Niggl, and Helmut Schwichtenberg. Higher type
+    recursion, ramification and polynomial time. Annals of Pure and Applied Logic,
+    104:17–30, 2000.
+[3] Ulrich Berger. Program extraction from normalization proofs. In M. Bezem and J.F.
+    Groote, editors, Typed Lambda Calculi and Applications, volume 664 of Lecture Notes
+    in Computer Science, pages 91–106. Springer Verlag, Berlin, Heidelberg, New York,
+    1993.
+[4] Voukko-Helena Caseiro. Equations for Defining Poly-time Functions. PhD thesis,
+    University of Oslo, 1997. ftp.ifi.uio.no/pub/vuokko/.
+[5] Kurt Gödel. Über eine bisher noch nicht benützte Erweiterung des finiten Standpunkts.
+    Dialectica, 12:280–287, 1958.
+[6] Martin Hofmann. A type system for bounded space and functional in-place update.
+    To appear: Nordic Journal of Programming. An extended abstract has appeared in
+    ‘Programming Languages and Systems’ (Proc. ESOP 2000), G. Smolka, ed., Springer
+    LNCS, 2000.
+[7] Martin Hofmann. Linear types and non-size-increasing polynomial time computation.
+    In Proceedings 14’th Symposium on Logic in Computer Science (LICS’99), pages 464–
+    473, 1999.
+[8] Martin Hofmann. The strength of non-size-increasing computation. In Proceedings
+    ‘Principles of programming languages’ (POPL’02), 2002.
+[9] Felix Joachimski and Ralph Matthes. Short Proofs of Normalization for the simply-
+    typed λ-calculus, permutative conversions and Gödel’s T . Archive for Mathematical
+    Logic, 42(1):59–87, 2003.
+[10] Daniel Leivant. Intrinsic reasoning about functional programs I. First order theories.
+     To appear in Annals of Pure and Applied Logic.
+[11] Jaco van de Pol. Termination of Higher-order Rewrite Systems. PhD thesis, Utrecht
+     University, 1996.
+[12] Uday Reddy. Global state considered unnecessary. An introduction to object based
+     semantics. J. Lisp and Symbolic Computation, 9:7–76, 1996.
+
+
+                                            27
+[13] John C. Reynolds. Syntactic control of interference. In ACM Symp. on Princ. of
+     Programming Lang., pages 39–46. ACM, 1978.
+
+
+
+
+                                       28
+

@@ -1,0 +1,108 @@
+DISSSER FRIEDMANN HOPP ZADEH MISSION SOURCE CROSSWALK
+Prepared 2026-11-02. This package contains open theorem statements, not proofs.
+
+Primary source
+Yann Disser, Oliver Friedmann, Alexander V. Hopp.
+An exponential lower bound for Zadeh's pivot rule.
+Mathematical Programming 199 (2023), 865–936; online 2022-07-19.
+https://doi.org/10.1007/s10107-022-01848-x
+Full detailed proof: https://arxiv.org/abs/1911.01074v2
+
+Companion definition source
+David Avis and Oliver Friedmann, An exponential lower bound for Cunningham's
+rule, Mathematical Programming 161 (2017), 271–305, Section 2.2.
+https://arxiv.org/html/1305.3944v1
+Defines path priority multiplicities and identifies equal count vectors.
+
+Items and source pointers
+
+Definitions.Def_friedmann_zadeh
+* Centre / Node / priority / successors: journal Section 3, Table 1; full
+  version Table 3.1, pages 6–7. Levels are zero-based in Lean. Centre (i,j)
+  exists precisely when i+j<n; absent top centres cannot enter the vertex type.
+* initial: journal Definition 5, full Definition 6.1, page 13.
+* closed / bitState / Canonical: journal Definitions 2–4. Missing centres are
+  explicitly not closed. Source statements mentioning both top centres are
+  interpreted only over centres actually present in the graph.
+* edgeGroup / internalBefore / before / counterChoice: journal Section 6.2,
+  Definition 7; full Section 6.2, Definition 6.4, pages 14–16.
+  Includes all seven groups, context-specific escape ordering, upper-selector
+  ordering, five cycle-edge precedence criteria, and initial zero-count
+  exceptional choice. A polynomial-size predecessor-count formula chooses a
+  deterministic total completion. tie_order is an explicit correctness target.
+* pgPlayScore: ordinary priority-multiplicity valuation order, represented by
+  integer radix. The source gives repeated priorities, so applying an injective
+  vertex-set comparator literally would be ill-defined. The valuation target
+  proves score-order equivalence to the standard multiplicity comparator.
+* pgValue: minimum of actual legal opponent play scores, with a zero fallback
+  only for an empty opponent set. Source graph totality makes that branch
+  unreachable; sink additionally supplies a common minimizing opponent.
+* transition / mdpReward / policyMatrix: journal Section 4 and Figure 5; full
+  Section 4, Figure 4.1. Figure 5 labels g, s and h with nonzero rewards and
+  leaves b,d,e,F unlabelled. Low-priority terms are also absent from the MDP
+  reduced-valuation expressions in full Appendix A.2 (Table A.3).
+  IMPORTANT AUDIT CONVENTION: deterministic h nodes are retained as one-action
+  reward states. The source prose describes these as random with probability
+  one while also assigning their outgoing reward in the figure. Retaining h
+  makes its high reward explicit. Dropping h's reward is not equivalent.
+* proper: nonsingularity of the Bellman system with terminal boundary V(t)=0.
+  The MDP main and run definitions do not permit division by zero inverses.
+* inducedLP: Section 5 occupancy-flow LP; deterministic h vertices retained.
+  It has 14n−6 rows and 26n−12 columns. This is an explicit equivalent
+  deterministic-vertex expansion, rather than an assertion that those are
+  the exact dimensions of a displayed source formula after elimination.
+* inducedTie: reconstruct the policy from the current basis, translate column
+  occurrence counts to action-edge counts, then apply the same explicit source
+  tie rule in the MDP context. No arbitrary function is supplied by the solver.
+
+Theorems
+* size: graph Table 1; exact retained-vertex LP counts are a bookkeeping lemma.
+* valuation: Avis–Friedmann Section 2.2; integer representation lemma.
+* sink: journal Lemma 1, full Lemma 6.3, parity part.
+* tie_order: journal Section 6.2 and Definition 7; explicit linear completion.
+* mdp_valid: Section 4 / Lemma 1 initialization and transition normalization.
+* counter_coverage: canonical enumeration consequence of journal Lemma 6;
+  not a claim to include all technical occurrence-record properties in it.
+* source_realization: journal Definition 7 / Section 6.3. The executable rule
+  obtains t→ by comparing values of g1 and b2, while the source phrases t→
+  through the number b at the start of a transition. The theorem supplies a
+  partition of an actual complete run into canonical transitions and proves
+  that every chosen switch obeys the source b-indexed choice. Thus this
+  convention is a named proof obligation, not a hidden assertion of identity.
+* lp_transfer: Section 5. Every policy switch, occurrence count and pivot is
+  preserved. Actual inverse matrices, feasibility, reduced costs and ratio
+  tests come from the shared FriedmannSimplex model. No correspondence is
+  assumed as a theorem hypothesis.
+* goal: journal Theorem 4 and Section 5; full Theorem 6.18. Each of PG, MDP,
+  LP has a complete run, and every admitted complete run needs at least 2^n
+  improving operations. The fixed graph and rule appear in definitions.
+
+Parameter and measurement conventions
+* n>0, N>=7n, rational 0<epsilon<N^(-(2n+11)).
+* All initial occurrence counts are zero. Selecting an edge increases its
+  counter by exactly one; original basic variables do not receive fictitious
+  historical entries. LP counts refer to entering variable columns.
+* T counts successful improving switches/pivots. There are T+1 displayed
+  strategy states including the initial configuration.
+* General bit complexity of arbitrary LP input and formal machine-time
+  complexity of the tie implementation are not separate theorem targets.
+  Graph cardinalities, probabilities, exact coefficients, and count updates
+  are explicit and may be inspected independently.
+* No global polytope boundedness is assumed: occupancy feasible sets can be
+  unbounded even when the optimization objective attains a finite optimum.
+
+Exploratory verification (not Lean certificates)
+notes/zadeh_explore.py runs exact small instances. Exhaustive opponent-policy
+evaluation agrees with an independent sink shortest-path evaluation for n<=3.
+PG n=1:5 switches, n=2:43, n=3:159, n=4:465. These correspond to 160/466
+displayed states for n=3/4, matching the source's published animation sizes.
+Exact rational Bellman solves with N=7n and epsilon=1/(N^(2n+11)+1) give MDP
+n=1:5 switches, n=2:43, n=3:161. Every matrix encountered is nonsingular.
+These finite runs support encoding review; they establish no general theorem.
+
+Historical source distinction
+The 2011 IPCO paper is Friedmann alone. The 2019 Disser–Hopp paper repairs
+three issues in that earlier construction while retaining the lower bound.
+This mission uses the stronger joint 2023 paper and its full proof.
+The construction and the fixed tie rule do not establish the lower bound
+uniformly over every possible tie-breaking strategy.

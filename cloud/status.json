@@ -1,0 +1,22 @@
+{
+  "requested_vm_count": 2,
+  "created_vm_count": 0,
+  "project": "project-6ac635c9-6153-4290-a99",
+  "planned_zone": "europe-west3-a",
+  "machine_type": "e2-standard-4",
+  "boot_disk_gb": 60,
+  "bootstrap_toolchain": "leanprover/lean4:v4.33.1",
+  "mathlib_rev": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "max_run_duration": "24h",
+  "termination_action": "STOP",
+  "status": "blocked",
+  "reason": "DNS resolution of compute.googleapis.com failed; no Compute Engine create request sent",
+  "checks": [
+    "gcloud existing active project read",
+    "provisioner offline plan passed",
+    "Python syntax passed",
+    "bootstrap bash syntax passed"
+  ],
+  "credentials_in_package": false,
+  "temporary_credential_config_removed": true
+}

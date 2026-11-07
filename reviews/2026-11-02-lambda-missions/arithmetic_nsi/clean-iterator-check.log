@@ -1,0 +1,6 @@
+CHECK arithmetic_nsi/CleanIteratorAudit.lean
+'ArithmeticCleaningAudit.iteration_typed' does not depend on any axioms
+'ArithmeticCleaningAudit.iteration_closed' does not depend on any axioms
+'ArithmeticCleaningAudit.cleaned_step_loses_element_argument' depends on axioms: [propext]
+'ArithmeticCleaningAudit.cleaned_iteration_untypable' depends on axioms: [propext]
+Checked 1 files; failed 0.

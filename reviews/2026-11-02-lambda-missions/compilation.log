@@ -1,0 +1,79 @@
+CHECK lean/Definitions/Def_ABHS2004_TermSystem.lean
+CHECK lean/Definitions/Def_ABHS2004_Arithmetic.lean
+CHECK lean/Definitions/Def_ABHS2004_Realizability.lean
+CHECK lean/Definitions/Def_Schwichtenberg1976_Lambda.lean
+CHECK lean/Definitions/Def_BNS2000_Syntax.lean
+CHECK lean/Definitions/Def_BNS2000_Terms.lean
+CHECK lean/Definitions/Def_BergerSchwichtenberg1991_Syntax.lean
+CHECK lean/Definitions/Def_BergerSchwichtenberg1991_Models.lean
+CHECK lean/Definitions/Def_AehligSchwichtenberg2002_Syntax.lean
+CHECK lean/Definitions/Def_AehligSchwichtenberg2002_Bounds.lean
+CHECK lean/Theorems/Thm_ABHS2004_lemma_2_11.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_ABHS2004_lemma_2_11.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_ABHS2004_proposition_2_13.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_ABHS2004_proposition_2_13.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_ABHS2004_corollary_2_22.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_ABHS2004_corollary_2_22.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_ABHS2004_theorem_2_25.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_ABHS2004_theorem_2_25.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_ABHS2004_theorem_4_7.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_ABHS2004_theorem_4_7.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_ABHS2004_corollary_4_8.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_ABHS2004_corollary_4_8.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_ABHS2004_theorem_4_9.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_ABHS2004_theorem_4_9.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_ABHS2004_corollary_4_11.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_ABHS2004_corollary_4_11.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_Schwichtenberg1976_combinators_and_sufficiency.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_Schwichtenberg1976_combinators_and_sufficiency.lean:11:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_Schwichtenberg1976_normal_subterm_structure.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_Schwichtenberg1976_normal_subterm_structure.lean:11:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_Schwichtenberg1976_subterm_polynomial_lemma.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_Schwichtenberg1976_subterm_polynomial_lemma.lean:10:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_Schwichtenberg1976_definable_iff_extended_polynomial.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_Schwichtenberg1976_definable_iff_extended_polynomial.lean:10:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_BNS2000_theorem_3_1.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_BNS2000_theorem_3_1.lean:9:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_BNS2000_lemma_4_1_and_4_2.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_BNS2000_lemma_4_1_and_4_2.lean:14:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_BNS2000_theorem_4_3_and_4_4.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_BNS2000_theorem_4_3_and_4_4.lean:15:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_BNS2000_theorem_4_5.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_BNS2000_theorem_4_5.lean:11:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_BNS2000_theorem_5_1.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_BNS2000_theorem_5_1.lean:11:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_BNS2000_theorem_5_2.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_BNS2000_theorem_5_2.lean:9:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_BNS2000_ptime_characterization.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_BNS2000_ptime_characterization.lean:10:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_BergerSchwichtenberg1991_lemma_1.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_BergerSchwichtenberg1991_lemma_1.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_BergerSchwichtenberg1991_lemma_2.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_BergerSchwichtenberg1991_lemma_2.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_BergerSchwichtenberg1991_lemma_3.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_BergerSchwichtenberg1991_lemma_3.lean:6:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_BergerSchwichtenberg1991_lemma_4.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_BergerSchwichtenberg1991_lemma_4.lean:6:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_BergerSchwichtenberg1991_lemma_5.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_BergerSchwichtenberg1991_lemma_5.lean:6:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_BergerSchwichtenberg1991_theorem_1.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_BergerSchwichtenberg1991_theorem_1.lean:6:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_BergerSchwichtenberg1991_completeness_pr_models.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_BergerSchwichtenberg1991_completeness_pr_models.lean:6:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_AehligSchwichtenberg2002_lemma_3_4.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_AehligSchwichtenberg2002_lemma_3_4.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_AehligSchwichtenberg2002_lemma_3_5.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_AehligSchwichtenberg2002_lemma_3_5.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_AehligSchwichtenberg2002_proposition_3_6.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_AehligSchwichtenberg2002_proposition_3_6.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_AehligSchwichtenberg2002_lemma_4_3.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_AehligSchwichtenberg2002_lemma_4_3.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_AehligSchwichtenberg2002_corollary_4_4.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_AehligSchwichtenberg2002_corollary_4_4.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_AehligSchwichtenberg2002_lemma_4_7.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_AehligSchwichtenberg2002_lemma_4_7.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_AehligSchwichtenberg2002_theorem_4_8.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_AehligSchwichtenberg2002_theorem_4_8.lean:4:8: warning: declaration uses `sorry`
+CHECK lean/Theorems/Thm_AehligSchwichtenberg2002_corollary_4_9.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/lean/Theorems/Thm_AehligSchwichtenberg2002_corollary_4_9.lean:4:8: warning: declaration uses `sorry`
+Checked 44 files; failed 0.

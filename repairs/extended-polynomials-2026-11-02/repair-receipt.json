@@ -1,0 +1,43 @@
+{
+  "proposal_id": "059a0f02-b778-44fd-9e95-ec7cbdba9cbc",
+  "status": "Draft",
+  "env": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "main_item_id": "1527fe27-8094-424b-b3d3-388c6a3107e4",
+  "item_order": [
+    "6c5ca301-620e-47dd-b58f-0672e13796be",
+    "a198ac2b-451f-4640-b000-6e373b285ba4",
+    "c6023a9f-21e2-4820-b9ad-05fd7b333afe",
+    "77849aaa-cd40-4e09-b027-aa31479c57fb",
+    "1527fe27-8094-424b-b3d3-388c6a3107e4"
+  ],
+  "old_to_new_items": {
+    "d07ad5a1-b497-4253-be46-eb89793c50a6": {
+      "key": "definition",
+      "new_item_id": "6c5ca301-620e-47dd-b58f-0672e13796be",
+      "name": "Schwichtenberg1976V2_Lambda"
+    },
+    "6e273f62-64c5-4318-a05a-8a39e52eee4b": {
+      "key": "combinators_and_sufficiency",
+      "new_item_id": "a198ac2b-451f-4640-b000-6e373b285ba4",
+      "name": "Schwichtenberg1976V2.combinators_and_sufficiency"
+    },
+    "642dc3db-853f-4e6d-bd9b-14deebeae480": {
+      "key": "normal_subterm_structure",
+      "new_item_id": "c6023a9f-21e2-4820-b9ad-05fd7b333afe",
+      "name": "Schwichtenberg1976V2.normal_subterm_structure"
+    },
+    "2d2c21d1-df7a-4961-a241-c2df62884098": {
+      "key": "subterm_polynomial_lemma",
+      "new_item_id": "77849aaa-cd40-4e09-b027-aa31479c57fb",
+      "name": "Schwichtenberg1976V2.subterm_polynomial_lemma"
+    },
+    "8f16f779-9541-4d5f-806c-a29a44f333c7": {
+      "key": "definable_iff_extended_polynomial",
+      "new_item_id": "1527fe27-8094-424b-b3d3-388c6a3107e4",
+      "name": "Schwichtenberg1976V2.definable_iff_extended_polynomial"
+    }
+  },
+  "packet_sha256": "34d10e4bb131e051158ff1b07f909196bbb4a2ba2c9f56933920bf27ce37b62d",
+  "proposal_after_sha256": "6ef8d0d9b8dbd18fa7887cb7707a7a1403cf1b98d0cb6a1396b99ac95f2ffa53",
+  "milestones_after_sha256": "6be905cfa00421b675240aedaf09b6fe3fe0a8e803c9452a272b89ff4295e67c"
+}

@@ -1,0 +1,25 @@
+{
+  "kind": "mocked CLI boundary checks; no cloud access",
+  "results": [
+    {
+      "check": "failed read creates nothing",
+      "passed": true
+    },
+    {
+      "check": "empty project creates exactly two",
+      "passed": true
+    },
+    {
+      "check": "partial previous creation reuses first",
+      "passed": true
+    },
+    {
+      "check": "both existing avoids another charge",
+      "passed": true
+    },
+    {
+      "check": "conflicting workload is preserved",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,968 @@
+                                              A syntactical analysis of non-size-increasing
+                                                     polynomial time computation
+
+
+
+
+arXiv:cs/0011037v2 [cs.LO] 14 Sep 2001
+                                                            Klaus Aehlig∗                Helmut Schwichtenberg
+
+
+
+
+                                                                                       Abstract
+                                                    A syntactical proof is given that all functions definable in a certain affine linear
+                                                typed λ-calculus with iteration in all types are polynomial time computable. The
+                                                proof provides explicit polynomial bounds that can easily be calculated.
+
+
+
+                                         1 Introduction
+                                         Recent research [3, 4, 9] has provided many characterizations of Ptime (the class
+                                         of all functions computable in polynomial time) by means of appropriate restrictions
+                                         of the terms in Gödel’s T [7]. Consider the following definition of an exponentially
+                                         growing function.
+                                                double([ ]) := [ ]                                     exp([ ]) := [tt]
+                                             double([ a | ℓ ]) := [ a, a | double(ℓ) ]             exp([ a | ℓ ]) := double(exp(ℓ))
+                                         Approaches based on predicative recursion [19, 3, 16] argue that the exponential growth
+                                         in this example is due to the way double is called: the previous value exp(ℓ) of the
+                                         outer recursion is the recursive argument to the inner recursion.
+                                         Although such approaches can capture all functions computable in polynomial time,
+                                         many natural algorithms are excluded, particularly if they involve nested recursions.
+                                         Standard examples are sorting algorithms like insertion sort, which has a similar recur-
+                                         sive structure as exp:
+
+                                              insert(a, [ ]) := [a]
+                                         insert(a, [ b | ℓ ]) := [ b′ | insert(a′ , ℓ) ]        a′ , b′ a permutation of a, b with b′ ≤ a′
+                                                  sort([ ]) := [ ]
+                                               sort([ a | ℓ ]) := insert(a, sort(ℓ))
+                                            ∗ supported by the “Graduiertenkolleg Logik in der Informatik” of the “Deutsche Forschungsgemein-
+
+                                         schaft”
+
+
+                                                                                           1
+Caseiro [5] studied many related examples and reached some (partially semantic) cri-
+teria for algorithms in order to ensure polynomial time complexity. For the insertion
+sort algorithm the essential point is that insert does not increase the size of its input.
+Hofmann [10] took up this line of research and formulated a new term system with a
+special type ✸ of tokens that accommodates nested recursion, but only allows to define
+non-size-increasing Ptime functions. The basic idea is that if a function increases the
+size of its argument (like a successor function), then one has to “pay” for the increase
+by providing a “token”, i.e., a term of type ✸.
+Hofmann [10] proved this result by means of inherently semantic concepts, such as
+the set-theoretic interpretation of terms. We present a new proof of his main result,
+which apart from being simpler provides more insight and yields an explicit construc-
+tion of time bound polynomials. Although Hofmann’s proof is constructive and thus
+also contains bounds, these are deeply hidden.
+The method developed here has several benefits:
+
+   • A reduction relation is defined in such a way that the term system is closed under
+     it. Therefore calculations can be performed within the system.
+   • We not only show that every definable function is polytime, but give explicit
+     polynomial bounds for the number of reduction steps that can be determined
+     easily for any given term.
+   • Hofmann’s semantical size measure [10, §3.2] (minimal upper bound of growth)
+     is replaced by the syntactic concept of the number of free variables. Hence the
+     role of the ✸-type becomes more transparent, as we will show (in Lemma 4.3)
+     that there are no closed terms of this type.
+
+A preliminary version [1] of this work has already been published. Apart from giving
+more technical details and elaborated proofs, the following aspects are added:
+
+   • The previous estimate of the number of reduction steps referred to a fixed re-
+     duction strategy. Here we show that this requirement can be relaxed somewhat,
+     without loosing the sharp estimate on the length of reduction sequences. The
+     main tool is an appropriate modification of the size measure ϑ (·).
+   • It is shown how the approach covers more complex data structures such as binary
+     labeled trees, for which iteration involves two recursive calls.
+
+Hofmann’s paper [10] is of course the starting point of ours. In the journal version [11]
+some new aspects are added, among others the definition and justification of a similar
+system which captures Pspace, and an operator for divide-and-conquer recursion. We
+shall show in Section 5.2 that our simplified approach can deal with the latter; however,
+it is not known whether it also suffices for Hofmann’s characterization of Pspace.
+Jones [15], in a paper called “The expressive power of higher-order types or, life with-
+out CONS”, directly relates programming languages and complexity theory. In a pre-
+vious paper [14] (see also [13]) he had characterized the power of first-order read-only
+
+                                            2
+programs in complexity terms; the results are extended [15] to arbitrary data orders and
+tail recursive programs. As Jones notes, the root for his Ptime result (for data order
+0) is an early paper of Cook [6] on “two-way auxiliary pushdown automata”. How-
+ever, no characterization of Ptime in terms of recursion with unlimited data orders is
+obtained.
+Jones work is certainly related to the present one: in his approach it is important
+whether constructors of structured data are allowed or not. Moreover, Jones’ paper
+is written from a broader programming point of view, giving special emphasis to the
+program control structure (general recursion, tail recursion or primitive recursion). The
+present paper (for simplicity) concentrates on the effects of higher order primitive re-
+cursion (i.e. Gödel’s T ).
+Leivant and Marion [18] give a λ-calculus characterization of Ptime. The main nov-
+elty is the use of the concept of “tiers” in the sense of different representations of data:
+as words (i.e. terms of base type), or as Church-like abstraction terms (expressions of
+higher type). This leads to a nice characterization of Ptime. Leivant [17] gives par-
+ticularly elegant proofs of characterizations of Jones [14] for Ptime and of Beckmann
+and Weiermann [2] for the elementary functions. He also treats a control-based sub-
+calculus of the system in [4], and — more importantly — obtains a characterization
+of Pspace along the same lines. This is achieved by the notions of an “input driven”
+term, i.e., a term with the property that no recursion argument has a free variable bound
+in the term, and the more special notion of a “solitary” term, where every higher type
+abstracted variable has at most one occurrence in the kernel. The solitary terms are the
+ones used for his characterization of Ptime. As with all extensional characterizations
+of Ptime, the question remains as to whether interesting Ptime algorithms can be
+represented directly.
+
+
+2 Types and terms
+Definition 2.1 (Finite types). The set of linear types is defined inductively as
+
+                    ρ, τ ::= ✸ | B | τ ⊸ ρ | τ ⊗ ρ | τ × ρ | L(τ )
+
+So types are built from the base type B of booleans and a special type ✸. L(τ ) denotes
+the list-type over τ . The type of binary numerals, as used by Hofmann [10], can be
+defined as L(B). The type ✸ may be interpreted as a pointer to free memory [8];
+Lemma 4.3 will show that no closed terms of type ✸ exist. Canonical terms of data-
+types may still contain free variables of that type. The type ✸ ⊸ τ ⊸ L(τ ) ⊸ L(τ )
+of the consτ function together with the linear typing discipline guarantees that the
+length of lists and the number of free variables coincide.
+τ ⊗ ρ and τ × ρ both represent ordered pairs. However, the linear meaning of those
+types is different. Each component of a tensor product τ ⊗ ρ can be used, whereas in
+the case of an ordinary pair one can choose only one component to be used. As can be
+seen from Definition 3.2, ⊗ corresponds to ⊸, while × corresponds to B.
+
+
+                                             3
+Terms are built from variables, denoted by x, y, z, and typed constructor symbols c.
+Each variable has a type, and it is assumed that there are infinitely many variables of
+each type. The notation xτ should express that the variable x has type τ .
+Definition 2.2 (Terms). The set of terms is inductively defined by
+
+                       r, s, t ::= xτ | c | λxτ . t | ht, si | ts | {t}
+
+These terms should be seen as our “raw syntax”; only correctly typed terms (in the
+sense of Definition 2.4) represent meaningful functions.
+The idea for the {·} term construct is taken from Joachimski and Matthes [12]. Terms
+of this form appear only as arguments in an L(τ ) elimination. This explicit marking of
+the step term in iteration constructs is not only technically convenient but also allows
+to directly read off the time complexity: the degree of the bounding polynomial is the
+nesting depth of braces and the symbols within n braces contribute to the coefficient of
+X n (see Definition 4.5 for details).
+The notations t~s and λ~x τ~ . t are defined as usual, so λxτ , y ρ . t is an abbreviation for
+λxτ .(λy ρ . t). Terms that only differ in the naming of bound variables are identified.
+Definition 2.3 (Constructor symbols). The constructor symbols and their types are
+
+                           tt        B
+                           ff        B
+                           nilτ      L(τ )
+                           consτ     ✸ ⊸ τ ⊸ L(τ ) ⊸ L(τ )
+                           ⊗τ,ρ      τ ⊸ρ⊸τ ⊗ρ
+
+A context is a set of variables. For two contexts Γ1 and Γ2 the notation Γ1 , Γ2 stands
+for the union, expressing that Γ1 and Γ2 are disjoint. We also write xτ for the singleton
+context {xτ }.
+The next definition states which terms of our raw syntax are correctly typed. Γ ⊢ tτ is
+to be read as “t is a typed term of type τ with free variables in Γ”.
+Definition 2.4 (Γ ⊢ tτ ). The relation Γ ⊢ tτ is inductively defined as follows:
+
+  Γ, xτ ⊢ xτ                                                              (V ar)
+
+  c of type τ
+    Γ ⊢ cτ                                                                (Const)
+
+   Γ ∪ {xτ } ⊢ tρ
+  Γ ⊢ (λxτ . t)τ ⊸ρ                                                       (⊸+ )
+
+
+
+
+                                              4
+  Γ1 ⊢ tτ ⊸ρ      Γ2 ⊢ s τ
+                    ρ
+      Γ1 , Γ2 ⊢ (ts)                                                             (⊸− )
+
+
+  Γ ⊢ tτ     Γ ⊢ sρ
+              τ ×ρ
+    Γ ⊢ ht, si                                                                   (×+ )
+
+
+  Γ ⊢ tτ ×ρ
+           τ
+  Γ ⊢ (ttt)                                                                      (×−
+                                                                                   1)
+
+
+  Γ ⊢ tτ ×ρ
+            ρ
+  Γ ⊢ (tff)                                                                      (×−
+                                                                                   0)
+
+
+  Γ 1 ⊢ tB      Γ2 ⊢ sτ         Γ2 ⊢ r τ
+                               τ
+          Γ1 , Γ2 ⊢ (t hs, ri)                                                   (B− )
+
+
+  Γ1 ⊢ tτ ⊗ρ     Γ2 , xτ , y ρ ⊢ sσ
+                               σ
+    Γ1 , Γ2 ⊢ (t(λxτ , y ρ .s))                                                  (⊗− )
+
+
+  Γ ⊢ tL(τ )    ∅ ⊢ s✸⊸τ ⊸ρ⊸ρ
+                     ρ⊸ρ
+         Γ ⊢ (t {s})                                                             (L(τ )− )
+
+
+It is crucial that the step term in (L(τ )− ) is closed. Otherwise it would not be pos-
+sible to define reduction rules in such a way that typed terms reduce to typed terms
+(Lemma 3.5), since free variables in the step terms would be duplicated.
+The typing system is based on elimination rules: For every type different to ✸ there is a
+rule describing how to use terms of this type; in all these rules the elimination is written
+as application1. For the right hand side of such an application a notation is chosen
+that expresses the computational behavior of the terms used for the elimination. This
+avoids duplication of syntax, e.g., with the pair ht, si we have a notation expressing
+that exactly one of the terms t and s will be needed. This syntax is also used for the “if
+. . . then . . . else . . . ” construct t hs, ri.
+Data-types, i.e., types from which all the stored information can be retrieved by a single
+use of an object of this type, are introduced by constants. In the system we have two
+forms of abstraction with special introduction rules: the λ-abstraction and the pair.
+Note that the pair really is an abstraction, as only part of the stored information can be
+retrieved by a single use. The tensor τ ⊗ ρ however is a data-type as a single use can
+access both components, hence we have a constant ⊗τ,ρ to introduce it.
+   1 It should be noted that the same syntax would appear in the standard implementation in the untyped
+
+λ-calculus. For example one should think of ⊗ as being λx, y, z.zxy.
+
+
+
+
+                                                  5
+This way of introduction allows the relatively simple Definition 3.3 of the reduction
+relation expressing that we may reduce within data, but not under abstractions.
+Immediately obvious from the definition is
+Proposition 2.5 (Weakening). If Γ ⊢ tτ and Γ ⊂ Γ′ then Γ′ ⊢ tτ .
+
+Rule (⊸+ ) could as well have been written
+
+                                           Γ, xτ ⊢ tρ
+                                                     τ ⊸ρ
+                                        Γ ⊢ (λxτ . t)
+
+
+requiring that the bound variable does not occur in the context afterwards. In our for-
+mulation it is easier to recognize weakening as a derived rule. As we identify α-equal
+terms, weakening holds in the alternative formulation as well and both formulations
+are in fact equivalent.
+It might seem odd that in this calculus a typed term can have an untypable subterm {t}.
+An obvious definition would introduce a new form of application, e.g., if r, s are terms
+then so is r {s}, rather then a new term former {s}. However, the present approach is
+technically more convenient, since it allows the simple classification of terms according
+to their head form (cf. Lemma 2.8).
+It should be noted that with some technical overhead one could resolve this problem
+by separating terms and so-called elimination terms, as in work of Joachimski and
+Matthes [12]. But in the present rather simple situation this seems to be an overkill.
+The notation tτ expresses that there is a Γ such that Γ ⊢ tτ . The smallest such Γ is
+called the set of free variables. By induction on the definition of Γ ⊢ tτ one easily
+verifies
+Lemma 2.6. For each term t there is at most one type τ such that tτ . In this case there
+is a smallest Γ with Γ ⊢ tτ which coincides with the set of free variables of t in the
+usual sense.
+
+As already mentioned, the main restriction of the typing calculus is linearity, that is, in
+an application t1 t2 the free variables of t1 and t2 have to be disjoint. This is stated ex-
+plicitly in the rule (⊸− ), but holds for all other “applications” as well. More precisely
+Lemma 2.7 (Linearity). Assume (t1 t2 )τ . Then either t2 = {t′2 } with closed t′2 or
+                                                                                   ′
+else there are types τ ′ and τ ′′ and disjoint contexts Γ1 , Γ2 such that Γ1 ⊢ t1 τ and
+         τ ′′
+Γ 2 ⊢ t2
+                                                               τ
+Proof2 . The last rule of a derivation of Γ ⊢ (t1 t2 ) must be one of (⊸− ), (×−        −
+                                                                                0 ), (×1 ),
+(B− ), (⊗− ) or (L(τ )− ). In each of these cases the claim is trivial. For example, in the
+                                                                                  τ ⊸ρ⊸σ
+case (⊗− ) we conclude by two applications of (⊸+ ) that Γ2 ⊢ (λxτ , y ρ .s)              .
+
+  2 It should be noted that this is just an inspection of the rules and in particular no induction is needed.
+
+
+
+
+                                                      6
+The fact that all eliminations are written as applications ensures that all typed terms
+have a uniform appearance. As can easily be verified by induction on the definition of
+the · ⊢ ·· relation, we have
+Lemma 2.8 (Head form). Assume Γ ⊢ tτ . Then t is of the form x~t, c~t, (λxρ . s)~t or
+hs, ri ~t.
+
+It should be noted that this lemma, although technically trivial, turns out to be crucial
+for the further development: As we are taking vector notation serious and only have
+constants for the introduction of data-types, case distinction according to this lemma
+(and further according to the constant c in the case c~t) is essentially case distinction
+according to the “form of the next canonical redex”, without the need of defining such
+a notion.
+
+
+3 Reductions
+The reduction rules to be defined are all correct with respect to the set-theoretic se-
+mantics (cf. Hofmann [11, §2.1]). In order to control the effects of recursion we allow
+reduction of an iteration only if the argument is already calculated, i.e., if the argument
+is a list.
+Definition 3.1 (Lists). Lists ℓ (with n entries) are terms of the form
+                                     τ                ✸ τ
+                           consτ d✸
+                                  1 a1 (. . . (consτ dn an nilτ ))
+
+where the d1 , . . . , dn stand for arbitrary terms of type ✸.
+
+It should be noted that we could also have required the d~ to be variables and get the
+same results. However, this definition allows more reductions (see Definition 3.2) and
+therefore is slightly more flexible when dealing with terms that are not almost closed,
+i.e., contain free variables of types other than ✸.
+Definition 3.2 (Conversions). 7→ is defined as:
+                    (λxτ . t)s                     7→    t[s/x]
+                    ht, si tt                       7→   t
+                    ht, si ff                     7→     s
+                    tt ht, si                    7→      t
+                    ff ht, si                   7→       s
+                    ⊗τ,ρ ts(λxτ , y ρ . r)     7→        r[t, s/x, y]
+                    nilτ {t} s                7→         s
+                    consτ d✸ aℓ {t} s        7→          td✸ a(ℓ {t} s)   ℓ a list
+
+Although they look quite similar, the rules ht, si tt 7→ t and tt ht, si 7→ t actually have
+a very different meaning: The first rule says that we can unfold a projection once the
+argument of the term of ×-type is in canonical form, whereas the other rule tells us to
+take the if-branch, once we know that the conditional evaluates to tt. Also notice the
+different typings of the two rules.
+
+                                                     7
+Definition 3.3. The reduction relation t → t′ is inductively defined as follows:
+
+                     t 7→ t′         t → t′            s → s′
+                     t → t′         ts → t′ s         ts → ts′
+
+
+The requirement that we can only unfold one step of an iteration if the argument is
+a full list (in the sense of Definition 3.1) is crucial for our method of estimating the
+length of reduction sequences (cf. the introduction to Section 4). This can be seen
+from the corresponding case in the proof of Theorem 4.8. Apart from this restriction
+and the requirement that one cannot reduce under abstractions the reduction strategy is
+arbitrary.
+As usual, we call a term t normal if it cannot be further reduced, i.e., if there is no t′
+such that t → t′ .
+Lemma 3.4. If Γ1 ∪ {xρ } ⊢ tτ and Γ2 ⊢ sρ and moreover Γ1 and Γ2 are disjoint,
+                         τ
+then Γ1 , Γ2 ⊢ (t[s/xρ ]) .
+
+Proof. Induction on t, using Lemma 2.7: If t is a variable or a constant the claim is
+obvious. If t is of the form t = t1 t2 then by Lemma 2.7 either t[s/x] = t1 [s/x]t2 or
+t[s/x] = t1 (t2 [s/x]). We apply the induction hypothesis to the corresponding subterm
+and can type t[s/x] by the same rule used to type t. If t is of the form t = λy.r, then t
+                                                      ′
+must be typed due to (⊸+ ), hence Γ1 ∪ {x, y} ⊢ rτ and we may apply the induction
+hypotheses to r (without loss of generality y does not to occur in Γ2 ) and then conclude
+the claim by (⊸− ). Similar if t = ht1 , t2 i.
+
+                                                                       τ
+Lemma 3.5 (Subject reduction). If Γ ⊢ tτ and t → t′ , then Γ ⊢ t′ .
+
+Proof. Induction on t → t′ shows that only conversions have to be considered. The
+only non-trivial case is handled in Lemma 3.4.
+
+Next we show that we have sufficiently many reduction rules, i.e., that normal terms
+have the expected form. As the size of a term is its number of free variables, we also
+have to consider non-closed terms. As ✸ is the only base type without closed terms,
+we can restrict ourselves to almost closed terms, i.e., to terms with free variables of
+type ✸ only. It should be noted that (for example) an arbitrary list can be encoded as
+an almost closed term.
+Proposition 3.6. Every normal, almost closed term of type L(τ ), B or ✸ is a list, tt or
+ff, or a variable of type ✸, respectively.
+
+Proof. Induction on t and case distinction according to Lemma 2.8: If t is of the form
+x~t then x has to be of type ✸ and hence ~t has to be empty (since there is no elimination
+rule for the type ✸). If t is of the form (λx.s)~t or hs, ri ~t, then ~t has to be empty as
+well, for otherwise the term would not be normal. So the interesting case is if t is of the
+form c~t. In this case we distinguish cases according to c. If c is tt or ff, nilτ or ⊗τ,ρ ,
+
+                                             8
+then t~ can only consist of at most 0, 1 or 2 terms, respectively (for otherwise there were
+a redex); hence we have the claim (or the term is not of one of the types we consider).
+In the case consτ dart~ we apply the induction hypothesis to r yielding that t is of the
+form ℓt~ with a list ℓ. So if t~ would consist of more then one term there would be a
+redex; but if t~ is a single term, then the whole term would have arrow-type.
+
+It should be noted that in the above proof the only place where the induction hypothesis
+actually is needed is to argue that in consτ d✸ ar the subterm r has to be a list as well
+(and hence the whole term is a list). In particular, these statements need not all be
+proved simultaneously, but only simultaneously with the statement that every normal,
+almost closed term of list-type is in fact a list (which is necessary due to the side-
+condition on the reduction rules for lists). This modularity is a feature of the vector
+notation, i.e., the consistent use of elimination-rules written as applications: in this way
+the (syntactical) Lemma 2.8 gives easy access to the “canonical” redex by showing the
+corresponding introduction. It should be noted that the use of elimination-constants
+(“iterators”) would have messed up this modularity, as in the case of an elimination
+constant followed by some arguments one would in fact need some form of induction
+hypothesis stating that the argument to be eliminated is introduced canonically.
+
+
+4 Length of reduction chains
+Before continuing we give a sketch of the main idea of the proof in order to motivate
+the following definitions. Since the system is linear, β-reduction reduces the num-
+ber of symbols (since the λ disappears). The same is true for the reductions due
+to projections and the “if . . . then . . . else”. So the only case where the number
+of symbols is increased is the case of iteration. However, if we unfold an iteration
+                                                 τ                ✸ τ
+completely, i.e., if we reduce consτ d✸       1 r1 (. . . (consτ dn rn nilτ )) {h} t in n + 1 steps
+          τ           ✸ τ
+to hd✸  r
+      1 1   (. . . (hd r
+                      n n t)) then     the {·}’s disappear!    So  by making them “sufficiently
+heavy” the total weight of the term reduces. As however the weight necessary for the
+{·}-construct depends not only on the term within the braces, but also on the length n
+of the numeral we iterate on, we cannot assign this term a fixed number; instead we
+assign a polynomial(ly bound function) in Definition 4.5. But what to plug in? Noting
+that we have n terms d✸                  ✸
+                            1 , . . . , dn of type ✸ and remembering the idea that terms of
+type ✸ should contain free variables (as will be proved in Proposition 4.3) we find that
+the number of free variables is just the right upper bound for the length n (since the d~
+are applied to one another, their free variables have to be disjoint).
+This would lead to a proof that every reduction strategy that always unfolds iterations
+completely is polynomially bounded. In order to get results for every reduction strat-
+                                                    τ                ✸ τ
+egy we notice that within the subterm consτ d✸   1 r1 (. . . (consτ dn rn nilτ )) {h} t the
+iteration unfolds at most n times, even if the actual number of free variables in the
+whole term is larger3. Using this information we can limit the assigned polynomial(ly
+bounded function) to get a measure that actually decreases in every step (Theorem 4.8).
+   3 This subterm might not unfold at all if it is positioned under a λ-abstraction that remains in the normal
+
+form. We do not allow to reduce under λ-abstractions (see Definition 3.3) since the number of free variables
+
+
+                                                      9
+So we use three different measures for terms: the number of free variables, which
+corresponds to the “size function” in Hofmann’s work [10]; the length, which is the
+number of symbols of a term that can be accessed (using the interpretation that you can
+only access one component of an ordinary pair) and the polynomial which is the upper
+bound for the complexity of a function.
+Definition 4.1 (Length). The length |t| of a term t is inductively defined as follows:
+
+                                     |c| := |x| := 1
+                                     |ts|     := |t| + |s|
+                                          τ
+                                     |λx . s| := |s| + 1
+                                     |ht, si|     := max {|t| , |s|} + 1
+                                     |{t}|        := 0
+
+As the length |t| is essentially used to handle β-redexes, the length of {·}-terms (which
+are closed terms!) is of no importance. So for simplicity, and to obtain slightly sharper
+results (as the length occurs in the Definition 4.5 of the polynomial bound) the value 0
+has been chosen. It should be noted that all the results would also hold with any other
+“reasonable” definition for |{t}|, such as |t|.
+Lemma 4.2. If Γ1 ⊢ tτ and Γ2 ⊢ sρ and moreover Γ1 , Γ2 are disjoint, then |t[s/x]| ≤
+|t| + |s|. In particular, |(λxτ . t)s| > |t[s/x]|.
+
+Proof. Induction on t, using the fact that t is typed and therefore in the case of an
+application only one of the terms can contain the variable x free (compare Lemma 2.7).
+For instance, if t is t1 t2 , then the last rule of a derivation of Γ ⊢ t1 , t2 τ must be one
+of (⊸− ), (×−         −         −      −             −
+              0 ), (×1 ), (B ), (⊗ ) or (L(τ ) ). In each of these cases the claim is
+obvious.
+
+Lemma 4.3. Every term of type ✸ contains a free variable, i.e., if Γ ⊢ t✸ , then Γ 6= ∅.
+
+Proof. Induction on |t| and case distinction according to Lemma 2.8. The case x~t is
+trivial. In the case (λx.s)~t the ~t cannot be empty (for otherwise the term would have an
+arrow type), so we can apply the induction hypothesis to the (by Lemma 4.2) shorter
+term t[t1 /x]t2 . . . tn . Similarly for hr, si ~t, where we apply the induction hypothesis to
+rt2 . . . tn or st2 . . . tn depending whether t1 is tt or ff (note that by typing one of these
+has to be the case) and ⊗τ,ρ~t, where we again use Lemma 4.2. For consτ ~t we use
+the induction hypothesis for t1 . For nilτ ~t use the induction hypothesis for t2 . . . tn . In
+the cases tt~t and ff~t, by typing, t1 has to be of the form hr, si and we can apply the
+induction hypothesis to (say) rt2 . . . tn .
+under a λ-abstraction is potentially higher and therefore numerals and lists are potentially longer. This
+restriction corresponds to not allowing the use of a “potential resource”, i.e., a resource that is not yet present.
+
+
+
+
+                                                        10
+The following corollary is formulated for type 1 functions only. However, if one ac-
+cepts the number of free variables as a reasonable size measure for definable functions
+for higher types as well, then the corollary trivially remains valid for every definable
+function.
+Corollary 4.4 (Non-size-increasing property). Every function of type L(τ ) ⊸ L(τ )
+definable by a closed term has the property that the output is not longer than the input.
+
+Proof. Lemma 4.3 shows that for closed terms of type L(τ ) the usual length and the
+number of free variables coincide (due to the typing ✸ ⊸ τ ⊸ L(τ ) ⊸ L(τ ) of
+the consτ function). The number of free variables trivially does not increase when
+reducing the term to normal form.
+
+Let N be the set of natural numbers and Npoly be the set of all functions from N to
+N that are (pointwise) bounded by some polynomial. We write X for the identity on
+the natural numbers, f + g and f · g for the pointwise sum and product in Npoly and
+Xn for the minimum of the identity and n, i.e., Xn (m) = min {n, m}. N is treated
+as a subset of Npoly by identifying a natural number with the corresponding constant
+function. Let 4 be the pointwise order on Npoly . Then there exist finite suprema (the
+pointwise maxima) in Npoly with respect to 4, denoted by sup4 {·}.
+It seems that by considering functions we leave the realm of syntax. But as we will
+only use functions that are explicitly defined by pointwise sum, product, maximum
+and minimum from the identity and constants we could as well restrict ourselves to
+these functions only. It should be obvious how these functions can be encoded by
+some finite (syntactical) object.
+Definition 4.5 (Polynomial bound ϑ (·) of a term). For each (not necessarily typed)
+term t we define a polynomial ϑ (t) ∈ Npoly by recursion on t.
+
+    ϑ (x) := ϑ (c) := 0
+                      
+                      ϑ (t) + Xn · ϑ (h) + Xn · |h| if t is a list with n entries
+                      
+                      
+    ϑ (ts)         :=                                and s is of the form {h}
+                      
+                      
+                      ϑ (t) + ϑ (s)                 otherwise
+    ϑ (λxτ . t)    := ϑ (t)
+    ϑ (ht, si)     := sup4 {ϑ (t) , ϑ (s)}
+    ϑ ({h})        := X · ϑ (h) + X · |h|
+                  n
+We write ϑ ~t for
+                 P
+                    ϑ (ti ).
+                   i=1
+
+
+Immediately from the definition (since Xn 4 X) we get
+Proposition 4.6. ϑ (ts) 4 ϑ (t) + ϑ (s).
+
+
+
+                                             11
+Lemma 4.7. If Γ1 ⊢ tτ , Γ2 ⊢ sρ and Γ1 , Γ2 are disjoint, then ϑ (t[s/x]) 4 ϑ (t) +
+ϑ (s).
+
+Proof. We prove this by induction on t. The only non-trivial case is when t is an
+application (note that the case {h} does not occur since t is typed). So let t be of the
+form rr′ . We distinguish cases whether r is a list or not.
+If r is a list with n entries then, as t is typed, we know that r′ must be of the form
+r′ = {h} and therefore closed. r[s/x] is easiliy seen to be again a list with n entries.
+Therefore we get
+
+           ϑ ((rr′ )[s/x]) = ϑ (r[s/x]r′ )
+                           = ϑ (r[s/x]) + Xn · ϑ (h) + Xn · |h|
+                            4 ϑ (r) + ϑ (s) + Xn · ϑ (h) + Xn · |h|             by IH
+                            = ϑ (rr′ ) + ϑ (s) .
+
+If r is not a list, then from the fact that t is typed we know that at most one of the terms
+r and r′ contains the variable x free. In the case x ∈ FV (r) (the other case is handled
+similarly) we have
+
+               ϑ ((rr′ )[s/x]) = ϑ (r[s/x]r′ )
+                               4 ϑ (r[s/x]) + ϑ (r′ )        by Proposition 4.6
+                                                         ′
+                               4 ϑ (r) + ϑ (s) + ϑ (r )          by IH
+                               = ϑ (rr′ ) + ϑ (s) .
+
+This completes the proof.
+
+Theorem 4.8. Assume Γ ⊢ tτ and N ≥ |FV (t)| where N ∈ N. If t → t′ , then
+
+                            ϑ (t) (N ) + |t| > ϑ (t′ ) (N ) + |t′ |
+
+In particular, any reduction sequence starting from t has length at most
+
+                                   ϑ (t) (|FV (t)|) + |t|
+
+Proof. We prove this by induction on the definition of the relation t → t′ .
+Case rs → r′ s via r → r′ . We distinguish whether r is a list or not.
+Subcase r is a list with n entries. Then by typing restrictions and from Lemma 4.3 we
+know that n ≤ |FV (t)| ≤ N . Also s has to be of the form s = {h}. r′ is again a list
+with n entries, so
+
+                ϑ (rs) (N )                                  +    |rs|
+           =    ϑ (r) (N ) + n · ϑ (h) (N ) + n · |h|        +    |r| + |s|
+           >    ϑ (r′ ) (N ) + n · ϑ (h)(N ) + n · |h|       +    |r′ | + |s|   by IH
+           =    ϑ (r′ s) (N )                                +    |r′ s|
+
+
+                                              12
+Subcase r is not a list. Then
+               ϑ (rs) (N )                   +    |rs|
+             = ϑ (r) (N ) + ϑ (s) (N )       +    |r| + |s|
+             > ϑ (r′ ) (N ) + ϑ (s) (N )     +    |r′ | + |s| by IH
+             ≥ ϑ (r′ s) (N )                 +    |r′ s| by Proposition 4.6.
+
+Case rs → rs′ via s → s′ . Then r is not a list, since otherwise, s were of the form
+{·} and we must not reduce within braces. Therefore this case can be handled as the
+second subcase above.
+Case t 7→ t′ . We distinguish subcases according to the form of the conversion.
+Subcase (λx. t)s 7→ t[s/x]. We have
+
+                ϑ ((λx. t)s) (N )          + |(λx. t)s|
+           =    ϑ (t) (N ) + ϑ (s) (N )    + |t| + 1 + |s|
+           ≥    ϑ (t[s/x]) (N )            + |t| + 1 + |s|    by Lemma 4.7.
+
+Subcase ⊗τ,ρ rs(λx, y.t) 7→ t[r, s/x, y]] is handled similarly.
+Subcase consτ d✸ aℓ {s} r 7→ sd✸ a(ℓ {s} r)] with ℓ a list with n entries. Then by
+Lemma 4.3 and the linear typing discipline n + 1 ≤ |FV (consτ d✸ aℓ {s} r)| ≤ N .
+Therefore we have
+                      ϑ (consτ d✸ aℓ {s} r) (N )
+                    + |consτ d✸ aℓ {s} r|
+
+               =      ϑ (d) (N ) + ϑ (a) (N ) + ϑ (ℓ) (N )
+                      + (n + 1)ϑ (s) (N ) + (n + 1) |s| + ϑ (r) (N )
+                    + 1 + |d| + |a| + |ℓ| + |r|
+
+and on the other hand
+                        ϑ (sd✸ a(ℓ {s} r)) (N )
+                   +    |sd✸ a(ℓ {s} r)|
+
+               =        ϑ (s) (N ) + ϑ (d) (N ) + ϑ (a) (N ) + ϑ (ℓ) (N )
+                         + n · ϑ (s) (N ) + n · |s| + ϑ (r) (N )
+                   +    |s| + |d| + |a| + |ℓ| + |r|
+
+which obviously is strictly smaller.
+Subcase tt hr, si 7→ r. We have
+
+                  ϑ (tt hr, si) (N )              + |tt hr, si|
+                = sup4 {ϑ (r) , ϑ (s)} (N )       + 1 + max {|r| , |s|}
+                ≥ ϑ (r) (N )                      + 1 + |r|
+
+The remaining subcases are similar to the last one.
+
+
+                                            13
+Corollary 4.9 (Hofmann, 1999). If ∅ ⊢ tL(B)⊸···⊸L(B)⊸L(B) , then t denotes a func-
+tion computable in polynomial many steps.
+
+Proof. We only treat unary functions. Let ℓ be an almost closed normal list. Then
+ϑ (tℓ) = ϑ (t), as ϑ (ℓ) = 0. Therefore an upper bound for the number of steps is
+ϑ (t) (|FV (ℓ)|) + |t| + |ℓ|, which is polynomial in the length of the input ℓ.
+
+Strictly speaking, the above result does not show that functions definable by closed
+terms are polynomial time computable, since no machine model has been provided.
+However, it is rather obvious how these reductions can be implemented in constant
+time (with respect to the size of the input): First note that the only terms that have to
+be duplicated are the step terms of iterations which are not part of the input and — as
+they are closed terms — no part of the input can become substituted into them. Next
+remark that all β-redexes are linear and hence can be implemented by the usual pointer
+switching techniques. In the case of h·, ·i an indirection node is used for the shared
+variables of the two components. Our reduction strategy does not reduce within a pair
+until the projection or the “if . . . then . . . else”-statement is resolved. As pairs are not
+part of the input, the amount of extra work in each resolution step is independent of the
+input.
+Example 4.10 (Insertion sort). Let τ be a type equipped with a linear ordering. As-
+sume that this ordering is represented by the term ✁τ of type τ ⊸ τ ⊸ B⊗(τ ⊗τ ), i.e.,
+✁τ ts →∗ ⊗B,τ ⊗τ tt(⊗τ,τ ts), if t is “smaller” than s, and ✁τ ts →∗ ⊗B,τ ⊗τ ff(⊗τ,τ ts)
+otherwise.
+Using this function, we can define a sort function of type τ ⊸ τ ⊸ τ ⊗ τ for two
+elements, i.e., a function of two arguments that returns them in the correct order:
+
+       ✁′τ = λpτ1 , pτ2 . ✁τ p1 p2 (λy B , pτ ⊗τ . p(λpτ1 , pτ2 .y h⊗τ,τ p1 p2 , ⊗τ,τ p2 p1 i)
+
+Now we can immediately define a function of type L(τ ) ⊸ ✸ ⊸ τ ⊸ L(τ ) inserting
+an element at the correct position in a given sorted list. At each step we compare the
+given element with the first element of the list, put the smaller element at the beginning
+of the list and insert the larger one in the rest of the list.
+                       τ   ✸⊸τ ⊸L(τ ) ✸ τ
+insert = λl.l{λx✸
+                1 , y1 , p           , x2 , y2 . ✁′τ y1 y2 (λz1τ , z2τ consτ x1 z1 (px2 z2 ))}
+            (λx✸ , y τ . consτ xynilτ )
+
+Then insertion sort is defined as usual:
+                                  n                            o
+                  sort = λlτ . l λx✸ , y τ , lL(τ ) . insertlxy nilτ
+
+Counting braces, as ϑ (✁′τ ) = ϑ (✁τ ), we get
+
+ϑ (sort) = X · ϑ (insert) + O(X) = X 2 · ϑ (✁′τ ) + O(X 2 ) = X 2 · ϑ (✁τ ) + O(X 2 )
+
+This reflects the fact that insertion sort is quadratic in the number of comparison oper-
+ations.
+
+                                                14
+By simple modifications of (the proof of) [10, §4.3] we may conclude that many “nat-
+ural orderings”, e.g., the normal ordering on binary coded natural numbers, can be
+defined in the given term system.
+However, it should be noted that it is not necessary that every interesting ordering is
+definable in the given system. It would also be possible to just add a new symbol
+✁τ with the conversion rules ✁τ ts 7→ ⊗B,τ ⊗τ tt(⊗τ,τ ts), if t is “smaller” than s,
+and ✁τ ts 7→ ⊗B,τ ⊗τ ff(⊗τ,τ ts) otherwise. With |✁τ | := 4 the above theory remains
+valid and shows that there are at most X 2 of the newly introduced conversions in a
+normalizing sequence. Therefore this theory can be used to calculate the number of
+calls to a “subroutine”, even if the subroutine itself is not definable in the given system,
+or not even polynomial time computable.
+
+
+5 Extensions of the System
+The syntactical analysis of the system allows various extensions which we only sketch
+here, giving sufficient detail to reconstruct the proofs.
+
+
+5.1 Full Polynomial Time
+The system so far only contains non-size-increasing functions, and hence cannot con-
+tain all Ptime functions. New results of Hofmann [8] show that indeed all these
+functions (and hence in particular all Ptime-predicates) are already within the present
+system.
+Here we shall briefly sketch an approach to obtain all Ptime functions, that might give
+some insight into the way the restriction to non-size-increasing functions works. Its
+motivation was to avoid explosion of growth by iterating over already aggregated data-
+structures. Yet in the definition of Ptime, the only large data-structure of a Turing
+machine is its tape. Moreover, a Turing machine does not iterate over its tape but
+instead modifies it locally.
+The central idea lies in the observation that size is represented by the number of free
+variables. Hence, we can add a type ι that allows closed terms for objects that are se-
+mantically of arbitrary size. On this type, we can then define functions that are seman-
+tically size-increasing, like the extension of the Turing-tape, but are from a technical
+point of view non-size-increasing, in that they do not require an argument of type ✸.
+Iteration on this new type ι would lead beyond polynomial time, as the number of
+iterations that a loop (i.e., an L(τ )-elimination) unfolds to is no longer immediately
+related to the input (via the number of free variables).
+The term system is extended by adding a new ground type ι, adding the following
+constants with their respective types
+                 ◦    ι                     p               ι⊸ι
+                 s0   ι⊸ι                   iszero          ι ⊸ (B ⊗ ι)
+                 s1   ι⊸ι                   head            ι ⊸ (B ⊗ ι)
+
+                                            15
+7→ is enriched by
+           p◦        7→ ◦                    iszero◦        7→ ⊗B,ι tt◦
+           p(si tι ) 7→ tι                   iszero(si tι ) 7→ ⊗B,ι ff(si tι )
+                            head◦         7→ ⊗B,ι ff◦
+                            head(s0 tι ) 7→ ⊗B,ι ff(s0 tι )
+                            head(s1 tι ) 7→ ⊗B,ι tt(s1 tι )
+
+The definitions of the relations Γ ⊢ tτ and t → t′ remain unchanged. Proposition 2.5,
+and Lemmata 2.6, 2.8, 3.4 and 3.5 remain valid with almost identical proofs.
+We call terms of the form si1 (. . . (sin ◦)) short numerals. As in Proposition 3.6 we
+show that every normal, almost closed term of type ι is a short numeral (and therefore
+closed).
+The definition of the term length |t| had the property that for all reductions except
+iteration the length decreased. To retain this property we define |iszero| = |head| = 3
+and keep the rest of Definition 4.1. In particular, every constant different to iszero and
+head still has length 1. Then Lemmata 4.2 and 4.3 remain valid.
+The definition of ϑ (t) remains unchanged. Then (with identical proof) Lemma 4.7
+holds and also the main Theorem 4.8. In particular, the extended system still consists
+of Ptime functions only.
+To show that every Ptime function can be defined by a closed term of type N ⊸ ι, we
+code the configuration of a Turing machine (with N states {S0 , . . . , SN −1 }, working
+over the alphabet {0, 1}) with the symbols i0 . . . ik before and including the head and
+the symbols j0 . . . jk′ followed by the non-visited positions after the head and with
+current state Sm by
+                                ⊗(sik (. . . (si0 ◦)))
+                               (⊗(sj0 (. . . (sjk′ ◦)))
+                               (⊗t1 (⊗ . . . (⊗tn−1 tn ))))
+
+with n being the smallest number such that N ≤ 2n and each of the ~t being tt or ff
+such that this is the binary coding of m . The closed terms s0 and s1 extend the Turing
+tape where necessary, so we can define the one-step function of the Turing machine by
+sufficiently many case-distinctions. Iterating this one-step function polynomially many
+times (e.g., as shown by Hofmann [10, §4.3]) completes the (sketched) proof.
+
+
+5.2 Trees
+We sketch how our technique applies to the more complex data type of binary labeled
+trees; this is to be hoped for, as Hofmann’s original method is capable of dealing with
+them [11, §4.3]. Notice that the extension is not completely obvious, since iteration
+on trees involves two recursive calls. It turns out that the number of free variables in a
+term still is a good measure for the number of unfoldings of an iteration.
+The system is extended by
+
+                                            16
+   • a new type constructor T(τ, ρ) for trees (with nodes labeled with elements of
+     type τ and leaves labeled with elements of type ρ)
+   • new constants with their respective types
+
+                 leaf τ,ρ        ρ ⊸ T(τ, ρ)
+                 treeτ,ρ         ✸ ⊸ τ ⊸ T(τ, ρ) ⊸ T(τ, ρ) ⊸ T(τ, ρ)
+
+   • a new term constructor {·, ·}
+   • a new typing rule
+
+           Γ ⊢ tT(τ,ρ)      ∅ ⊢ s✸⊸τ ⊸σ⊸σ⊸σ            ∅ ⊢ rρ⊸σ
+                                            σ
+                              Γ ⊢ (t {s, r})                                (T(τ, ρ)− )
+
+
+We inductively define the notion of a tree (with n nodes) by
+
+   • leaf τ,ρ tρ is a tree (with 0 nodes)
+   • if t1 and t2 are trees (with n1 and n2 nodes) then treeτ,ρ d✸ aτ t1 t2 is also a tree
+     (with n1 + n2 nodes)
+
+The conversion relation 7→ is augmented by
+
+          leaf τ,ρ t {s, r} 7→ rt
+          treeτ,ρ dat1 t2 {s, r} 7→ sda(t1 {s, r})(t2 {s, r})       t1 , t2 trees
+
+We extend the definition of the length by
+
+                                     |{s, r}| := |r|
+
+and the definition of the polynomial bound by
+
+ϑ ({s, r}) := X · ϑ (s) + (X + 1) · ϑ (r) + X · |s| + X · |r|
+              
+              
+              
+               ϑ (t) + Xn ϑ (h) + Xn |h|                if t is a list with n entries
+                                                               s is of the form {h}
+              
+              
+              
+                                                        and
+              
+              
+              
+              ϑ (t) + X · ϑ (s′ ) + (X + 1) · ϑ (r′ )
+                           n             n
+ϑ (ts)     :=            ′          ′
+              
+              
+               +Xn · |s | + Xn · |r |                   if t is a tree with n nodes
+                                                               s is of the form {s′ , r′ }
+              
+              
+              
+                                                        and
+              
+              
+              
+              ϑ (t) + ϑ (s)                             otherwise
+
+Then the theory in section 4 remains valid, with identical proofs. The new non-trivial
+subcase in Theorem 4.8 is
+
+                   treeτ,ρ dat1 t2 {s, r} 7→ sda(t1 {s, r})(t2 {s, r})
+
+                                            17
+where t1 and t2 are trees with n1 and n2 nodes respectively. Then by Lemma 4.3 and
+the linear typing discipline we know that n1 + n2 + 1 ≤ |FV (treeτ,ρ dat1 t2 {s, r})| ≤
+N , and hence
+
+                      ϑ (treeτ,ρ dat1 t2 {s, r}) (N )
+                 +    |treeτ,ρ dat1 t2 {s, r}|
+             =        ϑ (d) (N ) + ϑ (a) (N ) + ϑ (t1 ) (N ) + ϑ (t2 ) (N )+
+                 +    (n1 + n2 + 1)ϑ (s) (N ) + (n1 + n2 + 1 + 1)ϑ (r) (N )
+                 +    (n1 + n2 + 1) |s| + (n1 + n2 + 1) |r|
+                 +    1 + |d| + |a| + |t1 | + |t2 | + |r|
+and
+              ϑ (sda(t1 {s, r})(t2 {s, r})) (N )
+         +    |sda(t1 {s, r})(t2 {s, r})|
+   =          ϑ (s) (N ) + ϑ (d) (N ) + ϑ (a) (N )
+         +    ϑ (t1 ) (N ) + n1 · ϑ (s) (N ) + (n1 + 1) · ϑ (r) (N ) + n1 · |s| + n1 · |r|
+         +    ϑ (t2 ) (N ) + n2 · ϑ (s) (N ) + (n2 + 1) · ϑ (r) (N ) + n2 · |s| + n2 · |r|
+         +    |s| + |d| + |a| + |t1 | + |r| + |t2 | + |r|
+
+which is strictly smaller.
+It should be noted that, once iteration on labeled trees is available, “divide and conquer”
+recursion can be implemented: Starting from a “divide function”
+
+                             f : τ ⊸ L(τ ) ⊸ τ ⊗ L(τ ) ⊗ L(τ )
+
+we can construct a function f̃ : L(τ ) ⊸ T(τ, L(τ )) with
+
+           f̃(nilτ )         = leaf τ,L(τ ) nilτ
+           f̃(consτ d✸ aτ ℓ) = treeτ,L(τ ) da′ ℓ1 ℓ2             if faℓ = a′ ⊗ ℓ1 ⊗ ℓ2
+
+To do so we first construct D viaE iteration over lists a function g : L(τ ) ⊸ L(τ ) ×
+T(τ, L(τ )) with g(ℓ) = ℓ, f̃ℓ . Iterating a function that applies f̃ to (the label of)
+every leaf of a tree sufficiently (i.e., linearly) often [10, §4.3] we can define a function
+fD : L(τ ) ⊸ T(τ, L(τ )) such that
+
+      fD (nilτ )        =      leaf τ,L(τ )(nilτ )
+      fD (consd ✸ aτ ℓ) =      treeτ,L(τ )da′ (fD ℓ1 )(fD ℓ2 )       if faℓ = a′ ⊗ ℓ1 ⊗ ℓ2
+
+A final iteration over the created tree with an appropriate “conquer function” and an
+appropriate initial value finishes the implementation of “divide and conquer” recursion
+in the present system.
+Following these lines, we can, for example, specify quicksort by providing
+
+      • a divide-function of type τ ⊸ L(τ ) ⊸ τ ⊗ L(τ ) ⊗ L(τ ) splitting a list into two
+        sublists; one with the elements larger than the given one and one with smaller
+
+                                              18
+      elements
+
+       λxτ , lL(τ )   l{λy0✸ , y1τ , pτ ⊗L(τ )⊗τ     p(λxτ , pL(τ )⊗L(τ )    p(λl′ , l′′
+                       ✁τ xy1 (λz B , pτ ⊗ρ    p(λxτ , y1τ
+                              zh ⊗τ,L(τ )⊗L(τ )x(⊗L(τ ),L(τ ) (consτ y0 y1 l′ )l′′ ),
+                                 ⊗τ,L(τ )⊗L(τ )x(⊗L(τ ),L(τ ) l′ (consτ y0 y1 l′′ ))i)))}
+                      ⊗τ,L(τ )⊗L(τ )x(⊗L(τ ),L(τ ) nilτ nilτ )
+
+   • a conquer function of type ✸ ⊸ τ ⊸ L(τ ) ⊸ L(τ ) ⊸ L(τ ) taking two sorted
+     lists and joining them in the correct way with the middle element
+
+                           λx✸ , y τ , l′L(τ ) , l′′L(τ )   appl′ (consτ xyl′′ )
+
+      where app is the append function, defined as usual
+   • an initial case for the empty list, nilτ
+
+However, as in this implementation of “divide and conquer” recursion for each unfold-
+ing step the whole (intermediate) tree structure has to be traversed, it is less efficient
+than a “native” variant of “divide and conquer”, but, as shown, still in polynomial
+time.
+
+
+References
+ [1] Klaus Aehlig and Helmut Schwichtenberg. A syntactical analysis of non-size-
+     increasing polynomial time computation. In Proceedings 15’th Symposium on
+     Logic in Computer Science (LICS 2000), pages 84–91, 2000.
+ [2] Arnold Beckmann and Andreas Weiermann. Characterizing the elementary re-
+     cursive functions by a fragment of Gödel’s T . Archive for Mathematical Logic,
+     39(7):475–492, 2000.
+ [3] Stephen Bellantoni and Stephen Cook. A new recursion-theoretic characterization
+     of the polytime functions. Computational Complexity, 2:97–110, 1992.
+ [4] Stephen Bellantoni, Karl-Heinz Niggl, and Helmut Schwichtenberg. Higher type
+     recursion, ramification and polynomial time. Annals of Pure and Applied Logic,
+     104:17–30, 2000.
+ [5] Vuokko-Helena Caseiro. Equations for Defining Poly-Time Functions. PhD the-
+     sis, Department of Computer Science, University of Oslo, 1997. Available at
+     www.ifi.uio.no/ ftp/publications/research-reports/.
+ [6] Stephen A. Cook. Characterizations of push-down machines in terms of time
+     bounded computers. Journal of the Association for Computing Machinery, 18:4–
+     18, 1971.
+
+
+                                                   19
+ [7] Kurt Gödel. Über eine bisher noch nicht benützte Erweiterung des finiten Stand-
+     punkts. Dialectica, 12:280–287, 1958.
+ [8] Martin Hofmann. A type system for bounded space and functional in-place up-
+     date. To appear: Nordic Journal of Programming. An extended abstract has
+     appeared in ‘Programming Languages and Systems’ (Proc. ESOP 2000), G.
+     Smolka, ed., Springer LNCS, 2000.
+ [9] Martin Hofmann. Typed lambda calculi for polynomial-time computation. Habil-
+     itation thesis, Mathematisches Institut, TU Darmstadt, Germany. Available under
+     www.dcs.ed.ac.uk/home/mxh/habil.ps.gz, 1998.
+[10] Martin Hofmann. Linear types and non-size-increasing polynomial time compu-
+     tation. In Proceedings 14’th Symposium on Logic in Computer Science (LICS’99),
+     pages 464–473, 1999.
+[11] Martin Hofmann. Linear types and non-size-increasing polynomial time compu-
+     tation. To appear: Theoretical Computer Science, 2000.
+[12] Felix Joachimski and Ralph Matthes. Short proofs of normalisation for the
+     simply-typed λ-calculus, permutative conversions and Gödel’s T . To appear:
+     Archive for Mathematical Logic, 1999.
+[13] Neil D. Jones. Computability and Complexity from a Programming Perspective.
+     MIT Press, 1997.
+[14] Neil D. Jones. LOGSPACE and PTIME characterized by programming lan-
+     guages. Theoretical Computer Science, 228:151–174, 1999.
+
+[15] Neil D. Jones. The expressive power of higher-order types or, life without CONS.
+     J. Functional Programming, 11(1):55–94, 2001.
+[16] Daniel Leivant. A foundational delineation of computational feasibility. In Pro-
+     ceedings 6’th Symposium on Logic in Computer Science (LICS’91), 1991.
+[17] Daniel Leivant. Applicative control and computational complexity. In J. Flum
+     and M. Rodriguez-Artalejo, editors, Computer Science Logic (Proceedings of the
+     Thirteenth CSL Conference), number 1683 in LNCS, pages 82–95. Springer Ver-
+     lag, Berlin, Heidelberg, New York, 1999.
+[18] Daniel Leivant and Jean-Yves Marion. Lambda calculus characterization of poly-
+     time. Fundamenta Informaticae, 19:167–184, 1993.
+[19] Harold Simmons. The realm of primitive recursion. Archive for Mathematical
+     Logic, 27:177–188, 1988.
+
+
+
+
+                                          20
+

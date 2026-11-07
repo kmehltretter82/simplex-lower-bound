@@ -1,0 +1,693 @@
+       Higher Type Recursion, Rami cation and Polynomial Time
+                     S. Bellantoni            K.-H. Niggly    H. Schwichtenberg
+                                                August 1, 1999
+
+                                                    Abstract
+           It is shown how to restrict recursion on notation in all nite types so as to characterize the
+       polynomial time computable functions. The restrictions are obtained by using a rami ed type
+       structure, and by adding linear concepts to the lambda calculus.
+
+1 Introduction
+Recursion in all nite types was introduced by Hilbert [8] and later became known as the essential
+part of Godel's system T [7]. This system has long been viewed as a powerful scheme unsuitable for
+describing small complexity classes such as polynomial time. Simmons [17] showed that rami cation
+can be used to characterize the primitive recursive functions by higher type recursion. Leivant
+[13] used rami cation notions with all nite types in order to characterize the Kalmar-elementary
+functions. Leivant and Marion [15] showed that another form of rami cation can be used to restrict
+higher type recursion to PSPACE. However, to characterize the much smaller class of polynomial-
+time computable functions by higher type recursion, it seems that an additional principle is required.
+By introducing a liberalized form of linearity (allowing multiple use of ground types results) in
+conjunction with an extension of rami cation concepts (as considered e.g. by Simmons [17], Leivant
+[13], and Bellantoni and Cook [1]) to all nite types, we characterize polynomial-time computability.
+   Based on simple types built from the ground type  of binary numerals by !, recursion on
+notation in type  is a mapping R of type  ! ( !  !  ) !  !  de ned by
+                                      R g h 0 = g
+                                   R g h (sin) = h(sin)(Rghn):
+Now a single recursion in type  !  can de ne a function of exponential growth:
+                                  e := R! s (uV ! y :V (V y ))
+                                                    1
+
+
+
+satis es je(m)(n)j = 2jmj + jnj (where as usual jnj = dlog (n + 1)e). Note that the function e can
+                                                                   2
+
+be assigned a rami ed type under the scheme of Leivant [15], in which m is tier 1 and n is tier 0.
+    Research supported by: Graduiertenkolleg \Logik in der Informatik" der DFG, Munchen. Assistance of the
+Fields Instituted for Research in Mathematical Sciences, Toronto is gratefully acknowledged.
+   y Technische Universit
+                         at Ilmenau, Institut fur theoretische und technische Informatik, Fachgebiet Komplexitats-
+theorie, PF 100565, 98684 Ilmenau, Germany. The author was aliated with LMU while this paper was written.
+
+                                                         1
+ What this shows is that another requirement, in addition to rami cation of the recursion variable,
+ is required to restrict higher type recursion to polytime computability. The problem seems to lie in
+ the nested, nonlinear use of the previous value V . Our approach is to introduce at the same time
+ both rami cation of the recursion variable and linearity conditions.
+    To do so we enrich the type structure with the formation of types ! , called complete types ;
+ all other types are called incomplete. Intuitively, objects of complete types are completely known;
+ they can be used as the pattern for a recursion, or if they are of higher type they can be used in a
+ non-linear way. Objects of incomplete types can only be accessed through a few low-order bits, or
+ if they are of higher type, can be used in a certain linear way only. Then we de ne the class RA of
+ rami ed anable terms. The recursor R receives the rami ed type  !!(! !  !  ) !! ! 
+ and is admitted for any !-free  ; as well, we require that terms of complete type have no free
+ variables of incomplete types. Input positions of types ! and  correspond to normal / tier 1 and
+ safe / tier 0 input positions, common in earlier work on rami ed recursion (cf. [17, 12, 1, 3, 16]).
+ Anability is central to the system and expresses the linearity constraints for bound variables of
+ incomplete types. Anability is designed such that the system RA is closed under reduction.
+     We show that for each closed RA-term t of type level 1, one can nd a polynomial pt such
+ that for all numerals ~n, one can compute the normal form nf (t~n) in time pt (j~nj). Thus, t denotes a
+ polynomial time computable function. The converse also holds, as each polynomial time computable
+ function is computed by some RA-term. Observe that there are two normalizations required to
+ compute t~x for speci c values ~n of ~x. (i) Normalize t to u, say, which may take a long time (not
+ polynomial in the length of t). (ii) Normalize u~n, which will take polynomial time in the length of
+~n. One may view (i) as a (complex) compilation step, producing ecient code.
+     Recently, Hofmann [9, 10] used modalities of rami cation and of linearity in a lambda calculus,
+ and de ned them for all higher types. This interesting work also characterizes polynomial time
+ computability. However, the proof methods of the two papers are completely di erent, as Hofmann
+ uses a category-theoretic approach.
+     There are some connections between the present work and the \light linear logic" of Girard [6];
+ but due to di ering frameworks an exact comparison has not been made.
+     The approach to higher-type functions taken in this work contrasts with Cook and Kapron's
+ well-known Basic Feasible Functions (BFF) de ned by PV! terms [4]. There, explicit size bounds
+ are used and the critical value computed during the recursion is of ground type. A further di erence
+ can be seen by the fact that the system RA admits the iteration functional I satisfying I (f; x; y ) =
+ f jxj (y ), whereas I is not BFF. On the other hand, one intuitively expects that in some suitable
+ (    )
+
+
+ sense BFF functions should be de nable in RA.
+
+2 Types and terms
+The types are:  is a type, and if  and  are types, then so are  !  and ! . We assume ! binds
+tighter than !, and ! associates to the right.   1
+
+
+
+   Types of the form ! are complete ; all others are incomplete. In what follows, iterated !'s are not
+needed, however, for technical simplicity, they are allowed. Ground types are the types of level 0,
+de ning level by: l() = 0; l(! ) = l( ); and l( !  ) = maxfl( ); 1 + l( )g. A higher type is any
+                                !      (
+     1 Linear logicians may read \ " as \ ".
+
+
+                                                     2
+type of level at least 1. For example, !! is a ground type, but  !  is a higher type. !-free types
+are called safe. Every ground type is either safe or complete.
+The constant symbols are listed below, with their types.
+           0 
+           s !                                  (binary successor x 7! 2  x)
+           s !
+               0
+
+                                                  (binary successor x 7! 2  x + 1)
+           p !
+               1
+
+                                                  (binary predecessor x 7! b x c)
+           c  !  !  !  !  for  safe        (cases in type  )
+                                                                                             2
+
+
+
+           R  !!(! !  ! ) !! !  for  safe (recursion in type )
+Terms are built from these constants and typed variables x by introduction and elimination rules
+for the two type forms  !  and ! , i.e.
+                            (x :r )! ; (r! s ) ; (!r )  ; (r  ) :
+                                                                  !         !
+
+
+
+
+We write r   (rather than r  ) in order to have available a uniform notation for elimination terms
+           !                     !
+
+
+ts : : :sn with si either a term or .
+  1
+
+  A binary numeral is either 0 or si1 : : : sik s 0 where ij 2 f0; 1g. In the conversion rules below we
+assume that sin is a binary numeral (hence distinct from 0).
+                                                      1
+
+
+
+
+                                   (x:r)s 7! r[s=x]
+                                   (!r) 7! r
+                                     s 0 7! 0
+                                      0
+
+
+                                     p0 7! 0
+                                     p(sin) 7! n
+                                     c0rt t 7! r
+                                          0 1
+
+
+                                     c(sin)rt t 7! ti
+                                                0 1
+
+
+                                     R g h !0 7! g
+                                     R g h !(sin) 7! h !(sin) (R g h !n)
+Here an application of ! onto a term associates tighter than other applications, and to the right,
+while other applications associate to the left. Thus Rgh!n is (((Rg )h)(!n)).
+    The length jtj of a term t is de ned by jxj = jcj = 1; jx:rj = j!rj = jrj = jrj +1; jrsj = jrj + jsj +1.
+Redexes are subterms shown on the left side of conversion rules above. A term is in normal form
+if it does not contain a redex. For every term t there is a unique normal-form term nf (t) (see e.g.
+[18, 11] for proofs of normalisation in Godel's system T ). Two terms are equivalent if they have
+the same normal form.
+    One writes FV(t) for the set of free variables of t, and FO(x; t) for the number of free occurrences
+of x in t. Say that a term is complete, incomplete, safe, or ground if its type is.
+    Similar to Godel's T , types and terms are interpreted over the set theoretical function spaces.
+Thus, in the semantics we identify objects of type ! with those of type  , since we are only
+interested in the computational behaviour of terms. We interpret  as the non-negative integers.
+The value [ t] ' of a term t in an environment ' is de ned as usual, where [ !r] ' := [ r] ' and
+[ r] ' := [ r] '. As the value of a closed term t is independent of any environment, we just write [ t] .
+                                                          3
+3 RA-terms
+Two subterms ai and aj occurring in a term t are scope equivalent if whenever y binds a variable
+free in either ai or aj , then both ai and aj lie within the scope of the y .
+De nition. Let x be an incomplete variable, and let s be a term.
+   1. An anation of x in s is a ground type subterm a with FO(x; a) = 1 such that every free
+occurrence of x in s is in an occurrence of a in s, where the occurrences of a are scope equivalent
+in s.
+   2. We call x anable in s if there is an anation of x in s or FO(x; s)  1.
+   Every type  variable is trivially anable in every term, because it is an anation of itself.
+De nition. r is an RA-term (R for rami ed, A for anable) if
+   (R) every complete subterm contains complete free variables only, and
+   (A) for every subterm x:s with x incomplete, the variable x is anable in a reduct of s.
+  As pointed out in the Introduction, one intuition is that terms of complete type can be used in
+a non-linear way, while objects of higher incomplete type can be used only in a certain linear way
+expressed by (A). Accordingly, (R) requires that complete terms have no incomplete free variables.
+Non-primitive recursive growth rate is ruled out by this plus the requirement that step terms h in
+R ghn have complete types (cf. Simmons [17]): The previous value (V below) of an outer recursion
+cannot be applied to the previous value of an inner recursion. In contrast, in Godel's T the function
+F! (x) = Fx(x), where F (x) := x + 1 and Fn (x) := Fn x (x), can be de ned by
+                        0                           +1
+                                                                             (   +1)
+
+
+
+
+                         tF! := x:R! S (uV ! : R S0 (uv :V v )) x x
+To obtain polynomial growth rate we additionally require that recursion in type  is admitted for
+safe (i.e. !-free) types  only { recall the type  !!(! !  !  ) !! !  of R in RA.
+   For ground type recursion, the system mimics the use of so-called safe () and normal (!)
+input positions in [1]: Previous values in recursions can only be passed to safe input positions,
+i.e. input positions which do not induce the unfolding of recursions. Polynomially-growing functions
+ satisfying jm  nj = jmj + jnj, and satisfying jm nj = jmj  jnj, are easily de nable in RA:
+                                   t := x  y :R y !(u v : s v ) x
+                                            !                        !
+
+
+                                   t := x  y  :R 0 !(u v : t xv ) y
+                                                                                  1
+                                            !   !                        !
+
+
+
+
+The ability to form terms that have recursively computed outputs of type !, such as x i:!(x x),
+                                                                                           !
+
+
+distinguishes ground type recursions in RA or [1] from the systems of Leivant [14].
+   For higher type recursion, previous values can only be passed to safe anable input positions.
+Admitting recursion R for incomplete  would allow      j mj
+                                                               one to de ne proper Kalmar-elementary
+                            0                0
+functions; e.g. a function e satisfying e (m; n)  n would then have an RA de nition
+                                                             2
+
+
+
+
+                                !R ! (y :y) !(u V ! y  : V !(tsq y))
+                                        !                !       !           !
+
+
+
+
+where tsq := R (s 0) !(u v  : s (s v )) de nes the function sq(n) = 2 jnj.
+                  1
+                            !
+                                0   0
+                                                                                       2
+
+
+   Anability is designed to rule out nested occurrences of previous values in recursions, such as
+that used to de ne e in the Introduction. It requires that if we lambda abstract a higher-type
+                                                         4
+incomplete variable x in r, then either FO(x; r)  1 or else the free occurrences of x in r can be
+separated by the occurrences of one and the same ground type context a, the anation of x in r.
+   If x is anable in r and r ! r0 , then x need not be anable in r0. To obtain a system closed
+under reduction, condition (A) requires that x is anable in a reduct of r.
+   Terms with property (R) are not closed under application, as one may form e.g. X !  y  , or!
+
+
+else (y  : !0)y . However, if rs is incomplete and r, s satisfy (R), then so does rs. It is also rather
+immediate that terms with property (R) are closed under reductions. This is also true for RA-terms,
+as we will prove next.
+Theorem 3.1 (Closure under reduction). Let r be an RA-term.
+   (1) If r ! r0 , then r0 is an RA-term.
+   (2) If x is anable in r, then x is anable in nf (r).
+Proof. We show (1) and (2) by induction on the height h(r) of the reduction tree for r, and side
+induction on r. Assuming (1) and (2) for terms s with h(s) < h(r), we proceed to prove rst (1)
+and then (2) for r.
+   For the proof of (1), let r be an RA-term, and assume r ! r0 . Since terms with property (R)
+are closed under reductions, it suces to consider a subterm x:s0 of r0 where x is incomplete, and
+prove that x is anable in a reduct of s0 . We proceed by distinguishing two cases.
+   Case s0 = s[t=y ] for a subterm x:s of r. By assumption x is anable in a reduct of s. Then x
+is also anable in a reduct of s0 , since x 2= FV(t).
+   Case s ! s0 for a subterm x:s of r. We distinguish two subcases.
+   Subcase x is anable in s. Then s ! s0 ! nf (s), and by the side IH (2) for s, x is anable
+in nf (s) = nf (s0). Hence x is anable in a reduct of s0 , namely nf (s0).
+   Subcase x is anable in a reduct of s. Then we nd ourselves in the situation:
+                         s ! s ! : : : ! sn ; x anable in sn
+                                   1
+
+                          #
+                          s0
+By the side IH (1) at s, s is an RA-term. Successively applying the IH (1) to s ; : : : ; sn , one
+                            1                                                          1             1
+
+obtains that sn is an RA-term. Thus, by the IH (2) at sn , x is anable in nf (sn ) = nf (s0).
+   For the proof of (2), let r be an RA-term and assume that x is anable in r. If r is normal we
+are done. So assume r ! r0. Again, we proceed by distinguishing two cases.
+   Case there is an anation a of x in r. We may assume that there is a redex in a (otherwise, x
+is anable in r0 and the claim follows by (1) giving that r0 is an RA-term and then IH (2) giving
+that x is anable in nf (r)). Let r00 be the reduct of r obtained by replacing all occurrences of a in
+r with nf (a). Hence h(r00) < h(r), and r00 is an RA-term by (1). Then the claim follows from the
+IH for (2), for either x has at most one free occurrence in nf (a) (then nf (a) is an anation of x in
+r00), or else there is an anation b of x in nf (a) (then b is an anation of x in r00 ).
+   Case FO(x; r)  1. By (1) and the IH (2) we may assume FO(x; r0)  2, i.e. a subterm containing
+x is duplicated during the reduction. Considering all reductions, the only ones which can duplicate
+a subterm are R reductions and reductions. But in the former case, the duplicated subterm of
+r has complete type, hence by the property (R) cannot contain x. In the latter case, there is a
+redex (y:s)t in r with x 2 FV(t) such that r0 is formed by replacing (y:s)t with s[t=y ]. Since r
+                                                   5
+satis es (R) and t contains the incomplete variable x, it must be that t and hence y is incomplete.
+As r satis es (A), y is anable in a reduct s0 of s. So let r00 be obtained from r0 by replacing s[t=y ]
+with s0 [t=y ]. Then r00 is an RA-term by (1), and r0 ! r00 . Furthermore, x is anable in r00 , for
+if FO(y; s0)  1, then FO(x; r00 )  1, and if b is an anation of y in s0 , then b[t=y ] is an anation
+of x in r00 . Therefore, applying the induction hypothesis (2) to r00 , we obtain that x is anable in
+nf (r00) = nf (r).
+   Note. If t is an RA-term of type ~ !! with ~ all ground and no incomplete free variables, then
+the incomplete argument types i are redundant in the sense that t is equivalent to some RA-term
+~x~ :t where t has no free occurrence of an incomplete xi. To see this, rst note that in a normal
+      1           1
+
+RA-term t every subterm s of type ! !  which is not an abstraction can be  -expanded to an
+RA-term x  :sx. Observe that for  !  with  incomplete this need not be possible, since x :sx
+              !
+
+
+violates (R) in case  is complete. It is well known that such  expansions terminate in a unique
+form, called the long normal form of t.
+   Now we argue as follows. Let s := x1 ; : : : ; xmm :tm+1 !!n !  be the long normal form of t
+                                                                                !
+
+
+
+where t is not an abstraction. It suces to show that m = n, for then t has type ! and hence
+                                                1               1
+
+          1                                                                             1
+
+by (R) has no free occurrence of an incomplete variable xi . Suppose that m < n. Since t is in long
+normal form, m must be incomplete. As t is not an abstraction, the head of t cannot be a
+                      +1                               1                                             1
+
+constant (by the typing of our constants) and hence must be an incomplete higher type variable y ,
+so it is distinct from ~x. But this contradicts the assumption on t.
+
+4 RS-terms
+In our nal result we will only be interested in ground type terms t whose free variables are of
+ground type. We rst observe that { due to the typing of our constants { in the normal form of
+any such term all variables are safe or ground.
+Lemma 4.1. Let t be a ground type term whose free variables are of ground type. Then in nf (t)
+all variables are safe or ground.
+Proof. Suppose a variable x with  neither safe nor ground occurs in nf (t). It must be bound
+in a subterm (x :r)! of nf (t). Now from the structure of normal derivations in the system of
+propositional logic consisting of introduction and elimination rules for ! and ! it follows (cf. [18,
+p.84]) that  !  either occurs positively in the type of nf (t), or else negatively in the type of one
+of the constants or free variables of nf (t). The former is impossible since t is of ground type, and
+the latter by inspection of the types of the constants.
+    Now if a normal ground type term with only ground free variables satis es (A), then for every
+subterm x:s with x higher type (and hence safe), the variable x is anable in s (since each reduct of
+s is s itself). Therefore by repeated ground type expansions, viewed as a kind of sharing construct,
+we can obtain an equivalent term containing each higher type variable at most once: if e.g. s is
+: : :a : : :a : : : with a an anation of x in s, replace x: : : :a : : :a : : : by x:(y : : : :y : : :y : : : )a.
+Lemma 4.2 (Sharing). Let t be a term such that for every subterm x:s with x higher-type
+incomplete, the variable x is anable in s. Then by repeated  -expansions r[a=y ] 7! (y:r)a
+one can construct a term (t) from t (hence (t) ! t) such that for every subterm x:s in (t)
+with x higher-type incomplete, FO(x; s)  1.
+
+                                                           6
+Proof. By induction on the number of occurrences of bound higher-type incomplete variables. Con-
+sider an outermost subterm x:r with x higher-type incomplete and FO(x; r)  2. By assumption
+x has an anation a in r. Let u be the minimal subterm of r such that u contains all occurrences
+of a in r. Now let t0 result from t by replacing u with (y:u[y=a])a for some new variable y .         2
+
+
+
+   To apply the induction hypothesis to t0 , one must show that every anation in t inside x:r
+results in an anation in t0 . To see this, let z:s be a subterm of r such that z has an anation
+b in s. If a has no occurrence in s, then b is still an anation of z in t0. Otherwise by scope
+equivalence, either all occurrences of a are in s and z 2 FV(a), or else no occurrence of a in s has a
+free occurrence of z . In the latter case, either a occurs in b, in which case b[y=a] is an anation of z
+in t0 , or else a; b are separated, in which case b is still an anation of z in t0 . In the former case, the
+minimality of u implies that u is in s. By construction t0 results from t by replacing the subterm u
+of s with (y:u[y=a])a for some new y . Since z has a free occurrence in both a and b, there are two
+cases. If a is a subterm of b, then each occurrence of b contains exactly one occurrence of a, for b
+is an anation of z in s. By construction it follows that a is an anation of z in t0 . Otherwise if b
+is a subterm of a, then by construction b is still an anation of z in t0 .
+   This might motivate why it will be useful to consider a subset of the set of RA-terms, to be
+called RS-terms, where S stands for sharing.
+De nition. An RA-term is an RS-term if it has safe or ground variables only, and
+   (S) every higher type variable occurs at most once.
+     Every RS-term t can be written uniquely in head form, being of the form U~r, where U is a
+ variable, a constant, !s or s; or else U is x:s with FO(x; s)  1, or U is x:s with FO(x; s) > 1
+ and x ground. Call ~r, s, x, and U the components of t. Components are speci ed by numbering
+ them in order from left to right. A general term formation is an operation on terms, resulting in
+ the formation of a term t~v , (t)~v , (!t)~v, (x:t)~v, or (t[s=x])~v, where t, x and s are any components
+ of the given terms and ~v are optional trailing components of one of the given terms.
+     The algorithms nf and rf described below use a register machine model of computation, where
+ each register may contain a term. One has an unlimited supply of registers u, v , w etc. A primitive
+ computation step is any of the following operations: copying from one register to another; allocation
+ of a new register and initializing it to contain a constant or a new variable; renaming of all free
+ and bound variables simultaneously; test on the head form and branch; test on the head form and
+ perform a general term formation.
+     In particular, each of the following takes one primitive step: test on the head form of t and copy
+ any component of t into a register; test on (x:s)r~r with FO(x; s) > 1 and formation of r and s~r;
+ test on (x:s)r~r with FO(x; s)  1 and form the term s[r=x]~r; test on c t t t t r~, and formation
+                                                                                    1 2 3 4
+
+ of t and tj r~ for some j 2 f2; 3; 4g; test on (!s)~r, and form the term s~r.
+   1
+
+     It can be easily seen that these operations can be simulated by a Turing machine in polynomial
+ time (cf. e.g. [5]).
+     One associates a unique environment register ux with each variable x. A numeral is a binary
+ numeral preceeded by any number of !'s. An environment is a list ~n; ~x := n ; : : :; nk ; x ; : : :; xk
+                                                                                        1          1
+
+ where each ni is an RS-term of the same type as xi . A numeral environment is an environment
+~n; ~x such that each ni is a numeral.
+  2 We write u[y=a] for u with all occurrences of a simultaneously replaced by y.
+
+
+                                                        7
+Theorem 4.3. For every R-free RS-term t of ground type and numeral environment ~n; ~x such that
+FV(t)  ~x,
+  (i) one can compute nf (t[~n=~x]) in at most 2jtj steps,
+  (ii) the number of used registers is  jtj + #~n, and
+  (iii) every term s occurring in the computation satis es jsj  jtj + max jni j.
+Proof. We describe the algorithm nf , which at input t;~n; ~x outputs nf (t;~n; ~x) = nf (t[~n=~x]) in the
+input register of t, by induction on jtj. For type reasons, t is of the form U~r where U is either a
+variable among ~x or a constant or !, or else U is (x:s)r, where FO(x; s)  1 or x is of ground type.
+    If t is 0, then output 0. We have performed two steps, and (ii), (iii) are obvious.
+    If t is xi      with k occurrences of , then delete k leading !'s from the content of uxi and
+output the resulting numeral. We have performed k + 2  2jtj steps, using 2  jtj + #~n registers,
+and (iii) is obvious.
+    If t is Ur where U is a symbol s ; !, rst compute n := nf (r;~n; ~x), then form Un. We have
+                                          1
+
+performed  2 + 2jrj  2jtj steps, using  1 + jrj + #~n  jtj + #~n registers, and (iii) follows.
+    If t is s r, rst compute n := nf (r;~n; ~x), then output 0 if n = 0, otherwise form s n. We have
+           0                                                                                     0
+
+performed  3 + 2jrj  2jtj steps, using  1 + jrj + #~n  jtj + #~n registers. As for (iii), observe
+js nj  2 + jrj + max jnij = jtj + max jnij.
+ 0
+
+    Similarly, if t is pr, rst compute n := nf (r;~n; ~x), then form n0 if n = sin0 , else output 0.
+    If t is (!s)~r, compute nf (s~r;~n; ~x), in  4 + 2js~rj  2jtj steps, using  js~rj + #~n registers. (iii)
+follows directly from the induction hypothesis on s~r.
+    If t is c t t t t r~, rst compute n := nf (t ;~n; ~x), and then compute nf (tj ~r;~n; ~x) where j := 2
+if n = 0, and j := i + 3 if n = sin0 . We have performed  2 + 2jt j + 2jtj r~j  2jtj steps, using
+               1 2 3 4                             1
+
+                                                                              1
+
+ 1 + max(jt j + #~n; jtj r~j + #~n)  jtj + #~n registers. (iii) follows directly from the I.H. on tj ~r.
+               1
+
+    If t is (x:s)r~r with FO(x; s) > 1, then x has ground type. First compute n := nf (r;~n; ~x), copy n
+to ux , then compute nf (s~r;~n; n; ~x; x). Observe that r is of ground type, and ~n; n; ~x; x is a numeral
+environment such that FV(s~r)  ~x; x. We have performed  2 + 2jrj + 2js~rj  2jtj steps, using
+ 1 + max(jrj + #~n; js~rj + #~n + 1)  jtj + #~n registers. As for (iii), observe jnf (s~r;~n; n; ~x; x)j 
+js~rj + max(jnij; jnj)  js~rj + jrj + max jnij  jtj + max jnij.
+    If t is (x:s)r~r with FO(x; s)  1, compute nf (s[r=x]~r;~n; ~x). Since js[r=x]r~j < jtj, we have
+performed  1 + 2js[r=x]r~j  2jtj steps, using  js[r=x]r~j + #~n registers, and (iii) is obvious.
+Corollary 4.4 (Base Normalisation). Let t be a closed R-free RS-term of ground type. Then
+the numeral nf (t) can be computed in at most 2jtj steps using  jtj registers, and every term s
+occurring in the computation satis es jsj  jtj.
+   In order to compute R-free RS-terms t, we slightly generalise the technique above.
+Theorem 4.5 (R-Elimination). Let t be an RS-term of safe or ground type. There is a poly-
+nomial qt such that: if ~n are closed ground type R-free RS-terms with FV(t[~n=~x]) all safe, then
+one can compute an R-free RS-term rf (t;~n; ~x) equivalent to t[~n=~x] such that the number of steps,
+the number
+     P
+           of used registers and the length of every term occurring in the computation all are
+ qt( jnij).
+
+
+                                                       8
+                                                P
+Proof. By induction on jtj. Let m := jni j. We write #steps, #registers and maxlength for the
+three quantities above, and call their maximum bound. Of course, the computed term rf (t;~n; ~x)
+will be such that no new free variables are produced, i.e. FV(rf (t;~n; ~x))  FV(t[~n=~x]).
+    If t is z:r, then compute r := rf (r;~n; ~x) and form t := z:r. Observe that z and r are safe
+because t has safe type, hence r[~n=~x] has safe free variables only. By the induction hypothesis the
+R-free RS-term r is obtained with bound qr (m). Hence t is an R-free RS-term obtained with
+bound jtj + qr (m).
+    If t is Ur : : :rl with U a variable y 6= xi or one of the constants 0; s ; s ; p; c , then each ri
+              1                                                                        0   1
+
+is a safe or ground type term or else is . Apply the induction hypothesis to all RS-terms ri to
+obtain suitable R-free RS-terms ri := rf (ri;~n; ~x). Then form t := Ur : : :rl and rename t so as
+to obtain an RS-term. Here we need that the ~n are closed, for otherwise a free variable in ~n might
+                                                                                   1
+
+
+
+
+be duplicated, thus P
+                        violating the (S) property. Using the induction hypothesis, t is obtained with
+bound jtj + 1 + qri (m).
+    If t is (x:s)r~r with FO(x; s) > 1, then x must be of ground type, since t satis es (S). We
+distinguish two cases: If x is safe, we rst rename t, then form r and s~r (in one step), and
+compute s := rf (s~r;~n; ~x) and r := rf (r;~n; ~x). Finally, we form (x:s)r, and rename it so as
+to obtain an RS-term. Using the induction hypothesis the result term is obtained with bound
+jtj + 6 + qs~r (m) + qr (m). Otherwise if x is complete, rst form r and s~r (in one step) and compute
+n := rf (r;~n; ~x), then copy n to ux and compute rf (s~r;~n; n; ~x; x). Using the induction hypothesis
+the result term is obtained with bound is jtj + qr (m) + qs~r (m + qr (m)).
+    If t is (x:s)r~r with FO(x; s)  1, form t0 := s[r=x]~r (in one step) and compute rf (t0 ;~n; ~x). Using
+the induction hypothesis the result term is obtained with bound jtj + qt0 (m).
+    The case (!s)~r is treated similarly to the previous case, and the case t = xi is obvious.
+    Because t is safe, the only remaining case is where t is of the form Rghnr : : :rl . Then we will
+                                                                                           1
+
+output a renamed version of the term
+                                        (T (T : : : (Tk g ) : : : ))r : : :rl
+                                            0   1         1            1
+
+
+
+with g  := rf (g;~n; ~x), k := dlog ([ N ] + 1)e where !N := nf (rf (n;~n; ~x)), Ti := rf (hz;~n; !Ni; ~x; z ) for
+some new variable z , where Ni is obtained from N by deleting the rst i leading constants s or
+                                    2
+
+
+
+
+s , and rj := rf (rj ;~n; ~x).
+                                                                                                               0
+
+ 1
+
+   Since n is a complete subterm of a term satisfying (R), all free variables of n are complete. Hence
+n[~n=~x] is closed, since all free variables of t[~n=~x] are safe. Therefore, nf (n[~n=~x]) is a numeral. One
+obtains rf (n;~n; ~x) with bound  qn (m) by the induction hypothesis. Then by Base Normalization
+(4.4) one obtains the numeral !N := nf (rf (n;~n; ~x)) = nf (n[~n=~x]) with
+           #steps  2jrf (n;~n; ~x)j  2qn (m); #registers  qn (m); maxlength  qn (m):
+We now compute the term T (T : : : (Tk g ) : : : ) by an obvious loop with k  jN j  qn (m)
+                                    0   1           1
+
+rounds. However, to obtain an estimate on our bound, we need to look into some details. First
+pick a new variable z and write hz into a xed register v . Then, compute g  := rf (g;~n; ~x) with
+bound  qg (m) in a result register u, and consider the register w holding N = N as counter.        0
+
+If w holds Ni = 0, output the content of register u, i.e. g . Otherwise, w holds Ni 6= 0 and u
+holds (Tk i : : : (Tk g ) : : : ). Compute !Nk i from N and Ni in the environment register uz ;
+                       1                                 1
+
+this clearly is possible with some bound q (jN j)  q (qn (m)) for some polynomial q . Compute
+                                                    1            1                                   1
+
+
+
+
+                                                             9
+Tk i := rf (hz;~n; !Nk i ; ~x; z) in v , with bound qhz (m + jNk i j)  qhz (m + qn (m)). Update
+         1                      1                                          1
+
+u by applying the content of v onto u's original content. This gives Tk i (Tk i : : : (Tk g) : : : )
+                                                                                   1                1
+
+in one step, with no additional register and maxlength increased by jTk i j  qhz (m + qn (m)).
+                                                                                    1
+
+Finally, update w to hold Ni and go to the initial test of the loop.
+                                    +1
+
+   Let us now estimate our bound. We go k  jN j  qn (m) times through the loop. The number
+of steps in each round is
+           1 + q (jN j) + qhz (m + jNk i j) + 2  1 + q (qn(m)) + qhz (m + qn(m)) + 2:
+                    1                         1               1
+
+
+
+The number of register used is 3 (for v; u; uz ) plus q (qn (m)) (to compute !Nk i ) plus qhz (m +
+                                                          1                                 1
+
+qn (m)) (to compute Tk i ), and the maximum length of a term is
+                                1
+
+
+
+                                      qn (m) + qhz (m + qn (m)):
+Hence the total bound for this part of the computation is
+                                                                    
+                                      3 + qn (m) + qhz (m + qn (m))  qn (m):
+Finally, in a loop with l rounds, compute rj := rf (rj ;~n; ~x) with bound qrj (m), assuming u holds
+(T (T : : : (Tk g ) : : : ))r : : :rj , and update u by applying this term to rj .
+     0   1      1           1            1
+
+  The total number of steps, used registers and lengths of used terms are therefore  qt (m) with
+a polynomial qt explicitely de nable from qn , qhz , qg and all qrj .
+
+5 Polynomial time computable functions
+In this last section we complete the proof that the number theoretical functions de nable by RA-
+terms are exactly the polynomial-time computable functions.
+Theorem 5.1 (Bounding). Let t be a closed RA-term of type  ; : : : ; k !  , where  ; : : : ; k ; 
+                                                                       1                        1
+
+all are ground. Then one can nd a polynomial pt such that for all numerals    P
+                                                                                   n ; : : : ; nk with types
+                                                                                        1
+
+ ; : : : ; k respectively, one can compute the numeral nf (t~n) in time pt ( i jnij).
+ 1
+
+
+
+Proof. One must nd a polynomial        P
+                                             pt such that for all numerals ~n of types ~, one can compute
+nf (t~n) in time pt (m) with m :=         i i j. Let ~x be new variables of types ~ . We consider two cases.
+                                           jn
+    Case  is safe. Since t is an RA-term, so is t~x. The normal form of t~x is computed in a number
+of steps that is large but still only a constant with respect to ~n. By closure under reduction (3.1)
+this is an RA-term, with only ground free variables. Note that by (4.1) all variables in nf (t~x) are
+safe or ground. Since nf (t~x) is a normal term satisfying (A), for every subterm x:s with x higher
+type the variable x is anable in s. Hence by Sharing (4.2) one obtains an RS-term t0 := (nf (t~x))
+equivalent to t~x. Let c be the number of steps needed to compute t0 . By R-Elimination (4.5)
+one obtains an R-free RS-term rf (t0 ;~n; ~x) equivalent to t0 [~n=~x] and hence to t~n. This requires at
+most qt0 (m)qtime(qt0 (m)) steps, and uses at most this many registers of this size. As the output is
+in a register, this also bounds the length jrf (t0;~n; ~x)j. Using Base Normalization (4.4) one obtains
+nf (t~n) = nf (rf (t0;~n; ~x)) in a total of pt(m) := c + 3qt0 (m)qtime(qt0 (m)) steps using registers of at
+most the same size.
+   Case  is complete. Then by a note in section 3, all safe input positions i of t are redundant.
+Hence [ nf (t~n)] = [ nf (t~n0 )] where ~n0 results from ~n by replacing each safe ni with 0. Therefore
+                                                     10
+it suces to compute nf (t~n0 ). To this end, consider the RA-term t~x0 where ~x0 results from ~x
+by replacing each safe xi with 0. Let ~n00 ; ~x00 result from ~n; ~x respectively by cancelling all safe
+components. Observing that [ t~n0 ] = [ t~x0 [~n00 =~x00 ]] = [ t0 [~n00=~x00]] where t0 now is (nf (t~x0 )), the
+argument in the rst case carries over to t~x0 and ~n00; ~x00 . One obtains the same bound pt .
+   It remains to embed the polynomial time computable functions into the system of RA-terms.
+One could use any of the resource-free function algebra characterizations [1, 3, 16] of the polynomial
+time computable functions; we pick [1].
+Theorem 5.2. Every function f computable in polynomial time on a Turing machine, is denoted
+by an RA term tf .
+Proof. In [1] the polynomial time computable functions are characterized by a function algebra B
+based on the schemata of safe recursion and safe composition. There every function is written in
+the form f (~x; ~y) where ~x; ~y denotes a kind of bookkeeping of those variables ~x involved in a safe
+recursion in the de nition of f , whereas ~y denotes those variables on which no recursion has been
+performed. We proceed by induction on the de nition of f (~x; ~y) in B, associating to f a closed
+RA-term tf of type ~!; ~ !  such that tf is denoting f , i.e. [ tf ] = f .
+   If f is an initial function 0, si (; y ), p(; y ) or c(; y ; y ; y ), then tf := f . If f is a projection jm;n
+satisfying jm;n (x ; : : : ; xm; xm ; : : : ; xm n ) = xj , then we de ne tf := x : : :xm n :uj where
+                                                                 1   2       3
+
+                     1                +1           +                                              1        +
+
+uj := xj  if j  m, and uj := xj otherwise.
+   If f is de ned by safe composition from g;~g; ~h, that is, f (~x; ~y) := g (~g(~x; ); ~h(~x; ~y)) where #~g =: m
+and #~h =: n, then de ne tf := ~x~y : tg !(tg1 ~x) : : :!(tgm ~x)(th1 ~x~y ) : : : (thn ~xy~) where ~x all are of type !,
+and ~y all are of type .
+   Finally, if f is de ned by safe recursion from g , h , and h , then f (0; ~x; ~y) = g (~x; ~y) and
+f (six; ~x; ~y) = hi(x; ~x; ~y; f (x; ~x; ~y)) for si x 6= 0. Using the induction hypothesis to obtain th0 and
+                                                                         0       1
+
+
+
+
+th1 , rst de ne th = n~xy~: c n 0 (th0 (pn)~x~y) (th1 (pn)~xy~). The case is nished by de ning
+                            tf := x~x: R~! (tg ~x) !(u V ~! ~y : th u~x~y(V ~y )) x
+                                                                 !
+
+
+
+
+where x; ~x all are of type !, and ~y all are of type . In each case one easily veri es [ tf ] = f .
+
+References
+[1] S.J. Bellantoni and S. Cook. A New Recursion-Theoretic Characterization of the Polytime
+    Functions. Computational Complexity, 2:97{110, 1992.
+[2] S.J. Bellantoni. Characterizing parallel polylog time using type 2 recursions with polynomial
+    output length. In D. Leivant, editor, Logic and Computational Complexity, Springer Lecture
+    Notes in Computer Science, 960:253{268, 1995.
+[3] S.J. Bellantoni and K.-H. Niggl. Ranking Primitive Recursions: The Low Grzegorczyk Classes
+    Revisited. SIAM Journal of Computing, 1998. To appear.
+[4] S.A. Cook and B.M. Kapron. Characterizations of the basic feasible functionals of nite type.
+    In S. Buss and P. Scott, editors, Feasible Mathematics, p. 71{98, Birkhauser Boston, New York,
+    1990.
+                                                            11
+[5] M.D. Davis and E.J. Weyker. Computability, complexity and languages. Fundamentals of theo-
+    retical computer science. Acad. Pr., New York, 1983.
+[6] J.Y. Girard. Light Linear Logic. Information and Computation, 143:175{204, 1998.
+[7] K. Godel. U ber eine bisher noch nicht benutzte Erweiterung des niten Standpunktes. Dialec-
+    tica, 12:280{287, 1958.
+[8] D. Hilbert. U ber das Unendliche. Mathematische Annalen, 95:161{190, 1925.
+[9] M. Hofmann. A mixed modal/linear lambda calculus with applications to Bellantoni-Cook
+    safe recursion. Proceedings of CSL '97, Aarhus. Springer Lecture Notes in Computer Science,
+    1414:275{294, 1998.
+[10] M. Hofmann. Typed lambda calculi for polynomial-time computation. Habilitation thesis, TU
+    Darmstadt, 1998.
+[11] F. Joachimski and R. Matthes. Short proofs of normalisation for the simply-typed -calculus,
+    permutative conversions and Godel's T. Submitted, 1998
+[12] D. Leivant. Subrecursion and lambda representation over free algebras. In S. Buss and P. Scott,
+    editors, Feasible Mathematics, Perspectives in Computer Science, p. 281{291, Birkhauser-
+    Boston, New York, 1990.
+[13] D. Leivant. Predicative recurrence in nite type. In A. Nerode and Y. V. Matiyasevisch,
+    editors, Logical Foundations of Computer Science, Springer Lecture Notes in Computer Science,
+    813:227{239, 1994.
+[14] D. Leivant. Rami ed recurrence and computational complexity I: Word recurrence and poly-
+    time. In P. Clote and J. Remmel, editors, Feasible Mathematics II, Perspectives in Computer
+    Science, p. 320{343, Birkhauser, 1994.
+[15] D. Leivant and J.-Y. Marion. Rami ed Recurrence and Computational Complexity IV: Pred-
+    icative Functionals and Poly-space. Information and Computation, to appear.
+[16] K.-H. Niggl. The -Measure as a Tool for Classifying Computational Complexity. Archive for
+    Mathematical Logic, 1999. To appear.
+[17] H. Simmons. The Realm of Primitive Recursion. Archive for Mathematical Logic, 27:177{188,
+    1988.
+[18] A.S. Troelstra and H. Schwichtenberg. Basic Proof Theory, Cambridge University Press, 1996.
+
+
+
+
+                                                12
+

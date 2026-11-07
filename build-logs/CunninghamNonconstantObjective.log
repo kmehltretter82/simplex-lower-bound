@@ -1,0 +1,5 @@
+'CunninghamNonconstantObjective.points_feasible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CunninghamNonconstantObjective.omittedContribution_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CunninghamNonconstantObjective.omittedContribution_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CunninghamNonconstantObjective.nonconstant_on_feasible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CunninghamNonconstantObjective.no_constant_offset' depends on axioms: [propext, Classical.choice, Quot.sound]

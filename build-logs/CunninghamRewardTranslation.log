@@ -1,0 +1,13 @@
+'CunninghamRewardTranslation.eliminate_bottom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CunninghamRewardTranslation.expandBottom_valid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CunninghamRewardTranslation.expandBottom_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CunninghamRewardTranslation.boundary_objective_coefficients' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CunninghamRewardTranslation.boundary_conservation_entries' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CunninghamRewardTranslation.bottom_graph_matches_boundary_action' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CunninghamRewardTranslation.coefficient_difference' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CunninghamRewardTranslation.objective_difference' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CunninghamRewardTranslation.program_objective_difference' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CunninghamRewardTranslation.eliminate_interior' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CunninghamRewardTranslation.first_switch_advantage' depends on axioms: [propext, Classical.choice, Quot.sound]

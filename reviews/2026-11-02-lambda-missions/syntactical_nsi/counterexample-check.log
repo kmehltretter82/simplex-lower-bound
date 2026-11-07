@@ -1,0 +1,375 @@
+CHECK syntactical_nsi/counterexample.lean
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:312: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:322: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:522: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:532: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:1335: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:1345: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:1511: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:1521: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:1687: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:1697: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:1894: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:1904: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:2185: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:2195: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:2379: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:2389: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:3154: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:3360: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:3370: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:3574: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:3584: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:3799: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:3809: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:4026: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:4036: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:4224: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:4234: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:137: warning: Unused tactic linter: `tauto` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:660: warning: Unused tactic linter: `tauto` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:824: warning: Unused tactic linter: `tauto` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:2517: warning: Unused tactic linter: `tauto` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:14:2665: warning: Unused tactic linter: `tauto` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:200: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:210: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:424: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:434: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:602: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:612: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:811: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:821: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:991: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:1001: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:1169: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:1179: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:1347: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:1357: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:1548: warning: This simp argument is unused:
+  or_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_left_comm, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:17:1558: warning: This simp argument is unused:
+  or_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsDisjointCtxUnion, DisjointCtx, IsCtxUnion, or_assoc, or_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:93:4487: warning: This simp argument is unused:
+  freeVarOccurrences
+
+Hint: Omit it from the simp argument list.
+  [apply] simp +decide [substTerm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:97:5184: warning: This simp argument is unused:
+  freeVarOccurrences
+
+Hint: Omit it from the simp argument list.
+  [apply] simp +decide [substTerm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:99:5061: warning: This simp argument is unused:
+  freeVarOccurrences
+
+Hint: Omit it from the simp argument list.
+  [apply] simp +decide [substTerm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:101:5922: warning: This simp argument is unused:
+  freeVarOccurrences
+
+Hint: Omit it from the simp argument list.
+  [apply] simp +decide [substTerm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:105:4545: warning: This simp argument is unused:
+  freeVarOccurrences
+
+Hint: Omit it from the simp argument list.
+  [apply] simp +decide [substTerm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:107:4288: warning: This simp argument is unused:
+  freeVarOccurrences
+
+Hint: Omit it from the simp argument list.
+  [apply] simp +decide [substTerm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/Users/kmehltretter/codex/collaboration/oliver/reviews/2026-11-02-lambda-missions/syntactical_nsi/counterexample.lean:109:5810: warning: This simp argument is unused:
+  freeVarOccurrences
+
+Hint: Omit it from the simp argument list.
+  [apply] simp +decide [substTerm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'AehligSchwichtenberg2002.Audit.f_typed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AehligSchwichtenberg2002.Audit.input_canonical' depends on axioms: [propext, Quot.sound]
+'AehligSchwichtenberg2002.Audit.reaches_output' depends on axioms: [propext, Quot.sound]
+'AehligSchwichtenberg2002.Audit.output_normal' depends on axioms: [propext, Quot.sound]
+'AehligSchwichtenberg2002.Audit.output_violates_bound' depends on axioms: [propext, Quot.sound]
+'AehligSchwichtenberg2002.Audit.submitted_corollary_4_4_false' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Checked 1 files; failed 0.

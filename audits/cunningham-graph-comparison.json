@@ -1,0 +1,76 @@
+{
+  "method": "Independent source-graph elimination compared with actual Lean #eval output",
+  "universal_proof": false,
+  "cases": [
+    {
+      "n": 3,
+      "rows": 10,
+      "columns": 20,
+      "matrix_entries": 200,
+      "graph_vertices": 21,
+      "all_exact_checks_passed": true
+    },
+    {
+      "n": 4,
+      "rows": 15,
+      "columns": 30,
+      "matrix_entries": 450,
+      "graph_vertices": 29,
+      "all_exact_checks_passed": true
+    },
+    {
+      "n": 5,
+      "rows": 20,
+      "columns": 40,
+      "matrix_entries": 800,
+      "graph_vertices": 37,
+      "all_exact_checks_passed": true
+    },
+    {
+      "n": 6,
+      "rows": 25,
+      "columns": 50,
+      "matrix_entries": 1250,
+      "graph_vertices": 45,
+      "all_exact_checks_passed": true
+    },
+    {
+      "n": 7,
+      "rows": 30,
+      "columns": 60,
+      "matrix_entries": 1800,
+      "graph_vertices": 53,
+      "all_exact_checks_passed": true
+    },
+    {
+      "n": 8,
+      "rows": 35,
+      "columns": 70,
+      "matrix_entries": 2450,
+      "graph_vertices": 61,
+      "all_exact_checks_passed": true
+    },
+    {
+      "n": 9,
+      "rows": 40,
+      "columns": 80,
+      "matrix_entries": 3200,
+      "graph_vertices": 69,
+      "all_exact_checks_passed": true
+    },
+    {
+      "n": 10,
+      "rows": 45,
+      "columns": 90,
+      "matrix_entries": 4050,
+      "graph_vertices": 77,
+      "all_exact_checks_passed": true
+    }
+  ],
+  "sha256": {
+    "Definitions/Def_friedmann_cunningham.lean": "72e58bee2bc88d22a17ca25c1dad59c0b977b4ca7c9afd02fa8865a5879feca4",
+    "checks/CunninghamExport.lean": "6766da46be56721b265785674b935588dfca9e363fc4ebf6adf6883acad2c3c2",
+    "notes/cunningham_graph_audit.py": "1b0c64e4f5c25aeb1b34c98f37c6421b6e81d49c1ae702d3568ec31d2fd2f8a6",
+    "build-logs/CunninghamExport.log": "6627d9a04a230b1bff333043d83291bf5e316ff6de4dbe3f6b41669701fd77c5"
+  }
+}

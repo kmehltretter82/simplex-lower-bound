@@ -1,0 +1,47 @@
+{
+  "proposal_id": "059a0f02-b778-44fd-9e95-ec7cbdba9cbc",
+  "new_items": {
+    "definition": {
+      "id": "6c5ca301-620e-47dd-b58f-0672e13796be",
+      "name": "Schwichtenberg1976V2_Lambda",
+      "hash": "624e1796f3c3f9df812e71b1f46ce0bc2208da9bad1718923e999d8bd1a962c7"
+    },
+    "combinators_and_sufficiency": {
+      "id": "a198ac2b-451f-4640-b000-6e373b285ba4",
+      "name": "Schwichtenberg1976V2.combinators_and_sufficiency",
+      "hash": "0eb9c97b051bf7f17a2f57fcecf2a0abd2e84ae4f2f5ff6ee74747581e423b08"
+    },
+    "normal_subterm_structure": {
+      "id": "c6023a9f-21e2-4820-b9ad-05fd7b333afe",
+      "name": "Schwichtenberg1976V2.normal_subterm_structure",
+      "hash": "b771a53a1879a4e9628e3918d81e6278578e2b631e2a939d4791bd58cf0e7e73"
+    },
+    "subterm_polynomial_lemma": {
+      "id": "77849aaa-cd40-4e09-b027-aa31479c57fb",
+      "name": "Schwichtenberg1976V2.subterm_polynomial_lemma",
+      "hash": "dd5f5eda27da24f8755ff8a67d00e50181b20fe47c9f1dc9919ca1e5bcf4cc8f"
+    },
+    "definable_iff_extended_polynomial": {
+      "id": "1527fe27-8094-424b-b3d3-388c6a3107e4",
+      "name": "Schwichtenberg1976V2.definable_iff_extended_polynomial",
+      "hash": "0da2bcb3df9bed590aaa25b626e0f1b4e9510958b1869ac561e73e47abe07364"
+    }
+  },
+  "new_milestones": {
+    "combinators_and_sufficiency": "e15cabc7b28938803c569b26a9ff61a830cbe8ffeb82217fb6bc341f569ad6d9",
+    "normal_subterm_structure": "e9f60d967c0eaa6a71a0677dd11bfc1245cb665f2a6fb94b234b8ed300f2ab73",
+    "subterm_polynomial_lemma": "669436235838c77282f84ca91be272973bfc282abcccdc92f2505968a239de11"
+  },
+  "removed_old_milestones": [
+    "6e273f62-64c5-4318-a05a-8a39e52eee4b",
+    "642dc3db-853f-4e6d-bd9b-14deebeae480",
+    "2d2c21d1-df7a-4961-a241-c2df62884098"
+  ],
+  "removed_old_items": [
+    "d07ad5a1-b497-4253-be46-eb89793c50a6",
+    "6e273f62-64c5-4318-a05a-8a39e52eee4b",
+    "642dc3db-853f-4e6d-bd9b-14deebeae480",
+    "2d2c21d1-df7a-4961-a241-c2df62884098",
+    "8f16f779-9541-4d5f-806c-a29a44f333c7"
+  ]
+}

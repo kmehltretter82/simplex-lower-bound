@@ -1,0 +1,310 @@
+[
+  {
+    "path": "Definitions/Def_ABHS2004_TermSystem.lean",
+    "slug": "arithmetic_nsi",
+    "theorem_id": "aee9d687-6c4e-4dcc-8a9a-6a87e20650f5",
+    "name": "ABHS2004_TermSystem",
+    "kind": "definition"
+  },
+  {
+    "path": "Definitions/Def_ABHS2004_Arithmetic.lean",
+    "slug": "arithmetic_nsi",
+    "theorem_id": "25cf72d6-0484-4d02-a3f3-4615360888f6",
+    "name": "ABHS2004_Arithmetic",
+    "kind": "definition"
+  },
+  {
+    "path": "Definitions/Def_ABHS2004_Realizability.lean",
+    "slug": "arithmetic_nsi",
+    "theorem_id": "4820983d-c521-416a-afd7-67121134b395",
+    "name": "ABHS2004_Realizability",
+    "kind": "definition"
+  },
+  {
+    "path": "Theorems/Thm_ABHS2004_lemma_2_11.lean",
+    "slug": "arithmetic_nsi",
+    "theorem_id": "c84a3ce3-0a4d-4f00-8a88-301a8a774ed9",
+    "name": "ABHS2004.lemma_2_11",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_ABHS2004_proposition_2_13.lean",
+    "slug": "arithmetic_nsi",
+    "theorem_id": "49839b16-26ee-4654-82f5-a18c8380df60",
+    "name": "ABHS2004.proposition_2_13",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_ABHS2004_corollary_2_22.lean",
+    "slug": "arithmetic_nsi",
+    "theorem_id": "9332b2a2-fce3-4dee-ba84-816298c4e419",
+    "name": "ABHS2004.corollary_2_22",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_ABHS2004_theorem_2_25.lean",
+    "slug": "arithmetic_nsi",
+    "theorem_id": "781d5724-8400-4aaa-b8e9-a80da0140554",
+    "name": "ABHS2004.theorem_2_25",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_ABHS2004_theorem_4_7.lean",
+    "slug": "arithmetic_nsi",
+    "theorem_id": "4d154f33-9db8-4048-8df3-fd719b97a5dc",
+    "name": "ABHS2004.theorem_4_7",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_ABHS2004_corollary_4_8.lean",
+    "slug": "arithmetic_nsi",
+    "theorem_id": "1747f247-f7a7-44e1-b4c6-03f368f7bf80",
+    "name": "ABHS2004.corollary_4_8",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_ABHS2004_theorem_4_9.lean",
+    "slug": "arithmetic_nsi",
+    "theorem_id": "8153f9a2-f87b-4253-b9ba-b757d52d00d7",
+    "name": "ABHS2004.theorem_4_9",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_ABHS2004_corollary_4_11.lean",
+    "slug": "arithmetic_nsi",
+    "theorem_id": "bf94660f-3637-40e8-ba3b-06853916376b",
+    "name": "ABHS2004.corollary_4_11",
+    "kind": "theorem"
+  },
+  {
+    "path": "Definitions/Def_Schwichtenberg1976_Lambda.lean",
+    "slug": "extended_polynomials",
+    "theorem_id": "1b8fdb07-70ed-450d-a3a9-1ff2a939563f",
+    "name": "Schwichtenberg1976_Lambda",
+    "kind": "definition"
+  },
+  {
+    "path": "Theorems/Thm_Schwichtenberg1976_combinators_and_sufficiency.lean",
+    "slug": "extended_polynomials",
+    "theorem_id": "4694e83f-7878-4185-8cdf-964a0d906b8a",
+    "name": "Schwichtenberg1976.combinators_and_sufficiency",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_Schwichtenberg1976_normal_subterm_structure.lean",
+    "slug": "extended_polynomials",
+    "theorem_id": "aadc9a8e-5141-4915-b574-db398c5d5716",
+    "name": "Schwichtenberg1976.normal_subterm_structure",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_Schwichtenberg1976_subterm_polynomial_lemma.lean",
+    "slug": "extended_polynomials",
+    "theorem_id": "8057498b-8e0a-4096-bdd4-ec2e8be75632",
+    "name": "Schwichtenberg1976.subterm_polynomial_lemma",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_Schwichtenberg1976_definable_iff_extended_polynomial.lean",
+    "slug": "extended_polynomials",
+    "theorem_id": "d41263bd-5699-47e6-9aea-b2d2af7f2deb",
+    "name": "Schwichtenberg1976.definable_iff_extended_polynomial",
+    "kind": "theorem"
+  },
+  {
+    "path": "Definitions/Def_BNS2000_Syntax.lean",
+    "slug": "higher_type",
+    "theorem_id": "524b25b3-0657-4c05-9ec3-3206a0778e9e",
+    "name": "BNS2000_Syntax",
+    "kind": "definition"
+  },
+  {
+    "path": "Definitions/Def_BNS2000_Terms.lean",
+    "slug": "higher_type",
+    "theorem_id": "02e9f80a-7062-4b5e-ad64-3827cc010519",
+    "name": "BNS2000_Terms",
+    "kind": "definition"
+  },
+  {
+    "path": "Theorems/Thm_BNS2000_theorem_3_1.lean",
+    "slug": "higher_type",
+    "theorem_id": "af34efec-8aba-46ba-b515-02995cb6922d",
+    "name": "BNS2000.theorem_3_1",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_BNS2000_lemma_4_1_and_4_2.lean",
+    "slug": "higher_type",
+    "theorem_id": "843d6509-d9d6-4f59-bf22-2a2d8f3f0510",
+    "name": "BNS2000.lemma_4_1_and_4_2",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_BNS2000_theorem_4_3_and_4_4.lean",
+    "slug": "higher_type",
+    "theorem_id": "5e24e9ec-f0f3-47bf-a0d2-46a45e19ddf5",
+    "name": "BNS2000.theorem_4_3_and_4_4",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_BNS2000_theorem_4_5.lean",
+    "slug": "higher_type",
+    "theorem_id": "5eb076ec-d2e4-4bc5-9e1f-e3de47f2bb7e",
+    "name": "BNS2000.theorem_4_5",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_BNS2000_theorem_5_1.lean",
+    "slug": "higher_type",
+    "theorem_id": "6697cd6f-3349-437a-a835-5aded351f76f",
+    "name": "BNS2000.theorem_5_1",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_BNS2000_theorem_5_2.lean",
+    "slug": "higher_type",
+    "theorem_id": "87f0a9b2-d444-41e1-8b7e-63b50aab8479",
+    "name": "BNS2000.theorem_5_2",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_BNS2000_ptime_characterization.lean",
+    "slug": "higher_type",
+    "theorem_id": "a39da23f-86c2-4263-9f64-dfc11038dbe0",
+    "name": "BNS2000.ptime_characterization",
+    "kind": "theorem"
+  },
+  {
+    "path": "Definitions/Def_BergerSchwichtenberg1991_Syntax.lean",
+    "slug": "inverse_evaluation",
+    "theorem_id": "77bba890-32b5-4485-a94a-120c9b3361e3",
+    "name": "BergerSchwichtenberg1991_Syntax",
+    "kind": "definition"
+  },
+  {
+    "path": "Definitions/Def_BergerSchwichtenberg1991_Models.lean",
+    "slug": "inverse_evaluation",
+    "theorem_id": "0bb5bc30-2efd-41d1-b583-d0780cee8bca",
+    "name": "BergerSchwichtenberg1991_Models",
+    "kind": "definition"
+  },
+  {
+    "path": "Theorems/Thm_BergerSchwichtenberg1991_lemma_1.lean",
+    "slug": "inverse_evaluation",
+    "theorem_id": "c8b8f03b-7913-403f-b349-4daf6b82845b",
+    "name": "BergerSchwichtenberg1991.lemma_1",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_BergerSchwichtenberg1991_lemma_2.lean",
+    "slug": "inverse_evaluation",
+    "theorem_id": "2c7ff2fa-f3b1-4736-8533-346eb80d1f0c",
+    "name": "BergerSchwichtenberg1991.lemma_2",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_BergerSchwichtenberg1991_lemma_3.lean",
+    "slug": "inverse_evaluation",
+    "theorem_id": "c9134df5-456e-42b1-8651-6eec851d26bf",
+    "name": "BergerSchwichtenberg1991.lemma_3",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_BergerSchwichtenberg1991_lemma_4.lean",
+    "slug": "inverse_evaluation",
+    "theorem_id": "82d84dac-69b9-4561-9992-cfd317faff5f",
+    "name": "BergerSchwichtenberg1991.lemma_4",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_BergerSchwichtenberg1991_lemma_5.lean",
+    "slug": "inverse_evaluation",
+    "theorem_id": "9103856f-178c-455c-8cac-ea09d2f58b0e",
+    "name": "BergerSchwichtenberg1991.lemma_5",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_BergerSchwichtenberg1991_theorem_1.lean",
+    "slug": "inverse_evaluation",
+    "theorem_id": "e7d7112d-cd6a-4f46-95eb-51f6952b462f",
+    "name": "BergerSchwichtenberg1991.theorem_1",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_BergerSchwichtenberg1991_completeness_pr_models.lean",
+    "slug": "inverse_evaluation",
+    "theorem_id": "c4cdb23c-1935-4e0d-9eaa-5d27cd2e4606",
+    "name": "BergerSchwichtenberg1991.completeness_pr_models",
+    "kind": "theorem"
+  },
+  {
+    "path": "Definitions/Def_AehligSchwichtenberg2002_Syntax.lean",
+    "slug": "syntactical_nsi",
+    "theorem_id": "1ce7bcef-c3e9-422e-924f-1735c5fbc4d9",
+    "name": "AehligSchwichtenberg2002_Syntax",
+    "kind": "definition"
+  },
+  {
+    "path": "Definitions/Def_AehligSchwichtenberg2002_Bounds.lean",
+    "slug": "syntactical_nsi",
+    "theorem_id": "84cd66c7-2b4e-44e6-9c44-483bc81fd640",
+    "name": "AehligSchwichtenberg2002_Bounds",
+    "kind": "definition"
+  },
+  {
+    "path": "Theorems/Thm_AehligSchwichtenberg2002_lemma_3_4.lean",
+    "slug": "syntactical_nsi",
+    "theorem_id": "be7ab9df-d8b3-4216-8d1c-e9c3541e5d96",
+    "name": "AehligSchwichtenberg2002.lemma_3_4",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_AehligSchwichtenberg2002_lemma_3_5.lean",
+    "slug": "syntactical_nsi",
+    "theorem_id": "dcf7735d-0553-4d21-a5c5-211092d5ad01",
+    "name": "AehligSchwichtenberg2002.lemma_3_5",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_AehligSchwichtenberg2002_proposition_3_6.lean",
+    "slug": "syntactical_nsi",
+    "theorem_id": "ca4f6a84-88c3-4e4d-b349-baf9d394ce06",
+    "name": "AehligSchwichtenberg2002.proposition_3_6",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_AehligSchwichtenberg2002_lemma_4_3.lean",
+    "slug": "syntactical_nsi",
+    "theorem_id": "870822b8-2c65-4745-a6b0-a99fd5dd1e39",
+    "name": "AehligSchwichtenberg2002.lemma_4_3",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_AehligSchwichtenberg2002_corollary_4_4.lean",
+    "slug": "syntactical_nsi",
+    "theorem_id": "ee8fa0d7-cd23-4f23-8a0e-f01805651c6e",
+    "name": "AehligSchwichtenberg2002.corollary_4_4",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_AehligSchwichtenberg2002_lemma_4_7.lean",
+    "slug": "syntactical_nsi",
+    "theorem_id": "1fdf124e-5735-4b71-ab33-4fe415758c90",
+    "name": "AehligSchwichtenberg2002.lemma_4_7",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_AehligSchwichtenberg2002_theorem_4_8.lean",
+    "slug": "syntactical_nsi",
+    "theorem_id": "cbba3b20-e4d3-4b3d-b293-64785440d99d",
+    "name": "AehligSchwichtenberg2002.theorem_4_8",
+    "kind": "theorem"
+  },
+  {
+    "path": "Theorems/Thm_AehligSchwichtenberg2002_corollary_4_9.lean",
+    "slug": "syntactical_nsi",
+    "theorem_id": "6d615b63-22ea-4eeb-9957-c01bfe51d035",
+    "name": "AehligSchwichtenberg2002.corollary_4_9",
+    "kind": "theorem"
+  }
+]

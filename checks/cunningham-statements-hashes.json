@@ -1,0 +1,11 @@
+{
+  "Theorems/Thm_friedmann_cunningham_auso_lower_bound.lean": "a1c2b128af2091fdb1386404701bd025510d13d60a96eb814d266e9973e20c4c",
+  "Theorems/Thm_friedmann_cunningham_counterstrategy.lean": "0a4f5d420db1685bc753bb6865a43f00dc6d36167a346d04c7d6c88e8fb9ae6a",
+  "Theorems/Thm_friedmann_cunningham_cube_realization.lean": "d4838a9230230284477c142912c5df85876d3441f62ee0377745205973b8d89d",
+  "Theorems/Thm_friedmann_cunningham_lp_valid.lean": "fc42c6cf06c0ff5b2a7f83d3f7512870f397e7b4be2e74c3693d2a83ea901985",
+  "Theorems/Thm_friedmann_cunningham_mdp_lower_bound.lean": "c62c1e23ca23fa8116906aed7cf9a69f527b551a9b4c7613d83a9bf38babe227",
+  "Theorems/Thm_friedmann_cunningham_mdp_valid.lean": "d2a4a318946f181457064179a1c97a07feb388d2c1dbfa4e430b758a0b5e66a3",
+  "Theorems/Thm_friedmann_cunningham_parity_lower_bound.lean": "b5627886a3214bcee72799206237f96bb4a8c0ec44d85849b87d1b71a9a14643",
+  "Theorems/Thm_friedmann_cunningham_policy_pivot.lean": "08bae07286bd8475e934946f3ac49b69a328efda66a0537e9d398ee955bd041d",
+  "Theorems/Thm_friedmann_cunningham_simplex_lower_bound.lean": "553cf796890816f73903523a94704f3ed34cbbced552a069f0a6c195b02fc78a"
+}

@@ -1,0 +1,15 @@
+Primary source: Oliver Friedmann, An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms, LMCS 2011, author PDF https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf; arXiv:1106.0778v2 https://arxiv.org/abs/1106.0778
+
+FriedmannParity.counterstrategy_exists — §3, Lemma 3.1, existence clause and definition of the game valuation
+FriedmannParity.improvement_strict — §3, Theorem 3.2
+FriedmannParity.nonimprovable_solves — §3, Theorem 3.3, all five conclusions
+FriedmannParity.exponential_local — §6, Theorem 6.14 together with §7.1 linear-edge refinement
+FriedmannDiscounted.discounted_bellman — equation-level infrastructure consequence
+FriedmannStochastic.absorption_values — equation-level infrastructure consequence
+FriedmannParity.exponential_payoff — §9, payoff-game lower-bound corollary and standard mean-to-discounted reduction
+FriedmannParity.exponential_stochastic — §9, final simple-stochastic-game lower-bound corollary
+FriedmannParity.exponential_deterministic — §§6–9, local/global lower bounds, linear-edge refinements, and payoff/stochastic extensions
+
+Source table issue: the author PDF Table 4 lists g_n with priority 4n+4, colliding with a_1 despite the standing injectivity convention. Figure 4 uses different shifted gadget priorities. This packet does not transcribe either drawing as a hard-coded game: the source main lower bounds are stated as existential families with the source size convention. A proof must construct witnesses and justify their priorities and edge counts.
+
+Numbering: use the author PDF labels. The experimental arXiv HTML counts some proof environments and therefore shifts later theorem numbers; do not mix its labels into the PDF citations.

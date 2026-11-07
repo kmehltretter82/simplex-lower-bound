@@ -1,0 +1,26 @@
+{
+  "proposal_id": "059a0f02-b778-44fd-9e95-ec7cbdba9cbc",
+  "milestones": [
+    {
+      "item_id": "6e273f62-64c5-4318-a05a-8a39e52eee4b",
+      "title": "Sufficiency — Combinators and Extended Polynomials (p. 113)",
+      "milestone_description": "Proves that every extended polynomial is λ-definable over the Church numeral type `ν`.",
+      "sort_order": 0,
+      "theorem_id": "4694e83f-7878-4185-8cdf-964a0d906b8a"
+    },
+    {
+      "item_id": "642dc3db-853f-4e6d-bd9b-14deebeae480",
+      "title": "Normal-Form Analysis — Subterms of Type `0 → 0` (p. 114, clauses (1)-(3))",
+      "milestone_description": "Classifies all well-typed subterms of the normal form `r` of `t F₁ ... Fₖ α`.",
+      "sort_order": 1,
+      "theorem_id": "aadc9a8e-5141-4915-b574-db398c5d5716"
+    },
+    {
+      "item_id": "2d2c21d1-df7a-4961-a241-c2df62884098",
+      "title": "Polynomial Evaluation Lemma on Positive Numerals (p. 114)",
+      "milestone_description": "Establishes by induction on clauses (1)-(3) that substituting positive Church numerals reduces every type `0 → 0` subterm to `α` or `λy. α^{P(n⃗)} z`.",
+      "sort_order": 2,
+      "theorem_id": "8057498b-8e0a-4096-bdd4-ec2e8be75632"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+Build environment
+Checked 2026-11-02
+Lean: leanprover/lean4:v4.33.1
+Mathlib: 0df444a360eaa60ab8c11dca51a86af692955474
+The package cache is reused read-only through .lake/packages, which points to the existing .local/share/p2m-agent/envs/0df444a360ea cache. Source and build products for this package stay in this directory.
+The checked-in Lake pin uses the full revision; the local symlink is only a cache shortcut, not a dependency requirement.
+Prove2Me read-only API probe failed because the shell could not resolve prove2.me. The environment is the supported default recorded in the existing local environments.json snapshots; live API support was not rechecked.
+No platform drafts have been created by this preparation script.
+The initially inspected prove2me_mfotl cache contained mixed Lean4.33.0 and Lean4.33.1 headers and was not used after the smoke test detected this. The selected p2m-agent cache has matching headers.

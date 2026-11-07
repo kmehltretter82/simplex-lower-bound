@@ -1,0 +1,11 @@
+{
+  "Theorems/Thm_friedmann_zadeh_size.lean": "7a7dd4a4626ede89122c2f2f2acb2bfdc64bee8f3c4d4acef8c0f091c627016f",
+  "Theorems/Thm_friedmann_zadeh_valuation.lean": "2d705d2fc77cf82db8caa1c7fcc8ecbfa3bc8f4591e84ab94ae9ccd8d329ea60",
+  "Theorems/Thm_friedmann_zadeh_sink.lean": "7abc2caf0cc9d7d8038b7beee2acd3011c5f9191f11011910d73c39f97629115",
+  "Theorems/Thm_friedmann_zadeh_tie_order.lean": "0d5ac55c25f24283adbc86a12376f3d14a67a7a9f8be24535a13555ba1bafa01",
+  "Theorems/Thm_friedmann_zadeh_mdp_valid.lean": "e663da0e074a568ab5846a08f42094e341a88ca05349c8770da54a5ace9df367",
+  "Theorems/Thm_friedmann_zadeh_counter_coverage.lean": "6642049ead1d96602eb248570f075915103d89a2426374076ddbdb87766b1ffc",
+  "Theorems/Thm_friedmann_zadeh_lp_transfer.lean": "6f1dbb3c127c44a21ce7d31d93065df427410f139ffad5542fe6569d4dd66c1b",
+  "Theorems/Thm_friedmann_zadeh_source_realization.lean": "a1c62c297f1cda14b33adab2e9771681a23beaf30a26c544405a744bf6dafa91",
+  "Theorems/Thm_friedmann_zadeh_goal.lean": "6d4c6048f33338eceaee8c9456b4b1b8cf76a4d7cb1b0a2d797c4583ee7628b2"
+}

@@ -1,0 +1,67 @@
+{
+  "items": {
+    "def:friedmann_parity": {
+      "id": "0d2f7121-a7ff-43a6-9ec8-1ca69cbf0ee0",
+      "hash": "a5f85a389bb2cbbfc5b0a594be917c346ebd5c900f232c2e7c92ce6c7e537280"
+    },
+    "def:friedmann_multiplicity": {
+      "id": "a747d224-9d3e-46a3-8b54-d0ba60690300",
+      "hash": "4eec7b6478becb2b465aa503fe27f5c773578e70a23d2dd05e72f50e1117894e"
+    },
+    "def:friedmann_simplex": {
+      "id": "beab4a14-3f64-49ed-81b3-db49b9f77c28",
+      "hash": "dc5c351a58c40c1b7647f61b65345120932d7015067a2590c49012ee864a9a16"
+    },
+    "def:friedmann_cunningham": {
+      "id": "570290a0-1ee3-4857-8590-26896eadb9e8",
+      "hash": "d1331cf9531a5bfddb3b52d80d697d018a52d7d6efb97ba56d7a3e8b3f61a171"
+    },
+    "counterstrategy": {
+      "id": "7f12b423-04d3-46eb-a250-89f84840320d",
+      "hash": "b46af9ef72a1cf4dedfbf44805e3d78b964dda3363a244994e412790f3bd35ee"
+    },
+    "parity_lower_bound": {
+      "id": "1e243da2-c10b-423a-ba32-b9e967b183e2",
+      "hash": "3229830357f3d156fbf5852fdfd9214492db9ccd7f93ef872ba6a85c9a7d0483"
+    },
+    "mdp_valid": {
+      "id": "56e18c91-86e9-4637-9ac7-e060bff8596c",
+      "hash": "0a61d98b17e219b0db4776985b2acb41c16e9c79f99636b8c5de28ca982e717d"
+    },
+    "lp_valid": {
+      "id": "5dc1a9cf-60c3-4c0e-a3f1-aff2f5bbf503",
+      "hash": "1f262de2d75206e84d84e8c6c2a19836185da9ceb383ce59ac760c7300307bf7"
+    },
+    "policy_pivot": {
+      "id": "d24afa5e-ff30-4f53-856c-0433bf9fba14",
+      "hash": "b590d00cdacfdae712c201ec076b65bd76cb18bd3c0b7cc5e6728063c05f50b9"
+    },
+    "mdp_lower_bound": {
+      "id": "b2271fe7-3146-4435-8df8-8b35019e8820",
+      "hash": "bced504634d66def8f56a26b8e889757c879222183d9ef5ff4946ba7b41400e9"
+    },
+    "cube_realization": {
+      "id": "1bbda392-1b13-42d8-91a1-ccf5d569e7c8",
+      "hash": "9e463990db90f4be054f7d36eb6e0e44a2406a70269c164bcf4089a16abf62df"
+    },
+    "auso_lower_bound": {
+      "id": "b9fb76f1-ab85-4671-93e7-1195b85c65f3",
+      "hash": "3e38a7e26f7d5f1ed81bae54fca31e8d9dbbd0e798e223e08f05fe6cf220aba2"
+    },
+    "goal": {
+      "id": "8e909f7e-d5be-44aa-8c78-d9b8a0095ca4",
+      "hash": "952c7721450747c8d70e16573da146c0f988aa10686c94efeaeacc922544f6b7"
+    }
+  },
+  "milestones": {
+    "counterstrategy": "759d1514c4e850fbe389ef9fb2d846f727f1d66bb49d117cc4eb375a1f4394a9",
+    "parity_lower_bound": "d0d14353df234fa1690a3acbbb75405f4ea030e11afb894a484e7c78e6292710",
+    "mdp_valid": "b38c245f0dd9bcaff3e3f18f982a1bf8743b3c3172689ecd0320a93f5188d933",
+    "lp_valid": "c8e4c6a97f70b5fd3f67d722e0d8bf5fccd78b484f6e0799d8025d83be7a17c0",
+    "policy_pivot": "91d64f4e3eef96c80737596bbc0c44b519652f25daa36aa1bb3f0a9798e95acf",
+    "mdp_lower_bound": "35c6c4d92443066c193ee9fb2466dfa244bbd9833d4b916a71ad710c72a4167b",
+    "cube_realization": "0f59b64ecad93cb1c5bd0cca90cc9d57decc83e12cd5642658293ea3d9338639",
+    "auso_lower_bound": "a5b4fa74b123c73049c7240aca924711338fe17613a55a8596e19f513d473eab"
+  },
+  "proposal_id": "56809bca-587b-4681-a37e-5c1a6151675c"
+}

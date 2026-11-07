@@ -1,0 +1,110 @@
+{
+  "checked_date": "2026-11-02",
+  "papers": [
+    {
+      "key": "deterministic-2011",
+      "title": "An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms",
+      "authors": [
+        "Oliver Friedmann"
+      ],
+      "year": 2011,
+      "venue": "Logical Methods in Computer Science",
+      "paper": "https://arxiv.org/abs/1106.0778",
+      "pdf": "https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf",
+      "selection": "Recommended starting mission; shared parity-game and strategy-improvement interfaces."
+    },
+    {
+      "key": "cunningham-2017",
+      "title": "An exponential lower bound for Cunningham’s rule",
+      "authors": [
+        "David Avis",
+        "Oliver Friedmann"
+      ],
+      "year": 2017,
+      "online_year": 2016,
+      "venue": "Mathematical Programming 161, 271–305",
+      "doi": "10.1007/s10107-016-1008-4",
+      "paper": "https://arxiv.org/abs/1305.3944",
+      "pdf": "https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf",
+      "selection": "History-dependent pivoting, with MDP, LP and realizable cube targets."
+    },
+    {
+      "key": "zadeh-2023",
+      "title": "An exponential lower bound for Zadeh’s pivot rule",
+      "authors": [
+        "Yann Disser",
+        "Oliver Friedmann",
+        "Alexander V. Hopp"
+      ],
+      "year": 2023,
+      "online_year": 2022,
+      "venue": "Mathematical Programming 199, 865–936",
+      "doi": "10.1007/s10107-022-01848-x",
+      "paper": "https://arxiv.org/abs/1911.01074",
+      "pdf": "https://arxiv.org/pdf/1911.01074",
+      "selection": "Later exponential least-entered result with explicit tie-breaking and occurrence records."
+    },
+    {
+      "key": "lics-2009",
+      "title": "An Exponential Lower Bound for the Parity Game Strategy Improvement Algorithm as We Know it",
+      "authors": [
+        "Oliver Friedmann"
+      ],
+      "year": 2009,
+      "venue": "LICS 2009, 145–156",
+      "pdf": "https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound.pdf",
+      "selection": "Historical source for the first mission; Kleene Award confirmed by LICS archive."
+    },
+    {
+      "key": "stoc-2011",
+      "title": "Subexponential lower bounds for randomized pivoting rules for the simplex algorithm",
+      "authors": [
+        "Oliver Friedmann",
+        "Thomas Dueholm Hansen",
+        "Uri Zwick"
+      ],
+      "year": 2011,
+      "venue": "STOC 2011, 283–292",
+      "pdf": "https://oliverfriedmann.com/downloads/papers/random_edge_lower_bound.pdf",
+      "selection": "Award-winning historical reference; variant-sensitive randomized targets require separate correction-aware preparation."
+    },
+    {
+      "key": "random-facet-erratum",
+      "title": "Errata for: A subexponential lower bound for the Random Facet algorithm for Parity Games",
+      "authors": [
+        "Oliver Friedmann",
+        "Thomas Dueholm Hansen",
+        "Uri Zwick"
+      ],
+      "year": 2014,
+      "paper": "https://arxiv.org/abs/1410.7871",
+      "selection": "The original equality of expectations for Random-Facet and Random-Facet* is false; do not conflate algorithm variants."
+    },
+    {
+      "key": "zadeh-correction-2019",
+      "title": "On Friedmann’s Subexponential Lower Bound for Zadeh’s Pivot Rule",
+      "authors": [
+        "Yann Disser",
+        "Alexander V. Hopp"
+      ],
+      "year": 2019,
+      "venue": "IPCO 2019, 168–180",
+      "doi": "10.1007/978-3-030-17953-3_13",
+      "paper": "https://link.springer.com/chapter/10.1007/978-3-030-17953-3_13",
+      "selection": "Repairs three issues in the 2011 Zadeh analysis while retaining its result."
+    },
+    {
+      "key": "dissertation-2011",
+      "title": "Exponential Lower Bounds for Solving Infinitary Payoff Games and Linear Programs",
+      "authors": [
+        "Oliver Friedmann"
+      ],
+      "year": 2011,
+      "venue": "LMU Munich dissertation",
+      "doi": "10.5282/edoc.13294",
+      "paper": "https://edoc.ub.uni-muenchen.de/13294/",
+      "pdf": "https://edoc.ub.uni-muenchen.de/13294/1/Friedmann_Oliver.pdf",
+      "selection": "Background source; Tucker Prize2012 belongs to this thesis, not the STOC article."
+    }
+  ]
+}

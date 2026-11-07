@@ -1,0 +1,128 @@
+Cunningham source-faithfulness audit
+===================================
+Completed 2026-11-02. This is the source review requested after discussion
+of the three boundary reward coefficients.
+
+Conclusion
+----------
+The three coefficients retained in the mission are required by the paper's
+graph and outgoing-edge reward convention. For each of b_2^0,c_2^0,d_2^0,
+eliminating g_1,F_1,h_1 contributes G_1+epsilon*H_1 and sends epsilon flow
+to a_2 and 1-epsilon flow to e_1. This is a general algebraic derivation,
+not an adjustment selected to obtain the expected pivot counts.
+
+The source-level audit and independent semantic/code review are complete.
+The package is a reviewed rational reconstruction of the graph-derived
+construction, with the source conventions below made explicit. This does
+not mean its nine research theorem targets have been proved.
+
+Evidence
+--------
+1. notes/source-independent-audit.txt gives an exhaustive action table for
+   arbitrary n>=3, deriving the entire collapsed stochastic model and LP
+   from Figures 7 and 8. It checks rewards, probabilities, all boundary
+   cases, source parameters, and the initial-state discrepancy.
+
+2. checks/CunninghamRewardTranslation.lean contains 11 completed Lean proofs.
+   The central bottom_graph_matches_boundary_action theorem connects the
+   independently written three local graph equations directly to the actual
+   mission objectiveCoefficient and conservation matrix entries, for all n
+   and all three affected action kinds. The certificate also proves the
+   full finite-sum objective-difference identity, interior elimination,
+   existence of expanded local solutions, and the conditional first-switch
+   advantage. It imports no open research targets. Its axiom reports contain
+   only propext, Classical.choice, and Quot.sound; no sorryAx or custom axiom.
+   See build-logs/CunninghamRewardTranslation.log.
+
+3. notes/cunningham_graph_audit.py independently builds the source graphs,
+   eliminates intermediate vertices, and compares with data evaluated from
+   the actual Lean definitions by checks/CunninghamExport.lean. Every one
+   of 14,200 matrix entries, every objective coefficient, and every graph
+   edge, priority, initial bit, action name and cyclic rank matches for
+   n=3,...,10. The source hashes and results are recorded in
+   audits/cunningham-graph-comparison.json. These are exact finite checks.
+
+4. notes/cunningham_objective_witness.py supplies two explicit feasible
+   rational points where the added objective contribution differs. Direct
+   substitution into the source equations verifies them. Therefore the
+   difference is not a constant offset or a linear combination of equality
+   constraints. It also supplies a valid alternative all-e-zero initial
+   basis. See notes/cunningham-objective-witness.json.
+   checks/CunninghamNonconstantObjective.lean separately certifies the two
+   points against the actual Lean program and proves that its objective
+   difference from the displayed-reward variant is not constant on the
+   feasible set at n=3. This certificate uses ordinary kernel-checked
+   arithmetic, without native_decide or an external arithmetic oracle.
+
+5. notes/cunningham-semantic-audit.txt reviews the simplex, parity valuation,
+   stochastic and polytope interfaces and all nine research statements.
+   An independently built parity evaluator enumerates every opponent
+   strategy and compares whole action sequences with exact simplex pivots.
+   The sequences agree for n=3,4,5, with 36,118,320 switches respectively.
+   See build-logs/CunninghamSemanticProbe.log.
+
+Repairs made during this review
+-------------------------------
+* Removed our incorrect claim that the all-e_i^0 initial policy is singular
+  or nonabsorbing. The explicit source start uses e_1^1, and the alternative
+  has one preliminary improving switch before reaching that start.
+* Added boundedness directly to realizesCube. The cube-realization and AUSO
+  targets now themselves assert that the realization is a polytope; the
+  separate lp_valid target no longer carries this condition on their behalf.
+* Updated the MDP/AUSO source mappings to identify the common explicit
+  counter start, and refreshed the independent readbacks affected by the
+  strengthened definition.
+
+Source conventions that remain explicit
+---------------------------------------
+The paper's displayed Section 4.4 objective uses priority notation where
+the preceding stochastic construction uses priority-induced rewards. Even
+after that interpretation it lacks the three alias contributions. The
+mission follows the graph and general translation, not that display alone.
+The F_1 transition follows the boundary drawing and its conservation row.
+Sections 2.3 and 4.4 explicitly give the chosen e_1^1 start; Sections 3.3 and
+5.2 use conflicting all-e-zero shorthand. The companion lower bounds use
+the full counter-run transfer, not subtraction of one from a bound of 2^n.
+No author confirmation or published erratum has been established.
+
+Uniform indexing check
+----------------------
+For n>=3 the five row blocks have lengths n-1,n-2,n-1,n-1,n, with
+starting offsets 0,n-1,2n-3,3n-4,4n-5. Their total is 5n-5. These are
+exactly the branches of rowName; rowRank subtracts the branch's starting
+level and adds the corresponding offset. Consequently they name each
+source decision vertex once, with no b_n and no a_1,c_1,d_1 decision row.
+
+The first column group contains e_1^1, then n-2 complete four-action
+blocks, then d_n^0,e_n^1: 1+4(n-2)+2=4n-5 columns. The remaining groups
+have lengths 2(n-1),n,n-1,2(n-1), so their successive starting offsets are
+4n-5,6n-7,7n-7,8n-8 and the total is 10n-10. These match columnName's
+branches. Quotient/remainder modulo 4 or 2 picks the level and action in
+the respective block; columnRank reverses those operations. Each valid
+rank lies in [0,10n-10), so the modulo in actionColumn and initialBasis
+does not change it. This gives an arbitrary-n arithmetic check of the
+naming/order interface, separately from the finite exported-data checks.
+
+Limits of the completed review
+------------------------------
+Source-to-Lean faithfulness necessarily includes mathematical reading of
+the paper. The new kernel certificates prove the disputed local algebra
+and its code connection; they do not formalize the entire arbitrary-n
+graph-to-LP equivalence. The all-action derivation and code inspection are
+recorded mathematical review, supplemented by exact finite comparisons.
+The rational-to-real polytope argument is supplied in the semantic audit,
+but is not a separate Lean transport theorem. All nine exponential-bound
+and companion research targets remain open. The platform's human proposal
+self-audit and submission have not been performed by this review.
+
+Reproduction
+------------
+python3 scripts/lean_check.py checks/CunninghamRewardTranslation.lean
+python3 scripts/lean_check.py checks/CunninghamNonconstantObjective.lean
+python3 scripts/lean_check.py checks/CunninghamExport.lean > build-logs/CunninghamExport.log
+python3 notes/cunningham_graph_audit.py
+python3 notes/cunningham_objective_witness.py
+python3 notes/cunningham_semantic_probe.py 3 4 5
+python3 scripts/check_all.py --resume
+python3 scripts/assemble_packets.py
+python3 scripts/stage_drafts.py upload/cunningham.json

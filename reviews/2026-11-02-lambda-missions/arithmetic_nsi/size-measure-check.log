@@ -1,0 +1,5 @@
+CHECK arithmetic_nsi/SizeMeasureAudit.lean
+'ArithmeticSizeAudit.input_length' depends on axioms: [propext, Quot.sound]
+'ArithmeticSizeAudit.output_length' depends on axioms: [propext, Quot.sound]
+'ArithmeticSizeAudit.no_additive_syntax_length_bound' depends on axioms: [propext, Quot.sound]
+Checked 1 files; failed 0.

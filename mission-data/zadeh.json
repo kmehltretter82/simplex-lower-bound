@@ -1,0 +1,121 @@
+{
+  "name": "Exponential lower bounds for Zadeh’s pivot rule",
+  "description": "## Motivation\n\nThe simplex method repeatedly replaces a basic variable by an improving nonbasic variable. A **pivot rule** specifies which improvement to make. Zadeh’s **least-entered rule** selects an improving variable that has entered the basis least often; equal counts require a separate tie rule. The paper establishes an exponential worst case for a specific strategy-dependent tie rule, alongside corresponding results for games and decision processes. It does not establish an exponential lower bound for every possible resolution of equal counts. [Primary paper](https://doi.org/10.1007/s10107-022-01848-x).\n\n## Setting\n\nThe model fixes the paper’s finite two-centre counter, denoted $S_n$, with $n>0$ levels and terminal vertex $t$. A **positional strategy** assigns a successor at each controlled vertex. Infinite play is evaluated by the highest priority recurring infinitely often. Source indices start at one; the implementation uses zero-based level indices. Missing top-level centres are excluded by the vertex type.\n\nA **Markov decision process** replaces each cycle centre by a random choice. Its probabilities are $\\varepsilon$ to the upper selection vertex and $(1-\\varepsilon)/2$ to each of two cycle vertices. The explicit parameters satisfy $N\\ge7n$ and $0<\\varepsilon<N^{-(2n+11)}$. The terminal value is zero. Deterministic reward vertices are retained as one-action decision vertices; eliminating them produces the same continuation equation. A generated occupancy linear program places one unit of input flow at every nonterminal decision vertex.\n\n## Formalization targets\n\nThe goal combines the three conclusions for the constructed instances and the fixed tie rule:\n\n$$T_{\\mathrm{PG}}\\ge2^n,\\qquad T_{\\mathrm{MDP}}\\ge2^n,\\qquad T_{\\mathrm{LP}}\\ge2^n.$$\n\nEach component includes existence of a complete legal execution and the lower bound for every complete execution admitted by the rule. A complete execution ends only when no improving choice remains. Counting begins with zero occurrences, and a switch increments only its selected edge or entering variable. $T$ counts switches or pivots; the initial configuration is an additional displayed state.\n\nThe milestones cover finite size, priority valuation, the sink property, the tie ordering, canonical-state coverage, stochastic validity, and preservation of each switch by the generated linear program. The goal is not duplicated as a milestone. The canonical-state target requires a run to visit a strategy representing every integer from zero through $2^n-1$; it does not assume the lower bound in a hypothesis.\n\n## Significance\n\nThe requested work is formal verification of a published lower-bound construction. Completing the mission would connect a concrete game, an exact rational stochastic model, and actual ratio-test simplex pivots. These are separately inspectable objects. Shared definitions can also support formal studies of other history-dependent pivot rules. The existence of open theorem targets in this package does not constitute a proof of those targets.\n\n## Difficulty\n\nLeast-entered counts must be tracked throughout intermediate states. The tie rule depends on the current strategy, rather than a fixed ordering of variable names. The initial exceptional choice must also be preserved. The stochastic model has its own canonical-strategy convention, and policy improvement must correspond to an actual feasible simplex pivot. A proof that only follows the binary numbers without checking intervening choices would leave the principal obligations unresolved.\n\n## Formalization scope\n\nAll graph, probability, reward and linear-program coefficients are explicit definitions. The LP basis matrix must have nonzero determinant, every pivot must satisfy the ratio test, and all visited MDP policies must have nonsingular sink-normalized Bellman equations. There is no assumed iteration count, abstract progress certificate, or lower-bound field in the data.\n\nThe source counter repeats priorities. Its valuation is therefore represented by priority multiplicities, with equal multiplicity vectors identified, following [Avis and Friedmann, Section 2.2](https://arxiv.org/html/1305.3944v1). An integer-radix encoding realizes that finite lexicographic order; its equivalence is an explicit milestone. The transition direction used in the seven-class tie rule is concretely determined by comparing the current values of $b_2$ and $g_1$. Agreement with the source’s phase convention must be checked alongside canonical coverage. The rewards follow the labelled stochastic construction in Figure 5, retaining the high reward at deterministic $h$ vertices. These conventions are part of the draft audit.\n\n## Selected references\n\n- Yann Disser, Oliver Friedmann and Alexander V. Hopp, *An exponential lower bound for Zadeh’s pivot rule*, Mathematical Programming 199 (2023), 865–936. [DOI](https://doi.org/10.1007/s10107-022-01848-x); [full version](https://arxiv.org/abs/1911.01074v2).\n- David Avis and Oliver Friedmann, *An exponential lower bound for Cunningham’s rule*, Mathematical Programming 161 (2017), 271–305. [Priority-multiplicity valuation, Section 2.2](https://arxiv.org/html/1305.3944v1).\n- Yann Disser and Alexander V. Hopp, *On Friedmann’s Subexponential Lower Bound for Zadeh’s Pivot Rule*, IPCO 2019. [Correction of the original 2011 construction](https://doi.org/10.1007/978-3-030-17953-3_13).\n",
+  "source": "Disser, Friedmann and Hopp, An exponential lower bound for Zadeh’s pivot rule, Mathematical Programming 199 (2023), 865–936, online 19 July 2022. https://doi.org/10.1007/s10107-022-01848-x; full version arXiv:1911.01074v2.",
+  "definition_files": [
+    "Definitions/Def_friedmann_parity.lean",
+    "Definitions/Def_friedmann_simplex.lean",
+    "Definitions/Def_friedmann_zadeh.lean"
+  ],
+  "theorems": [
+    {
+      "file": "Theorems/Thm_friedmann_zadeh_size.lean",
+      "key": "size",
+      "theorem_name": "FriedmannZadeh.size",
+      "theorem_title": "Finite size of the counter and occupancy program",
+      "natural_language_statement": "For every positive n, the graph has 16n−6 vertices and the chosen occupancy representation has 14n−6 rows and 26n−12 columns.",
+      "source": "Disser, Friedmann and Hopp, An exponential lower bound for Zadeh’s pivot rule, Mathematical Programming 199 (2023), 865–936, online 19 July 2022. https://doi.org/10.1007/s10107-022-01848-x; full version arXiv:1911.01074v2. Table 1 and §5; exact counts for the retained deterministic reward-vertex representation.",
+      "milestone_title": "Finite size of the counter and occupancy program",
+      "milestone_description": "For every positive n, the graph has 16n−6 vertices and the chosen occupancy representation has 14n−6 rows and 26n−12 columns."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_zadeh_valuation.lean",
+      "key": "valuation",
+      "theorem_name": "FriedmannZadeh.valuation",
+      "theorem_title": "Priority multiplicities agree with the radix score",
+      "natural_language_statement": "For every positive n, every four strategy functions and every two starting vertices, comparison of their integer play scores is equivalent to the lexicographic cycle-priority, path-priority-multiplicity and length comparison.",
+      "source": "Disser, Friedmann and Hopp, An exponential lower bound for Zadeh’s pivot rule, Mathematical Programming 199 (2023), 865–936, online 19 July 2022. https://doi.org/10.1007/s10107-022-01848-x; full version arXiv:1911.01074v2. Avis–Friedmann §2.2; radix realization for the present finite graph.",
+      "milestone_title": "Priority multiplicities agree with the radix score",
+      "milestone_description": "For every positive n, every four strategy functions and every two starting vertices, comparison of their integer play scores is equivalent to the lexicographic cycle-priority, path-priority-multiplicity and length comparison."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_zadeh_sink.lean",
+      "key": "sink",
+      "theorem_name": "FriedmannZadeh.sink",
+      "theorem_title": "Lemma 1 parity sink property",
+      "natural_language_statement": "Every strategy reachable from the initial strategy by improving single switches has a common legal minimizing opponent strategy whose play from every start eventually remains at the sink.",
+      "source": "Disser, Friedmann and Hopp, An exponential lower bound for Zadeh’s pivot rule, Mathematical Programming 199 (2023), 865–936, online 19 July 2022. https://doi.org/10.1007/s10107-022-01848-x; full version arXiv:1911.01074v2. Journal Lemma 1 / full version Lemma 6.3, parity part.",
+      "milestone_title": "Lemma 1 parity sink property",
+      "milestone_description": "Every strategy reachable from the initial strategy by improving single switches has a common legal minimizing opponent strategy whose play from every start eventually remains at the sink."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_zadeh_tie_order.lean",
+      "key": "tie_order",
+      "theorem_name": "FriedmannZadeh.tie_order",
+      "theorem_title": "Definition 7 ordering has the specified completion",
+      "natural_language_statement": "For each positive n, legal strategy, parity or MDP context, and either possible transition direction, the predecessor-count rank is an injective linear extension of the seven-class source ordering.",
+      "source": "Disser, Friedmann and Hopp, An exponential lower bound for Zadeh’s pivot rule, Mathematical Programming 199 (2023), 865–936, online 19 July 2022. https://doi.org/10.1007/s10107-022-01848-x; full version arXiv:1911.01074v2. §6.2 and Definition 7; explicit linear-extension implementation.",
+      "milestone_title": "Definition 7 ordering has the specified completion",
+      "milestone_description": "For each positive n, legal strategy, parity or MDP context, and either possible transition direction, the predecessor-count rank is an injective linear extension of the seven-class source ordering."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_zadeh_mdp_valid.lean",
+      "key": "mdp_valid",
+      "theorem_name": "FriedmannZadeh.mdp_valid",
+      "theorem_title": "Section 4 probabilities and initial policy are valid",
+      "natural_language_statement": "For every permitted n,N,epsilon, the initial strategy is legal and its normalized Bellman matrix is nonsingular. For every legal strategy, every transition row is nonnegative and sums to one.",
+      "source": "Disser, Friedmann and Hopp, An exponential lower bound for Zadeh’s pivot rule, Mathematical Programming 199 (2023), 865–936, online 19 July 2022. https://doi.org/10.1007/s10107-022-01848-x; full version arXiv:1911.01074v2. §4, Figure 5, Lemma 1 MDP initialization; deterministic reward-vertex convention.",
+      "milestone_title": "Section 4 probabilities and initial policy are valid",
+      "milestone_description": "For every permitted n,N,epsilon, the initial strategy is legal and its normalized Bellman matrix is nonsingular. For every legal strategy, every transition row is nonnegative and sums to one."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_zadeh_counter_coverage.lean",
+      "key": "counter_coverage",
+      "theorem_name": "FriedmannZadeh.counter_coverage",
+      "theorem_title": "Lemma 6 canonical counter coverage",
+      "natural_language_statement": "For every permitted parameter triple, a complete parity run and a complete MDP run each visit a canonical strategy for every number below 2^n, using their respective canonical conventions.",
+      "source": "Disser, Friedmann and Hopp, An exponential lower bound for Zadeh’s pivot rule, Mathematical Programming 199 (2023), 865–936, online 19 July 2022. https://doi.org/10.1007/s10107-022-01848-x; full version arXiv:1911.01074v2. Definitions 2 and 4; Lemma 6 and its use in Theorem 4. This is the canonical-enumeration consequence, not all technical occurrence-record clauses of Lemma 6.",
+      "milestone_title": "Lemma 6 canonical counter coverage",
+      "milestone_description": "For every permitted parameter triple, a complete parity run and a complete MDP run each visit a canonical strategy for every number below 2^n, using their respective canonical conventions."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_zadeh_lp_transfer.lean",
+      "key": "lp_transfer",
+      "theorem_name": "FriedmannZadeh.lp_transfer",
+      "theorem_title": "Section 5 preserves policy switches and occurrence records",
+      "natural_language_statement": "Every complete MDP run on a permitted construction lifts to a complete run of its generated occupancy LP with exactly the same number of pivots, represented strategy at every step, and count on every action column.",
+      "source": "Disser, Friedmann and Hopp, An exponential lower bound for Zadeh’s pivot rule, Mathematical Programming 199 (2023), 865–936, online 19 July 2022. https://doi.org/10.1007/s10107-022-01848-x; full version arXiv:1911.01074v2. §5; full version Theorem 6.18 proof. Feasible-basis and ratio-test conditions are in the LP run conclusion.",
+      "milestone_title": "Section 5 preserves policy switches and occurrence records",
+      "milestone_description": "Every complete MDP run on a permitted construction lifts to a complete run of its generated occupancy LP with exactly the same number of pivots, represented strategy at every step, and count on every action column."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_zadeh_source_realization.lean",
+      "key": "source_realization",
+      "theorem_name": "FriedmannZadeh.source_realization",
+      "theorem_title": "Definition 7 transition direction agrees throughout counter enumeration",
+      "natural_language_statement": "For each permitted parameter triple and each of the parity and MDP contexts, there exists a complete implemented run and a strictly increasing sequence of canonical-transition cut times beginning at zero, covering every binary number. Every switch between consecutive cuts also obeys the source tie rule with the transition direction prescribed by the number at the start of that interval.",
+      "source": "Disser, Friedmann and Hopp, An exponential lower bound for Zadeh’s pivot rule, Mathematical Programming 199 (2023), 865–936, online 19 July 2022. https://doi.org/10.1007/s10107-022-01848-x; full version arXiv:1911.01074v2. §6.2 Definition 7, §6.3 transition direction convention and Lemma 6. This explicitly checks the value-defined realization of the source phase-dependent direction.",
+      "milestone_title": "Definition 7 source tie realization",
+      "milestone_description": "A complete run admits a canonical enumeration in which each selected switch also follows the source’s transition-index convention for the tie rule."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_zadeh_goal.lean",
+      "key": "goal",
+      "theorem_name": "FriedmannZadeh.goal",
+      "theorem_title": "Theorem 4 exponential lower bounds for games decision processes and simplex",
+      "natural_language_statement": "For every permitted n,N,epsilon, each fixed constructed parity game, MDP and occupancy LP has a complete run under the specified least-entered rule, and every such complete run needs at least 2^n improving switches or pivots.",
+      "source": "Disser, Friedmann and Hopp, An exponential lower bound for Zadeh’s pivot rule, Mathematical Programming 199 (2023), 865–936, online 19 July 2022. https://doi.org/10.1007/s10107-022-01848-x; full version arXiv:1911.01074v2. Journal Theorem 4 with §5 LP transfer; full version Theorem 6.18."
+    }
+  ],
+  "main_key": "goal",
+  "source_paper": {
+    "authors": [
+      "Yann Disser",
+      "Oliver Friedmann",
+      "Alexander V. Hopp"
+    ],
+    "title": "An exponential lower bound for Zadeh’s pivot rule",
+    "year": 2023,
+    "online_year": 2022,
+    "doi": "10.1007/s10107-022-01848-x",
+    "url": "https://link.springer.com/article/10.1007/s10107-022-01848-x",
+    "pdf": "https://arxiv.org/pdf/1911.01074v2",
+    "source_sections": [
+      "§3",
+      "§4",
+      "§5",
+      "§6.2",
+      "Theorem 4"
+    ]
+  }
+}

@@ -1,0 +1,152 @@
+Avis and Friedmann Cunningham mission source crosswalk
+=====================================================
+
+Paper: David Avis and Oliver Friedmann, An exponential lower bound for
+Cunningham's rule, Mathematical Programming 161, 271–305 (2017).
+Published online 11 April 2016. DOI 10.1007/s10107-016-1008-4.
+Primary working text: author's accepted 35-page manuscript:
+https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf
+The 2013 arXiv version has different theorem numbers:
+https://arxiv.org/html/1305.3944v1
+
+Construction and conventions
+----------------------------
+The formal model uses rational coefficients, standard-form maximization,
+five kinds of decision states, and two actions per state. There are exactly
+5(n−1) rows and 10(n−1) columns; every target requires n≥3. Columns are
+numbered in the exact cyclic order (1), including separate names for the
+two directions at each decision state. Therefore the generic rule uses
+the identity rank permutation. The scan begins with the minimum rank and
+resumes at the last entering column; that column is then basic and is
+ineligible to re-enter immediately.
+
+The chosen parameters N=2n+1 and epsilon=N^(−2n−2) satisfy the source's
+requirements N≥2n and 0<epsilon≤N^(−2n). The source's priority-induced
+rewards are g_i=(-N)^(2i−1), h_i=(-N)^(2i), and s=1.
+
+IMPORTANT SOURCE DISPLAY DISCREPANCY
+------------------------------------
+program n is derived from Figure 7 and the general transformation in
+Sections 4.2–4.3. It must not be described as a literal transcription of
+the displayed LP in Section 4.4. The source identifies b_1=c_1=g_1.
+Eliminating this random vertex gives each of the actions b_2^0,c_2^0,d_2^0
+the immediate reward g_1+epsilon*h_1 as well as its displayed transition
+probabilities. Those three reward contributions are retained in
+objectiveCoefficient. The displayed Section 4.4 objective, read with
+nonexistent variables set to zero as instructed there, omits them; it
+also writes priority notation Omega where the preceding construction
+uses priority-induced rewards. This package uses the graph-derived
+reward interpretation explicitly and records the difference here.
+
+The source's Section 4.4 initial basis includes e_1^1 and e_i^0 for i>1.
+Section 2.3 also explicitly starts the counter at 00...001 with e_1^1.
+Some shorthand descriptions in Sections 3.3 and 5.2 instead list e_*^0.
+That alternative is absorbing and has a nonsingular basis: our earlier
+claim to the contrary was incorrect. From that alternative, the first cyclic
+improvement switches e_1 to action 1, with advantage N-1>0. The package uses
+the explicit Sections 2.3 and 4.4 starting state, after that optional prefix.
+
+At the bottom level, F_1 has no d_1 successor. The boundary transition
+is epsilon to h_1 and 1−epsilon to e_1, as depicted in Figure 8 and
+reflected in the displayed e_1 conservation equation. The generic
+Figure 7 interior-row probability 0.5*(1−epsilon) must not be copied
+to this missing-successor boundary without that adjustment.
+
+The source-faithfulness audit is complete; see cunningham-audit-summary.txt
+and source-independent-audit.txt in this directory. The three contributions
+follow algebraically from the graph, and a Lean certificate connects the
+local elimination to the implemented coefficients for all n. This is not a
+claim that an erratum has been published or that the lower bound is proved.
+
+Exact rational sanity checks
+----------------------------
+notes/cunningham_numeric.py independently solves the linear systems and
+implements reduced-cost entering choices, minimum-ratio leaving choices,
+and the prescribed cyclic order. With the graph-derived rewards it finds:
+
+ n   rows  columns  pivots  2^n
+ 3    10      20       36     8
+ 4    15      30      118    16
+ 5    20      40      320    32
+ 6    25      50      794    64
+
+Every checked basis had strictly positive basic values and every pivot
+strictly increased the objective. This is discovery evidence, not a
+Lean proof and not a proof of any asymptotic lower bound.
+
+With the three alias reward contributions omitted, the reward-based
+transcription gives only 19,27,35,43 pivots respectively and fails the
+n=6 lower bound. This check caught the missing alias contributions before
+the formal capstone was written.
+This comparison interprets the displayed priority symbols as rewards in
+both variants; it changes only the three alias contributions. Independent
+feasible witnesses show the difference is not a constant objective offset.
+
+Declaration crosswalk
+---------------------
+Definitions.Def_friedmann_simplex supplies actual standard-form simplex
+semantics: nonsingular basis matrices, feasible basic solutions, reduced
+costs, minimum-ratio leaving rows, basis update, and cyclic entering rule.
+No runtime or correctness claim is included as a field of LP data.
+
+Definitions.Def_friedmann_multiplicity supplies the occurrence-count
+valuation from Section 2.2, including equivalent paths through different
+vertices with identical counts. It imports the common Game/play layer
+but does not use the injective-priority comparison or WellFormed predicate.
+
+Definitions.Def_friedmann_cunningham supplies the graph-derived family,
+the exact order (1), prescribed initial basis, eliminated-state MDP,
+policy/BFS correspondence interfaces, actual polytope-graph conditions over
+rational points, cube faces, AUSO and signed-direction cyclic walk.
+
+counterstrategy: Lemma 1 on the explicit repeated-priority family, including
+a single counterstrategy simultaneously optimal from every starting vertex.
+
+parity_lower_bound: Theorem 4, using the explicit Figure 2 graph,
+prescribed initial strategy, order (1), and multiplicity comparison.
+
+lp_valid: Section 4.2 policy/BFS correspondence and bounded-family
+construction, made explicit as boundedness and positive policy bases.
+
+mdp_valid: Figure 7 and Lemma 8 (absorbing Markov chains), represented by
+substochastic transition rows and invertible transient systems after
+the random vertices have been eliminated. The invertibility statement
+does not by itself assert every probabilistic detail of Lemma 8.
+
+policy_pivot: Sections 4.2–4.3, including Lemma 11. Objective equals the
+sum of decision-state values; improving actions exactly match positive
+reduced costs, and switching one action is a minimum-ratio simplex pivot.
+
+mdp_lower_bound: Theorem 6 in the accepted manuscript (Theorem 3.1 in
+arXiv v1), on the equivalent decision-state MDP. Complete run from the
+prescribed initial policy has at least 2^n switches.
+
+simplex_lower_bound: Theorem 7 (Theorem 4.1 in arXiv v1), for the
+graph-derived LP and prescribed order/starting basis. It asserts a
+complete run with at least 2^n pivots and strict increase at every step.
+
+cube_realization: Lemma 12. The feasible set is explicitly bounded. Policies
+map bijectively onto actual extreme
+points; one-bit changes correspond exactly to edges of the feasible
+polytope. A perturbed rational objective may orient formerly tied edges,
+must retain every original strict improvement, and defines an AUSO.
+
+auso_lower_bound: Theorem 8 (Theorem 5.1 in arXiv v1). The realized cube
+has dimension 5(n−1), rather than n. Its signed-direction cyclic walk
+has at least 2^n edges and terminates at its unique sink. Both orientation
+and realization are explicit mathematical conditions, not assumed fields.
+
+The MDP and AUSO statements use the explicit Sections 2.3/4.4 initial
+counter state. Their source mapping invokes the full counter-run transfer,
+not subtraction of one from the bound associated with shorthand all-e-zero
+starts. The semantic audit also explains the rational-to-real polytope
+representation; that bridge is not yet a checked Lean transport theorem.
+
+The parity-game companion Theorem 4 uses repeated priorities. The source-
+specific model retains them rather than postulating a priority-refinement
+reduction. Its cycle valuation uses the common finite-orbit play layer;
+all set/valuation comparisons are the occurrence-count definitions.
+
+All theorem declarations are OPEN mission targets with sorry bodies.
+Definitions must compile without sorry, custom axioms or unchecked
+algorithm interfaces. The package does not claim the lower bounds proved.

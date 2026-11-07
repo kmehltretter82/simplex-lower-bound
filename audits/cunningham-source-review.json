@@ -1,0 +1,109 @@
+{
+  "reviewed_at_utc": "2026-11-02T04:54:58.568449+00:00",
+  "status": "source_review_complete_with_documented_normalizations",
+  "primary_source": {
+    "url": "https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf",
+    "sha256": "8a43db95db8e7e2ffeff6ef71f9c518a96764e2b3992bb54a7b936f5f6cb8ec8"
+  },
+  "certificates": [
+    {
+      "path": "checks/CunninghamRewardTranslation.lean",
+      "sha256": "829b58c53b02a409684959c12bee88df11a4a5c2c3ec55a2337d525ae81ef205",
+      "log": "build-logs/CunninghamRewardTranslation.log",
+      "log_sha256": "afa1ba837dcc831394cd2bdebd19e2a91b1a7e68878776d8866fbe0edba8f544",
+      "compiled": true,
+      "proved_theorems": [
+        "CunninghamRewardTranslation.eliminate_bottom",
+        "CunninghamRewardTranslation.expandBottom_valid",
+        "CunninghamRewardTranslation.expandBottom_value",
+        "CunninghamRewardTranslation.boundary_objective_coefficients",
+        "CunninghamRewardTranslation.boundary_conservation_entries",
+        "CunninghamRewardTranslation.bottom_graph_matches_boundary_action",
+        "CunninghamRewardTranslation.coefficient_difference",
+        "CunninghamRewardTranslation.objective_difference",
+        "CunninghamRewardTranslation.program_objective_difference",
+        "CunninghamRewardTranslation.eliminate_interior",
+        "CunninghamRewardTranslation.first_switch_advantage"
+      ],
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "path": "checks/CunninghamNonconstantObjective.lean",
+      "sha256": "6165b2021871a7caf71575332dd84cb8c1ff3045b3e5d23be06bafc057979471",
+      "log": "build-logs/CunninghamNonconstantObjective.log",
+      "log_sha256": "ebe6a973a4a332c493fb4b92934b6ad4c7c3e904a7c09473da865d7c9ae15b81",
+      "compiled": true,
+      "proved_theorems": [
+        "CunninghamNonconstantObjective.points_feasible",
+        "CunninghamNonconstantObjective.omittedContribution_eq",
+        "CunninghamNonconstantObjective.omittedContribution_ne",
+        "CunninghamNonconstantObjective.nonconstant_on_feasible",
+        "CunninghamNonconstantObjective.no_constant_offset"
+      ],
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "proved_audit_theorems": 16,
+  "mission_modules_checked": 35,
+  "cunningham_research_targets": 9,
+  "cunningham_research_targets_proved": 0,
+  "all_source_hashes_current": true,
+  "independent_readbacks_current": true,
+  "exact_graph_checks": {
+    "n": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "matrix_entries": 14200,
+    "passed": true
+  },
+  "independent_trace_checks": {
+    "n": [
+      3,
+      4,
+      5
+    ],
+    "lengths": [
+      36,
+      118,
+      320
+    ],
+    "full_sequences_equal": true
+  },
+  "repairs": [
+    "Corrected false singularity claim for all-e-zero initial policy.",
+    "Added boundedness to realizesCube."
+  ],
+  "limits": [
+    "No formal proof of the entire arbitrary-n graph-to-LP equivalence.",
+    "Rational-to-real geometry bridge is mathematically justified but not proved in Lean.",
+    "Nine research statements remain open."
+  ],
+  "evidence_sha256": {
+    "notes/cunningham-audit-summary.txt": "ddd4ec1b3a69243d94d370b1ca2af1556cec0dc76a4b755bce14dd2bae53e1ce",
+    "notes/source-independent-audit.txt": "43eacb4ee4810cc13191e61d4c59b24804b0a5bf3be2f73b9932b2434bd0f915",
+    "notes/cunningham-semantic-audit.txt": "2326a01db870cf39f0004d0115baf9831ca0e91051658d331d997a1fdc24391a",
+    "notes/cunningham-source-crosswalk.txt": "6d3445d1b12e4feda97e9f0e498e4a3328b434452468f2ca946068fdf774b9a4",
+    "notes/cunningham_graph_audit.py": "1b0c64e4f5c25aeb1b34c98f37c6421b6e81d49c1ae702d3568ec31d2fd2f8a6",
+    "notes/cunningham_objective_witness.py": "6c13a072b94601d367d4a4d17366d9b6d7bd44dc26aa2caf1b01514444bc6279",
+    "notes/cunningham_semantic_probe.py": "7017a9ff937e1a39017578c5aead3ea6e72842862a0e4de865bef1ec2083ce8f",
+    "notes/cunningham-objective-witness.json": "a103a71bea9cf8fa6fd653d782686527bb1512e2d64db43c010b432c60172630",
+    "audits/cunningham-readbacks.json": "15563699345162bac56cc66c0598cc23c8c360f905dd0cfe301f5982caf75018",
+    "audits/cunningham-graph-comparison.json": "be4e4c62a447f886c5afa538d441e2f6a9636448533ea11c359071b6455044f7",
+    "build-logs/CunninghamSemanticProbe.log": "d65cea62ae620019df888c308ec8241bba0429da38d23c5af3464bc8249d095b"
+  }
+}

@@ -1,0 +1,199 @@
+Independent source audit: Cunningham rewards and boundary conventions
+====================================================================
+Date: 2026-11-02
+Auditor: independent Codex source-review agent; model identifier unavailable.
+Scope: mathematical transcription of the source graph into the rational LP,
+the disputed objective contribution, and initial-state conventions. This is
+not a proof of the exponential lower bound.
+
+PRIMARY EVIDENCE
+
+[A] Avis and Friedmann, author-hosted accepted manuscript, 35 pages:
+https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf
+Downloaded PDF SHA256:
+8a43db95db8e7e2ffeff6ef71f9c518a96764e2b3992bb54a7b936f5f6cb8ec8
+
+[B] Author-submitted arXiv v1, with different theorem numbering:
+https://arxiv.org/html/1305.3944v1
+The same objective omission and initial-state discrepancy occur in this
+version. The PDF [A], rather than HTML rendering, controls page references.
+
+[C] Publication record:
+https://doi.org/10.1007/s10107-016-1008-4
+Mathematical Programming 161 (2017), 271-305; online 11 April 2016.
+
+Relevant locations in [A]:
+  p12 Figure 3: action labels and successors.
+  p13 Section 2.3: explicit initial counter 00...001 and e_1^1 exception.
+  p14 equation (1): complete cyclic action ordering.
+  p15 Figure 4: first n=3 counter transition; total 36 improving switches.
+  pp24-25 Section 3.2: relaxed MDP and rewards on outgoing edges.
+  p25 Figure 7: transitions, priority values, and aliases.
+  p26 Figure 8: bottom-level probability 1-epsilon to e_1.
+  p27 Section 3.3: shorthand all-e^0 initial policy.
+  pp29-30 Sections 4.2-4.3: reward/flow LP and policy/pivot relation.
+  pp30-31 Section 4.4: displayed objective, conservation equations and basis.
+  p33 Section 5.2: shorthand all-e^0 initial basis.
+
+The supplementary URL in reference [11],
+http://files.oliverfriedmann.de/add/cunningham_exponential_parity_game.pdf,
+could not be retrieved: its host did not resolve in a direct curl request.
+The old arXiv reference http://tcswiki.com/?title=Cunningham's_Rule was also
+unavailable through the web tool. No conclusion below relies on an unseen
+supplement, and no published erratum or author confirmation is asserted.
+
+1. GENERAL ALGEBRAIC DERIVATION
+
+Let G_i=(-N)^(2i-1), H_i=(-N)^(2i), and S=1. These are the rewards in the
+MDP, not its priority labels. Section 3.2 assigns a reward (-N)^Omega(v) to
+each outgoing edge of a priority-bearing vertex. Figure 7 gives the MDP
+priorities 2i-1, 2i, and 0. Thus the package's rewardG/rewardH and reward 1
+at s are exactly the source MDP reward convention; no unproved shift from
+the parity game's distinct priority scale is being silently applied.
+
+Fix n>=3 and 0<epsilon<1. Write q=(1-epsilon)/2 and identify a_(n+1) with
+the absorbing sink t, b_1 and c_1 with g_1. Given any continuation values
+V at the decision vertices and V(t)=0, elimination of the intermediate
+vertices gives the following identities by substitution:
+
+  V(h_i) = H_i + V(a_(i+1)),
+  V(s)   = 1 + V(c_n),
+  V(F_i) = epsilon*(H_i+V(a_(i+1))) + q*V(d_i)+q*V(e_i), i>=2,
+  V(F_1) = epsilon*(H_1+V(a_2)) + (1-epsilon)*V(e_1),
+  V(g_i) = G_i + V(F_i).
+
+Here V(F_i) denotes the expected continuation through the random vertex,
+not a policy choice at that vertex. The F_1 equation follows Figure 8 and
+the e_1 conservation equation. Applying the interior q probability to its
+only non-h successor would lose half the remaining probability mass.
+
+The following exhaustive action table results. An entry (v,p) means the
+next original decision vertex is v with probability p; sink mass is omitted.
+The reward is accumulated only until that next decision vertex or sink.
+
+  action                         reward           next-decision distribution
+  a_i^0, i<n                    0                (a_(i+1),1)
+  a_n^0                         0                none: sink with probability 1
+  b_i^0, i>2                    0                (b_(i-1),1)
+  c_i^0, i>2                    0                (c_(i-1),1)
+  d_i^0, i>2                    0                (b_(i-1),1)
+  b_2^0,c_2^0,d_2^0             G_1+epsilon*H_1  (a_2,epsilon),(e_1,1-epsilon)
+  a_i^1,b_i^1,c_i^1             G_i+epsilon*H_i  (a_(i+1),epsilon),(d_i,q),(e_i,q)
+  d_i^1,e_i^1, i>=2             epsilon*H_i      (a_(i+1),epsilon),(d_i,q),(e_i,q)
+  e_1^1                        epsilon*H_1      (a_2,epsilon),(e_1,1-epsilon)
+  e_i^0                        1                (c_n,1)
+
+Only existing actions are included: a,c,d levels 2..n; b levels 2..n-1;
+e levels 1..n. For a_(n+1) entries the corresponding epsilon mass reaches
+the sink, so the final listed row is substochastic after sink deletion.
+
+This table covers every action and every endpoint case for arbitrary n>=3.
+It yields the LP without invoking any long-run or lower-bound argument:
+for each original decision row u, set A[u,j]=1_{u=source(j)}-P(j,u), b[u]=1,
+and c[j]=expected_reward(j). Expanding this formula produces exactly the
+seven classes of conservation equations displayed in Section 4.4, including
+the a_2, e_1 and c_n boundary rows. This is also the coefficient formula
+implemented in Def_friedmann_cunningham.lean after its row/column naming.
+One unit is injected at each original decision row, as in the displayed
+Section 4.4 LP; no extra unit is introduced at eliminated intermediate nodes.
+
+2. WHY THE THREE OBJECTIVE COEFFICIENTS ARE REQUIRED
+
+The actions b_2^0 and d_2^0 lead to b_1, and c_2^0 leads to c_1. All three
+targets are g_1. Their zero-labelled actions therefore have reward
+
+  R = G_1 + epsilon*H_1 = -N + epsilon*N^2,
+
+whereas zero-labelled b,c,d actions at higher levels have zero immediate
+reward before the next decision vertex. The graph-derived objective thus
+adds R*(b_2^0+c_2^0+d_2^0) to the displayed reward-interpreted objective.
+In particular, reward here is a signed quantity: the package's parameter
+choice makes R negative, so it is a penalty rather than a positive bonus.
+
+There are TWO separate source-display issues:
+  (a) the printed Section 4.4 expression uses Omega rather than (-N)^Omega;
+  (b) even after interpreting Omega there as priority-induced rewards, it
+      gives coefficient zero to these three boundary actions.
+The existing 43-versus-794 pivot comparison changes only (b). It is NOT a
+comparison with a wholly literal priority-valued objective.
+
+This is an algebraic deduction from the graph and outgoing-edge rewards.
+It does not depend on choosing terms to fit observed pivot counts. Keeping
+the constraints while omitting R changes the resulting optimization problem.
+
+3. THE DIFFERENCE IS NOT A CONSTANT ON THE FEASIBLE POLYTOPE
+
+It is legitimate to ask whether the omitted expression can be absorbed into
+the constraints, leaving all objective comparisons unchanged. An exact
+counterexample excludes that explanation.
+
+Set n=3, N=7, epsilon=1/5764801. Two strictly positive feasible policy bases
+have alias flow S=b_2^0+c_2^0+d_2^0 equal to:
+
+  explicit Section 4.4 initial basis: S=20176805/2882401;
+  same policy with only b_2 changed:  S=20176804/2882401.
+
+As R is nonzero, R*S differs on these two feasible points. Hence it cannot
+equal a constant, nor can its coefficient vector be A^T*y for any y (which
+would give the constant y^T*b on Ax=b). This does not by itself prove every
+pairwise objective ordering changes; it proves the proposed constraint-based
+constant-offset explanation is unavailable.
+
+notes/cunningham_objective_witness.py stores all coordinates explicitly and
+checks them using direct substitution into the ten source equations. It
+does not import the package's coefficient generator or pivot simulator.
+It verifies strict positivity and nonzero basis determinants with exact
+rational arithmetic. Its output is notes/cunningham-objective-witness.json.
+These finite certificates are independently checkable mathematical witnesses,
+not a universal Lean proof of the graph-to-LP translation.
+
+4. INITIAL-STATE DISCREPANCY AND A CORRECTION TO OUR EARLIER NOTES
+
+Sections 2.3 and 4.4 explicitly prescribe e_1^1, with e_i^0 for i>1. This
+matches initialBit and both the game and LP start in the package. Sections
+3.3 and 5.2 instead give the shorthand all-e_i^0. The latter is not the same
+starting state and must not be described as textually identical.
+
+The previous local note claiming the all-e_i^0 initial MDP policy was
+nonabsorbing or singular is FALSE. The witness script gives a strictly
+positive nonsingular basis for that alternative at n=3. More generally,
+the graph supplies a positive-probability route through h_1,a_2,...,a_n,t;
+there is no absorbing nonterminal class in that initial policy.
+
+The difference is a one-step prefix. In the all-e_i^0 policy all a_i^0
+actions continue up to the sink, so V(a_i)=0. The c ladder continues to g_1.
+Consequently:
+
+  V(e_1) = 1 + V(c_n) = 1 + G_1 + V(F_1).
+
+Changing only e_1 to its action 1 has improvement V(F_1)-V(e_1)=N-1>0.
+Since e_1^1 is first in ordering (1), Cunningham chooses it immediately.
+This reaches exactly the package's initial policy and cursor. Thus the
+all-e0 convention gives one preliminary switch followed by the same run.
+
+The package's simplex target matches the explicit start of Theorem 7 in
+Section 4.4. The parity target matches Section 2.3/Theorem 4. The MDP and
+AUSO companion targets use this common normalized start: they are not
+literal reproductions of the conflicting shorthand in Sections 3.3 and
+5.2. Removing a prefix from a statement 'at least 2^n' does not formally
+preserve that exact bound by itself. Their intended justification is the
+paper's transfer of the full Section 2.3 counter run, not the arithmetic
+argument 'subtract one from Theorem 6'. This distinction must remain clear
+in source mapping and future proofs.
+
+5. AUDIT CONCLUSION
+
+The graph-derived three coefficients are justified by the source equations;
+they are not optional terms or unexplained numerical repairs. The boundary
+transition and chosen reward exponents agree with the explicit graph. The
+paper's compact displayed objective is not identical to that graph-derived
+LP, even after interpreting its priority symbols as rewards.
+
+The statement package may accurately be described as formalizing the
+graph-derived construction with explicitly reconciled boundary and initial
+conventions. It must not be described as a literal transcription of every
+displayed formula. The earlier singular-initial-policy rationale must be
+removed. No author endorsement or published erratum has been established.
+This report settles the source-level algebra for the disputed reward term;
+the universal Lean correspondence and exponential lower-bound proofs are
+separate obligations, with their status reported by the supervising audit.

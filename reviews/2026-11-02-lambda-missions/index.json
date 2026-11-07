@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "higher_type",
+    "id": "d6a320af-caf0-4032-a7cc-7d494a9539b2",
+    "name": "Higher Type Recursion, Ramification and Polynomial Time",
+    "status": "In review"
+  },
+  {
+    "slug": "extended_polynomials",
+    "id": "059a0f02-b778-44fd-9e95-ec7cbdba9cbc",
+    "name": "Definable Functions in the Simply Typed Lambda-Calculus (Extended Polynomials Theorem)",
+    "status": "In review"
+  },
+  {
+    "slug": "inverse_evaluation",
+    "id": "15e6e856-ad83-4ad8-8d88-f7cfdc7f058e",
+    "name": "An Inverse of the Evaluation Functional for Typed Lambda-Calculus",
+    "status": "In review"
+  },
+  {
+    "slug": "syntactical_nsi",
+    "id": "7af10cd8-5e9e-4347-a4cf-2232bd15d007",
+    "name": "A Syntactical Analysis of Non-Size-Increasing Polynomial Time Computation",
+    "status": "In review"
+  },
+  {
+    "slug": "arithmetic_nsi",
+    "id": "c900846e-090f-48cb-99cd-869a4ce1bf09",
+    "name": "An Arithmetic for Non-Size-Increasing Polynomial-Time Computation",
+    "status": "In review"
+  }
+]

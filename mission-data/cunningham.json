@@ -1,0 +1,182 @@
+{
+  "slug": "cunningham",
+  "proposal": {
+    "name": "Exponential lower bounds for Cunningham’s rule",
+    "mission_type": "ResearchPaper",
+    "env": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "description": "## Motivation\n\nA local improvement algorithm can reach an optimum without coming close to doing so quickly. A **pivot rule** chooses the next neighboring solution of a linear program. Cunningham’s rule uses a fixed cyclic order and remembers the last variable selected. It resumes its scan from that variable, choosing the first eligible entering variable. Avis and Friedmann prove exponential lower bounds for this rule in several connected optimization models. This mission treats that known result as a formal verification project. [Avis and Friedmann, 2017](https://doi.org/10.1007/s10107-016-1008-4).\n\n## Setting\n\nThe common optimization representation is a rational matrix $A$, a rational right-hand side $b$, and rational objective coefficients $c$. A feasible vector satisfies $Ax=b$ and $x_j\\geq0$ for every coordinate. The objective is $c^Tx$. A **basis** selects one column for each equality constraint. It is valid only when these columns are distinct, their square matrix is nonsingular, and its inverse applied to $b$ has nonnegative coordinates. All other coordinates of the associated basic solution are zero.\n\nAn entering variable is nonbasic and has strictly positive reduced cost. A leaving row is chosen by the minimum ratio test, considering only positive entries of the transformed entering column. The basis changes by replacing that row’s selected column. The formal relation requires both endpoint bases to be feasible; a later theorem must prove strict objective increase for the particular family.\n\nThe parameter $n\\geq3$ controls an explicit family with $5(n-1)$ equality constraints and $10(n-1)$ nonnegative variables. Column numbers follow the source’s ordering (1). The starting basis chooses the specified actions, including the exceptional action $e_1^1$. The occurrence of a variable in the cyclic scan is distinct from its entering the basis.\n\n## Formalization targets\n\nThe main target is the simplex lower bound. Let $T$ count pivots of a complete execution from the prescribed basis, and let $x_t$ be its basic solutions. The goal asserts the existence of such an execution with\n\n$$T\\geq 2^n,\\qquad c^Tx_t<c^Tx_{t+1}\\quad(0\\leq t<T).$$\n\nSupporting targets cover the same source’s parity-game, Markov-decision-process, and polytope-orientation results. The parity game uses a finite graph with a designated owner and natural-number priority at each vertex. Its valuation compares priority occurrence counts, since different vertices may have equal priorities. A positional strategy fixes one successor at every vertex owned by that player.\n\nThe eliminated-state decision process has two actions at every decision vertex. Each action supplies a rational immediate reward and a substochastic transition row; missing probability goes to an absorbing sink. Its policy values are the solution of the corresponding transient linear system. Separate targets establish that the transition rows are valid, the systems are invertible, and policy improvements coincide with simplex pivots.\n\nThe final companion target concerns an **acyclic unique sink orientation** of a cube. Every face must have exactly one sink and the directed graph must have no cycle. Its dimension is $5(n-1)$, while the required walk length is at least $2^n$. The realization condition uses actual extreme points and one-dimensional faces of the feasible rational polytope. A rational objective may resolve ties while retaining every original strict improvement. The cube walk scans both signed directions at each coordinate in the prescribed cyclic order.\n\n## Significance\n\nThe statement package distinguishes the optimization problem from the algorithm used to solve it. Its outputs include reusable basis, reduced-cost, ratio-test, cyclic-history, decision-process, and polytope-graph interfaces. Each lower-bound theorem remains an open proof obligation in this draft; successful elaboration establishes that the statement is meaningful Lean code, rather than establishing its mathematical truth. The intended contribution is a machine-checked reconstruction of a published result. [Paper and publication record](https://doi.org/10.1007/s10107-016-1008-4).\n\n## Difficulty\n\nLocal progress does not bound the number of distinct intermediate policies. A complete proof must control every eligible improvement while also retaining the cyclic cursor. The transition to linear programming additionally requires the chosen entering action to induce the minimum-ratio basis exchange. For the cube result, constructing an abstract directed graph is insufficient: its vertices and edges must match those of the specified feasible polytope.\n\n## Formalization scope\n\nAll coefficients and finite-dimensional vectors in the optimization layer are rational. Matrix inverses are guarded by explicit nonsingularity conditions. The complete-run definitions require a feasible start, a legal step at every counted time, and an optimal endpoint. Runtime, correctness, and long-execution conclusions are absent from input structures.\n\nThe linear program is derived from the source’s graph and general policy-to-LP transformation. It explicitly retains the rewards incurred by the aliases $b_1=c_1=g_1$ when random vertices are eliminated. Those terms differ from a literal reading of the displayed shorthand objective in Section 4.4. An independent source audit derives every action class and boundary case for arbitrary n. A separate Lean certificate proves the disputed local reward elimination and its agreement with the implemented coefficients. Two exact feasible points show that the omitted term is not a constant offset. The explicit initial state follows Sections 2.3 and 4.4; the all-zero-e shorthand in Sections 3.3 and 5.2 adds one preliminary switch. The MDP and AUSO targets use the common explicit counter start and are justified through the counter-run transfer, rather than by subtracting one from a lower bound. The realization predicate explicitly includes boundedness. Geometry is represented over rational points; the rational-to-real justification is recorded as a mathematical argument, not a checked Lean transport theorem. These audit results do not prove the open asymptotic targets.\n\nDefinitions precede theorem targets. Companion results remain in this mission, and the main theorem is not duplicated as a milestone. Proof contributions may develop the shared interfaces or the explicit family, but must preserve the declared starting states, signed-direction order, cardinalities, strictness, and termination requirements.\n\n## Selected references\n\n- David Avis and Oliver Friedmann, *An exponential lower bound for Cunningham’s rule*, Mathematical Programming 161, 271–305 (2017), [DOI](https://doi.org/10.1007/s10107-016-1008-4). Published online in 2016.\n- [Author’s accepted manuscript](https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf), used for theorem numbering.\n- [Earlier arXiv version](https://arxiv.org/abs/1305.3944), with different theorem numbers.\n",
+    "visibility": "public"
+  },
+  "main_theorem": "FriedmannCunningham.simplex_lower_bound",
+  "definition_files": [
+    "Definitions/Def_friedmann_parity.lean",
+    "Definitions/Def_friedmann_multiplicity.lean",
+    "Definitions/Def_friedmann_simplex.lean",
+    "Definitions/Def_friedmann_cunningham.lean"
+  ],
+  "definition_descriptions": {
+    "friedmann_multiplicity": "Priority-occurrence-count ordering of parity-game play valuations, constrained minimum over legal opponent strategies, and improving switches. Repeated priorities are allowed; the minimum fallback is an explicit validity obligation.",
+    "friedmann_simplex": "Rational standard-form LPs, nonsingular feasible bases and their actual basic solutions, reduced costs, minimum-ratio pivots, boundedness, and Cunningham entering-variable order with a retained cursor.",
+    "friedmann_cunningham": "Explicit graph-derived Avis–Friedmann family: source-specific cyclic column ordering, prescribed exceptional initial action, collapsed absorbing MDP, exact parity graph with repeated-priority semantics, policy-to-basis map, and actual polytope realizability/AUSO/cube-walk predicates."
+  },
+  "theorems": [
+    {
+      "file": "Theorems/Thm_friedmann_cunningham_counterstrategy.lean",
+      "theorem_name": "FriedmannCunningham.counterstrategy",
+      "theorem_title": "Lemma 1 — optimal counterstrategy",
+      "natural_language_statement": "For every n≥3 and every legal player-zero strategy in the explicit repeated-priority game, one legal player-one strategy minimizes the multiplicity valuation simultaneously at every starting vertex.",
+      "source": "Avis and Friedmann (2017), Lemma 1, §2.2. https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf",
+      "main": false,
+      "key": "counterstrategy",
+      "milestone_title": "Lemma 1 — optimal counterstrategy",
+      "milestone_description": "For every n≥3 and every legal player-zero strategy in the explicit repeated-priority game, one legal player-one strategy minimizes the multiplicity valuation simultaneously at every starting vertex."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_cunningham_parity_lower_bound.lean",
+      "theorem_name": "FriedmannCunningham.parity_lower_bound",
+      "theorem_title": "Theorem 4 — parity-game lower bound",
+      "natural_language_statement": "For every n≥3 the explicit parity game admits a complete strategy-improvement run from the prescribed initial strategy, with the prescribed cyclic edge order, using at least 2^n switches.",
+      "source": "Avis and Friedmann (2017), Theorem 4, §2.4. https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf",
+      "main": false,
+      "key": "parity_lower_bound",
+      "milestone_title": "Theorem 4 — parity-game lower bound",
+      "milestone_description": "For every n≥3 the explicit parity game admits a complete strategy-improvement run from the prescribed initial strategy, with the prescribed cyclic edge order, using at least 2^n switches."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_cunningham_mdp_valid.lean",
+      "theorem_name": "FriedmannCunningham.mdp_valid",
+      "theorem_title": "Lemma 8 — absorbing decision-process model",
+      "natural_language_statement": "For every n≥3 each collapsed action has nonnegative transition probabilities whose sum is at most one, and every policy transient system has nonzero determinant. This is the eliminated-state algebraic prerequisite supplied by the source’s absorbing-chain construction.",
+      "source": "Avis and Friedmann (2017), Figure 7 and Lemma 8, §3.2. https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf",
+      "main": false,
+      "key": "mdp_valid",
+      "milestone_title": "Lemma 8 — absorbing decision-process model",
+      "milestone_description": "For every n≥3 each collapsed action has nonnegative transition probabilities whose sum is at most one, and every policy transient system has nonzero determinant. This is the eliminated-state algebraic prerequisite supplied by the source’s absorbing-chain construction."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_cunningham_lp_valid.lean",
+      "theorem_name": "FriedmannCunningham.lp_valid",
+      "theorem_title": "Policy bases and bounded polytope",
+      "natural_language_statement": "For every n≥3 the graph-derived program has a bounded feasible set, and every Boolean policy selects a nonsingular feasible basis with strictly positive basic values.",
+      "source": "Avis and Friedmann (2017), §4.2 and §4.4 construction. https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf",
+      "main": false,
+      "key": "lp_valid",
+      "milestone_title": "Policy bases and bounded polytope",
+      "milestone_description": "For every n≥3 the graph-derived program has a bounded feasible set, and every Boolean policy selects a nonsingular feasible basis with strictly positive basic values."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_cunningham_policy_pivot.lean",
+      "theorem_name": "FriedmannCunningham.policy_pivot",
+      "theorem_title": "Lemma 11 and policy-pivot correspondence",
+      "natural_language_statement": "For every n≥3 and every Boolean policy, the LP objective at its basic solution equals the sum of its decision-state values. At every decision vertex an improving alternative action is exactly an eligible positive-reduced-cost entering column, and the policy update is a genuine minimum-ratio simplex pivot.",
+      "source": "Avis and Friedmann (2017), Lemma 11 and §§4.2–4.3. https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf",
+      "main": false,
+      "key": "policy_pivot",
+      "milestone_title": "Lemma 11 and policy-pivot correspondence",
+      "milestone_description": "For every n≥3 and every Boolean policy, the LP objective at its basic solution equals the sum of its decision-state values. At every decision vertex an improving alternative action is exactly an eligible positive-reduced-cost entering column, and the policy update is a genuine minimum-ratio simplex pivot."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_cunningham_mdp_lower_bound.lean",
+      "theorem_name": "FriedmannCunningham.mdp_lower_bound",
+      "theorem_title": "Theorem 6 — policy-iteration lower bound",
+      "natural_language_statement": "For every n≥3 the graph-derived collapsed decision process admits a complete policy-iteration run from the explicit Sections 2.3/4.4 policy and cyclic order with at least 2^n switches.",
+      "source": "Avis and Friedmann (2017), Theorem 6, §3.3. https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf Uses the explicit counter start of Sections 2.3 and 4.4; the transfer from Theorem 4 supplies the bound, rather than subtracting the shorthand start’s first switch from Theorem 6.",
+      "main": false,
+      "key": "mdp_lower_bound",
+      "milestone_title": "Theorem 6 — policy-iteration lower bound",
+      "milestone_description": "For every n≥3 the graph-derived collapsed decision process admits a complete policy-iteration run from the explicit Sections 2.3/4.4 policy and cyclic order with at least 2^n switches."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_cunningham_cube_realization.lean",
+      "theorem_name": "FriedmannCunningham.cube_realization",
+      "theorem_title": "Lemma 12 — realization as an AUSO",
+      "natural_language_statement": "For every n≥3 the feasible set is bounded and the Boolean policy cube is realized by the actual vertex-edge graph of the graph-derived feasible polytope. Some rational objective induces an acyclic unique-sink orientation and retains every original strict improvement.",
+      "source": "Avis and Friedmann (2017), Lemma 12, §5.2. https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf",
+      "main": false,
+      "key": "cube_realization",
+      "milestone_title": "Lemma 12 — realization as an AUSO",
+      "milestone_description": "For every n≥3 the feasible set is bounded and the Boolean policy cube is realized by the actual vertex-edge graph of the graph-derived feasible polytope. Some rational objective induces an acyclic unique-sink orientation and retains every original strict improvement."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_cunningham_auso_lower_bound.lean",
+      "theorem_name": "FriedmannCunningham.auso_lower_bound",
+      "theorem_title": "Theorem 8 — realizable-AUSO lower bound",
+      "natural_language_statement": "For every n≥3 the bounded graph-derived polytope realizes a cube of dimension 5(n−1); a rational objective retaining original strict improvements gives an AUSO on which the specified signed-direction cyclic walk starts at the prescribed policy, terminates at the unique sink, and takes at least 2^n steps.",
+      "source": "Avis and Friedmann (2017), Theorem 8, §5.2. https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf Uses the explicit Sections 2.3/4.4 counter start and the full counter-run transfer, resolving the shorthand Section 5.2 start.",
+      "main": false,
+      "key": "auso_lower_bound",
+      "milestone_title": "Theorem 8 — realizable-AUSO lower bound",
+      "milestone_description": "For every n≥3 the bounded graph-derived polytope realizes a cube of dimension 5(n−1); a rational objective retaining original strict improvements gives an AUSO on which the specified signed-direction cyclic walk starts at the prescribed policy, terminates at the unique sink, and takes at least 2^n steps."
+    },
+    {
+      "file": "Theorems/Thm_friedmann_cunningham_simplex_lower_bound.lean",
+      "theorem_name": "FriedmannCunningham.simplex_lower_bound",
+      "theorem_title": "Theorem 7 — simplex lower bound",
+      "natural_language_statement": "For every n≥3 the graph-derived linear program has a complete Cunningham simplex execution from the specified basis and order (1), requiring at least 2^n pivots and strictly increasing the objective on every pivot.",
+      "source": "Avis and Friedmann (2017), Theorem 7, §4.4 interpreted via Figure 7 and §§4.2–4.3. https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf",
+      "main": true,
+      "key": "goal"
+    }
+  ],
+  "notes": [
+    "notes/cunningham-source-crosswalk.txt",
+    "notes/cunningham_numeric.py",
+    "notes/source-independent-audit.txt",
+    "notes/cunningham-semantic-audit.txt",
+    "checks/CunninghamRewardTranslation.lean",
+    "notes/cunningham_graph_audit.py",
+    "notes/cunningham_semantic_probe.py",
+    "notes/cunningham_objective_witness.py",
+    "notes/cunningham-audit-summary.txt",
+    "checks/CunninghamNonconstantObjective.lean",
+    "audits/cunningham-source-review.json"
+  ],
+  "sanity_checks": {
+    "arithmetic": "exact rational",
+    "n": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "pivots": [
+      36,
+      118,
+      320,
+      794
+    ],
+    "all_basic_values_positive": true,
+    "all_pivots_strict": true,
+    "proof": false
+  },
+  "independent_readback": "Complete; per-file hashes and independent readbacks are in audits/cunningham-readbacks.json.",
+  "name": "Exponential lower bounds for Cunningham’s rule",
+  "description": "## Motivation\n\nA local improvement algorithm can reach an optimum without coming close to doing so quickly. A **pivot rule** chooses the next neighboring solution of a linear program. Cunningham’s rule uses a fixed cyclic order and remembers the last variable selected. It resumes its scan from that variable, choosing the first eligible entering variable. Avis and Friedmann prove exponential lower bounds for this rule in several connected optimization models. This mission treats that known result as a formal verification project. [Avis and Friedmann, 2017](https://doi.org/10.1007/s10107-016-1008-4).\n\n## Setting\n\nThe common optimization representation is a rational matrix $A$, a rational right-hand side $b$, and rational objective coefficients $c$. A feasible vector satisfies $Ax=b$ and $x_j\\geq0$ for every coordinate. The objective is $c^Tx$. A **basis** selects one column for each equality constraint. It is valid only when these columns are distinct, their square matrix is nonsingular, and its inverse applied to $b$ has nonnegative coordinates. All other coordinates of the associated basic solution are zero.\n\nAn entering variable is nonbasic and has strictly positive reduced cost. A leaving row is chosen by the minimum ratio test, considering only positive entries of the transformed entering column. The basis changes by replacing that row’s selected column. The formal relation requires both endpoint bases to be feasible; a later theorem must prove strict objective increase for the particular family.\n\nThe parameter $n\\geq3$ controls an explicit family with $5(n-1)$ equality constraints and $10(n-1)$ nonnegative variables. Column numbers follow the source’s ordering (1). The starting basis chooses the specified actions, including the exceptional action $e_1^1$. The occurrence of a variable in the cyclic scan is distinct from its entering the basis.\n\n## Formalization targets\n\nThe main target is the simplex lower bound. Let $T$ count pivots of a complete execution from the prescribed basis, and let $x_t$ be its basic solutions. The goal asserts the existence of such an execution with\n\n$$T\\geq 2^n,\\qquad c^Tx_t<c^Tx_{t+1}\\quad(0\\leq t<T).$$\n\nSupporting targets cover the same source’s parity-game, Markov-decision-process, and polytope-orientation results. The parity game uses a finite graph with a designated owner and natural-number priority at each vertex. Its valuation compares priority occurrence counts, since different vertices may have equal priorities. A positional strategy fixes one successor at every vertex owned by that player.\n\nThe eliminated-state decision process has two actions at every decision vertex. Each action supplies a rational immediate reward and a substochastic transition row; missing probability goes to an absorbing sink. Its policy values are the solution of the corresponding transient linear system. Separate targets establish that the transition rows are valid, the systems are invertible, and policy improvements coincide with simplex pivots.\n\nThe final companion target concerns an **acyclic unique sink orientation** of a cube. Every face must have exactly one sink and the directed graph must have no cycle. Its dimension is $5(n-1)$, while the required walk length is at least $2^n$. The realization condition uses actual extreme points and one-dimensional faces of the feasible rational polytope. A rational objective may resolve ties while retaining every original strict improvement. The cube walk scans both signed directions at each coordinate in the prescribed cyclic order.\n\n## Significance\n\nThe statement package distinguishes the optimization problem from the algorithm used to solve it. Its outputs include reusable basis, reduced-cost, ratio-test, cyclic-history, decision-process, and polytope-graph interfaces. Each lower-bound theorem remains an open proof obligation in this draft; successful elaboration establishes that the statement is meaningful Lean code, rather than establishing its mathematical truth. The intended contribution is a machine-checked reconstruction of a published result. [Paper and publication record](https://doi.org/10.1007/s10107-016-1008-4).\n\n## Difficulty\n\nLocal progress does not bound the number of distinct intermediate policies. A complete proof must control every eligible improvement while also retaining the cyclic cursor. The transition to linear programming additionally requires the chosen entering action to induce the minimum-ratio basis exchange. For the cube result, constructing an abstract directed graph is insufficient: its vertices and edges must match those of the specified feasible polytope.\n\n## Formalization scope\n\nAll coefficients and finite-dimensional vectors in the optimization layer are rational. Matrix inverses are guarded by explicit nonsingularity conditions. The complete-run definitions require a feasible start, a legal step at every counted time, and an optimal endpoint. Runtime, correctness, and long-execution conclusions are absent from input structures.\n\nThe linear program is derived from the source’s graph and general policy-to-LP transformation. It explicitly retains the rewards incurred by the aliases $b_1=c_1=g_1$ when random vertices are eliminated. Those terms differ from a literal reading of the displayed shorthand objective in Section 4.4. An independent source audit derives every action class and boundary case for arbitrary n. A separate Lean certificate proves the disputed local reward elimination and its agreement with the implemented coefficients. Two exact feasible points show that the omitted term is not a constant offset. The explicit initial state follows Sections 2.3 and 4.4; the all-zero-e shorthand in Sections 3.3 and 5.2 adds one preliminary switch. The MDP and AUSO targets use the common explicit counter start and are justified through the counter-run transfer, rather than by subtracting one from a lower bound. The realization predicate explicitly includes boundedness. Geometry is represented over rational points; the rational-to-real justification is recorded as a mathematical argument, not a checked Lean transport theorem. These audit results do not prove the open asymptotic targets.\n\nDefinitions precede theorem targets. Companion results remain in this mission, and the main theorem is not duplicated as a milestone. Proof contributions may develop the shared interfaces or the explicit family, but must preserve the declared starting states, signed-direction order, cardinalities, strictness, and termination requirements.\n\n## Selected references\n\n- David Avis and Oliver Friedmann, *An exponential lower bound for Cunningham’s rule*, Mathematical Programming 161, 271–305 (2017), [DOI](https://doi.org/10.1007/s10107-016-1008-4). Published online in 2016.\n- [Author’s accepted manuscript](https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf), used for theorem numbering.\n- [Earlier arXiv version](https://arxiv.org/abs/1305.3944), with different theorem numbers.\n",
+  "source": "David Avis and Oliver Friedmann, An exponential lower bound for Cunningham’s rule. Mathematical Programming161,271–305(2017). DOI10.1007/s10107-016-1008-4; accepted manuscript https://oliverfriedmann.com/downloads/papers/cunningham_exponential_lower_bound.pdf",
+  "main_key": "goal",
+  "source_audit": {
+    "status": "completed_with_documented_source_normalizations",
+    "date": "2026-11-02",
+    "summary": "notes/cunningham-audit-summary.txt",
+    "independent_source_review": "notes/source-independent-audit.txt",
+    "independent_semantic_review": "notes/cunningham-semantic-audit.txt",
+    "lean_certificate": "checks/CunninghamRewardTranslation.lean",
+    "graph_comparison": "audits/cunningham-graph-comparison.json",
+    "source_normalizations": [
+      "Priority symbols in the displayed LP interpreted as priority-induced rewards.",
+      "Three bottom alias contributions retained as derived from the graph.",
+      "F_1 boundary uses probability 1-epsilon toward e_1.",
+      "Companion statements use the explicit Sections 2.3/4.4 counter start."
+    ],
+    "remaining_proof_scope": "Nine research targets and the rational-to-real geometry transport are not proved in Lean.",
+    "proof_status": {
+      "reward_translation": "11 Lean theorems proved; ordinary Lean/Mathlib axioms only",
+      "research_targets": "9 open targets",
+      "global_graph_equivalence": "general mathematical source derivation plus code review and exact finite checks",
+      "rational_to_real": "mathematical argument; no Lean transport theorem",
+      "nonconstant_objective": "5 Lean theorems proved; explicit feasible n=3 witnesses and no constant offset"
+    },
+    "nonconstant_objective_certificate": "checks/CunninghamNonconstantObjective.lean",
+    "proved_audit_theorems": 16
+  }
+}
