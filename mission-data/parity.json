@@ -22,10 +22,10 @@
       "key": "improvement",
       "theorem_name": "FriedmannParity.improvement_strict",
       "theorem_title": "Strict improvement of game valuations",
-      "natural_language_statement": "A legal strategy update in the improvement arena, containing a strict switch whenever the original strategy is improvable, weakly raises every vertex valuation and strictly raises at least one.",
+      "natural_language_statement": "A legal strategy update in the improvement arena, containing a strict switch whenever the original strategy is improvable, weakly raises every vertex valuation and strictly raises the chosen successor valuation at some player-0 vertex.",
       "source": "Oliver Friedmann, An Exponential Lower Bound for the Latest Deterministic Strategy Iteration Algorithms, LMCS 2011, author PDF https://oliverfriedmann.com/downloads/papers/strategy_improvement_lower_bound_journal.pdf; arXiv:1106.0778v2 https://arxiv.org/abs/1106.0778; §3, Theorem 3.2",
       "milestone_title": "Theorem 3.2 — strict strategy improvement",
-      "milestone_description": "A legal strategy update in the improvement arena, containing a strict switch whenever the original strategy is improvable, weakly raises every vertex valuation and strictly raises at least one."
+      "milestone_description": "A legal strategy update in the improvement arena, containing a strict switch whenever the original strategy is improvable, weakly raises every vertex valuation and strictly raises the chosen successor valuation at some player-0 vertex."
     },
     {
       "file": "Theorems/Thm_friedmann_parity_winning.lean",
